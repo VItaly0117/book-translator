@@ -35,3 +35,4 @@ input/
 *.jpeg
 *.jpg
 *.png
+\n.env.template
