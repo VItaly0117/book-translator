@@ -34,6 +34,10 @@ import os
 import re
 import sys
 import time
+import sqlite3
+import hashlib
+import concurrent.futures
+import csv
 from pathlib import Path
 from typing import Optional
 
@@ -73,8 +77,8 @@ INPUT_DIR  = BASE_DIR / "input"
 OUTPUT_DIR = BASE_DIR / "output"
 IMAGES_DIR = BASE_DIR / "images"
 
-# DeepL max payload is 128 KB UTF-8.  We use 90 000 chars as a safe ceiling.
-CHUNK_SIZE = 90_000
+# DeepL max payload is 128 KB UTF-8.  We use 10 000 chars as a safe ceiling.
+CHUNK_SIZE = 10_000
 
 # ---------------------------------------------------------------------------
 # Placeholder templates
@@ -83,6 +87,7 @@ CHUNK_SIZE = 90_000
 _PH_MATH_BLOCK  = "MATHBLK{idx:04d}X"   # display / block math
 _PH_MATH_INLINE = "MATHINL{idx:04d}X"   # inline math
 _PH_IMAGE       = "IMGTOKEN{idx:04d}X"  # Markdown image links
+_PH_PAGENUM     = "PAGENUM{idx:04d}X"   # Page numbers
 
 # ---------------------------------------------------------------------------
 # Regex patterns (applied in ORDER – most specific first to avoid overlap)
@@ -111,16 +116,12 @@ _IMAGE_PATTERN = (r"!\[[^\]]*\]\([^)]+\)", 0)   # flags=0 (single-line OK)
 def parse_pdf_to_md(
     pdf_path: str | Path,
     images_dir: Optional[Path] = None,
-    parser: str = "auto",
     max_pages: Optional[int] = None,
 ) -> str:
     """
     Convert a PDF file to Markdown, preserving LaTeX formulas and images.
 
-    Parser selection (``parser`` argument):
-    * ``"auto"``       – tries pymupdf4llm first (fast), falls back to marker-pdf
-    * ``"pymupdf4llm"``– lightweight, no PyTorch required, installs in seconds
-    * ``"marker"``     – AI-powered (Surya), best quality, requires ~2 GB models
+    Uses `marker-pdf` (AI-powered, best quality) for parsing.
 
     Parameters
     ----------
@@ -128,8 +129,8 @@ def parse_pdf_to_md(
         Source PDF to convert.
     images_dir : Path, optional
         Where to save extracted raster images. Defaults to ``images/``.
-    parser : str
-        Which PDF parser to use: ``"auto"``, ``"pymupdf4llm"``, or ``"marker"``.
+    max_pages : int, optional
+        Process only first N pages (for testing).
 
     Returns
     -------
@@ -143,33 +144,8 @@ def parse_pdf_to_md(
     if not pdf_path.exists():
         raise FileNotFoundError(f"PDF not found: {pdf_path}")
 
-    log.info("Stage 1 – Parsing PDF (%s): %s", parser, pdf_path)
+    log.info("Stage 1 – Parsing PDF (marker): %s", pdf_path)
 
-    # ── pymupdf4llm path ────────────────────────────────────────────────────
-    if parser in ("auto", "pymupdf4llm"):
-        try:
-            import pymupdf4llm  # type: ignore
-
-            log.info("  Using pymupdf4llm parser …")
-            pages = list(range(max_pages)) if max_pages else None
-            md_text = pymupdf4llm.to_markdown(
-                str(pdf_path),
-                pages=pages,
-                write_images=True,
-                image_path=str(images_dir),
-            )
-            log.info("Stage 1 complete – %d characters extracted.", len(md_text))
-            return md_text
-
-        except ImportError:
-            if parser == "pymupdf4llm":
-                raise ImportError(
-                    "pymupdf4llm is not installed.\n"
-                    "  Run: pip install pymupdf4llm"
-                )
-            log.info("  pymupdf4llm not found, trying marker-pdf …")
-
-    # ── marker-pdf path (supports both v0.x and v1.x APIs) ──────────────────
     try:
         log.info("  Using marker-pdf parser (loading models, this may take a while) …")
         if max_pages:
@@ -182,7 +158,7 @@ def parse_pdf_to_md(
             from marker.config.parser import ConfigParser       # type: ignore
 
             log.info("  Detected marker-pdf v1.x API")
-            cfg: dict = {"languages": ["English"]}
+            cfg: dict = {"languages": ["Russian"]}
             if max_pages:
                 cfg["max_pages"] = max_pages
 
@@ -211,7 +187,7 @@ def parse_pdf_to_md(
                 str(pdf_path),
                 models,
                 max_pages=max_pages,
-                langs=["English"],
+                langs=["Russian"],
                 batch_multiplier=1,
             )
             for img_name, img_obj in images.items():
@@ -224,9 +200,8 @@ def parse_pdf_to_md(
 
     except ImportError:
         raise ImportError(
-            "No PDF parser found!  Install one of:\n"
-            "  pip install pymupdf4llm        ← recommended (fast, lightweight)\n"
-            "  pip install marker-pdf         ← AI-powered but requires PyTorch\n\n"
+            "marker-pdf is not installed.\n"
+            "  Run: pip install marker-pdf\n\n"
             "Or convert the PDF manually and use:\n"
             "  python3 book_translator.py --md input/your_book.md"
         )
@@ -264,6 +239,7 @@ def mask_elements(md_text: str) -> tuple[str, dict[str, str]]:
     block_idx  = 0
     inline_idx = 0
     image_idx  = 0
+    page_idx   = 0
 
     result = md_text
 
@@ -302,9 +278,19 @@ def mask_elements(md_text: str) -> tuple[str, dict[str, str]]:
     img_pattern, img_flags = _IMAGE_PATTERN
     result = re.sub(img_pattern, _replace_image, result, flags=img_flags)
 
+    # --- 4. Page numbers ---
+    def _replace_page(match: re.Match) -> str:
+        nonlocal page_idx
+        ph = _PH_PAGENUM.format(idx=page_idx)
+        elements_dict[ph] = match.group(0).strip()
+        page_idx += 1
+        return f"\n\n{ph}\n\n"
+
+    result = re.sub(r"(?im)^\s*(?:\[page\s*\d+\]|\d+)\s*$", _replace_page, result)
+
     log.info(
-        "Stage 2 – Masked %d block-math, %d inline-math, %d image(s).",
-        block_idx, inline_idx, image_idx,
+        "Stage 2 – Masked %d block-math, %d inline-math, %d image(s), %d page(s).",
+        block_idx, inline_idx, image_idx, page_idx,
     )
     return result, elements_dict
 
@@ -349,6 +335,20 @@ def _chunk_text(text: str, chunk_size: int = CHUNK_SIZE) -> list[str]:
             # … last resort: hard cut
             split_pos = end - 1
 
+        # Prevent splitting a chunk such that it ends with a markdown header without its content
+        while split_pos > start:
+            chunk_so_far = text[start : split_pos + 1].rstrip()
+            last_newline = chunk_so_far.rfind("\n")
+            last_line = chunk_so_far[last_newline + 1:] if last_newline != -1 else chunk_so_far
+            if re.match(r"^#+\s", last_line):
+                # The chunk ends with a header. Move split_pos back to before this header.
+                prev_split = text.rfind("\n", start, start + last_newline) if last_newline != -1 else -1
+                if prev_split <= start:
+                    break  # Can't go further back, accept it
+                split_pos = prev_split
+            else:
+                break
+
         chunks.append(text[start : split_pos + 1])
         start = split_pos + 1
 
@@ -372,29 +372,8 @@ def translate_text_deepl(
     * Uses ``preserve_formatting=True`` to avoid whitespace mangling around
       placeholders.
     * Retries with exponential back-off on transient API errors.
-    * Raises ``ValueError`` immediately if the API key is empty (no network
-      call is made).
-
-    Parameters
-    ----------
-    text : str
-        Masked text produced by Stage 2 (must contain NO raw LaTeX or image
-        Markdown – only opaque placeholders).
-    api_key : str
-        DeepL authentication key.
-    target_lang : str
-        ISO language code (default ``"UK"`` for Ukrainian).
-    chunk_size : int
-        Max characters per API request (default 90 000).
-    retry_attempts : int
-        Number of retry attempts per chunk before propagating the exception.
-    retry_delay : float
-        Base delay in seconds between retries (doubles on each attempt).
-
-    Returns
-    -------
-    str
-        Translated text with all placeholders intact.
+    * Uses `sqlite3` for local caching to survive disconnects and save progress.
+    * Translates chunks in parallel using ThreadPoolExecutor.
     """
     if deepl is None:
         raise ImportError("DeepL package missing. Run: pip install deepl")
@@ -407,30 +386,82 @@ def translate_text_deepl(
 
     translator = deepl.Translator(api_key)
     chunks     = _chunk_text(text, chunk_size)
-    translated: list[str] = []
 
-    for i, chunk in enumerate(tqdm(chunks, desc="Translating chunks"), start=1):
-        log.info(
-            "  Chunk %d/%d – %d chars …", i, len(chunks), len(chunk)
+    # ── 1. Glossary Support ──
+    glossary_id = None
+    glossary_path = BASE_DIR / "glossary.csv"
+    if glossary_path.exists():
+        try:
+            entries = {}
+            with open(glossary_path, "r", encoding="utf-8") as f:
+                reader = csv.reader(f)
+                for row in reader:
+                    if len(row) >= 2:
+                        entries[row[0].strip()] = row[1].strip()
+            if entries:
+                glossary = translator.create_glossary(
+                    "Project Glossary", source_lang="RU", target_lang=target_lang, entries=entries
+                )
+                glossary_id = glossary.glossary_id
+                log.info("  Loaded glossary from glossary.csv with %d entries.", len(entries))
+        except Exception as e:
+            log.warning("  Failed to load glossary.csv: %s", e)
+
+    # ── 2. DB Cache Setup ──
+    db_path = BASE_DIR / "cache.db"
+    with sqlite3.connect(db_path) as conn:
+        conn.execute(
+            "CREATE TABLE IF NOT EXISTS translation_cache (md5 TEXT PRIMARY KEY, translated_text TEXT)"
         )
+
+    # ── 3. Parallel Translation Function ──
+    def _translate_chunk(args_tuple) -> str:
+        i, chunk = args_tuple
+        chunk_md5 = hashlib.md5(chunk.encode('utf-8')).hexdigest()
+        
+        # Check cache
+        with sqlite3.connect(db_path, timeout=10) as conn:
+            cursor = conn.cursor()
+            cursor.execute("SELECT translated_text FROM translation_cache WHERE md5 = ?", (chunk_md5,))
+            row = cursor.fetchone()
+            if row:
+                log.info("  Chunk %d/%d – Loaded from cache", i, len(chunks))
+                return row[0]
+
+        log.info("  Chunk %d/%d – Transmitting %d chars …", i, len(chunks), len(chunk))
         for attempt in range(1, retry_attempts + 1):
             try:
-                result = translator.translate_text(
-                    chunk,
-                    source_lang="EN",
-                    target_lang=target_lang,
-                    preserve_formatting=True,
-                )
-                translated.append(result.text)
-                break
+                # Need to use **kwargs because glossary is only accepted if not None
+                kwargs = {
+                    "source_lang": "RU",
+                    "target_lang": target_lang,
+                    "preserve_formatting": True
+                }
+                if glossary_id:
+                    kwargs["glossary"] = glossary_id
+                    
+                result = translator.translate_text(chunk, **kwargs)
+                res_text = result.text
+                
+                # Save to cache
+                with sqlite3.connect(db_path, timeout=10) as conn:
+                    conn.execute(
+                        "INSERT OR REPLACE INTO translation_cache (md5, translated_text) VALUES (?, ?)", 
+                        (chunk_md5, res_text)
+                    )
+                return res_text
+                
             except deepl.DeepLException as exc:
-                log.warning(
-                    "  Chunk %d – attempt %d/%d failed: %s",
-                    i, attempt, retry_attempts, exc,
-                )
+                log.warning("  Chunk %d – attempt %d/%d failed: %s", i, attempt, retry_attempts, exc)
                 if attempt == retry_attempts:
                     raise
                 time.sleep(retry_delay * (2 ** (attempt - 1)))
+        return ""
+
+    # ── 4. Execution ──
+    with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
+        results = executor.map(_translate_chunk, enumerate(chunks, start=1))
+        translated = list(results)
 
     log.info("Stage 3 – Translation complete.")
     return "\n\n".join(translated)
@@ -473,12 +504,16 @@ def unmask_elements(
         escaped = re.escape(placeholder)
         pattern = rf"\s*{escaped}\s*"
 
-        # Determine spacing based on placeholder type
-        is_block = (
-            placeholder.startswith("MATHBLK")
-            or placeholder.startswith("IMGTOKEN")
-        )
-        replacement = f"\n\n{original}\n\n" if is_block else f" {original} "
+        # Determine spacing and restoration strategy based on placeholder type
+        if placeholder.startswith("PAGENUM"):
+            # Turn page numbers into clean page break dividers for EPUB/PDF
+            replacement = '\n\n<div style="page-break-after: always;"></div>\n\n'
+        else:
+            is_block = (
+                placeholder.startswith("MATHBLK")
+                or placeholder.startswith("IMGTOKEN")
+            )
+            replacement = f"\n\n{original}\n\n" if is_block else f" {original} "
 
         # Use a lambda to prevent re.sub from interpreting backslashes in
         # the replacement string (critical for LaTeX with \frac, \sin, etc.)
@@ -506,7 +541,60 @@ def unmask_math(
 
 
 # ===========================================================================
-# Stage 5 – Orchestration
+# Stage 5 – Exporting via Pandoc
+# ===========================================================================
+
+def export_to_book_formats(md_text: str, output_stem: str, output_dir: Path):
+    """
+    Convert the final Markdown text into professionally styled EPUB and PDF
+    books using Pandoc.
+    """
+    try:
+        import pypandoc
+    except ImportError:
+        log.warning("pypandoc not installed. Run 'pip install pypandoc'. Skipping EPUB/PDF export.")
+        return
+
+    epub_path = output_dir / f"{output_stem}.epub"
+    pdf_path  = output_dir / f"{output_stem}.pdf"
+    css_path  = BASE_DIR / "book_style.css"
+
+    log.info("Stage 6 – Exporting to EPUB and PDF via pandoc ...")
+    
+    # EPUB
+    epub_args = ["--webtex", f"--resource-path={str(IMAGES_DIR)}"]
+    if css_path.exists():
+        epub_args.append(f"--css={str(css_path)}")
+    
+    try:
+        pypandoc.convert_text(
+            md_text,
+            'epub',
+            format='markdown',
+            outputfile=str(epub_path),
+            extra_args=epub_args,
+        )
+        log.info("  Generated EPUB: %s", epub_path)
+    except Exception as e:
+        log.error("  EPUB generation failed: %s", e)
+
+    # PDF
+    try:
+        pdf_args = ["--pdf-engine=xelatex", f"--resource-path={str(IMAGES_DIR)}"]
+        pypandoc.convert_text(
+            md_text,
+            'pdf',
+            format='markdown',
+            outputfile=str(pdf_path),
+            extra_args=pdf_args,
+        )
+        log.info("  Generated PDF: %s", pdf_path)
+    except Exception as e:
+        log.warning("  PDF generation failed (missing xelatex/pdflatex?). Error: %s", str(e).split('\n')[0])
+
+
+# ===========================================================================
+# Orchestration
 # ===========================================================================
 
 def process_document(
@@ -515,7 +603,6 @@ def process_document(
     output_md_path:  Optional[str | Path] = None,
     api_key:         Optional[str] = None,
     target_lang:     str = TARGET_LANG,
-    parser:          str = "auto",
     max_pages:       Optional[int] = None,
 ) -> Path:
     """
@@ -563,7 +650,7 @@ def process_document(
         md_text = md_path.read_text(encoding="utf-8")
         stem    = md_path.stem
     elif input_pdf_path:
-        md_text = parse_pdf_to_md(input_pdf_path, parser=parser, max_pages=max_pages)
+        md_text = parse_pdf_to_md(input_pdf_path, max_pages=max_pages)
         stem    = Path(input_pdf_path).stem
 
         raw_path = OUTPUT_DIR / f"{stem}_raw.md"
@@ -601,6 +688,11 @@ def process_document(
     out_path = Path(output_md_path) if output_md_path else OUTPUT_DIR / f"{stem}_uk.md"
     out_path.write_text(final_md, encoding="utf-8")
 
+    # ------------------------------------------------------------------
+    # Stage 6 – Export (EPUB/PDF)
+    # ------------------------------------------------------------------
+    export_to_book_formats(final_md, stem, OUTPUT_DIR)
+
     log.info("=" * 60)
     log.info("Pipeline complete!  Output: %s", out_path)
     log.info("=" * 60)
@@ -630,16 +722,6 @@ if __name__ == "__main__":
     parser.add_argument("--lang", metavar="LANG", default=TARGET_LANG,
                         help="DeepL target language code (default: UK).")
     parser.add_argument(
-        "--parser", metavar="PARSER", default="auto",
-        choices=["auto", "pymupdf4llm", "marker"],
-        help=(
-            "PDF parser to use (default: auto).\n"
-            "  auto       – tries pymupdf4llm, falls back to marker\n"
-            "  pymupdf4llm– fast, lightweight, works on text-based PDFs\n"
-            "  marker     – AI-powered OCR, works on scanned/image-based PDFs"
-        ),
-    )
-    parser.add_argument(
         "--max-pages", metavar="N", type=int, default=None,
         help="Process only the first N pages (useful for quick tests, e.g. --max-pages 20)."
     )
@@ -651,7 +733,6 @@ if __name__ == "__main__":
             input_md_path=args.md,
             output_md_path=args.output,
             target_lang=args.lang,
-            parser=args.parser,
             max_pages=args.max_pages,
         )
         print(f"\n✅  Done!  Translated file → {result_path}")

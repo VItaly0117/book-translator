@@ -22,9 +22,16 @@ from __future__ import annotations
 
 import re
 import textwrap
+import tempfile
+from pathlib import Path
 from unittest.mock import MagicMock, patch
 
 import pytest
+
+import book_translator
+# Isolate tests so they don't use the real cache.db
+book_translator.BASE_DIR = Path(tempfile.mkdtemp())
+book_translator.OUTPUT_DIR = book_translator.BASE_DIR / "output"
 
 # ── Module under test ───────────────────────────────────────────────────────
 from book_translator import (
@@ -192,6 +199,17 @@ class TestMaskElements:
             assert re.fullmatch(r"[A-Za-z0-9]+", ph), (
                 f"Placeholder {ph!r} contains non-alphanumeric chars!"
             )
+
+    def test_page_number_is_masked(self):
+        """[Page N] or standalone numbers should become PAGENUM tokens."""
+        text = "End of chapter.\n\n[Page 12]\n\nNext chapter."
+        masked, elems = mask_elements(text)
+        assert "[Page 12]" in elems.values()
+        assert "PAGENUM" in masked
+
+        # Check unmasking turns it into a page break
+        final = unmask_elements(masked, elems)
+        assert "page-break-after: always;" in final
 
 
 # ===========================================================================
@@ -434,6 +452,15 @@ class TestChunkText:
         for chunk in chunks:
             assert len(chunk) <= 10_000
 
+    def test_chunk_protects_headers(self):
+        """Check that a chunk doesn't end immediately after a markdown header."""
+        text = ("word " * 1_000) + "\n\n# Chapter 2\n\nContent paragraph."
+        chunks = _chunk_text(text, chunk_size=len("word " * 1_000) + 16)
+        
+        for chunk in chunks:
+            # Look at the end of the chunk text, it shouldn't be the header by itself
+            assert not chunk.rstrip().endswith("# Chapter 2")
+
 
 # ===========================================================================
 # 6. Mocked DeepL API
@@ -459,6 +486,24 @@ class TestTranslateTextDeepL:
         assert out == "Рівняння теплопровідності є фундаментальним."
 
     @patch("book_translator.deepl")
+    def test_translate_caching(self, mock_deepl, tmp_path):
+        """Test that translation results are cached locally in SQLite."""
+        # Use a fresh tmp path for this specific test
+        book_translator.BASE_DIR = tmp_path
+        
+        mock_deepl.Translator.return_value.translate_text.return_value = self._result("Cached translation")
+        mock_deepl.DeepLException = Exception
+        
+        res1 = translate_text_deepl("test text", api_key="k:fx")
+        assert res1 == "Cached translation"
+        assert mock_deepl.Translator.return_value.translate_text.call_count == 1
+        
+        res2 = translate_text_deepl("test text", api_key="k:fx")
+        assert res2 == "Cached translation"
+        # call_count should STILL be 1 because of DB cache
+        assert mock_deepl.Translator.return_value.translate_text.call_count == 1
+
+    @patch("book_translator.deepl")
     def test_correct_api_parameters(self, mock_deepl):
         """Must call DeepL with source_lang=EN, target_lang=UK, preserve_formatting=True."""
         mock_translator = MagicMock()
@@ -469,7 +514,7 @@ class TestTranslateTextDeepL:
         translate_text_deepl("text", api_key="key:fx", target_lang="UK")
 
         kwargs = mock_translator.translate_text.call_args.kwargs
-        assert kwargs["source_lang"]         == "EN"
+        assert kwargs["source_lang"]         == "RU"
         assert kwargs["target_lang"]         == "UK"
         assert kwargs["preserve_formatting"] is True
 
@@ -646,3 +691,40 @@ class TestFullPipelineIntegration:
         assert "![Overview diagram](images/overview.png)" in final
         assert "![Second figure](images/fig2.png)"        in final
         assert _image_phs(final) == [], "Image tokens not removed from final output."
+
+# ===========================================================================
+# 8. Russian Localization Pipeline
+# ===========================================================================
+
+class TestRussianLocalizationFast:
+    @patch("book_translator.export_to_book_formats")
+    @patch("book_translator.deepl")
+    def test_fast_russian_pipeline(self, mock_deepl, mock_export, tmp_path):
+        from book_translator import process_document
+        
+        # Create a mock MD input
+        md_text = "Тестовая страница\n\n[page 1]\n\n$$E=mc^2$$"
+        in_md = tmp_path / "input.md"
+        in_md.write_text(md_text, encoding="utf-8")
+        
+        mock_deepl.Translator.return_value.translate_text.return_value = MagicMock(text="Test page\n\nPAGENUM0000X\n\nMATHBLK0000X")
+        mock_deepl.DeepLException = Exception
+        
+        # Patch BASE_DIR so cache.db goes to tmp_path, and OUTPUT_DIR for intermediate files
+        book_translator.BASE_DIR = tmp_path
+        book_translator.OUTPUT_DIR = tmp_path
+        out_file = process_document(
+            input_md_path=in_md,
+            output_md_path=tmp_path / "out.md",
+            api_key="fake",
+            target_lang="UK"
+        )
+            
+        assert out_file.exists()
+        out_content = out_file.read_text(encoding="utf-8")
+        assert "Test page" in out_content
+        assert "$$E=mc^2$$" in out_content
+        assert "page-break-after" in out_content # page number transformed
+        
+        mock_export.assert_called_once()
+

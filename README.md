@@ -1,26 +1,28 @@
-# 📚 PDF Book Translator (EN → UK)
+# 📚 PDF Book Translator (RU → UK)
 
-Automated pipeline for translating mathematical/scientific PDF textbooks from English to Ukrainian, **preserving all LaTeX formulas and embedded images** using the DeepL API.
+Automated pipeline for translating mathematical/scientific PDF textbooks from Russian to Ukrainian, **preserving all LaTeX formulas, embedded images, and book layout** using the DeepL API.
 
 ## ✨ Features
 
 - **AI-powered OCR** via [marker-pdf](https://github.com/VikParuchuri/marker) (handles scanned PDFs, extracts LaTeX)
-- **Formula protection** — all `$$...$$` and `$...$` LaTeX is masked before translation and restored after
-- **Image link protection** — Markdown image references are preserved intact
-- **DeepL API** translation with automatic text chunking for large documents
-- **Intermediate files** saved at each stage for easy debugging
-- **39 unit tests** — full coverage of masking, unmasking, chunking, and translation logic
+- **Formula & Page Number protection** — all `$$...$$` and `$...$` LaTeX, as well as page numbers, are masked before translation and restored after.
+- **Image link protection** — Markdown image references are preserved intact.
+- **Parallel DeepL API Translation** — fast threaded translation of text chunks.
+- **Local SQLite Caching** — preserves translation progress directly to `cache.db` to survive disconnects and save API usage.
+- **Multi-Format Export** — automatically exports translated Markdown into `.epub` and `.pdf` formats using `pandoc`.
+- **43 unit/integration tests** — full coverage of masking, unmasking, chunking, caching, and translation logic.
 
 ## 🗂️ Project Structure
 
 ```
 .
 ├── book_translator.py      # Main pipeline script
-├── test_translator.py      # pytest test suite (39 tests)
+├── test_translator.py      # pytest test suite (43 tests)
 ├── requirements.txt        # Python dependencies
 ├── .env.template           # Environment variables template
+├── book_style.css          # Styling used for EPUB/PDF export
 ├── input/                  # Put your PDF here (git-ignored)
-├── output/                 # Translated Markdown output (git-ignored)
+├── output/                 # Translated Markdown/EPUB/PDF output (git-ignored)
 └── images/                 # Extracted images (git-ignored)
 ```
 
@@ -48,15 +50,12 @@ cp .env.template .env
 
 ```bash
 # Translate a scanned PDF (AI OCR via marker-pdf):
-python3 book_translator.py --pdf "input/your_book.pdf" --parser marker
-
-# Test with only 20 pages first:
-python3 book_translator.py --pdf "input/your_book.pdf" --parser marker --max-pages 20
-
-# Translate a text-based PDF (fast, no AI needed):
 python3 book_translator.py --pdf "input/your_book.pdf"
 
-# Use a pre-converted Markdown file (skip PDF parsing):
+# Test with only 20 pages first:
+python3 book_translator.py --pdf "input/your_book.pdf" --max-pages 20
+
+# Use a pre-parsed Markdown file (skip PDF parsing/OCR stage):
 python3 book_translator.py --md "input/your_book.md"
 
 # Prevent Mac from sleeping during long runs:
@@ -69,32 +68,34 @@ caffeinate -i python3 book_translator.py --pdf "input/your_book.pdf" --parser ma
 |--------|-------------|
 | `--pdf PATH` | Source PDF file |
 | `--md PATH` | Pre-parsed Markdown (skips PDF stage) |
-| `--parser` | `auto` / `pymupdf4llm` / `marker` |
 | `--max-pages N` | Process only first N pages (for testing) |
 | `--lang CODE` | DeepL target language (default: `UK`) |
-| `--output PATH` | Output file path |
+| `--output PATH` | Output `.md` file path |
 
 ## 🔄 Pipeline Stages
 
 ```
-PDF ──[marker OCR]──► raw.md ──[masking]──► masked.md ──[DeepL]──► translated_masked.md ──[unmasking]──► _uk.md
+PDF ──[marker OCR]──► raw.md ──[masking]──► masked.md ──[DeepL]──► translated_masked.md ──[unmasking]──► _uk.md ──[pandoc]──► .epub / .pdf
 ```
 
-1. **Parse** — marker-pdf converts PDF pages to Markdown with LaTeX
-2. **Mask** — LaTeX formulas and image links replaced with `MATHBLKXXXXX` / `MATHINLXXXXX` / `IMGTOKENXXXXX`
-3. **Translate** — DeepL translates only the plain text (formulas untouched)
-4. **Unmask** — Placeholders restored to original LaTeX and image links
+1. **Parse** — marker-pdf converts Russian PDF pages to Markdown with LaTeX
+2. **Mask** — LaTeX formulas, image links, and page numbers replaced with secure tokens
+3. **Translate** — DeepL translates only the plain text in parallel (utilizes SQLite caching)
+4. **Unmask** — Placeholders restored to original LaTeX and image links, page numbers converted to page breaks
+5. **Export** — Pandoc converts the Markdown into professionally styled `.epub` and `.pdf` files
 
 ## 🧪 Running Tests
 
 ```bash
 pytest test_translator.py -v
-# 39 passed ✅
+# 43 passed ✅
 ```
 
 ## ⚠️ First Run Note
 
-On the first run with `--parser marker`, the AI models (~3 GB) will be downloaded automatically to `~/.cache/datalab/`. Subsequent runs use the cached models and are much faster.
+On the first run, `marker-pdf` AI models (~3 GB) will be downloaded automatically to `~/.cache/datalab/`. Subsequent runs use the cached models and are much faster.
+
+Pandoc EPUB export works out of the box, but PDF export may require a valid XeLaTeX/PDFLaTeX installation on your system.
 
 ## 📋 Requirements
 
