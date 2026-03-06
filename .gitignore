@@ -28,3 +28,10 @@ images/
 
 # Pytest cache
 .pytest_cache/
+
+# Input files (PDFs, test books — too large for git)
+input/
+*.pdf
+*.jpeg
+*.jpg
+*.png
