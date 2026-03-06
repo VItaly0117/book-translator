@@ -169,27 +169,55 @@ def parse_pdf_to_md(
                 )
             log.info("  pymupdf4llm not found, trying marker-pdf …")
 
-    # ── marker-pdf path ─────────────────────────────────────────────────────
+    # ── marker-pdf path (supports both v0.x and v1.x APIs) ──────────────────
     try:
-        from marker.convert import convert_single_pdf  # type: ignore
-        from marker.models import load_all_models        # type: ignore
-
         log.info("  Using marker-pdf parser (loading models, this may take a while) …")
         if max_pages:
             log.info("  ⚙️  max-pages limit: %d", max_pages)
-        models = load_all_models()
-        full_text, images, _meta = convert_single_pdf(
-            str(pdf_path),
-            models,
-            max_pages=max_pages,
-            langs=["English"],
-            batch_multiplier=1,
-        )
 
-        for img_name, img_obj in images.items():
-            dest = images_dir / img_name
-            img_obj.save(str(dest))
-            log.info("  Saved image: %s", dest)
+        # ── Try new API first: marker-pdf >= 1.0 ────────────────────────────
+        try:
+            from marker.converters.pdf import PdfConverter      # type: ignore
+            from marker.models import create_model_dict         # type: ignore
+            from marker.config.parser import ConfigParser       # type: ignore
+
+            log.info("  Detected marker-pdf v1.x API")
+            cfg: dict = {"languages": ["English"]}
+            if max_pages:
+                cfg["max_pages"] = max_pages
+
+            config_parser = ConfigParser(cfg)
+            converter = PdfConverter(
+                config=config_parser.generate_config_dict(),
+                artifact_dict=create_model_dict(),
+                llm_service=None,
+            )
+            rendered = converter(str(pdf_path))
+            full_text = rendered.markdown
+
+            for img_name, img_obj in rendered.images.items():
+                dest = images_dir / img_name
+                img_obj.save(str(dest))
+                log.info("  Saved image: %s", dest)
+
+        # ── Fall back to old API: marker-pdf < 1.0 ──────────────────────────
+        except ImportError:
+            from marker.convert import convert_single_pdf  # type: ignore
+            from marker.models import load_all_models       # type: ignore
+
+            log.info("  Detected marker-pdf v0.x API")
+            models = load_all_models()
+            full_text, images, _meta = convert_single_pdf(
+                str(pdf_path),
+                models,
+                max_pages=max_pages,
+                langs=["English"],
+                batch_multiplier=1,
+            )
+            for img_name, img_obj in images.items():
+                dest = images_dir / img_name
+                img_obj.save(str(dest))
+                log.info("  Saved image: %s", dest)
 
         log.info("Stage 1 complete – %d characters extracted.", len(full_text))
         return full_text
