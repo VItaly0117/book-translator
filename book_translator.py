@@ -697,7 +697,12 @@ def export_to_book_formats(
     md_text = re.sub(r'\]\((?:images/|\./images/)', f']({images_abs_dir}/', md_text)
     
     import os
-    res_path = f".{os.pathsep}{output_dir.absolute()}{os.pathsep}{(images_dir or IMAGES_DIR).absolute()}"
+    resource_dirs = [
+        ".",
+        output_dir.absolute().as_posix(),
+        (images_dir or IMAGES_DIR).absolute().as_posix()
+    ]
+    res_path = os.pathsep.join(resource_dirs)
     
     # ------------------------------------------------------------------
     # EPUB – with MathML for formula rendering
