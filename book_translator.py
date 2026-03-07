@@ -34,6 +34,7 @@ import os
 import re
 import sys
 import time
+import datetime
 import sqlite3
 import hashlib
 import concurrent.futures
@@ -43,6 +44,18 @@ from typing import Optional
 
 from dotenv import load_dotenv
 from tqdm import tqdm
+
+# ---------------------------------------------------------------------------
+# Optional: OpenCV for image enhancement
+# ---------------------------------------------------------------------------
+try:
+    import cv2          # type: ignore
+    import numpy as np  # type: ignore
+    _CV2_AVAILABLE = True
+except ImportError:  # pragma: no cover
+    cv2 = None  # type: ignore
+    np = None   # type: ignore
+    _CV2_AVAILABLE = False
 
 # ---------------------------------------------------------------------------
 # Try to import deepl at module level so tests can patch it easily.
@@ -107,6 +120,102 @@ _INLINE_MATH_PATTERNS: list[tuple[str, int]] = [
 # Group 3: Markdown image links  ![alt text](path/to/image.png)
 # Captures the entire ![...](...)  construct including any whitespace inside.
 _IMAGE_PATTERN = (r"!\[[^\]]*\]\([^)]+\)", 0)   # flags=0 (single-line OK)
+
+
+# ===========================================================================
+# Image Enhancement (OpenCV)
+# ===========================================================================
+
+def enhance_book_image(image_path: str | Path) -> None:
+    """
+    Enhance a scanned book image in-place using classic computer-vision
+    algorithms.  The result is a strictly binary (pure black / pure white)
+    image saved back to the same path.
+
+    Algorithm
+    ---------
+    1. Convert to grayscale.
+    2. Apply a 3×3 median blur to remove salt-and-pepper noise.
+    3. Binarise with Otsu's global threshold – background becomes pure white
+       (255) and all foreground pixels (lines / text) become pure black (0).
+    4. Overwrite the original file with the cleaned image.
+
+    If OpenCV (``cv2``) is not installed the function logs a warning and
+    returns immediately without modifying the file.
+
+    Parameters
+    ----------
+    image_path : str | Path
+        Path to the image file (PNG / JPEG / TIFF …).
+    """
+    if not _CV2_AVAILABLE:
+        log.warning("enhance_book_image: cv2 not installed – skipping image enhancement.")
+        return
+
+    image_path = str(image_path)
+    img = cv2.imread(image_path)
+    if img is None:
+        log.warning("enhance_book_image: cannot read image %s – skipping.", image_path)
+        return
+
+    # 1. Grayscale
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+    # 2. Median blur – removes isolated noise pixels without smearing edges
+    blurred = cv2.medianBlur(gray, 3)
+
+    # 3. Otsu binarisation (global, works well for old scanned pages)
+    _, binary = cv2.threshold(blurred, 0, 255, cv2.THRESH_BINARY | cv2.THRESH_OTSU)
+
+    # 4. Save back to the same path
+    cv2.imwrite(image_path, binary)
+    log.debug("enhance_book_image: processed %s", image_path)
+# ===========================================================================
+# Markdown Formatting Cleanup
+# ===========================================================================
+
+def clean_markdown_formatting(md_text: str) -> str:
+    """Очищает грязный Markdown, сгенерированный marker-pdf."""
+    
+    # 0. ФИКС РАЗОРВАННЫХ ПРЕДЛОЖЕНИЙ (когда картинка влезает посреди слова)
+    # Пример: "мідна і \n\n ![img] \n\n сталь-" -> "мідна і сталь- \n\n ![img]"
+    md_text = re.sub(
+        r'([a-zA-Zа-яА-ЯёЁіІїЇєЄґҐ\-]+)\s*\n+(!\[.*?\]\(.*?\))\s*\n+([a-zA-Zа-яА-ЯёЁіІїЇєЄґҐ])', 
+        r'\1 \3\n\n\2\n\n', 
+        md_text
+    )
+
+    # 1. Удаляем обратные кавычки вокруг формул (спасает от серых фонов)
+    md_text = re.sub(r'`\s*(\$\$.*?\$\$)\s*`', r'\1', md_text, flags=re.DOTALL)
+    md_text = re.sub(r'`\s*(\$.*?\$)\s*`', r'\1', md_text)
+    
+    # 2. Исправляем специфичный баг склеивания переменных OCR-ом
+    md_text = re.sub(r'\bxit\b', '$x$ і $t$', md_text)
+    md_text = re.sub(r'r,\s*\\theta\s*it\b', '$r$, $\\theta$ і $t$', md_text)
+    md_text = md_text.replace('$x~i~t$', '$x$ і $t$')
+    md_text = md_text.replace('$r,\\theta i~t$', '$r$, $\\theta$ і $t$')
+    
+    # 3. Втягиваем одиночные инлайн-формулы и союзы из отдельных абзацев обратно в строку
+    md_text = re.sub(r'\n+\s*(\$[^$\n]+\$)\s*\n+', r' \1 ', md_text)
+    md_text = re.sub(r'\n+\s*(i|і|та|або|а)\s*\n+', r' \1 ', md_text)
+    
+    # 4. Притягиваем оторванную пунктуацию (запятые, точки) обратно к формулам и тексту
+    md_text = re.sub(r'\s*\n+\s*([\,\.\;\:\)])', r'\1', md_text)
+    
+    # 5. Уничтожаем мусор из разрушенных таблиц (сотни пустых запятых)
+    md_text = re.sub(r',{2,}', ' ', md_text)
+    md_text = re.sub(r'^[ \t\,]+$', '', md_text, flags=re.MULTILINE)
+    
+    # 6. Фикс отступов у блочных формул: pandoc делает серый фон, если перед $$ есть пробелы
+    md_text = re.sub(r'^[ \t]+(\$\$)', r'\1', md_text, flags=re.MULTILINE)
+    
+    # 7. Защищаем картинки (добавляем пустые строки, чтобы текст не прилипал)
+    md_text = re.sub(r'\s*(!\[.*?\]\(.*?\))\s*', r'\n\n\1\n\n', md_text)
+    
+    # 8. Схлопываем гигантские пробелы (3+ переноса строки) в стандартные абзацы
+    md_text = re.sub(r'\n{3,}', '\n\n', md_text)
+    
+    return md_text
 
 
 # ===========================================================================
@@ -175,6 +284,7 @@ def parse_pdf_to_md(
                 dest = images_dir / img_name
                 img_obj.save(str(dest))
                 log.info("  Saved image: %s", dest)
+                enhance_book_image(dest)
 
         # ── Fall back to old API: marker-pdf < 1.0 ──────────────────────────
         except ImportError:
@@ -194,6 +304,7 @@ def parse_pdf_to_md(
                 dest = images_dir / img_name
                 img_obj.save(str(dest))
                 log.info("  Saved image: %s", dest)
+                enhance_book_image(dest)
 
         log.info("Stage 1 complete – %d characters extracted.", len(full_text))
         return full_text
@@ -327,30 +438,30 @@ def _chunk_text(text: str, chunk_size: int = CHUNK_SIZE) -> list[str]:
             break
 
         # Prefer paragraph break …
-        split_pos = text.rfind("\n\n", start, end)
+        split_pos = text.rfind("\n\n", int(start), int(end))
         if split_pos <= start:
             # … then single newline …
-            split_pos = text.rfind("\n", start, end)
+            split_pos = text.rfind("\n", int(start), int(end))
         if split_pos <= start:
             # … last resort: hard cut
-            split_pos = end - 1
+            split_pos = int(end) - 1
 
         # Prevent splitting a chunk such that it ends with a markdown header without its content
         while split_pos > start:
             chunk_so_far = text[start : split_pos + 1].rstrip()
-            last_newline = chunk_so_far.rfind("\n")
+            last_newline = int(chunk_so_far.rfind("\n"))
             last_line = chunk_so_far[last_newline + 1:] if last_newline != -1 else chunk_so_far
             if re.match(r"^#+\s", last_line):
                 # The chunk ends with a header. Move split_pos back to before this header.
-                prev_split = text.rfind("\n", start, start + last_newline) if last_newline != -1 else -1
+                prev_split = int(text.rfind("\n", start, start + last_newline) if last_newline != -1 else -1)
                 if prev_split <= start:
                     break  # Can't go further back, accept it
                 split_pos = prev_split
             else:
                 break
 
-        chunks.append(text[start : split_pos + 1])
-        start = split_pos + 1
+        chunks.append(text[int(start) : int(split_pos) + 1])
+        start = int(split_pos) + 1
 
     log.info("  Splitting into %d chunk(s) for translation.", len(chunks))
     return chunks
@@ -465,6 +576,7 @@ def translate_text_deepl(
 
     log.info("Stage 3 – Translation complete.")
     return "\n\n".join(translated)
+    return text
 
 
 # ===========================================================================
@@ -544,7 +656,12 @@ def unmask_math(
 # Stage 5 – Exporting via Pandoc
 # ===========================================================================
 
-def export_to_book_formats(md_text: str, output_stem: str, output_dir: Path):
+def export_to_book_formats(
+    md_text: str, 
+    output_stem: str, 
+    output_dir: Path,
+    images_dir: Optional[Path] = None
+):
     """
     Convert the final Markdown text into professionally styled EPUB and PDF
     books using Pandoc.
@@ -560,12 +677,17 @@ def export_to_book_formats(md_text: str, output_stem: str, output_dir: Path):
     css_path  = BASE_DIR / "book_style.css"
 
     log.info("Stage 6 – Exporting to EPUB and PDF via pandoc ...")
-    
-    # EPUB
-    epub_args = ["--webtex", f"--resource-path={str(IMAGES_DIR)}"]
+
+    # ------------------------------------------------------------------
+    # EPUB – with MathML for formula rendering
+    # ------------------------------------------------------------------
+    epub_args = [
+        "--mathml",
+        f"--resource-path={str(IMAGES_DIR)}",
+    ]
     if css_path.exists():
         epub_args.append(f"--css={str(css_path)}")
-    
+
     try:
         pypandoc.convert_text(
             md_text,
@@ -578,19 +700,45 @@ def export_to_book_formats(md_text: str, output_stem: str, output_dir: Path):
     except Exception as e:
         log.error("  EPUB generation failed: %s", e)
 
-    # PDF
+    # ------------------------------------------------------------------
+    # PDF – XeLaTeX with full Cyrillic / Unicode font support
+    # ------------------------------------------------------------------
+    # XeLaTeX is required for Cyrillic (Ukrainian / Russian) text.
+    # Without an explicit Cyrillic-capable font the text is silently
+    # dropped by pdflatex, leaving only punctuation and formulas.
+    pdf_args = [
+        "--pdf-engine=xelatex",
+        f"--resource-path={str(images_dir or IMAGES_DIR)}",
+        # Main serif font – DejaVu Serif ships with most TeX distributions
+        # and covers the full Cyrillic Unicode block.
+        "-V", "mainfont=DejaVu Serif",
+        # Monospace font for code blocks
+        "-V", "monofont=DejaVu Sans Mono",
+        # Sans-serif for headers
+        "-V", "sansfont=DejaVu Sans",
+        # Page numbering at the bottom-centre of every page
+        "-V", "pagestyle=plain",
+        # Required packages for Cyrillic + geometry
+        "-V", "lang=uk",
+        # fontenc / inputenc are handled automatically by XeLaTeX
+        # geometry: standard book margins
+        "-V", "geometry:margin=2.5cm",
+    ]
+
     try:
-        pdf_args = ["--pdf-engine=xelatex", f"--resource-path={str(IMAGES_DIR)}"]
         pypandoc.convert_text(
             md_text,
             'pdf',
-            format='markdown',
+            format='markdown+raw_tex',
             outputfile=str(pdf_path),
             extra_args=pdf_args,
         )
         log.info("  Generated PDF: %s", pdf_path)
     except Exception as e:
-        log.warning("  PDF generation failed (missing xelatex/pdflatex?). Error: %s", str(e).split('\n')[0])
+        log.warning(
+            "  PDF generation failed (missing xelatex?). Error: %s",
+            str(e).split('\n')[0],
+        )
 
 
 # ===========================================================================
@@ -637,7 +785,13 @@ def process_document(
         Path to the written output Markdown file.
     """
     api_key = api_key or DEEPL_API_KEY
-    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+    
+    run_name = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S_%A")
+    run_dir = OUTPUT_DIR / run_name
+    run_dir.mkdir(parents=True, exist_ok=True)
+    
+    images_dir = run_dir / "images"
+    images_dir.mkdir(parents=True, exist_ok=True)
 
     # ------------------------------------------------------------------
     # Stage 1 – Obtain Markdown source
@@ -650,10 +804,10 @@ def process_document(
         md_text = md_path.read_text(encoding="utf-8")
         stem    = md_path.stem
     elif input_pdf_path:
-        md_text = parse_pdf_to_md(input_pdf_path, max_pages=max_pages)
+        md_text = parse_pdf_to_md(input_pdf_path, images_dir=images_dir, max_pages=max_pages)
         stem    = Path(input_pdf_path).stem
 
-        raw_path = OUTPUT_DIR / f"{stem}_raw.md"
+        raw_path = run_dir / f"{stem}_raw.md"
         raw_path.write_text(md_text, encoding="utf-8")
         log.info("  Raw Markdown cached: %s", raw_path)
     else:
@@ -664,7 +818,7 @@ def process_document(
     # ------------------------------------------------------------------
     masked_text, elements_dict = mask_elements(md_text)
 
-    masked_path = OUTPUT_DIR / f"{stem}_masked.md"
+    masked_path = run_dir / f"{stem}_masked.md"
     masked_path.write_text(masked_text, encoding="utf-8")
     log.info("  Masked text cached: %s", masked_path)
 
@@ -673,7 +827,7 @@ def process_document(
     # ------------------------------------------------------------------
     translated_text = translate_text_deepl(masked_text, api_key, target_lang)
 
-    trans_path = OUTPUT_DIR / f"{stem}_translated_masked.md"
+    trans_path = run_dir / f"{stem}_translated_masked.md"
     trans_path.write_text(translated_text, encoding="utf-8")
     log.info("  Translated (masked) cached: %s", trans_path)
 
@@ -683,15 +837,21 @@ def process_document(
     final_md = unmask_elements(translated_text, elements_dict)
 
     # ------------------------------------------------------------------
+    # Stage 4b – Clean markdown formatting
+    # ------------------------------------------------------------------
+    final_md = clean_markdown_formatting(final_md)
+    log.info("  Stage 4b – Markdown formatting cleaned.")
+
+    # ------------------------------------------------------------------
     # Stage 5 – Write final output
     # ------------------------------------------------------------------
-    out_path = Path(output_md_path) if output_md_path else OUTPUT_DIR / f"{stem}_uk.md"
+    out_path = Path(output_md_path) if output_md_path else run_dir / f"{stem}_uk.md"
     out_path.write_text(final_md, encoding="utf-8")
 
     # ------------------------------------------------------------------
     # Stage 6 – Export (EPUB/PDF)
     # ------------------------------------------------------------------
-    export_to_book_formats(final_md, stem, OUTPUT_DIR)
+    export_to_book_formats(final_md, stem, run_dir, images_dir=images_dir)
 
     log.info("=" * 60)
     log.info("Pipeline complete!  Output: %s", out_path)

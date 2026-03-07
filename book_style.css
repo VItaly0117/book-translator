@@ -1,12 +1,18 @@
-/* book_style.css */
+/* ============================================================
+ * book_style.css – Classical book typography for EPUB export
+ * ============================================================ */
 
+/* ── Global ─────────────────────────────────────────────────── */
 body {
     font-family: 'Garamond', 'Georgia', serif;
-    line-height: 1.6;
-    margin: 2em;
-    color: #333;
+    font-size: 1em;
+    line-height: 1.7;
+    color: #1a1a1a;
+    margin: 0;
+    padding: 0;
 }
 
+/* ── Headings ────────────────────────────────────────────────── */
 h1,
 h2,
 h3,
@@ -14,64 +20,171 @@ h4,
 h5,
 h6 {
     font-family: 'Helvetica Neue', 'Arial', sans-serif;
-    color: #222;
-    page-break-after: avoid;
-    margin-top: 1.5em;
+    color: #111;
+    line-height: 1.3;
+    margin-top: 1.8em;
     margin-bottom: 0.5em;
+    /* Don't split a heading from its following content */
+    page-break-after: avoid;
+    break-after: avoid;
 }
 
+h1 {
+    font-size: 1.6em;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 0.3em;
+}
+
+h2 {
+    font-size: 1.35em;
+}
+
+h3 {
+    font-size: 1.15em;
+}
+
+/* ── Body paragraphs – justified, classical first-line indent ── */
 p {
+    text-align: justify;
     text-indent: 1.5em;
+    /* red-line (красная строка) */
     margin-top: 0;
     margin-bottom: 0;
-    text-align: justify;
+    hyphens: auto;
+    -epub-hyphens: auto;
+    orphans: 2;
+    widows: 2;
 }
 
-/* No indent for first paragraph after a header */
+/* Cancel indent for the first paragraph after a heading/block element */
 h1+p,
 h2+p,
 h3+p,
 h4+p,
 h5+p,
-h6+p {
+h6+p,
+figure+p,
+blockquote+p,
+table+p {
     text-indent: 0;
 }
 
-blockquote {
-    font-style: italic;
-    border-left: 4px solid #ccc;
-    margin: 1.5em 2em;
-    padding-left: 1em;
-    color: #555;
-    background-color: #f9f9f9;
-}
-
+/* ── Images – preserve original inline/float position ────────── */
+/* Images are display:inline-block by default so they stay where  */
+/* they appear in the source (not centred unless already centred). */
 img {
     max-width: 100%;
-    height: auto;
     display: block;
-    margin: 1.5em auto;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 1em auto;
 }
 
-.math {
+/* A figure wrapper (pandoc may emit <figure>) gets mild spacing  */
+figure {
+    margin: 1.5em 0;
+    page-break-inside: avoid;
+    break-inside: avoid;
+}
+
+/* Figure captions – keep them tightly attached to the image */
+figcaption,
+span.caption {
+    font-size: 0.88em;
     font-style: italic;
-    font-family: 'Times New Roman', serif;
+    color: #555;
+    margin-top: 0.4em;
+    text-align: left;
+    text-indent: 0;
+    display: block;
+    page-break-before: avoid;
+    break-before: avoid;
 }
 
+/* ── Block / display math – centred on its own line ─────────── */
+/* pandoc wraps display math in a <p class="math display">        */
+p.math.display,
+.math.display,
+mjx-container[display="true"],
+math[display="block"] {
+    display: block;
+    text-align: center;
+    margin: 1.2em 0;
+    overflow-x: auto;
+    page-break-inside: avoid;
+    break-inside: avoid;
+}
+
+/* Inline math – stays in the text flow */
+.math.inline,
+mjx-container:not([display="true"]) {
+    display: inline;
+}
+
+/* ── Blockquote ────────────────────────────────────────────────── */
+blockquote {
+    font-style: italic;
+    border-left: 3px solid #bbb;
+    margin: 1.2em 2em;
+    padding: 0.5em 1em;
+    color: #555;
+    page-break-inside: avoid;
+    break-inside: avoid;
+}
+
+/* ── Tables ─────────────────────────────────────────────────────── */
 table {
     border-collapse: collapse;
     width: 100%;
-    margin: 2em 0;
+    margin: 1.5em 0;
+    font-size: 0.95em;
+    page-break-inside: avoid;
+    break-inside: avoid;
 }
 
 th,
 td {
-    border: 1px solid #ddd;
-    padding: 8px;
+    border: 1px solid #ccc;
+    padding: 6px 10px;
     text-align: left;
+    vertical-align: top;
 }
 
 th {
-    background-color: #f2f2f2;
+    background-color: #f0f0f0;
+    font-weight: bold;
+}
+
+/* ── Code ───────────────────────────────────────────────────────── */
+code,
+pre {
+    font-family: 'DejaVu Sans Mono', 'Courier New', monospace;
+    font-size: 0.88em;
+    background: #f5f5f5;
+    border-radius: 3px;
+}
+
+code,
+span.math,
+div.math {
+    background-color: transparent !important;
+    border: none !important;
+}
+
+pre {
+    padding: 0.8em 1em;
+    overflow-x: auto;
+    page-break-inside: avoid;
+    break-inside: avoid;
+}
+
+code {
+    padding: 0.1em 0.3em;
+}
+
+/* ── Page-break helpers ─────────────────────────────────────────── */
+div.page-break,
+hr.page-break {
+    page-break-after: always;
+    break-after: always;
+    visibility: hidden;
+    height: 0;
 }
