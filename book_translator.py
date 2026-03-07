@@ -224,6 +224,9 @@ def clean_markdown_formatting(md_text: str) -> str:
     # 8. Схлопываем гигантские пробелы (3+ переноса строки) в стандартные абзацы
     md_text = re.sub(r'\n{3,}', '\n\n', md_text)
     
+    # 9. Заменяем устаревшие теги LaTeX для Pandoc
+    md_text = md_text.replace(r"\rm ", r"\mathrm{ }").replace(r"\rm", r"\mathrm")
+    
     return md_text
 
 
@@ -692,12 +695,15 @@ def export_to_book_formats(
     images_abs_dir = (images_dir or IMAGES_DIR).absolute().as_posix()
     md_text = re.sub(r'\]\((?:images/|\./images/)', f']({images_abs_dir}/', md_text)
     
+    import os
+    res_path = f".{os.pathsep}{output_dir.absolute()}{os.pathsep}{(images_dir or IMAGES_DIR).absolute()}"
+    
     # ------------------------------------------------------------------
     # EPUB – with MathML for formula rendering
     # ------------------------------------------------------------------
     epub_args = [
         "--mathml",
-        f"--resource-path={BASE_DIR.absolute()}",
+        f"--resource-path={res_path}",
     ]
     if css_path.exists():
         epub_args.append(f"--css={str(css_path)}")
@@ -722,7 +728,7 @@ def export_to_book_formats(
     # dropped by pdflatex, leaving only punctuation and formulas.
     pdf_args = [
         "--pdf-engine=xelatex",
-        f"--resource-path={BASE_DIR.absolute()}",
+        f"--resource-path={res_path}",
         # Main serif font – DejaVu Serif ships with most TeX distributions
         # and covers the full Cyrillic Unicode block.
         "-V", "mainfont=DejaVu Serif",
@@ -749,10 +755,7 @@ def export_to_book_formats(
         )
         log.info("  Generated PDF: %s", pdf_path)
     except Exception as e:
-        log.warning(
-            "  PDF generation failed (missing xelatex?). Error: %s",
-            str(e).split('\n')[0],
-        )
+        log.error("  Ошибка генерации PDF. Убедитесь, что MiKTeX (XeLaTeX) установлен и добавлен в системный PATH Windows. Детали: %s", e)
 
 
 # ===========================================================================
