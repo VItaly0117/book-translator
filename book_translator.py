@@ -39,6 +39,7 @@ import sqlite3
 import hashlib
 import concurrent.futures
 import csv
+import shutil
 from pathlib import Path
 from typing import Optional
 
@@ -936,6 +937,20 @@ if __name__ == "__main__":
             args.max_pages = int(max_pgs)
             
         print("\n🚀 Начинаю процесс...\n" + "=" * 60 + "\n")
+        
+    # --- Предварительные проверки (Pre-flight checks) ---
+    if not shutil.which("pandoc"):
+        log.warning(
+            "ВНИМАНИЕ: Pandoc не найден в системном PATH. "
+            "Конвертация в EPUB и PDF (Финальный этап) будет пропущена. "
+            "Вам будет доступен только Markdown-исходник."
+        )
+    if not shutil.which("xelatex"):
+        log.warning(
+            "ВНИМАНИЕ: XeLaTeX не найден в системном PATH. "
+            "Конвертация в PDF будет невозможна. Убедитесь, что установлен MiKTeX "
+            "(или TeX Live) и его папка bin добавлена в Переменные Среды Windows."
+        )
 
     try:
         result_path = process_document(
