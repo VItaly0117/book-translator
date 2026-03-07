@@ -30,7 +30,8 @@ images/
 .pytest_cache/
 
 # Input files (PDFs, test books — too large for git)
-input/
+input/*
+!input/.gitkeep
 *.pdf
 *.jpeg
 *.jpg

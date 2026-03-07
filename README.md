@@ -61,8 +61,11 @@ python3 book_translator.py --pdf "input/your_book.pdf" --max-pages 20
 python3 book_translator.py --md "input/your_book.md"
 
 # Интерактивное меню (new!):
-# Просто запустите скрипт без флагов для вызова удобного текстового меню:
+# Просто запустите скрипт без флагов для вызова удобного текстового диалогового меню:
 python3 book_translator.py
+# Скрипт спросит:
+# 👉 1. Введите путь к PDF или MD файлу (например, input/book.pdf):
+# 👉 2. Сколько страниц перевести? (Оставьте пустым, чтобы перевести ВСЮ книгу):
 
 # Prevent Mac from sleeping during long runs:
 caffeinate -i python3 book_translator.py --pdf "input/your_book.pdf" --parser marker
