@@ -186,8 +186,13 @@ def clean_markdown_formatting(md_text: str) -> str:
     )
 
     # 1. Удаляем обратные кавычки вокруг формул (спасает от серых фонов)
-    md_text = re.sub(r'`\s*(\$\$.*?\$\$)\s*`', r'\1', md_text, flags=re.DOTALL)
-    md_text = re.sub(r'`\s*(\$.*?\$)\s*`', r'\1', md_text)
+    # Заменяем `\s*\$(.*?)\$\s*` на $\1$ (для инлайн формул) и `\s*\$\$(.*?)\$\$\s*` на $$\1$$ (для блочных)
+    md_text = re.sub(r'`\s*\$\$(.*?)\$\$\s*`', r'$$\1$$', md_text, flags=re.DOTALL)
+    md_text = re.sub(r'`\s*\$(.*?)\$\s*`', r'$\1$', md_text)
+    
+    # 1.5 Добавляем пробел между кириллицей и математикой ($) 
+    md_text = re.sub(r'([а-яА-ЯёЁіІїЇєЄґҐ])\$', r'\1 $', md_text)
+    md_text = re.sub(r'\$([а-яА-ЯёЁіІїЇєЄґҐ])', r'$ \1', md_text)
     
     # 2. Исправляем специфичный баг склеивания переменных OCR-ом
     md_text = re.sub(r'\bxit\b', '$x$ і $t$', md_text)
@@ -202,8 +207,12 @@ def clean_markdown_formatting(md_text: str) -> str:
     # 4. Притягиваем оторванную пунктуацию (запятые, точки) обратно к формулам и тексту
     md_text = re.sub(r'\s*\n+\s*([\,\.\;\:\)])', r'\1', md_text)
     
-    # 5. Уничтожаем мусор из разрушенных таблиц (сотни пустых запятых)
-    md_text = re.sub(r',{2,}', ' ', md_text)
+    # Схлопываем одинокаие переносы строк внутри предложений (чтобы абзацы не разрывались)
+    # Оставляем только \n\n для реальных абзацев
+    md_text = re.sub(r'([a-zA-Zа-яА-ЯёЁіІїЇєЄґҐ\-]+)\n([a-zA-Zа-яА-ЯёЁіІїЇєЄґҐ\-])', r'\1 \2', md_text)
+    
+    # 5. Уничтожаем мусор из разрушенных таблиц (3+ запятых подряд меняем на пробел)
+    md_text = re.sub(r',{3,}', ' ', md_text)
     md_text = re.sub(r'^[ \t\,]+$', '', md_text, flags=re.MULTILINE)
     
     # 6. Фикс отступов у блочных формул: pandoc делает серый фон, если перед $$ есть пробелы
@@ -678,12 +687,17 @@ def export_to_book_formats(
 
     log.info("Stage 6 – Exporting to EPUB and PDF via pandoc ...")
 
+    # ВАЖНО ДЛЯ WINDOWS: принудительно заменяем относительные пути картинок на строгие абсолютные пути
+    # Это гарантирует, что Pandoc стопроцентно найдет каждый файл
+    images_abs_dir = (images_dir or IMAGES_DIR).absolute().as_posix()
+    md_text = re.sub(r'\]\((?:images/|\./images/)', f']({images_abs_dir}/', md_text)
+    
     # ------------------------------------------------------------------
     # EPUB – with MathML for formula rendering
     # ------------------------------------------------------------------
     epub_args = [
         "--mathml",
-        f"--resource-path={str(IMAGES_DIR)}",
+        f"--resource-path={BASE_DIR.absolute()}",
     ]
     if css_path.exists():
         epub_args.append(f"--css={str(css_path)}")
@@ -708,7 +722,7 @@ def export_to_book_formats(
     # dropped by pdflatex, leaving only punctuation and formulas.
     pdf_args = [
         "--pdf-engine=xelatex",
-        f"--resource-path={str(images_dir or IMAGES_DIR)}",
+        f"--resource-path={BASE_DIR.absolute()}",
         # Main serif font – DejaVu Serif ships with most TeX distributions
         # and covers the full Cyrillic Unicode block.
         "-V", "mainfont=DejaVu Serif",
@@ -865,6 +879,7 @@ def process_document(
 
 if __name__ == "__main__":
     import argparse
+    import sys
 
     parser = argparse.ArgumentParser(
         description=(
@@ -872,7 +887,7 @@ if __name__ == "__main__":
             "preserving all LaTeX formulas and embedded images."
         )
     )
-    group = parser.add_mutually_exclusive_group(required=True)
+    group = parser.add_mutually_exclusive_group(required=False)
     group.add_argument("--pdf", metavar="PATH",
                        help="Source PDF (will be parsed automatically).")
     group.add_argument("--md",  metavar="PATH",
@@ -886,6 +901,31 @@ if __name__ == "__main__":
         help="Process only the first N pages (useful for quick tests, e.g. --max-pages 20)."
     )
     args = parser.parse_args()
+
+    # Интерактивное меню для удобного запуска пользователем без аргументов
+    if not args.pdf and not args.md:
+        print("\n" + "=" * 60)
+        print(" 📚 Интерактивный переводчик научных книг (PDF/MD)")
+        print("=" * 60)
+        
+        file_path = input("\n1. Введите путь к PDF или MD файлу:\n> ").strip()
+        if not file_path:
+            print("❌ Ошибка: необходимо указать путь к файлу.")
+            sys.exit(1)
+            
+        if file_path.lower().endswith('.pdf'):
+            args.pdf = file_path
+        elif file_path.lower().endswith('.md'):
+            args.md = file_path
+        else:
+            print("❌ Ошибка: неподдерживаемый формат. Пожалуйста, укажите файл .pdf или .md")
+            sys.exit(1)
+            
+        max_pgs = input("\n2. Сколько страниц перевести? (Оставьте пустым для всей книги):\n> ").strip()
+        if max_pgs.isdigit():
+            args.max_pages = int(max_pgs)
+            
+        print("\n🚀 Начинаю процесс...\n" + "=" * 60 + "\n")
 
     try:
         result_path = process_document(

@@ -60,6 +60,10 @@ python3 book_translator.py --pdf "input/your_book.pdf" --max-pages 20
 # Use a pre-parsed Markdown file (skip PDF parsing/OCR stage):
 python3 book_translator.py --md "input/your_book.md"
 
+# Интерактивное меню (new!):
+# Просто запустите скрипт без флагов для вызова удобного текстового меню:
+python3 book_translator.py
+
 # Prevent Mac from sleeping during long runs:
 caffeinate -i python3 book_translator.py --pdf "input/your_book.pdf" --parser marker
 ```
@@ -99,6 +103,18 @@ pytest test_translator.py -v
 On the first run, `marker-pdf` AI models (~3 GB) will be downloaded automatically to `~/.cache/datalab/`. Subsequent runs use the cached models and are much faster.
 
 Pandoc EPUB export works out of the box, but PDF export may require a valid XeLaTeX/PDFLaTeX installation on your system.
+
+## 🛠 Особенности установки на Windows
+
+1. **Версия Python**: Категорически **НЕЛЬЗЯ** использовать Python из MSYS2 или Microsoft Store. Скачайте официальный установщик (`.exe`) с [python.org](https://www.python.org/downloads/) и обязательно поставьте галочку "Add Python to PATH" при установке.
+2. **Активация venv в PowerShell**: Если при команде `.\.venv\Scripts\activate` возникает ошибка о запрете выполнения сценариев, откройте PowerShell от имени Администратора и введите:
+   ```powershell
+   Set-ExecutionPolicy Unrestricted -Scope CurrentUser
+   ```
+3. **Генерация PDF (Pandoc & MiKTeX)**: Для успешного экспорта Markdown в PDF с кириллицей на Windows необходимо вручную скачать и установить:
+   - [Pandoc](https://pandoc.org/installing.html) (убедитесь, что он добавлен в PATH).
+   - [MiKTeX](https://miktex.org/download) (предоставляет движок XeLaTeX). Без него конвертация упадет с ошибкой "exitcode 43". Во время установки MiKTeX разрешите ему "скачивать отсутствующие пакеты "на лету" (install missing packages on-the-fly -> Yes)".
+4. **Интерактивный запуск**: Для удобства вы можете просто запустить `python book_translator.py` без флагов, чтобы вызвать удобное интерактивное меню прямо в консоли.
 
 ## 📋 Requirements
 

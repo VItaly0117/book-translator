@@ -728,7 +728,8 @@ class TestCleanMarkdownFormatting:
     def test_broken_line_rejoined(self):
         text = "This is a long sentence that was broken by the\nOCR parser at the page margin."
         result = clean_markdown_formatting(text)
-        assert "broken by the\nOCR" in result, f"Got:\n{result!r}"
+        # The new robust regex successfully joins it all
+        assert "broken by the OCR parser" in result, f"Got:\n{result!r}"
 
     def test_sentence_ending_line_not_joined(self):
         text = "First sentence.\nSecond sentence starts here."
