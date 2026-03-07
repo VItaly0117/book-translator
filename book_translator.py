@@ -826,6 +826,18 @@ def process_document(
         log.info("Stage 1 – Loading pre-parsed Markdown: %s", md_path)
         md_text = md_path.read_text(encoding="utf-8")
         stem    = md_path.stem
+        
+        # Копируем картинки из папки с исходным MD в новую рабочую папку
+        source_dir = md_path.parent
+        source_images = source_dir / "images"
+        if source_images.exists() and source_images.is_dir():
+            try:
+                shutil.copytree(source_images, images_dir, dirs_exist_ok=True)
+                log.info("  Скопирована папка с картинками исходного MD файла: %s", source_images)
+            except Exception as e:
+                log.warning("  Не удалось скопировать папку с картинками. Pandoc может не найти их: %s", e)
+        else:
+            log.warning("  Папка 'images' рядом с исходным MD не найдена. Картинки могут быть утеряны.")
     elif input_pdf_path:
         md_text = parse_pdf_to_md(input_pdf_path, images_dir=images_dir, max_pages=max_pages)
         stem    = Path(input_pdf_path).stem
