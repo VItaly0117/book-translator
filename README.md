@@ -5,25 +5,27 @@ Automated pipeline for translating mathematical/scientific PDF textbooks from Ru
 ## ✨ Features
 
 - **AI-powered OCR** via [marker-pdf](https://github.com/VikParuchuri/marker) (handles scanned PDFs, extracts LaTeX)
+- **OpenCV Image Enhancement** — automatically processes extracted math/graphics to remove dark backgrounds and fix scanned artefacts.
+- **Robust OCR Artefact Cleanup** — cleans up marker-pdf Markdown output (formats equations, repairs broken sentences, inline formulas, and tabular data).
 - **Formula & Page Number protection** — all `$$...$$` and `$...$` LaTeX, as well as page numbers, are masked before translation and restored after.
 - **Image link protection** — Markdown image references are preserved intact.
 - **Parallel DeepL API Translation** — fast threaded translation of text chunks.
 - **Local SQLite Caching** — preserves translation progress directly to `cache.db` to survive disconnects and save API usage.
 - **Multi-Format Export** — automatically exports translated Markdown into `.epub` and `.pdf` formats using `pandoc`.
-- **43 unit/integration tests** — full coverage of masking, unmasking, chunking, caching, and translation logic.
+- **Dynamic Run Directories** — isolates every run into a unique timestamped folder for clean output artifact tracking.
+- **69 unit/integration tests** — full coverage of masking, unmasking, chunking, caching, translation, image processing, and formatting logic.
 
 ## 🗂️ Project Structure
 
 ```
 .
 ├── book_translator.py      # Main pipeline script
-├── test_translator.py      # pytest test suite (43 tests)
+├── test_translator.py      # pytest test suite (69 tests)
 ├── requirements.txt        # Python dependencies
 ├── .env.template           # Environment variables template
 ├── book_style.css          # Styling used for EPUB/PDF export
 ├── input/                  # Put your PDF here (git-ignored)
-├── output/                 # Translated Markdown/EPUB/PDF output (git-ignored)
-└── images/                 # Extracted images (git-ignored)
+└── output/                 # Dinamically generated timestamped folders (e.g. 2026-03-07_15-30-00_Saturday)
 ```
 
 ## ⚙️ Setup
@@ -75,20 +77,21 @@ caffeinate -i python3 book_translator.py --pdf "input/your_book.pdf" --parser ma
 ## 🔄 Pipeline Stages
 
 ```
-PDF ──[marker OCR]──► raw.md ──[masking]──► masked.md ──[DeepL]──► translated_masked.md ──[unmasking]──► _uk.md ──[pandoc]──► .epub / .pdf
+PDF ──[marker OCR & OpenCV]──► raw.md ──[masking]──► masked.md ──[DeepL]──► translated_masked.md ──[unmasking & formatting cleanup]──► _uk.md ──[pandoc]──► .epub / .pdf
 ```
 
-1. **Parse** — marker-pdf converts Russian PDF pages to Markdown with LaTeX
-2. **Mask** — LaTeX formulas, image links, and page numbers replaced with secure tokens
-3. **Translate** — DeepL translates only the plain text in parallel (utilizes SQLite caching)
-4. **Unmask** — Placeholders restored to original LaTeX and image links, page numbers converted to page breaks
-5. **Export** — Pandoc converts the Markdown into professionally styled `.epub` and `.pdf` files
+1. **Parse & Enhance** — marker-pdf converts Russian PDF pages to Markdown with LaTeX, and OpenCV cleans extracted charts/images.
+2. **Mask** — LaTeX formulas, image links, and page numbers replaced with secure tokens.
+3. **Translate** — DeepL translates only the plain text in parallel (utilizes SQLite caching).
+4. **Unmask** — Placeholders restored to original LaTeX and image links, page numbers converted to page breaks.
+5. **Format Cleanup** — Regex formatting fixes OCR gluing issues, inline formula artefacts, and table breaks.
+6. **Export** — Pandoc converts the Markdown into professionally styled `.epub` and `.pdf` files inside a dedicated timestamped run directory.
 
 ## 🧪 Running Tests
 
 ```bash
 pytest test_translator.py -v
-# 43 passed ✅
+# 69 passed ✅
 ```
 
 ## ⚠️ First Run Note
