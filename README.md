@@ -107,17 +107,50 @@ On the first run, `marker-pdf` AI models (~3 GB) will be downloaded automaticall
 
 Pandoc EPUB export works out of the box, but PDF export may require a valid XeLaTeX/PDFLaTeX installation on your system.
 
-## 🛠 Особенности установки на Windows
+## 🛠 Подробный гайд по установке для Windows (с нуля)
 
-1. **Версия Python**: Категорически **НЕЛЬЗЯ** использовать Python из MSYS2 или Microsoft Store. Скачайте официальный установщик (`.exe`) с [python.org](https://www.python.org/downloads/) и обязательно поставьте галочку "Add Python to PATH" при установке.
-2. **Активация venv в PowerShell**: Если при команде `.\.venv\Scripts\activate` возникает ошибка о запрете выполнения сценариев, откройте PowerShell от имени Администратора и введите:
-   ```powershell
-   Set-ExecutionPolicy Unrestricted -Scope CurrentUser
-   ```
-3. **Генерация PDF (Pandoc & MiKTeX)**: Для успешного экспорта Markdown в PDF с кириллицей на Windows необходимо вручную скачать и установить:
-   - [Pandoc](https://pandoc.org/installing.html) (убедитесь, что он добавлен в PATH).
-   - [MiKTeX](https://miktex.org/download) (предоставляет движок XeLaTeX). Без него конвертация упадет с ошибкой "exitcode 43". Во время установки MiKTeX разрешите ему "скачивать отсутствующие пакеты "на лету" (install missing packages on-the-fly -> Yes)".
-4. **Интерактивный запуск**: Для удобства вы можете просто запустить `python book_translator.py` без флагов, чтобы вызвать удобное интерактивное меню прямо в консоли.
+Если вы настраиваете скрипт на свежей системе Windows (например, по удаленке у друга), выполните эти шаги строго по порядку:
+
+**Шаг 1: Установка базовых программ (Обязательно)**
+1. **[Python (от 3.10 до 3.12)](https://www.python.org/downloads/)** — скачайте официальный `.exe` установщик. При установке **ОБЯЗАТЕЛЬНО** поставьте галочку внизу окна: **`Add Python to PATH`**! Без этого ничего не заработает.
+2. **[Git для Windows](https://git-scm.com/download/win)** — скачайте и установите со стандартными настройками (нужен для клонирования кода).
+3. **[Pandoc](https://pandoc.org/installing.html)** — скачайте `.msi` установщик и установите. Он отвечает за финальную генерацию документов и сам добавит себя в системный PATH.
+4. **[MiKTeX](https://miktex.org/download)** — это LaTeX-движок, без которого не создастся PDF с формулами (будет ошибка exitcode 43). 
+   - **Важно:** при установке MiKTeX вас спросят *"Install missing packages on-the-fly"*. Обязательно выберите **"Yes"** (чтобы он сам докачивал нужные шрифты и пакеты в процессе сборки).
+
+*(После установки всех этих программ желательно **перезагрузить компьютер**, чтобы обновились системные пути PATH)*
+
+**Шаг 2: Загрузка проекта**
+Откройте **PowerShell** или встроенный терминал и выполните:
+```powershell
+git clone https://github.com/VItaly0117/book-translator.git
+cd book-translator
+```
+
+**Шаг 3: Настройка окружения и зависимостей**
+В терминале внутри папки проекта последовательно введите:
+```powershell
+# Если PowerShell ругается на скрипты, сначала выполните эту команду (от имени Администратора):
+# Set-ExecutionPolicy Unrestricted -Scope CurrentUser
+
+python -m venv venv
+.\venv\Scripts\Activate.ps1
+# (В начале строки должно появиться зеленое слово (venv))
+
+pip install -r requirements.txt
+# (Установка займет время, так как скачиваются тяжелые Torch и OpenCV)
+```
+
+**Шаг 4: Подготовка к запуску**
+1. В папке с проектом создайте файл `.env`.
+2. Впишите внутрь него ключ: `DEEPL_API_KEY=ваш_ключ_здесь`
+3. Создайте папку `input` и положите туда вашу книгу (pdf или md).
+
+**Шаг 5: Запуск**
+```powershell
+python book_translator.py
+```
+Скрипт откроет красивое интерактивное текстовое меню и сам спросит, какой файл переводить и сколько страниц!
 
 ## 📋 Requirements
 
