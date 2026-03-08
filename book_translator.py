@@ -735,13 +735,17 @@ def export_to_book_formats(
     pdf_args = [
         "--pdf-engine=xelatex",
         f"--resource-path={res_path}",
-        # Main serif font – DejaVu Serif ships with most TeX distributions
-        # and covers the full Cyrillic Unicode block.
-        "-V", "mainfont=DejaVu Serif",
+        # Force images to not overflow the page bounds
+        "-V", "graphics=true",
+        "-V", "maxwidth=\\textwidth",
+        "-V", "maxheight=0.8\\textheight",
+        
+        # Main serif font – Universally available on Windows & Mac
+        "-V", "mainfont=Times New Roman",
         # Monospace font for code blocks
-        "-V", "monofont=DejaVu Sans Mono",
+        "-V", "monofont=Courier New",
         # Sans-serif for headers
-        "-V", "sansfont=DejaVu Sans",
+        "-V", "sansfont=Arial",
         # Page numbering at the bottom-centre of every page
         "-V", "pagestyle=plain",
         # Required packages for Cyrillic + geometry
