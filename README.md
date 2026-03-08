@@ -1,159 +1,159 @@
 # 📚 PDF Book Translator (RU → UK)
 
-Automated pipeline for translating mathematical/scientific PDF textbooks from Russian to Ukrainian, **preserving all LaTeX formulas, embedded images, and book layout** using the DeepL API.
+Автоматизований конвеєр (пайплайн) для перекладу математичних та наукових PDF-підручників з російської на українську мову, **зі збереженням усіх LaTeX-формул, вбудованих зображень та верстки книги**, використовуючи DeepL API.
 
-## ✨ Features
+## ✨ Особливості (Features)
 
-- **AI-powered OCR** via [marker-pdf](https://github.com/VikParuchuri/marker) (handles scanned PDFs, extracts LaTeX)
-- **OpenCV Image Enhancement** — automatically processes extracted math/graphics to remove dark backgrounds and fix scanned artefacts.
-- **Robust OCR Artefact Cleanup** — cleans up marker-pdf Markdown output (formats equations, repairs broken sentences, inline formulas, and tabular data).
-- **Formula & Page Number protection** — all `$$...$$` and `$...$` LaTeX, as well as page numbers, are masked before translation and restored after.
-- **Image link protection** — Markdown image references are preserved intact.
-- **Parallel DeepL API Translation** — fast threaded translation of text chunks.
-- **Local SQLite Caching** — preserves translation progress directly to `cache.db` to survive disconnects and save API usage.
-- **Multi-Format Export** — automatically exports translated Markdown into `.epub` and `.pdf` formats using `pandoc`.
-- **Dynamic Run Directories** — isolates every run into a unique timestamped folder for clean output artifact tracking.
-- **69 unit/integration tests** — full coverage of masking, unmasking, chunking, caching, translation, image processing, and formatting logic.
+- **ШІ-розпізнавання тексту (OCR)** через [marker-pdf](https://github.com/VikParuchuri/marker) (обробляє відскановані PDF, витягує LaTeX).
+- **Покращення зображень через OpenCV** — автоматично обробляє витягнуту математику та графіку, щоб видалити темний фон і виправити артефакти сканування.
+- **Надійне очищення артефактів OCR** — виправляє згенерований marker-pdf Markdown-код (форматує рівняння, виправляє розірвані речення, інлайн-формули та табличні дані).
+- **Захист формул та номерів сторінок** — усі LaTeX-вирази `$$...$$` та `$...$`, а також номери сторінок, маскуються перед перекладом і відновлюються після нього.
+- **Захист посилань на зображення** — посилання на зображення у форматі Markdown залишаються недоторканими.
+- **Паралельний переклад через DeepL API** — швидкий багатопотоковий переклад текстових блоків.
+- **Локальне кешування в SQLite** — зберігає прогрес перекладу безпосередньо у `cache.db`, щоб пережити розриви зв'язку та зекономити ліміти API.
+- **Експорт у мультиформати** — автоматично експортує перекладений Markdown у формати `.epub` та `.pdf` за допомогою `pandoc`.
+- **Динамічні робочі папки** — ізолює результати кожного запуску в унікальну папку з відміткою часу для відстеження файлів без плутанини.
+- **69 unit/integration тестів** — повне покриття логіки маскування, розмаскування, нарізки тексту, кешування, перекладу, обробки зображень та форматування.
 
-## 🗂️ Project Structure
+## 🗂️ Структура проєкту
 
-```
+```text
 .
-├── book_translator.py      # Main pipeline script
-├── test_translator.py      # pytest test suite (69 tests)
-├── requirements.txt        # Python dependencies
-├── .env.template           # Environment variables template
-├── book_style.css          # Styling used for EPUB/PDF export
-├── input/                  # Put your PDF here (git-ignored)
-└── output/                 # Dinamically generated timestamped folders (e.g. 2026-03-07_15-30-00_Saturday)
+├── book_translator.py      # Головний скрипт пайплайну
+├── test_translator.py      # pytest тести (69 тестів)
+├── requirements.txt        # Залежності Python
+├── .env.template           # Шаблон змінних середовища
+├── book_style.css          # Стилі для експорту в EPUB/PDF
+├── input/                  # Покладіть ваш PDF сюди (папка ігнорується git)
+└── output/                 # Динамічно згенеровані папки з датою і часом (напр. 2026-03-07_15-30-00_Saturday)
 ```
 
-## ⚙️ Setup
+## ⚙️ Початкове налаштування (Setup)
 
 ```bash
-# 1. Clone the repo
+# 1. Клонувати репозиторій
 git clone https://github.com/YOUR_USER/book-translator.git
 cd book-translator
 
-# 2. Create virtual environment
+# 2. Створити віртуальне середовище
 python3 -m venv .venv
 source .venv/bin/activate       # macOS/Linux
 # .venv\Scripts\activate        # Windows
 
-# 3. Install dependencies
+# 3. Встановити залежності
 pip install -r requirements.txt
 
-# 4. Configure API key
+# 4. Налаштувати API ключ
 cp .env.template .env
-# Edit .env and add your DeepL API key
+# Відкрийте .env файл і додайте ваш DeepL API ключ
 ```
 
-## 🚀 Usage
+## 🚀 Використання (Usage)
 
 ```bash
-# Translate a scanned PDF (AI OCR via marker-pdf):
+# Перекласти відсканований PDF (AI OCR через marker-pdf):
 python3 book_translator.py --pdf "input/your_book.pdf"
 
-# Test with only 20 pages first:
+# Протестувати тільки перші 20 сторінок:
 python3 book_translator.py --pdf "input/your_book.pdf" --max-pages 20
 
-# Use a pre-parsed Markdown file (skip PDF parsing/OCR stage):
+# Використати вже готовий розпізнаний Markdown-файл (пропустити етап PDF/OCR):
 python3 book_translator.py --md "input/your_book.md"
 
-# Интерактивное меню (new!):
-# Просто запустите скрипт без флагов для вызова удобного текстового диалогового меню:
+# Інтерактивне меню (new!):
+# Просто запустіть скрипт без жодних прапорців, щоб викликати зручне текстове меню:
 python3 book_translator.py
-# Скрипт спросит:
-# 👉 1. Введите путь к PDF или MD файлу (например, input/book.pdf):
-# 👉 2. Сколько страниц перевести? (Оставьте пустым, чтобы перевести ВСЮ книгу):
+# Скрипт запитає:
+# 👉 1. Введіть шлях до PDF або MD файлу (наприклад, input/book.pdf):
+# 👉 2. Скільки сторінок перекласти? (Залиште порожнім, щоб перекласти ВСЮ книгу):
 
-# Prevent Mac from sleeping during long runs:
+# Щоб Mac не заснув під час тривалої роботи:
 caffeinate -i python3 book_translator.py --pdf "input/your_book.pdf" --parser marker
 ```
 
-## 🔧 CLI Options
+## 🔧 CLI Опції
 
-| Option | Description |
+| Опція | Опис |
 |--------|-------------|
-| `--pdf PATH` | Source PDF file |
-| `--md PATH` | Pre-parsed Markdown (skips PDF stage) |
-| `--max-pages N` | Process only first N pages (for testing) |
-| `--lang CODE` | DeepL target language (default: `UK`) |
-| `--output PATH` | Output `.md` file path |
+| `--pdf PATH` | Шлях до вхідного PDF файлу |
+| `--md PATH` | Шлях до готового Markdown файлу (пропускає етап обробки PDF) |
+| `--max-pages N` | Обробити лише перші N сторінок (для тестування) |
+| `--lang CODE` | Цільова мова DeepL (за замовчуванням: `UK`) |
+| `--output PATH` | Шлях для вихідного `.md` файлу |
 
-## 🔄 Pipeline Stages
+## 🔄 Етапи конвеєра (Pipeline Stages)
 
+```text
+PDF ──[marker OCR & OpenCV]──► raw.md ──[маскування]──► masked.md ──[DeepL]──► translated_masked.md ──[розмаскування та очищення]──► _uk.md ──[pandoc]──► .epub / .pdf
 ```
-PDF ──[marker OCR & OpenCV]──► raw.md ──[masking]──► masked.md ──[DeepL]──► translated_masked.md ──[unmasking & formatting cleanup]──► _uk.md ──[pandoc]──► .epub / .pdf
-```
 
-1. **Parse & Enhance** — marker-pdf converts Russian PDF pages to Markdown with LaTeX, and OpenCV cleans extracted charts/images.
-2. **Mask** — LaTeX formulas, image links, and page numbers replaced with secure tokens.
-3. **Translate** — DeepL translates only the plain text in parallel (utilizes SQLite caching).
-4. **Unmask** — Placeholders restored to original LaTeX and image links, page numbers converted to page breaks.
-5. **Format Cleanup** — Regex formatting fixes OCR gluing issues, inline formula artefacts, and table breaks.
-6. **Export** — Pandoc converts the Markdown into professionally styled `.epub` and `.pdf` files inside a dedicated timestamped run directory.
+1. **Parse & Enhance (Розпізнавання та Покращення)** — marker-pdf конвертує сторінки російського PDF у Markdown із підтримкою LaTeX, а OpenCV очищує витягнуті графіки та зображення.
+2. **Mask (Маскування)** — LaTeX-формули, посилання на зображення та номери сторінок замінюються на спеціальні захищені токени.
+3. **Translate (Переклад)** — DeepL паралельно перекладає лише звичайний текст (з використанням кешування SQLite).
+4. **Unmask (Розмаскування)** — Токени повертаються у свій оригінальний вигляд (LaTeX-код та посилання на зображення), а номери сторінок перетворюються на розриви сторінок.
+5. **Format Cleanup (Очищення форматування)** — Регулярні вирази (Regex) виправляють проблеми зі склеюванням слів від OCR, артефакти від інлайн-формул та зламані таблиці.
+6. **Export (Експорт)** — Pandoc конвертує фінальний Markdown у професійно оформлені файли `.epub` та `.pdf` усередині динамічної папки прогону (з датою та часом).
 
-## 🧪 Running Tests
+## 🧪 Запуск тестів
 
 ```bash
 pytest test_translator.py -v
 # 69 passed ✅
 ```
 
-## ⚠️ First Run Note
+## ⚠️ Примітка щодо першого запуску
 
-On the first run, `marker-pdf` AI models (~3 GB) will be downloaded automatically to `~/.cache/datalab/`. Subsequent runs use the cached models and are much faster.
+Під час першого запуску ШІ-моделі `marker-pdf` (близько 3 ГБ) будуть завантажені автоматично у `~/.cache/datalab/`. Наступні запуски використовуватимуть закешовані моделі і відбуватимуться значно швидше.
 
-Pandoc EPUB export works out of the box, but PDF export may require a valid XeLaTeX/PDFLaTeX installation on your system.
+Експорт у формат Pandoc EPUB працює одразу "з коробки", але експорт у PDF може вимагати наявності встановленого XeLaTeX/PDFLaTeX у вашій системі.
 
-## 🛠 Подробный гайд по установке для Windows (с нуля)
+## 🛠 Докладний гайд зі встановлення для Windows (з нуля)
 
-Если вы настраиваете скрипт на свежей системе Windows (например, по удаленке у друга), выполните эти шаги строго по порядку:
+Якщо ви налаштовуєте скрипт на "чистій" системі Windows (наприклад, дистанційно у друга), виконайте ці кроки строго по порядку:
 
-**Шаг 1: Установка базовых программ (Обязательно)**
-1. **[Python (от 3.10 до 3.12)](https://www.python.org/downloads/)** — скачайте официальный `.exe` установщик. При установке **ОБЯЗАТЕЛЬНО** поставьте галочку внизу окна: **`Add Python to PATH`**! Без этого ничего не заработает.
-2. **[Git для Windows](https://git-scm.com/download/win)** — скачайте и установите со стандартными настройками (нужен для клонирования кода).
-3. **[Pandoc](https://pandoc.org/installing.html)** — скачайте `.msi` установщик и установите. Он отвечает за финальную генерацию документов и сам добавит себя в системный PATH.
-4. **[MiKTeX](https://miktex.org/download)** — это LaTeX-движок, без которого не создастся PDF с формулами (будет ошибка exitcode 43). 
-   - **Важно:** при установке MiKTeX вас спросят *"Install missing packages on-the-fly"*. Обязательно выберите **"Yes"** (чтобы он сам докачивал нужные шрифты и пакеты в процессе сборки).
+**Крок 1: Встановлення базових програм (Обов'язково)**
+1. **[Python (від 3.10 до 3.12)](https://www.python.org/downloads/)** — завантажте офіційний `.exe` установник. Під час встановлення **ОБОВ'ЯЗКОВО** поставте галочку внизу вікна: **`Add Python to PATH`**! Без цього нічого не запрацює.
+2. **[Git для Windows](https://git-scm.com/download/win)** — завантажте та встановіть зі стандартними налаштуваннями (потрібен для клонування коду).
+3. **[Pandoc](https://pandoc.org/installing.html)** — завантажте `.msi` установник і встановіть. Він відповідає за фінальну генерацію документів і сам додасть себе до системного PATH.
+4. **[MiKTeX](https://miktex.org/download)** — це LaTeX-рушій, без якого не створиться PDF з формулами (буде помилка exitcode 43). 
+   - **Важливо:** під час встановлення MiKTeX вас запитають *"Install missing packages on-the-fly"*. Обов'язково виберіть **"Yes"** (щоб він сам дозавантажував потрібні шрифти та пакети в процесі збірки).
 
-*(После установки всех этих программ желательно **перезагрузить компьютер**, чтобы обновились системные пути PATH)*
+*(Після встановлення усіх цих програм бажано **перезавантажити комп'ютер**, щоб оновилися системні шляхи PATH)*
 
-**Шаг 2: Загрузка проекта**
-Откройте **PowerShell** или встроенный терминал и выполните:
+**Крок 2: Завантаження проєкту**
+Відкрийте **PowerShell** або вбудований термінал і виконайте:
 ```powershell
 git clone https://github.com/VItaly0117/book-translator.git
 cd book-translator
 ```
 
-**Шаг 3: Настройка окружения и зависимостей**
-В терминале внутри папки проекта последовательно введите:
+**Крок 3: Налаштування середовища та залежностей**
+У терміналі всередині папки проєкту послідовно введіть:
 ```powershell
-# Если PowerShell ругается на скрипты, сначала выполните эту команду (от имени Администратора):
+# Якщо PowerShell лається на скрипти, спершу виконайте цю команду (від імені Адміністратора):
 # Set-ExecutionPolicy Unrestricted -Scope CurrentUser
 
 python -m venv venv
 .\venv\Scripts\Activate.ps1
-# (В начале строки должно появиться зеленое слово (venv))
+# (На початку рядка має з'явитися зелене слово (venv))
 
 pip install -r requirements.txt
-# (Установка займет время, так как скачиваются тяжелые Torch и OpenCV)
+# (Встановлення займе час, оскільки завантажуються важкі Torch та OpenCV)
 ```
 
-**Шаг 4: Подготовка к запуску**
-1. В папке с проектом создайте файл `.env`.
-2. Впишите внутрь него ключ: `DEEPL_API_KEY=ваш_ключ_здесь`
-3. Создайте папку `input` и положите туда вашу книгу (pdf или md).
+**Крок 4: Підготовка до запуску**
+1. У папці з проєктом створіть файл `.env`.
+2. Впишіть усередину нього ключ: `DEEPL_API_KEY=ваш_ключ_тут`
+3. Створіть папку `input` і покладіть туди вашу книгу (pdf або md).
 
-**Шаг 5: Запуск**
+**Крок 5: Запуск**
 ```powershell
 python book_translator.py
 ```
-Скрипт откроет красивое интерактивное текстовое меню и сам спросит, какой файл переводить и сколько страниц!
+Скрипт відкриє гарне інтерактивне текстове меню і сам запитає, який файл перекладати та скільки сторінок!
 
-## 📋 Requirements
+## 📋 Вимоги (Requirements)
 
 - Python 3.10+
-- DeepL API key (free tier: 500k chars/month)
-- ~4 GB disk space for AI models (marker-pdf)
+- DeepL API ключ (free tier: 500k символів/місяць)
+- ~4 ГБ дискового простору для ШІ-моделей (marker-pdf)
