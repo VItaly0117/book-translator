@@ -36,4 +36,11 @@ input/*
 *.jpeg
 *.jpg
 *.png
-\n.env.template
+.env.template
+
+# SQLite Cache
+cache.db
+cache.db-journal
+
+# Temporary files
+temp_gemini.svg

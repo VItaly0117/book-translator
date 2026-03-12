@@ -47,6 +47,22 @@ from dotenv import load_dotenv
 from tqdm import tqdm
 
 # ---------------------------------------------------------------------------
+# Optional: Gemini & SVG Vision (AI image recreation)
+# ---------------------------------------------------------------------------
+try:
+    from PIL import Image
+    import google.generativeai as genai
+    from svglib.svglib import svg2rlg
+    from reportlab.graphics import renderPM
+    _AI_IMAGES_AVAILABLE = True
+except ImportError:
+    Image = None
+    genai = None
+    svg2rlg = None
+    renderPM = None
+    _AI_IMAGES_AVAILABLE = False
+
+# ---------------------------------------------------------------------------
 # Optional: OpenCV for image enhancement
 # ---------------------------------------------------------------------------
 try:
@@ -84,7 +100,11 @@ log = logging.getLogger(__name__)
 load_dotenv()
 
 DEEPL_API_KEY: str = os.getenv("DEEPL_API_KEY", "")
+GEMINI_API_KEY: str = os.getenv("GEMINI_API_KEY", "")
 TARGET_LANG: str   = os.getenv("TARGET_LANG", "UK")
+
+if GEMINI_API_KEY and _AI_IMAGES_AVAILABLE:
+    genai.configure(api_key=GEMINI_API_KEY)
 
 BASE_DIR   = Path(__file__).parent
 INPUT_DIR  = BASE_DIR / "input"
@@ -171,6 +191,66 @@ def enhance_book_image(image_path: str | Path) -> None:
     # 4. Save back to the same path
     cv2.imwrite(image_path, binary)
     log.debug("enhance_book_image: processed %s", image_path)
+
+
+def recreate_image_with_gemini(image_path: str | Path) -> None:
+    """
+    Recreate a diagram/graph using Google Gemini API (Vision) as an SVG,
+    then convert it back to PNG at the original location.
+    
+    Translates Russian text in the image to Ukrainian.
+    """
+    if not _AI_IMAGES_AVAILABLE:
+        raise ImportError("AI image recreation requires 'google-generativeai', 'Pillow', 'svglib' and 'reportlab'.")
+    
+    image_path = Path(image_path)
+    if not GEMINI_API_KEY:
+        raise ValueError("GEMINI_API_KEY not found in environment.")
+
+    log.info("  Recreating image via Gemini: %s", image_path.name)
+    
+    # A. Open image
+    img = Image.open(image_path)
+    
+    # B. Init model
+    model = genai.GenerativeModel('gemini-1.5-pro')
+    
+    # C. Prompt
+    prompt = (
+        "You are an expert technical graphic designer. Recreate the provided diagram/graph perfectly "
+        "as an SVG graphic. Translate all Russian text in the image to Ukrainian. "
+        "Use clean, modern fonts (like Arial or sans-serif) and sharp lines. "
+        "Return ONLY raw, valid SVG code. Do not wrap it in markdown blockquotes like ```svg. "
+        "The output must start with <svg> and end with </svg>."
+    )
+    
+    # D. Generate content
+    response = model.generate_content([prompt, img])
+    svg_code = response.text.strip()
+    
+    # E. Clean Markdown tags if Gemini added them
+    if svg_code.startswith("```"):
+        # Remove first line if it looks like ```svg or just ```
+        lines = svg_code.splitlines()
+        if lines[0].startswith("```"):
+            lines = lines[1:]
+        if lines and lines[-1].startswith("```"):
+            lines = lines[:-1]
+        svg_code = "\n".join(lines).strip()
+    
+    # F. Save to temp SVG
+    temp_svg = Path("temp_gemini.svg")
+    temp_svg.write_text(svg_code, encoding="utf-8")
+    
+    try:
+        # G. Convert SVG to PNG (using svglib + reportlab for cross-platform)
+        drawing = svg2rlg(str(temp_svg))
+        renderPM.drawToFile(drawing, str(image_path), fmt="PNG")
+        log.info("  Successfully recreated and translated: %s", image_path.name)
+    finally:
+        # H. Cleanup
+        if temp_svg.exists():
+            temp_svg.unlink()
 # ===========================================================================
 # Markdown Formatting Cleanup
 # ===========================================================================
@@ -297,7 +377,6 @@ def parse_pdf_to_md(
                 dest = images_dir / img_name
                 img_obj.save(str(dest))
                 log.info("  Saved image: %s", dest)
-                enhance_book_image(dest)
 
         # ── Fall back to old API: marker-pdf < 1.0 ──────────────────────────
         except ImportError:
@@ -317,7 +396,6 @@ def parse_pdf_to_md(
                 dest = images_dir / img_name
                 img_obj.save(str(dest))
                 log.info("  Saved image: %s", dest)
-                enhance_book_image(dest)
 
         log.info("Stage 1 complete – %d characters extracted.", len(full_text))
         return full_text
@@ -589,7 +667,6 @@ def translate_text_deepl(
 
     log.info("Stage 3 – Translation complete.")
     return "\n\n".join(translated)
-    return text
 
 
 # ===========================================================================
@@ -779,6 +856,7 @@ def process_document(
     api_key:         Optional[str] = None,
     target_lang:     str = TARGET_LANG,
     max_pages:       Optional[int] = None,
+    use_ai_images:   bool = False,
 ) -> Path:
     """
     Run the complete translation pipeline end-to-end.
@@ -853,6 +931,22 @@ def process_document(
         raise ValueError("Provide either 'input_pdf_path' or 'input_md_path'.")
 
     # ------------------------------------------------------------------
+    # Stage 1b – Process images (AI Recreate or OpenCV Enhance)
+    # ------------------------------------------------------------------
+    if images_dir.exists():
+        log.info("Stage 1b – Processing images in %s", images_dir)
+        for img_path in images_dir.glob("*"):
+            if img_path.suffix.lower() in [".png", ".jpg", ".jpeg", ".tiff"]:
+                if use_ai_images:
+                    try:
+                        recreate_image_with_gemini(img_path)
+                    except Exception as e:
+                        log.warning("Gemini generation failed: %s. Falling back to OpenCV...", e)
+                        enhance_book_image(img_path)
+                else:
+                    enhance_book_image(img_path)
+
+    # ------------------------------------------------------------------
     # Stage 2 – Mask formulas + images
     # ------------------------------------------------------------------
     masked_text, elements_dict = mask_elements(md_text)
@@ -925,6 +1019,10 @@ if __name__ == "__main__":
         "--max-pages", metavar="N", type=int, default=None,
         help="Process only the first N pages (useful for quick tests, e.g. --max-pages 20)."
     )
+    parser.add_argument(
+        "--use-ai", action="store_true",
+        help="Use Gemini AI to recreate and translate images."
+    )
     args = parser.parse_args()
 
     # Интерактивное меню для удобного запуска пользователем без аргументов
@@ -957,6 +1055,14 @@ if __name__ == "__main__":
         if max_pgs.isdigit():
             args.max_pages = int(max_pgs)
             
+        print("\n" + "-" * 30)
+        use_ai = input("👉 3. Использовать ИИ (Gemini) для перерисовки графиков и перевода текста на них? (y/n):\n> ").strip().lower()
+        args.use_ai = (use_ai == 'y')
+        if args.use_ai:
+            print("✔️  Включена перерисовка графиков через Gemini Vision API.")
+        else:
+            print("✔️  Будет использован стандартный OpenCV-ластик (ч/б очистка).")
+
         print("\n🚀 Начинаю процесс...\n" + "=" * 60 + "\n")
         
     # --- Предварительные проверки (Pre-flight checks) ---
@@ -980,6 +1086,7 @@ if __name__ == "__main__":
             output_md_path=args.output,
             target_lang=args.lang,
             max_pages=args.max_pages,
+            use_ai_images=getattr(args, 'use_ai', False),
         )
         print(f"\n✅  Done!  Translated file → {result_path}")
     except Exception as exc:

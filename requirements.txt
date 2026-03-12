@@ -25,6 +25,11 @@ opencv-python-headless>=4.8.0
 # numpy is a transitive dependency of opencv but listed explicitly for tests
 numpy==1.24.0
 
+# --- AI & Vision ---
+google-generativeai
+svglib
+reportlab
+
 # --- Utilities ---
 tqdm==4.66.0        # Progress bars for long-running operations
 Pillow==10.0.0      # Image handling (used by marker-pdf internally)
