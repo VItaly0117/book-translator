@@ -47,22 +47,6 @@ from dotenv import load_dotenv
 from tqdm import tqdm
 
 # ---------------------------------------------------------------------------
-# Optional: Gemini & SVG Vision (AI image recreation)
-# ---------------------------------------------------------------------------
-try:
-    from PIL import Image
-    from google import genai
-    from svglib.svglib import svg2rlg
-    from reportlab.graphics import renderPM
-    _AI_IMAGES_AVAILABLE = True
-except ImportError:
-    Image = None
-    genai = None
-    svg2rlg = None
-    renderPM = None
-    _AI_IMAGES_AVAILABLE = False
-
-# ---------------------------------------------------------------------------
 # Optional: OpenCV for image enhancement
 # ---------------------------------------------------------------------------
 try:
@@ -100,11 +84,7 @@ log = logging.getLogger(__name__)
 load_dotenv()
 
 DEEPL_API_KEY: str = os.getenv("DEEPL_API_KEY", "")
-GEMINI_API_KEY: str = os.getenv("GEMINI_API_KEY", "")
 TARGET_LANG: str   = os.getenv("TARGET_LANG", "UK")
-
-# genai.Client initialization will be done per-request or globally if needed.
-# For now, we'll initialize it in the recreate_image_with_gemini function.
 
 BASE_DIR   = Path(__file__).parent
 INPUT_DIR  = BASE_DIR / "input"
@@ -193,67 +173,6 @@ def enhance_book_image(image_path: str | Path) -> None:
     log.debug("enhance_book_image: processed %s", image_path)
 
 
-def recreate_image_with_gemini(image_path: str | Path) -> None:
-    """
-    Recreate a diagram/graph using Google Gemini API (Vision) as an SVG,
-    then convert it back to PNG at the original location.
-    
-    Translates Russian text in the image to Ukrainian.
-    """
-    if not _AI_IMAGES_AVAILABLE:
-        raise ImportError("AI image recreation requires 'google-generativeai', 'Pillow', 'svglib' and 'reportlab'.")
-    
-    image_path = Path(image_path)
-    if not GEMINI_API_KEY:
-        raise ValueError("GEMINI_API_KEY not found in environment.")
-
-    log.info("  Recreating image via Gemini: %s", image_path.name)
-    
-    # A. Open image
-    img = Image.open(image_path)
-    
-    # B. Init client
-    client = genai.Client(api_key=GEMINI_API_KEY)
-    
-    # C. Prompt
-    prompt = (
-        "You are an expert technical graphic designer. Recreate the provided diagram/graph perfectly "
-        "as an SVG graphic. Translate all Russian text in the image to Ukrainian. "
-        "Use clean, modern fonts (like Arial or sans-serif) and sharp lines. "
-        "Return ONLY raw, valid SVG code. Do not wrap it in markdown blockquotes like ```svg. "
-        "The output must start with <svg> and end with </svg>."
-    )
-    
-    # D. Generate content
-    response = client.models.generate_content(
-        model='gemini-1.5-pro',
-        contents=[prompt, img]
-    )
-    svg_code = response.text.strip()
-    
-    # E. Clean Markdown tags if Gemini added them
-    if svg_code.startswith("```"):
-        # Remove first line if it looks like ```svg or just ```
-        lines = svg_code.splitlines()
-        if lines[0].startswith("```"):
-            lines = lines[1:]
-        if lines and lines[-1].startswith("```"):
-            lines = lines[:-1]
-        svg_code = "\n".join(lines).strip()
-    
-    # F. Save to temp SVG
-    temp_svg = Path("temp_gemini.svg")
-    temp_svg.write_text(svg_code, encoding="utf-8")
-    
-    try:
-        # G. Convert SVG to PNG (using svglib + reportlab for cross-platform)
-        drawing = svg2rlg(str(temp_svg))
-        renderPM.drawToFile(drawing, str(image_path), fmt="PNG")
-        log.info("  Successfully recreated and translated: %s", image_path.name)
-    finally:
-        # H. Cleanup
-        if temp_svg.exists():
-            temp_svg.unlink()
 # ===========================================================================
 # Markdown Formatting Cleanup
 # ===========================================================================
@@ -310,6 +229,17 @@ def clean_markdown_formatting(md_text: str) -> str:
     
     # 9. Заменяем устаревшие теги LaTeX для Pandoc
     md_text = md_text.replace(r"\rm ", r"\mathrm{ }").replace(r"\rm", r"\mathrm")
+    
+    # 10. FIX: Удаляем лишние $ внутри LaTeX окружений (cases, align, etc.)
+    # marker-pdf иногда добавляет $ внутри \begin{cases}...\end{cases}
+    # Пример: \begin{cases} $y > 0$ \\ ... \end{cases} -> \begin{cases} y > 0 \\ ... \end{cases}
+    def fix_cases_dollars(match):
+        content = match.group(1)
+        # Удаляем все $ внутри cases (они уже в математическом режиме)
+        content = content.replace('$', '')
+        return r'\begin{cases}' + content + r'\end{cases}'
+    
+    md_text = re.sub(r'\\begin\{cases\}(.*?)\\end\{cases\}', fix_cases_dollars, md_text, flags=re.DOTALL)
     
     return md_text
 
@@ -845,7 +775,7 @@ def export_to_book_formats(
         )
         log.info("  Generated PDF: %s", pdf_path)
     except Exception as e:
-        log.error("  Ошибка генерации PDF. Убедитесь, что MiKTeX (XeLaTeX) установлен и добавлен в системный PATH Windows. Детали: %s", e)
+        log.error("  PDF generation failed. Ensure XeLaTeX (MiKTeX/TeX Live) is installed and in PATH. Details: %s", e)
 
 
 # ===========================================================================
@@ -859,7 +789,7 @@ def process_document(
     api_key:         Optional[str] = None,
     target_lang:     str = TARGET_LANG,
     max_pages:       Optional[int] = None,
-    use_ai_images:   bool = False,
+    rebuild_only:    bool = False,
 ) -> Path:
     """
     Run the complete translation pipeline end-to-end.
@@ -886,6 +816,9 @@ def process_document(
         DeepL API key.  Falls back to the ``DEEPL_API_KEY`` env var.
     target_lang : str
         DeepL target language (default: ``"UK"``).
+    rebuild_only : bool
+        If True, skip translation stages (mask, translate, unmask, clean).
+        Only process images and rebuild PDF/EPUB from existing MD.
 
     Returns
     -------
@@ -934,49 +867,50 @@ def process_document(
         raise ValueError("Provide either 'input_pdf_path' or 'input_md_path'.")
 
     # ------------------------------------------------------------------
-    # Stage 1b – Process images (AI Recreate or OpenCV Enhance)
+    # Stage 1b – Process images (OpenCV B&W enhancement)
     # ------------------------------------------------------------------
     if images_dir.exists():
         log.info("Stage 1b – Processing images in %s", images_dir)
         for img_path in images_dir.glob("*"):
             if img_path.suffix.lower() in [".png", ".jpg", ".jpeg", ".tiff"]:
-                if use_ai_images:
-                    try:
-                        recreate_image_with_gemini(img_path)
-                    except Exception as e:
-                        log.warning("Gemini generation failed: %s. Falling back to OpenCV...", e)
-                        enhance_book_image(img_path)
-                else:
-                    enhance_book_image(img_path)
+                enhance_book_image(img_path)
 
     # ------------------------------------------------------------------
-    # Stage 2 – Mask formulas + images
+    # Stages 2-4b: Translation (skipped in rebuild mode)
     # ------------------------------------------------------------------
-    masked_text, elements_dict = mask_elements(md_text)
+    if not rebuild_only:
+        # ------------------------------------------------------------------
+        # Stage 2 – Mask formulas + images
+        # ------------------------------------------------------------------
+        masked_text, elements_dict = mask_elements(md_text)
 
-    masked_path = run_dir / f"{stem}_masked.md"
-    masked_path.write_text(masked_text, encoding="utf-8")
-    log.info("  Masked text cached: %s", masked_path)
+        masked_path = run_dir / f"{stem}_masked.md"
+        masked_path.write_text(masked_text, encoding="utf-8")
+        log.info("  Masked text cached: %s", masked_path)
 
-    # ------------------------------------------------------------------
-    # Stage 3 – Translate
-    # ------------------------------------------------------------------
-    translated_text = translate_text_deepl(masked_text, api_key, target_lang)
+        # ------------------------------------------------------------------
+        # Stage 3 – Translate
+        # ------------------------------------------------------------------
+        translated_text = translate_text_deepl(masked_text, api_key, target_lang)
 
-    trans_path = run_dir / f"{stem}_translated_masked.md"
-    trans_path.write_text(translated_text, encoding="utf-8")
-    log.info("  Translated (masked) cached: %s", trans_path)
+        trans_path = run_dir / f"{stem}_translated_masked.md"
+        trans_path.write_text(translated_text, encoding="utf-8")
+        log.info("  Translated (masked) cached: %s", trans_path)
 
-    # ------------------------------------------------------------------
-    # Stage 4 – Unmask
-    # ------------------------------------------------------------------
-    final_md = unmask_elements(translated_text, elements_dict)
+        # ------------------------------------------------------------------
+        # Stage 4 – Unmask
+        # ------------------------------------------------------------------
+        final_md = unmask_elements(translated_text, elements_dict)
 
-    # ------------------------------------------------------------------
-    # Stage 4b – Clean markdown formatting
-    # ------------------------------------------------------------------
-    final_md = clean_markdown_formatting(final_md)
-    log.info("  Stage 4b – Markdown formatting cleaned.")
+        # ------------------------------------------------------------------
+        # Stage 4b – Clean markdown formatting
+        # ------------------------------------------------------------------
+        final_md = clean_markdown_formatting(final_md)
+        log.info("  Stage 4b – Markdown formatting cleaned.")
+    else:
+        # Rebuild mode: skip translation, use MD as-is
+        final_md = md_text
+        log.info("  Rebuild mode: Skipping translation stages.")
 
     # ------------------------------------------------------------------
     # Stage 5 – Write final output
@@ -1023,8 +957,8 @@ if __name__ == "__main__":
         help="Process only the first N pages (useful for quick tests, e.g. --max-pages 20)."
     )
     parser.add_argument(
-        "--use-ai", action="store_true",
-        help="Use Gemini AI to recreate and translate images."
+        "--rebuild-only", action="store_true",
+        help="Rebuild mode: skip translation, only process images and generate PDF/EPUB from existing MD."
     )
     args = parser.parse_args()
 
@@ -1034,37 +968,50 @@ if __name__ == "__main__":
         print(" 📚 Интерактивный переводчик научных книг (PDF/MD)")
         print("=" * 70)
         print("\nДобро пожаловать! Скрипт проведет вас через процесс перевода.")
-        print("Вы можете использовать два формата:")
-        print("  1. Файл .pdf (Будет применено ИИ-распознавание, извлечение формул)")
-        print("  2. Файл .md  (Пропуск распознавания, сразу перевод готового текста)\n")
+        print("Доступные режимы:")
+        print("  1. Файл .pdf (Полный цикл: распознавание + перевод)")
+        print("  2. Файл .md  (Пропуск PDF-парсинга, только перевод)")
+        print("  3. Режим пересборки (БЕЗ ПЕРЕВОДА: только перерисовка картинок и генерация PDF/EPUB из готового .md)\n")
         
-        file_path = input("👉 1. Введите путь к PDF или MD файлу (например, input/book.pdf):\n> ").strip()
-        if not file_path:
-            print("❌ Ошибка: необходимо указать путь к файлу.")
-            sys.exit(1)
-            
-        if file_path.lower().endswith('.pdf'):
-            args.pdf = file_path
-            print("✔️  Выбран PDF-файл. Будет запущен полный цикл с распознаванием.")
-        elif file_path.lower().endswith('.md'):
+        mode = input("👉 1. Выберите режим (1, 2 или 3):\n> ").strip()
+        
+        if mode == '3':
+            # Rebuild mode - only need MD file path
+            args.rebuild_only = True
+            file_path = input("Введите путь к готовому .md файлу:\n> ").strip()
+            if not file_path:
+                print("❌ Ошибка: необходимо указать путь к файлу.")
+                sys.exit(1)
+            if not file_path.lower().endswith('.md'):
+                print("❌ Ошибка: для режима пересборки нужен .md файл.")
+                sys.exit(1)
             args.md = file_path
-            print("✔️  Выбран MD-файл. Этап PDF-парсинга будет пропущен.")
+            print("✔️  Выбран режим пересборки. Перевод будет пропущен.")
+        elif mode in ['1', '2']:
+            args.rebuild_only = False
+            file_path = input("Введите путь к файлу (например, input/book.pdf или input/book.md):\n> ").strip()
+            if not file_path:
+                print("❌ Ошибка: необходимо указать путь к файлу.")
+                sys.exit(1)
+                
+            if file_path.lower().endswith('.pdf'):
+                args.pdf = file_path
+                print("✔️  Выбран PDF-файл. Будет запущен полный цикл с распознаванием.")
+            elif file_path.lower().endswith('.md'):
+                args.md = file_path
+                print("✔️  Выбран MD-файл. Этап PDF-парсинга будет пропущен.")
+            else:
+                print("❌ Ошибка: неподдерживаемый формат. Пожалуйста, укажите файл .pdf или .md")
+                sys.exit(1)
+            
+            # Only ask about max_pages in translation modes
+            print("\nТестовый режим: Вы можете перевести только первые N страниц книги.")
+            max_pgs = input("👉 2. Сколько страниц перевести? (Оставьте пустым, чтобы перевести ВСЮ книгу):\n> ").strip()
+            if max_pgs.isdigit():
+                args.max_pages = int(max_pgs)
         else:
-            print("❌ Ошибка: неподдерживаемый формат. Пожалуйста, укажите файл .pdf или .md")
+            print("❌ Ошибка: неверный выбор режима. Введите 1, 2 или 3.")
             sys.exit(1)
-            
-        print("\nТестовый режим: Вы можете перевести только первые N страниц книги.")
-        max_pgs = input("👉 2. Сколько страниц перевести? (Оставьте пустым, чтобы перевести ВСЮ книгу):\n> ").strip()
-        if max_pgs.isdigit():
-            args.max_pages = int(max_pgs)
-            
-        print("\n" + "-" * 30)
-        use_ai = input("👉 3. Использовать ИИ (Gemini) для перерисовки графиков и перевода текста на них? (y/n):\n> ").strip().lower()
-        args.use_ai = (use_ai == 'y')
-        if args.use_ai:
-            print("✔️  Включена перерисовка графиков через Gemini Vision API.")
-        else:
-            print("✔️  Будет использован стандартный OpenCV-ластик (ч/б очистка).")
 
         print("\n🚀 Начинаю процесс...\n" + "=" * 60 + "\n")
         
@@ -1078,8 +1025,8 @@ if __name__ == "__main__":
     if not shutil.which("xelatex"):
         log.warning(
             "ВНИМАНИЕ: XeLaTeX не найден в системном PATH. "
-            "Конвертация в PDF будет невозможна. Убедитесь, что установлен MiKTeX "
-            "(или TeX Live) и его папка bin добавлена в Переменные Среды Windows."
+            "Конвертация в PDF будет невозможна. Убедитесь, что установлен TeX Live "
+            "(или MiKTeX) и его папка bin добавлена в PATH."
         )
 
     try:
@@ -1089,9 +1036,9 @@ if __name__ == "__main__":
             output_md_path=args.output,
             target_lang=args.lang,
             max_pages=args.max_pages,
-            use_ai_images=getattr(args, 'use_ai', False),
+            rebuild_only=getattr(args, 'rebuild_only', False),
         )
-        print(f"\n✅  Done!  Translated file → {result_path}")
+        print(f"\n✅  Done!  Output → {result_path}")
     except Exception as exc:
         log.error("Pipeline failed: %s", exc)
         sys.exit(1)

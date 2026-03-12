@@ -1,35 +1,16 @@
-# ==============================================================================
-# Book Translator Pipeline - Dependencies
-# ==============================================================================
-
 # --- PDF Parsing ---
-# PRIMARY: marker-pdf – AI-powered OCR (Surya), handles scanned PDFs,
-#   extracts LaTeX formulas from images. Requires ~2 GB models on first run.
 marker-pdf==0.3.5
 pypandoc==1.13
-
 # --- Translation ---
-# Official DeepL Python client
 deepl==1.18.0
-
 # --- Environment & Config ---
 python-dotenv==1.0.0
-
 # --- Testing ---
 pytest==8.0.0
 pytest-mock==3.12.0
-
-# --- Image Processing ---
-# OpenCV for scanned-book image enhancement (binarization, noise removal)
+# --- Image Processing (Classic B&W) ---
 opencv-python-headless>=4.8.0
-# numpy is a transitive dependency of opencv but listed explicitly for tests
 numpy==1.24.0
-
-# --- AI & Vision ---
-google-genai
-svglib
-reportlab
-
 # --- Utilities ---
-tqdm==4.66.0        # Progress bars for long-running operations
-Pillow==10.0.0      # Image handling (used by marker-pdf internally)
+tqdm==4.66.0
+Pillow==10.0.0
