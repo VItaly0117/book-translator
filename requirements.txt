@@ -26,7 +26,7 @@ opencv-python-headless>=4.8.0
 numpy==1.24.0
 
 # --- AI & Vision ---
-google-generativeai
+google-genai
 svglib
 reportlab
 

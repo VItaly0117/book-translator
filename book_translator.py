@@ -51,7 +51,7 @@ from tqdm import tqdm
 # ---------------------------------------------------------------------------
 try:
     from PIL import Image
-    import google.generativeai as genai
+    from google import genai
     from svglib.svglib import svg2rlg
     from reportlab.graphics import renderPM
     _AI_IMAGES_AVAILABLE = True
@@ -103,8 +103,8 @@ DEEPL_API_KEY: str = os.getenv("DEEPL_API_KEY", "")
 GEMINI_API_KEY: str = os.getenv("GEMINI_API_KEY", "")
 TARGET_LANG: str   = os.getenv("TARGET_LANG", "UK")
 
-if GEMINI_API_KEY and _AI_IMAGES_AVAILABLE:
-    genai.configure(api_key=GEMINI_API_KEY)
+# genai.Client initialization will be done per-request or globally if needed.
+# For now, we'll initialize it in the recreate_image_with_gemini function.
 
 BASE_DIR   = Path(__file__).parent
 INPUT_DIR  = BASE_DIR / "input"
@@ -212,8 +212,8 @@ def recreate_image_with_gemini(image_path: str | Path) -> None:
     # A. Open image
     img = Image.open(image_path)
     
-    # B. Init model
-    model = genai.GenerativeModel('gemini-1.5-pro')
+    # B. Init client
+    client = genai.Client(api_key=GEMINI_API_KEY)
     
     # C. Prompt
     prompt = (
@@ -225,7 +225,10 @@ def recreate_image_with_gemini(image_path: str | Path) -> None:
     )
     
     # D. Generate content
-    response = model.generate_content([prompt, img])
+    response = client.models.generate_content(
+        model='gemini-1.5-pro',
+        contents=[prompt, img]
+    )
     svg_code = response.text.strip()
     
     # E. Clean Markdown tags if Gemini added them
