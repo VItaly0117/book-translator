@@ -1,15 +1,15 @@
 # --- PDF Parsing ---
 marker-pdf==0.3.5
 pypandoc==1.13
+pypdf==4.1.0
 # --- Translation ---
-deepl==1.18.0
+requests==2.31.0
 # --- Environment & Config ---
 python-dotenv==1.0.0
 # --- Testing ---
 pytest==8.0.0
 pytest-mock==3.12.0
-# --- Image Processing (Classic B&W) ---
-opencv-python-headless>=4.8.0
+# --- Image Processing ---
 numpy==1.24.0
 # --- Utilities ---
 tqdm==4.66.0
