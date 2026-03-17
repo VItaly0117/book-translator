@@ -367,6 +367,12 @@ def translate_text_azure(
                 body = [{'text': chunk}]
 
                 response = requests.post(constructed_url, params=params, headers=request_headers, json=body, timeout=30)
+                if response.status_code == 429:
+                    retry_after = int(response.headers.get("Retry-After", 15))
+                    log.warning("  [429] Rate limit hit! Waiting %d seconds...", retry_after)
+                    time.sleep(retry_after + 1)
+                    continue
+
                 response.raise_for_status()
                 res_data = response.json()
                 res_text = res_data[0]['translations'][0]['text']
@@ -376,6 +382,7 @@ def translate_text_azure(
                         "INSERT OR REPLACE INTO translation_cache (md5, translated_text) VALUES (?, ?)", 
                         (chunk_md5, res_text)
                     )
+                time.sleep(1.5)
                 return res_text
                 
             except Exception as exc:
@@ -385,7 +392,7 @@ def translate_text_azure(
                 time.sleep(retry_delay * (2 ** (attempt - 1)))
         return ""
 
-    with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=1) as executor:
         results = executor.map(_translate_chunk, enumerate(chunks, start=1))
         translated = list(results)
 
@@ -551,7 +558,7 @@ def process_document(
         md_text = "\n\n".join(md_chunks)
         raw_path = OUTPUT_DIR / f"{stem}_raw.md"
         raw_path.write_text(md_text, encoding="utf-8")
-        log.info("  Raw Markdown merged and cached: %s", raw_path)
+        log.info("Сырой текст сохранен в %s. Если перевод прервется, вы сможете запустить скрипт, передав этот файл.", raw_path.name)
     else:
         raise ValueError("Provide either 'input_pdf_path' or 'input_md_path'.")
 
