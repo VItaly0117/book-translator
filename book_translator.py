@@ -259,6 +259,62 @@ def parse_pdf_to_md(
 # Stage 2 – Masking (formulas + images)
 # ===========================================================================
 
+
+def rescue_broken_latex(md_text: str) -> str:
+    """
+    Сканирует текст и принудительно оборачивает "потерянные" математические конструкции
+    в блочные теги $$...$$, если они еще ими не обернуты.
+    """
+    import uuid
+    hidden_math = {}
+    
+    def hide_math(match):
+        uid = f"HIDE{uuid.uuid4().hex}X"
+        hidden_math[uid] = match.group(0)
+        return uid
+
+    temp_text = md_text
+    
+    # 1. Прячем уже обернутую математику
+    for pattern, flags in _BLOCK_MATH_PATTERNS:
+        temp_text = re.sub(pattern, hide_math, temp_text, flags=flags)
+    for pattern, flags in _INLINE_MATH_PATTERNS:
+        temp_text = re.sub(pattern, hide_math, temp_text, flags=flags)
+
+    # 2. Паттерн А: Математические окружения
+    envs = r"(cases|matrix|pmatrix|bmatrix|vmatrix|Vmatrix|array|align|eqnarray|equation)"
+    pattern_a = r"(\\begin\{(" + envs + r")\}.*?\\end\{\2\})"
+    temp_text = re.sub(pattern_a, r"\n\n$$\n\1\n$$\n\n", temp_text, flags=re.DOTALL)
+    
+    # 3. Паттерн Б: Изолированные строки с жесткой математикой
+    math_triggers = [r"\\frac", r"\\partial", r"\\int", r"\\sum", r"\\infty", r"\\nabla", r"\^", r"_", r"="]
+    cyrillic_pattern = re.compile(r'[а-яА-ЯёЁіІїЇєЄґҐ]')
+    
+    lines = temp_text.split('\n')
+    rescued_lines = []
+    for line in lines:
+        if not line.strip():
+            rescued_lines.append(line)
+            continue
+            
+        if not cyrillic_pattern.search(line):
+            if any(re.search(trigger, line) for trigger in math_triggers):
+                # Исключаем строки, которые содержат только дефисы (разделители таблиц)
+                if re.fullmatch(r'[\s|\-]+', line):
+                    rescued_lines.append(line)
+                    continue
+                rescued_lines.append(f"$$\n{line.strip()}\n$$")
+                continue
+        rescued_lines.append(line)
+        
+    temp_text = '\n'.join(rescued_lines)
+    
+    # 4. Возвращаем спрятанную математику
+    for uid, original_math in hidden_math.items():
+        temp_text = temp_text.replace(uid, original_math)
+        
+    return temp_text
+
 def mask_elements(md_text: str) -> tuple[str, dict[str, str]]:
     elements_dict: dict[str, str] = {}
     block_idx  = 0
@@ -563,7 +619,8 @@ def process_document(
         raise ValueError("Provide either 'input_pdf_path' or 'input_md_path'.")
 
     if not rebuild_only:
-        masked_text, elements_dict = mask_elements(md_text)
+        rescued_md_text = rescue_broken_latex(md_text)
+        masked_text, elements_dict = mask_elements(rescued_md_text)
 
         translated_text = translate_text_azure(
             text=masked_text, 
