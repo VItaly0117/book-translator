@@ -46,6 +46,9 @@ AZURE_TRANSLATOR_KEY: str = os.getenv("AZURE_TRANSLATOR_KEY", "")
 AZURE_TRANSLATOR_ENDPOINT: str = os.getenv("AZURE_TRANSLATOR_ENDPOINT", "https://api.cognitive.microsofttranslator.com/")
 AZURE_TRANSLATOR_REGION: str = os.getenv("AZURE_TRANSLATOR_REGION", "")
 
+if not AZURE_TRANSLATOR_KEY:
+    log.error("Файл .env не найден или ключ AZURE_TRANSLATOR_KEY не заполнен!")
+
 TARGET_LANG: str   = os.getenv("TARGET_LANG", "uk")
 
 BASE_DIR   = Path(__file__).parent
