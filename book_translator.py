@@ -265,15 +265,23 @@ def rescue_broken_latex(md_text: str) -> str:
     Сканирует текст и принудительно оборачивает "потерянные" математические конструкции
     в блочные теги $$...$$, если они еще ими не обернуты.
     """
-    import uuid
-    hidden_math = {}
-    
+    hidden_math: dict[str, str] = {}
+
+    typo_fixes = {
+        r'\begin{case}': r'\begin{cases}',
+        r'\end{case}': r'\end{cases}',
+        r'\begin{align}': r'\begin{aligned}',
+        r'\end{align}': r'\end{aligned}',
+    }
+
     def hide_math(match):
         uid = f"HIDE{uuid.uuid4().hex}X"
         hidden_math[uid] = match.group(0)
         return uid
 
     temp_text = md_text
+    for broken, fixed in typo_fixes.items():
+        temp_text = temp_text.replace(broken, fixed)
     
     # 1. Прячем уже обернутую математику
     for pattern, flags in _BLOCK_MATH_PATTERNS:
@@ -282,9 +290,26 @@ def rescue_broken_latex(md_text: str) -> str:
         temp_text = re.sub(pattern, hide_math, temp_text, flags=flags)
 
     # 2. Паттерн А: Математические окружения
-    envs = r"(cases|matrix|pmatrix|bmatrix|vmatrix|Vmatrix|array|align|eqnarray|equation)"
-    pattern_a = r"(\\begin\{(" + envs + r")\}.*?\\end\{\2\})"
-    temp_text = re.sub(pattern_a, r"\n\n$$\n\1\n$$\n\n", temp_text, flags=re.DOTALL)
+    env_names = (
+        "array",
+        "cases",
+        "aligned",
+        "split",
+        "matrix",
+        "pmatrix",
+        "bmatrix",
+        "vmatrix",
+        "Vmatrix",
+        "equation",
+        "eqnarray",
+    )
+    env_pattern = "|".join(re.escape(env_name) for env_name in env_names)
+    pattern_a = rf"(\\begin\{{(?P<env>{env_pattern})\}}.*?\\end\{{(?P=env)\}})"
+
+    def wrap_environment(match: re.Match) -> str:
+        return f"\n\n$$\n{match.group(1)}\n$$\n\n"
+
+    temp_text = re.sub(pattern_a, wrap_environment, temp_text, flags=re.DOTALL)
     
     # 3. Паттерн Б: Изолированные строки с жесткой математикой
     math_triggers = [r"\\frac", r"\\partial", r"\\int", r"\\sum", r"\\infty", r"\\nabla", r"\^", r"_", r"="]
@@ -403,6 +428,15 @@ def translate_text_azure(
         'Content-type': 'application/json',
     }
 
+    def _parse_retry_after(header_value: Optional[str]) -> Optional[int]:
+        if header_value is None:
+            return None
+
+        try:
+            return max(int(float(header_value)), 0)
+        except (TypeError, ValueError):
+            return None
+
     def _translate_chunk(args_tuple) -> str:
         i, chunk = args_tuple
         chunk_md5 = hashlib.md5(chunk.encode('utf-8')).hexdigest()
@@ -424,9 +458,10 @@ def translate_text_azure(
 
                 response = requests.post(constructed_url, params=params, headers=request_headers, json=body, timeout=30)
                 if response.status_code == 429:
-                    retry_after = int(response.headers.get("Retry-After", 15))
-                    log.warning("  [429] Rate limit hit! Waiting %d seconds...", retry_after)
-                    time.sleep(retry_after + 1)
+                    retry_after = _parse_retry_after(response.headers.get("Retry-After"))
+                    wait_seconds = retry_after + 5 if retry_after is not None else 20
+                    log.warning("  [429] Rate limit hit! Waiting %d seconds...", wait_seconds)
+                    time.sleep(wait_seconds)
                     continue
 
                 response.raise_for_status()
@@ -438,7 +473,7 @@ def translate_text_azure(
                         "INSERT OR REPLACE INTO translation_cache (md5, translated_text) VALUES (?, ?)", 
                         (chunk_md5, res_text)
                     )
-                time.sleep(1.5)
+                time.sleep(3.0)
                 return res_text
                 
             except Exception as exc:
@@ -507,18 +542,9 @@ def export_to_book_formats(
 
     log.info("Stage 6 – Exporting to EPUB and PDF via pandoc ...")
 
-    images_abs_dir = images_dir.absolute().as_posix()
-    
-    # 1) Replacing 'images/' or './images/' strings inside ']()'
-    md_text = re.sub(r'\]\((?:images/|\./images/)', f']({images_abs_dir}/', md_text)
-    
-    # 2) Replacing pure filenames just inside ']()' - marker pdf formats this
-    md_text = re.sub(r'\]\((?!http|/|[A-Za-z]:)(.*?)\)', f']({images_abs_dir}/\1)', md_text)
-
     resource_dirs = [
         ".",
         output_dir.absolute().as_posix(),
-        images_dir.absolute().as_posix()
     ]
     res_path = os.pathsep.join(resource_dirs)
     
@@ -624,10 +650,10 @@ def process_document(
 
         translated_text = translate_text_azure(
             text=masked_text, 
-            api_key=AZURE_TRANSLATOR_KEY, 
-            endpoint=AZURE_TRANSLATOR_ENDPOINT, 
-            region=AZURE_TRANSLATOR_REGION, 
-            target_lang=TARGET_LANG
+            api_key=api_key, 
+            endpoint=endpoint, 
+            region=region, 
+            target_lang=target_lang
         )
 
         final_md = unmask_elements(translated_text, elements_dict)
