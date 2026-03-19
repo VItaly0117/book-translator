@@ -1,0 +1,151 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+  ukrainian,
+]{article}
+\usepackage{xcolor}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+\setmathfont{STIX Two Math}
+\fi
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{graphicx}
+\graphicspath{{/Users/kalinicenkovitalijmikolajovic/.codex/worktrees/5c15/Script_for_translate_book/Output_Final/}}
+\setkeys{Gin}{width=0.82\linewidth,height=0.82\textheight,keepaspectratio}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+\ifLuaTeX
+\usepackage[bidi=basic,shorthands=off,provide=*]{babel}
+\else
+\usepackage[bidi=default,shorthands=off,provide=*]{babel}
+\fi
+\ifLuaTeX
+  \usepackage{selnolig} % disable illegal ligatures
+\fi
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdflang={uk},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\author{}
+\date{}
+
+\begin{document}
+
+\section{Определение конформного
+отображения}\label{ux43eux43fux440ux435ux434ux435ux43bux435ux43dux438ux435-ux43aux43eux43dux444ux43eux440ux43cux43dux43eux433ux43e-ux43eux442ux43eux431ux440ux430ux436ux435ux43dux438ux44f}
+
+Відображення w=\(f(z)\) комплексної площини z у комплексну площину w
+називається конформним у точці \(z_{\bullet}\) площини z, якщо похідна
+\(f'(z_{\bullet}) \neq 0\) . Відображення \(f(z)\) називається
+конформним у регіоні D, якщо \(f'(z) \neq 0\) в кожній точці регіону D.
+
+Наприклад, відображення \(f(z) = z^2\) конформно всюди, крім точки z =
+0, оскільки \(z'(z) = 2z \neq 0\) для всіх \(z \neq 0\) . З іншого боку,
+відображення \(e^z\) конформно у всій z-площині, оскільки скрізь
+\(f'(z) = e^z \neq 0\) . Яке призначення конформних відображень?
+Відповідь полягає в тому, що, розв'язуючи рівняння Лапласа
+\(\phi_{xx} + \phi_{yy} = 0\) в певній області площини змінних x і y, ми
+можемо розглядати цю площину як площину комплексної змінної z.
+Розглянемо комплексне відображення w = \(f(z)\) площини z у площину w, у
+якій введені координати (u, v). Відображуючи w = \(f(z\)
+\phi\emph{\{xy\} + \phi}\{uy\} = 0 \()\), рівняння Лапласа
+\(\varphi_{xx} + \varphi_{yy} = 0\) перетворюється на нове
+диференціальне рівняння в частинних похідних, яке залежить від нових
+координат і v. До --- рівняння, яке \(\phi_{xx} + \phi_{uu} = 0\)
+повернеться у рівняння \(\varphi_{nn} + \varphi_{nn} = 0\) . Отже, ми
+придумаємо ідею знайти конформне відображення, яке переносить область з
+комплексною межею у область з простою межею (нагадаємо, що відображення
+\(w=z^*\) переносить межу першого квадранта площини z у дійсну вісь
+площини w).
+
+Ось кілька прикладів, які покажуть, як можна розв'язати диференціальні
+рівняння у похідних за допомогою конформних відображень.
+
+Уравнение Лапласа в верхней полуплоскости.
+
+Припустимо, що нам потрібно розв'язати наступну задачу Діріхле у верхній
+половині видимості (рис. 47.3):
+
+(47.1)
+
+MATHBLK1183X
+
+MATHBLK1184X
+
+\begin{verbatim}
+\begin{aligned} (Y & \Pi) & \varphi_{xx} + \varphi_{yy} = 0, & -\infty < x < \infty, & 0 < y < \infty, \\ (47.1) & \varphi(x, 0) = \begin{cases} 0, & |x| > 1, \\ 1, & |x| \le 1. \end{cases}
+\end{verbatim}
+
+MATHBLK1185X
+
+\[
+w = \ln\left\{\frac{z-1}{z+1}\right\}
+\]
+
+MATHBLK1186X
+
+\[
+\begin{split} S\left[u_{t}\right] &= \frac{dS\left[u\right]}{dt}, \quad S\left[u_{tt}\right] = \frac{d^{2}S\left[u\right]}{dt^{2}}, \\ S\left[u_{xx}\right] &= -\left[n\pi/L\right]^{2}S\left[u\right] + \frac{2n\pi}{L^{2}}\left[u\left(0,\ t\right) + (-1)^{n+2}u\left(L,\ t\right)\right], \\ C\left[u_{xx}\right] &= -\left[n\pi/L\right]^{2}C\left[u\right] - \frac{2}{L}\left[u_{x}\left(0,\ t\right) + (-1)^{n+1}u_{x}\left(L,\ t\right)\right]. \end{split}
+\]
+
+MATHBLK1187X M A
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_357_Figure_11.jpeg}}
+
+THBLK1188X M
+
+\end{document}

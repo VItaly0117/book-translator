@@ -1,0 +1,2928 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+  ukrainian,
+]{article}
+\usepackage{xcolor}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+\setmathfont{STIX Two Math}
+\fi
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{longtable,booktabs,array}
+\newcounter{none} % for unnumbered tables
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\graphicspath{{/Users/kalinicenkovitalijmikolajovic/.codex/worktrees/5c15/Script_for_translate_book/Output_Final/}}
+\setkeys{Gin}{width=0.82\linewidth,height=0.82\textheight,keepaspectratio}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+\ifLuaTeX
+\usepackage[bidi=basic,shorthands=off,provide=*]{babel}
+\else
+\usepackage[bidi=default,shorthands=off,provide=*]{babel}
+\fi
+\ifLuaTeX
+  \usepackage{selnolig} % disable illegal ligatures
+\fi
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdflang={uk},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\author{}
+\date{}
+
+\begin{document}
+
+\section{Задача теплопровідності з похідною в граничній
+умові}\label{ux437ux430ux434ux430ux447ux430-ux442ux435ux43fux43bux43eux43fux440ux43eux432ux456ux434ux43dux43eux441ux442ux456-ux437-ux43fux43eux445ux456ux434ux43dux43eux44e-ux432-ux433ux440ux430ux43dux438ux447ux43dux456ux439-ux443ux43cux43eux432ux456}
+
+Розглянемо пристрій, показаний на рис. 7.1. Припустимо, що верхній
+кінець стрижня підтримується при нульовій температурі, тобто \(u(0, t)\)
+= 0, а нижній кінець занурений у воду, температура якої також стала і
+дорівнює нулю (у цьому випадку --- нуль Р и с
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_50_Picture_4.jpeg}}
+
+. 7.1. Схематичне представлення зсувної задачі.
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_50_Figure_6.jpeg}}
+
+Рис. 7.2. Природа кривих, які задовольняють
+
+\[
+(\Gamma Y) = \begin{cases} u(0, t) = 0, \\ u_x(1, t) = -hu(1, t). \end{cases}
+\]
+
+відповідає певній еталонній температурі). Теплообмін між стрижнем і
+водою відбувається згідно із законом Ньютона, який записується у x=1 як
+наступна гранична умова:
+
+\[
+u_x(1, t) = -hu(1, t).
+\]
+
+Тепер припустимо, що початкова температура стрижня дорівнює \(u(x, 0)\)
+= x, але одразу при t \textgreater{} 0 включаємо граничні умови. Щоб
+визначити температуру в стрижні, необхідно розв'язати проблему зміщення
+
+\begin{verbatim}
+\begin{aligned}
+(\text{УЧП})\quad & u_t = \alpha^2 u_{xx}, && 0 < x < 1,\ 0 < t < \infty, \\
+(7.1)\ (\text{ГУ})\quad & u(0,t) = 0,\quad u_x(1,t) + h u(1,t) = 0, && 0 < t < \infty, \\
+(\text{НУ})\quad & u(x,0) = x, && 0 \leq x \leq 1.
+\end{aligned}
+\end{verbatim}
+
+Щоб використати метод розділення змінних, розбиємо процес розв'язання на
+кілька етапів.
+
+\textbf{КРОК} 1. (Перетворення диференціального рівняння в похідних у
+два звичайних диференціальних рівняння)
+
+Підставляючи \(u(x, t)\) = X(x)\$\(T(t)\)у рівняння (7.1),
+отримуємо\(XT' = \alpha^2 X''T\)Поділивши інші частини цього рівняння
+на\$\alpha\^{}2 XT отримуємо
+
+\[
+\frac{T'}{\alpha^2 T} = \frac{X''}{X} .
+\]
+
+Оскільки ліва частина останнього рівняння залежить лише від часу, а
+права --- лише від x (і оскільки x і t незалежні), обидві сторони
+рівняння мають бути константами. Прирівнюючи обидві частини до однієї
+сталої \(\mu\) , отримуємо
+
+(7.2)
+
+\[
+T' - \mu \alpha^{2} T = 0, X'' - \mu X = 0.
+\]
+
+Процес розщеплення змінних завершено.
+
+КРОК 2. (Визначення константи відокремлення)
+
+По-перше, константа і не повинна бути додатною, інакше \(^{1}\) )
+функція \(T\left( t\right)\) буде зростати експоненційно, що призведе до
+нескінченного підвищення температури u=XT. Очевидно, що таке рішення не
+має фізичного значення.
+
+По-друге, припустимо, що \(\mu = 0\) . Тоді
+
+\[
+X'' = 0
+\]
+
+і, отже.
+
+\[
+X(x) = A + \hat{B}x.
+\]
+
+Однак, оскільки граничні умови вимагають, що
+
+\[
+u(0, t) = X(0) T(t) = 0,
+\]
+
+\(u(1, t) = (hX(1) + X'(1)) T(t) = 0,\) Ми одразу дійшли висновку, що
+
+\[
+X(0) = 0
+\]
+
+\(\Rightarrow A = 0\) \(X'(1) + hX(1) = 0\) \(\Rightarrow B = 0\) .
+
+Це означає, що \(u(x, t) \equiv 0\) . Іншими словами, лише нульове
+розв'язання відповідає нульовій константі розділення. Ми відкинемо його,
+оскільки нас цікавлять ненульові розв'язки.
+
+Якщо, нарешті, \(\mu < 0\) , можна поставити \(\mu = -\lambda^2\) і
+переписати рівняння (7.2) у вигляді
+
+\[
+T' + \lambda^2 \alpha^2 T = 0,
+X' + \lambda^2 X = 0.
+\]
+
+1) Розв'язок \(X(x)\) відповідної задачі з граничним значенням буде лише
+тривіальним, \(X(x)\) = 0. --- Ед. Ед.
+
+Загальні розв'язки цих рівнянь легко знайти:
+
+\[
+T(t) = Ae^{-(\lambda \alpha)^2 t},
+X(x) = B\sin(\lambda x) + C\cos(\lambda x).
+\]
+
+Отже, будь-яка функція провідника
+
+(7.3)
+
+\[
+u(x, t) = e^{-(\lambda \alpha)^2 t} [A \sin(\lambda x) + B \cos(\lambda x)]
+\]
+
+при будь-яких значеннях \(\lambda\) A і B задовольняє рівняння (читач
+може перевірити це самостійно простою заміною).
+
+Тепер нам потрібно з'ясувати, які з цих функцій задовольняють граничним
+умовам
+
+(7.4)
+
+\[
+u(0, t) = 0, u_x(1, t) + hu(1, t) = 0.
+\]
+
+Підстановка розв'язків виду (7.3) у граничні умови (7.4) дозволяє знайти
+відношення, яким мають задовольняти значення \(\lambda\) , \(\Lambda\)
+та B:
+
+\[
+Be^{-(\lambda\alpha)^2 t} = 0 \Rightarrow B = 0,
+\]
+
+\(A\lambda e^{-(\lambda\alpha)^2 t} \cos \lambda + hAe^{-(\lambda\alpha)^2 t} \sin \lambda = 0.\)
+Після простих алгебранхічних перетворень останнє рівняння зводиться до
+вигляду
+
+\[
+tg \lambda = -\lambda/\hbar
+\]
+
+.
+
+Іншими словами, щоб визначити \(\lambda\) , потрібно знайти точки
+перетину графів функцій tg \(\lambda\) і --- \(\lambda/h\) (рисунок
+7.3).
+
+Числові значення значень \(\lambda_1\) , \(\lambda_2\) , \ldots{} можна
+знайти за допомогою комп'ютера, якщо задано значення h Р и с
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_52_Figure_15.jpeg}}
+
+. 7.3. Перетин графів функцій \(tg(\lambda)\) і \(-\lambda/h\) .
+
+викликати власні значення задачі граничного значення
+
+(7.5)
+
+\[
+X'' + \lambda^{2}X = 0, \begin{cases} X(0) = 0 \\ X'(1) + hX(1) = 0. \end{cases}
+\]
+
+Іншими словами, з цими значеннями параметра \(\lambda\) існують
+нетривіальні розв'язки задачі (7.5). Власні значення задачі (7.5)
+визначаються як корені рівняння \(\log \lambda = -\lambda/h\) . Їхні
+числові значення знаходилися на комп'ютері для випадку h = 1. Таблиця
+7.1 показує результати розрахунків перших кількох власних значень.
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}llll@{}}
+\toprule\noalign{}
+n & \(\lambda_B\) & rt . & \(\lambda_n\) \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+123 & 2,024,917,98 & 45 & 11,0814,20 \\
+\end{longtable}
+}
+
+Розв'язки задачі (7.5), що відповідають власним значенням \(\lambda_n\)
+, називаються власними функціями \(X_n(x)\) . Для розглянутого завдання
+власні функції виглядають так:
+
+\[
+X_n(x) = \sin(\lambda_n x)
+\]
+
+і зображені на рис. 7.4.
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_53_Figure_10.jpeg}}
+
+Рис. 7.4. Власні функції \(X_n(x)\) завдання (7.5) при h=1; Усі власні
+функції задовольняють граничні умови.
+
+КРОК 3, (Пошук фундаментальних рішень)
+
+Тепер у нас є нескінченний набір функцій (фундаментальних розв'язків) у
+нашому розпорядженні
+
+\[
+u_n(x, t) = X_n(x) T_n(t) = e^{-(\lambda_n x)^2 t} \sin(\lambda_n x),
+\]
+
+кожна з яких задовольняє рівняння та граничні умови. Залишився ще один
+крок --- загалом
+
+\[
+u(x, t) = \sum_{n=1}^{\infty} a_n X_n(x) T_n(t) =
+= \sum_{n=1}^{\infty} a_n e^{-(\lambda_n c t^2 t)} \sin(\lambda_n x)
+\]
+
+Вибрати коефіцієнти \(a_n\) так, щоб функція \(u(x, t)\) задовольняла
+початкову умову \(u(x, 0)\) = x (у цьому випадку функція \(u(x, t)\)
+задовольнятиме рівняння та граничні умови, оскільки, по-перше, кожен
+член суми їх задовольняє, а по-друге, і рівняння, і граничні умови є
+лінійними та однорідними).
+
+Отже, ймовірність \(a_n\) слід визначати з цієї умови
+
+(7 6)
+
+\[
+u(x, 0) = x = \sum_{n=1}^{\infty} a_n \sin(\lambda_n x).
+\]
+
+Ми маємо зробити останній крок.
+
+КРОК 4. (Розклад початкової умови на ряд за власними функціями)
+
+\begin{verbatim}
+Щоб знайти коефіцієнти a_n у розкладі (7,6) на власні функції, помножте обидві частини цього співвідношення на \sin(\lambda_m x) і інтегруйте від 0 до 1. У результаті ми отримуємо
+\end{verbatim}
+
+\[
+\int_{0}^{2} \xi \sin(\lambda_{m} \xi) d\xi = \sum_{n=1}^{\infty} a_{n} \int_{0}^{1} \sin(\lambda_{n} \xi) \sin(\lambda_{m} \xi) d\xi =
+= a_{m} \int_{0}^{1} \sin^{2}(\lambda_{m} \xi) d\xi =
+= a_{m} \left( \frac{\lambda_{m} - \sin \lambda_{m} \cos \lambda_{m}}{2\lambda_{m}} \right).
+\]
+
+Розв'язавши останнє відношення відносно \(a_m\) і замінивши m на n,
+отримуємо бажаний результат:
+
+(7.7)
+
+\[
+a_n = \frac{2\lambda_n}{(\lambda_n - \sin \lambda_n \cos \lambda_n)} \int_0^{\infty} \xi \sin (\lambda_n \xi) d\xi.
+\]
+
+Таблиця 7.2.
+
+\section{\texorpdfstring{Шанси \(a_n\) у формулі
+(7.8)}{Шанси a\_n у формулі (7.8)}}\label{ux448ux430ux43dux441ux438-a_n-ux443-ux444ux43eux440ux43cux443ux43bux456-7.8}
+
+n \textbar{} an \textbar{} n \textbar{} a\_n \textbar{}
+
+\textbar-------------\textbar-----------------------\textbar---------------\textbar----------------\textbar{}
+
+123 \textbar{} 0,240,22-0,03 \textbar{} 45 \textbar{} -0.11-0.09
+\textbar{}
+
+Отже, розв'язок задачі (7.1) записується у вигляді
+
+(7.8)
+
+\[
+u(x, t) = \sum_{n=1}^{\infty} a_n e^{-i\lambda_n \alpha_n^{2} t} \sin(\lambda_n x),
+\]
+
+де коефіцієнти \(a_n\) задаються формулами (7.7). Перші п'ять
+коефіцієнтів \(a_n\) нашої задачі були знайдені чисельно. Їхні значення
+наведені в Таблиці 1. 7.2.
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_55_Figure_8.jpeg}}
+
+Рис. 7.5. Графічне представлення функції (7.8); межа умовно
+задовольняється у всі моменти часу.
+
+Відповідно, перші три члени розв'язання змішаної задачі
+
+(7.9)
+
+\begin{verbatim}
+\begin{aligned} u_t &= u_{xx}, & 0 < x < 1, & 0 < t < \infty, \\ u_t &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t
+\end{verbatim}
+
+мають вигляд
+
+\[
+u(x, t) = = 0.24e^{-4t} \sin(2.02x) + 0.22e^{-24t} \sin(4.9x) - 0.03e^{-48.3t} \sin(7.98x) + \dots
+\]
+
+Фіг. На рисунку 7-5 показані графіки цього розв'язку для кількох точок
+часу. Рекомендуємо читачеві відповісти на такі питання: Чи відповідає
+тип рішення, яке ви отримуєте, з вашими інтуїтивними ідеями? Чи
+виконуються граничні умови?
+
+\section{ЗАУВАЖЕННЯ}\label{ux437ux430ux443ux432ux430ux436ux435ux43dux43dux44f}
+
+Задача власних значень (7.5) є особливим випадком більш загальної
+задачі, яку зазвичай називають проблемою Штурма-Ліувіля:
+
+(7.10)
+
+\[
+\begin{aligned} & (\text{ОДУ}) \quad [p(x)y']' - q(x)y + \lambda r(x)y = 0, \quad 0 < x < 1, \\ & (\alpha_1 y(0) + \beta_1 y'(0) = 0, \\ & (\alpha_2 y(1) + \beta_1 y'(1) = 0. \end{aligned}
+\]
+
+Якщо розв'язати задачу з однорідними граничними умовами методом
+розділення змінних, то функції \(X(x)\) завжди знаходяться як розв'язки
+деякої задачі Штурма--Ліувіля. Очевидно, що задача власних значень (7.5)
+є особливим випадком задачі (7.10).
+
+Перелічимо основні властивості задачі (7.10), які були встановлені
+Штурмом і Ліувілем за певних природних обмежень.
+
+функції \(p(x)\), \(q(x)\) та \(r(x)\).
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Існує нескінченна послідовність власних значень, що задовольняють
+  нерівності
+\end{enumerate}
+
+\[
+\lambda_1 < \lambda_2 < \lambda_3 < \ldots < \lambda_n < \ldots \to \infty
+\]
+
+.
+
+\begin{verbatim}
+2. Кожне власне значення \lambda_n відповідає одній (точній до константного множника) ненульовій власній функції y_n(x) .
+\end{verbatim}
+
+\begin{verbatim}
+3. Якщо y_n(x) і y_m(x) дві різні власні функції, що відповідають різним власним значенням \lambda_n і \lambda_m , то вони є ортогональними з вагою r(x) на сегменті [0, 1], тобто вони задовольняють це відношення
+\end{verbatim}
+
+\[
+\int_{0}^{1} r(x) y_{n}(x) y_{m}(x) dx = 0.
+\]
+
+Більше деталей про проблему Штурма-Ліувіля можна знайти в літературі,
+наведеній наприкінці книги.
+
+1) Див., наприклад, Тіхоног А. Н., Самарський А. А. Рівняння
+математичної фізики. --- Москва: Наука, 1972. --- ред. Ед.
+
+\section{ЗАВДАННЯ}\label{ux437ux430ux432ux434ux430ux43dux43dux44f}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Розв'язати наступну задачу для рівняння теплопровідності методом
+  розкладу
+\end{enumerate}
+
+(PPP)
+
+\[
+u_1 = u_{xx}, \quad 0 < x < 1, \quad 0 < t < \infty,
+\]
+
+(GI)
+
+\[
+\begin{cases} u(0, t) = 0, \\ u_x(1, t) = 0, \\ u(x, 0) = x, \quad 0 \le x \le 1. \end{cases}
+\]
+
+Чи відповідає рішення, яке ви знаходите, з інтонативними
+представленнями? Що таке стаціонарне рішення?
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Знайдіть власні цінності та функції проблеми Ассолта-Ліувіля
+\end{enumerate}
+
+(ODY)
+
+\[
+X' + \lambda X = 0, \quad 0 < x < 1,
+\]
+
+(FY)
+
+\[
+\begin{cases} X(0) = 0, \\ X'(1) = 0. \end{cases}
+\]
+
+Задайте специфічні вирази для функцій \(p(x)\), \(q(x)\) та \(r(x)\) із
+загальної задачі Штурма--Ліувіля для цього випадку.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Розв'язати задачу теплопровідності для планки з термоізольованими
+  межами
+\end{enumerate}
+
+(PPP)
+
+\[
+u_t = u_{xx}, \quad 0 < x < 1, \quad 0 < t < \infty,
+\]
+
+(GI)
+
+\[
+\begin{cases} u_x (0, t) = 0, \\ u_x (1, t) = 0, \end{cases} \quad 0 < t < \infty,
+\]
+
+\begin{verbatim}
+(ГУ) u(x, 0) = x, \quad 0 \le x \le 1. Чи відповідає рішення, яке ви отримуєте, з вашою інтерпретацією цієї проблеми? Що таке стаціонарне рішення? Яке його фізичне значення?
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Знайдіть власні цінності та функції завдань
+\end{enumerate}
+
+(ОДА)
+
+\[
+X'' + \lambda X = 0, \quad 0 < x < 1,
+\]
+
+(GI)
+
+\[
+\begin{cases} X'(0) = 0, \\ X'(1) = 0. \end{cases}
+\]
+
+\subsection{ПЕРЕТВОРЕННЯ СКЛАДНИХ РІВНЯНЬ У ПРОСТУ
+ФОРМУ}\label{ux43fux435ux440ux435ux442ux432ux43eux440ux435ux43dux43dux44f-ux441ux43aux43bux430ux434ux43dux438ux445-ux440ux456ux432ux43dux44fux43dux44c-ux443-ux43fux440ux43eux441ux442ux443-ux444ux43eux440ux43cux443}
+
+МЕТА ЛЕКЦІЇ Показати, як PPP для функції \(u(x, t)\) можна перетворити
+на простіший PPP для нової функції \(w(x, t)\). Вибір правильної
+трансформації зазвичай базується на ненавмисному намірі. У нашій лекції
+
+\[
+u_t = \alpha^2 u_{xx} - \beta u,
+u_t = \alpha^2 u_{xx} - v u_x, \quad (v = \text{const})
+\]
+
+переходимо до найпростішого рівняння теплопровідності
+
+\[
+w_1 = \alpha^2 w_{xx}
+\]
+
+внаслідок відповідних перетворень
+
+\[
+u(x, t) = e^{-\beta t} w(x, t)
+u(x, t) = e^{\epsilon t (1 - \delta t - 2) 2\alpha^2} w(x, t).
+\]
+
+\begin{verbatim}
+Розв'язавши просте рівняння теплопровідності за функцією \omega(x,t) , ми можемо знайти розв'язки початкових рівнянь, перетворивши функцію \omega(x,t) відповідно до цих формул (звісно, ці перетворення слід застосовувати і до початкових і граничних умов).
+\end{verbatim}
+
+Після прочитання двох останніх лекцій читач може створити враження, що
+метод розділення змінних застосовується \emph{лише} до рівняння
+
+\[
+u_1 = \alpha^2 u_{xx}
+\]
+
+Насправді рівняння теплопотоку є найпростішим, але не єдиним
+параболічним рівнянням, яке можна розв'язати методом розділення змінних.
+Як уже згадувалося, якщо рівняння є лінійним і однорідним, його можна
+розв'язати, поділивши змінні. Наприклад, двовимірна задача
+теплопровідності в колі описується рівнянням
+
+\[
+u_t = \alpha^2 \left[ u_{rr} + \frac{1}{r} u_r + \frac{1}{r^2} u_{\theta\theta} \right],
+\]
+
+І хоча це рівняння з \emph{змінними коефіцієнтами}, його можна звести до
+трьох звичайних диференціальних рівнянь.
+
+У цій лекції ми покажемо читачеві, що іноді, замість того, щоб
+безпосередньо розв'язувати диференціальне рівняння в похідних, краще
+перетворити його на простіше рівняння, яке можна розв'язати методом
+розділення змінних або іншим методом. Наступний приклад ілюструє цей
+підхід.
+
+\section{Перетворення проблеми з перенесенням бічної поверхні у проблему
+з термічно ізольованою бічною
+поверхнею}\label{ux43fux435ux440ux435ux442ux432ux43eux440ux435ux43dux43dux44f-ux43fux440ux43eux431ux43bux435ux43cux438-ux437-ux43fux435ux440ux435ux43dux435ux441ux435ux43dux43dux44fux43c-ux431ux456ux447ux43dux43eux457-ux43fux43eux432ux435ux440ux445ux43dux456-ux443-ux43fux440ux43eux431ux43bux435ux43cux443-ux437-ux442ux435ux440ux43cux456ux447ux43dux43e-ux456ux437ux43eux43bux44cux43eux432ux430ux43dux43eux44e-ux431ux456ux447ux43dux43eux44e-ux43fux43eux432ux435ux440ux445ux43dux435ux44e}
+
+Розглянемо наступне завдання:
+
+(8.1)
+
+\[
+u_{t} = \alpha^{2}u_{xx} - \beta u, \quad 0 < x < 1, \quad 0 < t < \infty,
+\begin{cases} u(0, t) = 0, \\ u(1, t) = 0, \\ u(x, 0) = \varphi(x), \quad 0 \le x \le 1, \end{cases}
+\]
+
+(8.1)
+
+\[
+(FY) \quad \begin{cases} u(0, t) = 0, \\ u(x, 0) = \varphi(x), \quad 0 \le x \le 1, \end{cases}
+\]
+
+де термін \(-\beta u\) описує потік тепла через бічну поверхню стрижня
+(рис. 8.1).
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_59_Figure_7.jpeg}}
+
+Рис. 81. Задача теплопровідності, описана рівнянням
+\(u_t = \alpha^t u_{\lambda\lambda} - \beta u\) : \(\alpha\) --- це
+втрата гепле через поверхню Боха; \(\delta\) -- дифузія вздовж стрижня.
+
+Наша мета --- ввести нову температурну \(w\left(x,\ t\right)\) замість
+\(u\left(x,\ t\right)\) , щоб рівняння для \(w\left(x,\ t\right)\) стало
+простішим за початкове рівняння
+
+\[
+u_t = \alpha^2 u_{xx} - \beta u
+\]
+
+.
+
+Це досить загальний метод розв'язання диференціальних рівнянь у
+частинних похідних, але вибір відповідного перетворення базується на
+інтуїтивних уявленнях про поведінку розв'язків початкового рівняння.
+Наприклад, у задачі (8.1) температура \(u(x, t)\) у кожній точці \(x_0\)
+змінюється внаслідок двох факторів:
+
+\begin{itemize}
+\tightlist
+\item
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi})}
+  \tightlist
+  \item
+    дифузія тепла вздовж стрижня (через компонентний \(\alpha^2 u_{xx}\)
+    ),
+  \end{enumerate}
+\item
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi})}
+  \setcounter{enumi}{1}
+  \tightlist
+  \item
+    теплопередача через бічну поверхню стрижня (через член RI).
+  \end{enumerate}
+\end{itemize}
+
+Найважливішим елементом нашого міркування є наступне: якщо не було
+дифузії вздовж стрижня ( \(\alpha = 0\) ),
+
+тоді температура в кожній точці стрижня експоненційно знижується до нуля
+згідно із законом
+
+\[
+u(x_0 t) = u(x_0, 0) e^{-\beta t}
+\]
+
+.
+
+Виходячи з цього спостереження, запитаємо, чи можна розв'язок проблеми
+(8.1) представити як утворення двох факторів
+
+\[
+(8.2) u(x, t) = e^{-\beta t}w(x, t)
+\]
+
+або:
+
+\begin{verbatim}
+\begin{pmatrix}
+\end{verbatim}
+
+Температура елемента з \textbackslash{}
+
+Неізольовані боком
+
+\begin{verbatim}
+Поверхня \end{pmatrix}
+\end{verbatim}
+
+де \(w(x, t)\) описує розподіл температури, що виникає лише через
+дифузію. Давайте подивимось, що станеться, якщо підставити цей вираз для
+температури у задачу (8.1). Після виконання відповідних розрахунків
+(читач може зробити їх сам), ми отримаємо
+
+Нова задача майже точно така ж, як і оригінальна, але більше не має
+додатку 6u. Тому замість розв'язання задачі (8.1) ми розв'язуємо
+перетворену задачу (8.3), а потім множимо отриманий розв'язок
+\(w(x, t)\) на \(e^{-\beta t}\) . У нашому випадку розв'язок задачі
+(8.3) вже було отримано раніше методом розділення змінних, тому ми
+можемо одразу записати
+
+(8.4)
+
+\[
+w(x, t) = \sum_{n=1}^{\infty} a_n e^{-(n\pi\alpha)^{\frac{n}{2}}t} \sin(n\pi x),
+a_n = 2 \int_0^{\infty} \phi(\xi) \sin(n\pi \xi) d\xi,
+\]
+
+і, отже, розв'язок початкової задачі (8.1) має вигляд
+
+\[
+u(x, t) = e^{-\beta t}w(x, t).
+\]
+
+Нижче, у розділі «Нотатки», наведено ще один приклад проблеми,
+розв'язаної цим методом.
+
+\section{ПРИМІТКИ}\label{ux43fux440ux438ux43cux456ux442ux43aux438}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Вирішити проблему
+\end{enumerate}
+
+\[
+\begin{aligned}
+u_t &= u_{xx} - u, && 0 < x < 1,\ 0 < t < \infty, \\
+u(0,t) &= 0,\quad u(1,t) = 0, && 0 < t < \infty, \\
+u(x,0) &= \sin(\pi x) + 0.5\sin(3\pi x), && 0 \leqslant x \leqslant 1.
+\end{aligned}
+\]
+
+За методом, описаним вище, ми
+
+\begin{itemize}
+\tightlist
+\item
+  \begin{enumerate}
+  \def\labelenumi{\alph{enumi})}
+  \tightlist
+  \item
+    тимчасово відкинути конвективний член u у початковому рівнянні.
+  \end{enumerate}
+\item
+  \begin{enumerate}
+  \def\labelenumi{\alph{enumi})}
+  \setcounter{enumi}{1}
+  \tightlist
+  \item
+    записати розв'язок змішаної задачі без конвективного члена
+  \end{enumerate}
+\end{itemize}
+
+\[
+u(x, t) = e^{-\pi^2 t} \sin(\pi x) + 0.5e^{-(3\pi)^2 t} \sin(3\pi x),
+\]
+
+\begin{verbatim}
+c) помножимо це розв'язання на конвективний фактор e^{-\beta t}=e^{-t} отримаємо остаточне розв'язання початкової задачі
+\end{verbatim}
+
+\[
+u(x, t) = e^{-t} \left[ e^{-\pi^2 t} \sin(\pi x) + 0.5e^{-(3\pi)^2 t} \sin(3\pi x) \right].
+\]
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Рівняння конвективної дифузії
+\end{enumerate}
+
+\[
+u_t = \alpha^2 u_{xx} - v u_x
+\]
+
+(коефіцієнт і є константою) також можна перетворити у вигляд
+
+\[
+w_t = \alpha^2 w_{xx}.
+\]
+
+Відповідне перетворення має вигляд
+
+\[
+u(x, t) = e^{v(x-vt/2)/2\alpha^2}w(x, t).
+\]
+
+\begin{verbatim}
+Це перетворення підкреслює експоненціальний фактор, який повністю зумовлений рухом середовища. Зверніть увагу, що цей множник описує хвилю, що поширюється зліва направо зі швидкістю \upsilon/2 . Читач матиме можливість скористатися цією трансформацією.
+\end{verbatim}
+
+\section{ЗАВДАННЯ}\label{ux437ux430ux432ux434ux430ux43dux43dux44f-1}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Розв'язати задачу конвективної дифузії
+\end{enumerate}
+
+\begin{verbatim}
+\begin{aligned}
+(\text{УЧП})\quad & u_t = u_{xx} - u_x, && 0 < x < 1,\ 0 < t < \infty, \\
+(\text{ГУ})\quad & u(0,t) = 0,\quad u(1,t) = 0, && 0 < t < \infty, \\
+(\text{НУ})\quad & u(x,0) = e^{x/2}, && 0 \leqslant x \leqslant 1.
+\end{aligned}
+\end{verbatim}
+
+методом перетворення до простішого рівняння. На що схожий розв'язок?
+Можна дати таку інтерпретацію цієї задачі: \(u(x,t)\) --- концентрація
+деякої речовини в рухомому середовищі, яке рухається зліва направо зі
+швидкістю v = 1; початковий розподіл концентрації задається функцією
+\(e^{x/2}\), а на межах концентрація підтримується нульовою. Чи
+відповідає ваш розв'язок такій інтерпретації?
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Розв'язати задачу
+\end{enumerate}
+
+\begin{verbatim}
+\begin{aligned}
+(\text{УЧП})\quad & u_t = u_{xx} - u + x, && 0 < x < 1,\ 0 < t < \infty, \\
+(\text{ГУ})\quad & u(0,t) = 0,\quad u(1,t) = 1, && 0 < t < \infty, \\
+(\text{НУ})\quad & u(x,0) = 0, && 0 \leqslant x \leqslant 1.
+\end{aligned}
+\end{verbatim}
+
+\begin{itemize}
+\item
+  а) перетворивши неоднорідні граничні умови на однорідні;
+\item
+  б) перетворивши вихідне рівняння на нове рівняння без члена -u;
+\item
+  в) розв'язавши задачу, що виникає після цих перетворень.
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Розв'язати задачу
+\end{enumerate}
+
+\begin{verbatim}
+\begin{aligned}
+(\text{УЧП})\quad & u_t = u_{xx} - u, && 0 < x < 1,\ 0 < t < \infty, \\
+(\text{ГУ})\quad & u(0,t) = 0,\quad u(1,t) = 0, && 0 < t < \infty, \\
+(\text{НУ})\quad & u(x,0) = \sin(\pi x), && 0 \leqslant x \leqslant 1.
+\end{aligned}
+\end{verbatim}
+
+застосовуючи метод розділення змінних безпосередньо до вихідного
+рівняння, не виконуючи жодних попередніх перетворень. Чи збігається
+отриманий розв'язок з розв'язком, знайденим раніше після заміни
+
+\[
+u(x,t) = e^{-t}w(x,t)
+\]
+
+?
+
+\section{РОЗВ'ЯЗАННЯ НЕОДНОРІДНИХ УЧП МЕТОДОМ РОЗКЛАДУ ЗА ВЛАСНИМИ
+ФУНКЦІЯМИ}\label{ux440ux43eux437ux432ux44fux437ux430ux43dux43dux44f-ux43dux435ux43eux434ux43dux43eux440ux456ux434ux43dux438ux445-ux443ux447ux43f-ux43cux435ux442ux43eux434ux43eux43c-ux440ux43eux437ux43aux43bux430ux434ux443-ux437ux430-ux432ux43bux430ux441ux43dux438ux43cux438-ux444ux443ux43dux43aux446ux456ux44fux43cux438}
+
+ЦІЛЬ ЛЕКЦІЇ: Навчитися розв'язувати змішані задачі вигляду
+
+\begin{verbatim}
+\begin{aligned}
+(\text{УЧП})\quad & u_t = \alpha^2 u_{xx} + f(x,t), && 0 < x < 1,\ 0 < t < \infty, \\
+(\text{ГУ})\quad & \alpha_1 u_x(0,t) + \beta_1 u(0,t) = 0, && 0 < t < \infty, \\
+& \alpha_2 u_x(1,t) + \beta_2 u(1,t) = 0, && 0 < t < \infty, \\
+(\text{НУ})\quad & u(x,0) = \varphi(x), && 0 \leqslant x \leqslant 1.
+\end{aligned}
+\end{verbatim}
+
+Розв'язок неоднорідного УЧП можна шукати у вигляді ряду
+
+\[
+u(x,t) = \sum_{n=1}^{\infty} T_n(t) X_n(x).
+\]
+
+де \(X_n\)(x) --- власні функції відповідної однорідної задачі
+
+\begin{verbatim}
+\begin{aligned}
+(\text{УЧП})\quad & u_t = \alpha^2 u_{xx}, && 0 < x < 1,\ 0 < t < \infty, \\
+(\text{ГУ})\quad & \alpha_1 u_x(0,t) + \beta_1 u(0,t) = 0, && 0 < t < \infty, \\
+& \alpha_2 u_x(1,t) + \beta_2 u(1,t) = 0, && 0 < t < \infty, \\
+(\text{НУ})\quad & u(x,0) = \varphi(x), && 0 \leqslant x \leqslant 1.
+\end{aligned}
+\end{verbatim}
+
+А функції \(T_n\)(t) визначаються як розв'язки деяких звичайних
+диференціальних рівнянь.
+
+На лекції 6 ми ознайомилися з тим, як перетворювати неоднорідні граничні
+умови на однорідні. На жаль, рівняння залишається гетерогенним, і ми
+стоїмо перед завданням
+
+\[
+(9.1) \quad u_{t} = \alpha^{2} u_{xx} + f(x, t), \quad 0 < x < 1, \quad 0 < t < \infty,
+(9.1) \quad (\Gamma Y) \quad
+\begin{cases} \alpha_{1} u_{x}(0, t) + \beta_{1} u(0, t) = 0, \\ \alpha_{2} u_{x}(1, t) + \beta_{2} u(1, t) = 0, \\ u(x, 0) = \varphi(x), \quad 0 \le x \le 1. \end{cases}
+\]
+
+Мета нашої лекції --- опанувати метод розв'язання таких задач. Цей метод
+аналогічний методу варіації довільних констант.
+
+теорія звичайних диференціальних рівнянь називається методом розкладу за
+власними функціями.
+
+Ідея методу надзвичайно проста. Відомо, що розв'язок задачі (9.1) при
+\(f(x, t)\) = 0 (так звана відповідна однорідна задача) записується як
+ряд
+
+\[
+u\left(x,\ t\right)=\sum_{n=1}^{\infty}a_{n}e^{-\left(\lambda_{n}\alpha\right)^{2}}/X_{n}\left(x\right),
+\]
+
+де \(X_n\)(x) --- власні функції задачі Штурма-Ліувіля,
+
+(9.2)
+
+\[
+X'' + \lambda^2 X = 0, \\ \alpha_1 X'(0) + \beta_1 X(0) = 0, \\ \alpha_2 X'(1) + \beta_2 X(1) = 0.
+\]
+
+Запитаймо себе, чи можна також шукати розв'язок гетерогенної проблеми
+(9.1) у вигляді серії власних функцій, але більш загальної форми
+
+\[
+u(x, t) = \sum_{n=1}^{\infty} T_n(t) X_n(x).
+\]
+
+Існують певні фізичні підстави для такого припущення. Насправді терміни
+\(f(x,t)\) описують джерело тепла, розташоване всередині стрижня. Це
+означає, що залежність рішення від часу не буде виражена показниками
+
+\[
+e^{-(\lambda_n\alpha)^2 t}
+\]
+
+,
+
+Це стосувалося однорідного завдання, але з деякими іншими функціями.
+
+Щоб показати цей метод у дії і не ускладнювати подання деталями, ми
+застосуємо його до розв'язання однієї дуже простої задачі.
+
+\section{Построзв'язання методом демаркації за власними
+функціями,}\label{ux43fux43eux441ux442ux440ux43eux437ux432ux44fux437ux430ux43dux43dux44f-ux43cux435ux442ux43eux434ux43eux43c-ux434ux435ux43cux430ux440ux43aux430ux446ux456ux457-ux437ux430-ux432ux43bux430ux441ux43dux438ux43cux438-ux444ux443ux43dux43aux446ux456ux44fux43cux438}
+
+Розглянемо гетерогенну проблему
+
+(9.3) (PY)
+
+\[
+\begin{aligned} u_t &= \alpha^2 u_{xx} + f(x, t), & 0 < x < 1, & 0 < t < \infty, \\ u(0, t) &= 0, & 0 < t < \infty, \\ u(1, t) &= 0, & 0 < t < \infty, \\ u(x, 0) &= \varphi(x), & 0 \leqslant x \leqslant 1. \end{aligned}
+\]
+
+Процес розв'язання задачі подається у вигляді послідовності наступних
+кроків.
+
+КРОК 1. Основна ідея методу полягає в розкладанні густини джерела
+\(f(x, t)\) на ряд власними функціями
+
+\[
+f(x, t) = f_1(t) X_1(x) + f_2(t) X_2(x) + \dots + f_n(t) X_n(x) + \dots
+\]
+
+\begin{verbatim}
+а також визначити реакції системи u_n\left(x,\,t\right) на вплив кожного компонента f_n\left(t\right)X_n\left(x\right) . Якщо знайти всі відповіді, рішення проблеми виглядатиме так:
+\end{verbatim}
+
+\[
+u(x, t) = \sum_{n=1}^{\infty} u_n(x, t).
+\]
+
+Головна складність цього методу --- розклад густини джерела на
+компоненти \(f_n\)(t),\(X_n\)(x) . Виявляється, що \(X_n\)(x) факторами
+в цій задачі є власними векторами системи Штурма--Ліувіля, які виникають
+при розв'язанні відповідної однорідної задачі методом розділення
+змінних, а саме
+
+\[
+\begin{array}{c} u_t = \alpha^2 u_{xx} \quad \text{(отметим, что } f(x, \ t) = 0), \\ u(0, \ t) = 0, \\ u(1, \ t) = 0, \\ u(x, \ 0) = \varphi(x). \end{array}
+\]
+
+Завдання Штурма-Ліувіля в цьому випадку виглядає так:
+
+\[
+X'' + \lambda^2 X = 0,
+\]
+
+\(X(0)\) = 0, \(X(1)\) = 0, а його розв'язки є функціями
+
+\[
+X_n(x) = \sin(n\pi x), \quad n = 1, 2, 3 \dots
+\]
+
+Отже, розклад на густину джерела представлений як ряд
+
+\[
+(9.5) \ f(x,t) = f_1(t) \sin(\pi x) + f_2(t) \sin(2\pi x) + \dots + f_n(t) \sin(n\pi x) + \dots
+\]
+
+\begin{verbatim}
+\mathcal{U} нарешті, щоб знайти функції f_n(t) , помножте обидві сторони останнього відношення на \sin(m\pi x) і інтегруйте від 0 до 1 за координатою x.
+\end{verbatim}
+
+У результаті ми отримуємо
+
+\[
+\int_{0}^{1} f(x, t) \sin(m\pi x) dx = \sum_{n=1}^{\infty} f_{n}(t) \int_{0}^{1} \sin(m\pi x) \sin(n\pi x) dx =
+= \frac{1}{2} f_{m}(t)
+\]
+
+або (після заміни t на p)
+
+(9.6)
+
+\[
+f_{n}(t) = 2 \int_{0}^{1} f(x, t) \sin(n\pi x) dx.
+\]
+
+Останнє співвідношення встановлює співвідношення між коефіцієнтами
+\(f_n(t)\) і часткою джерела тепла \(f(x, t)\).
+
+КРОК 2. (Пошук \(u_n(x, t) = X_n(x) T_n(t)\) реакції на вхідний вплив
+\(f_n(t) X_n(x)\) .)
+
+Замінимо густину джерела на його розклад у рядок
+
+\[
+f(x, t) = \sum_{n=1}^{\infty} f_n(t) \sin(n\pi x)
+\]
+
+і намагатися знайти індивідуальні відповіді, тобто функції,
+\(T_{\mathbf{n}}(t)\) у
+
+\[
+u(x, t) = \sum_{n=1}^{\infty} T_n(t) \sin(n\pi x).
+\]
+
+Оскільки розв'язок задачі має вигляд
+
+\[
+u(x, t) = \sum_{n=1}^{\infty} T_n(t) \sin(n\pi x),
+\]
+
+потім підставимо цей вираз у початкову задачу
+
+\[
+u_{t} = \alpha^{2} u_{xx} + \sum_{n=1}^{\infty} f_{n}(t) \sin(n\pi x),
+u(0, t) = 0,
+u(1, t) = 0,
+u(x, 0) = \varphi(x),
+\]
+
+У результаті ми отримаємо
+
+\[
+\sum_{n=1}^{\infty} T'_n(t) \sin(n\pi x) = -\alpha^2 \sum_{n=1}^{\infty} (n\pi)^2 T_n(t) \sin(n\pi x) + + \sum_{n=1}^{\infty} f_n(t) \sin(\pi n\lambda),
+\]
+
+(9.7)
+
+\[
+\sum_{n=1}^{\infty} T_n(t) \sin 0 = 0
+\]
+
+\begin{verbatim}
+(задовольняється ідентично), \sum_{n=1}^{\infty} T_n(t) \sin (n\pi) = 0 (задовольняється ідентично), \sum_{n=1}^{\infty} T_n(0) \sin (n\pi x) = \phi(x) .
+\end{verbatim}
+
+Переписування рівняння та початкової умови
+
+(PPP)
+
+\[
+\sum_{n=1}^{\infty} [T'_n + (n\pi\alpha)^2 T_n - f_n(t)] \sin(n\pi x) = 0,
+\]
+
+(НУ)
+
+\[
+\sum_{n=1}^{\infty} T_n(0) \sin(n\pi x) = \varphi(x),
+\]
+
+\begin{verbatim}
+можна побачити, що функції T_n(\ell) є розв'язками задачі Коші
+\end{verbatim}
+
+(9.8)
+
+\[
+T_{n} + (n\pi\alpha)^{2} T_{n} = f_{n}(t),
+T_{n}(0) = 2 \int_{0}^{1} \varphi(\xi) \sin(n\pi\xi) d\xi = a_{n}.
+\]
+
+Усі ці TAC легко розв'язати, а їхні рішення записуються у вигляді
+
+\begin{enumerate}
+\def\labelenumi{(\arabic{enumi})}
+\setcounter{enumi}{98}
+\tightlist
+\item
+\end{enumerate}
+
+\[
+T_n(t) = a_n e^{-(n\pi\alpha)^2 t} + \int_0^t e^{-(n\pi\alpha)^2 (t-\tau)} f_n(\tau) d\tau,
+\]
+
+З того місця, де легко отримати повне розв'язання проблеми (9.3):
+
+(9.10)
+
+\[
+u(x, t) = \sum_{n=1}^{\infty} T_n(t) \sin(n\pi x) =
+= \sum_{n=1}^{\infty} \left[ a_n e^{-(n\pi\alpha)^n t} \sin(n\pi x) \right] + \sum_{n=1}^{\infty} \left[ \sin(n\pi x) \int_0^t e^{-(n\pi\alpha)^n (t-\tau)} f_n(\tau) d\tau \right]
+\]
+
+Перехідна частина (обумовлена стаціонарною частиною (умовлена початковою
+умовою) правою частиною \(f(x, t)\)).
+
+Розв'язок (9.10) показує, що температурна реакція складається з двох
+частин: перша частина зумовлена початковими умовами, а друга ---
+густиною джерела \(f(x,t)\). Зверніть увагу, що термін «стаціонарна
+частина» не є найкращим описом другої частини температурної реакції,
+оскільки він не означає, що ця частина не залежить від часу
+(стаціонарний стан може бути періодичним, якщо \(f(x, t)\) є періодичною
+функцією часу t).
+
+Проблема повністю вирішена. Перш ніж перейти до наступної теми, давайте
+покажемо, як використовувати описаний вище метод для розв'язання
+
+Конкретне завдання.
+
+70
+
+\section{Розв'язання конкретної задачі методом декомпозиції за власними
+функціями}\label{ux440ux43eux437ux432ux44fux437ux430ux43dux43dux44f-ux43aux43eux43dux43aux440ux435ux442ux43dux43eux457-ux437ux430ux434ux430ux447ux456-ux43cux435ux442ux43eux434ux43eux43c-ux434ux435ux43aux43eux43cux43fux43eux437ux438ux446ux456ux457-ux437ux430-ux432ux43bux430ux441ux43dux438ux43cux438-ux444ux443ux43dux43aux446ux456ux44fux43cux438}
+
+Розглянемо просту задачу
+
+(9.11)
+
+\[
+\begin{aligned} u_t &= \alpha^2 u_{xx} + \sin{(3\pi x)}, & 0 < x < 1, \\ (\mathbf{FY}) & \begin{cases} u(0, t) &= 0, \\ u(1, t) &= 0, \end{cases} & 0 < t < \infty, \\ (\mathbf{HY}) & u(x, 0) &= \sin{(\pi x)}, & 0 \leq x \leq 1. \end{aligned}
+\]
+
+Наша мета --- обчислити коефіцієнти \(T_n\)(t) при розкладі
+
+\[
+u\left(x,\,t\right)=\sum_{n=1}^{\infty}\,T_{n}\left(t\right)\sin\left(n\pi x\right)
+\]
+
+(Власні функції цієї задачі \(X_n\)(x) збігатися з власними функціями
+попереднього). Якщо підставити цю декомпозицію на початкову задачу,
+отримаємо наступну задачу Коші для визначення функцій \(T_n\)(t) :
+
+\[
+T_n + (n\pi\alpha)^2 T_n = \int_n (t) = 2 \int_0^1 \sin(3\pi x) \sin(n\pi x) dx =
+\begin{cases} 1 &n = 3, \\ 0 & n \neq 3, \end{cases}
+T_n(0) = 2 \int_0^1 \sin(n\xi) \sin(n\pi\xi) d\xi =
+\begin{cases} 1 &n = 1, \\ 0 & n \neq 1. \end{cases}
+\]
+
+Перепишем эти уравнения последовательно для n=1, 2\ldots{}
+
+\begin{verbatim}
+\begin{aligned}
+(n=1)\quad & T_1' + (\pi\alpha)^2 T_1 = 0, && T_1(0) = 1, && T_1(t) = e^{-(\pi\alpha)^2 t}, \\
+(n=2)\quad & T_2' + (2\pi\alpha)^2 T_2 = 0, && T_2(0) = 0, && T_2(t) = 0, \\
+(n=3)\quad & T_3' + (3\pi\alpha)^2 T_3 = 4, && T_3(0) = 0, && T_3(t) = \frac{1}{(3\pi\alpha)^2}\left[1 - e^{-(3\pi\alpha)^2 t}\right], \\
+(n\geqslant 4)\quad & T_n' + (n\pi\alpha)^2 T_n = 0, && T_n(0) = 0, && T_n(t) = 0.
+\end{aligned}
+\end{verbatim}
+
+Отже, розв'язок задачі можна записати у вигляді
+
+\[
+u(x, t) = e^{-(\pi\alpha)^2 t} \sin(\pi x) + \frac{1}{(3\pi\alpha)^2} [1 - e^{-(3\pi\alpha)^2 t}] \sin(3\pi x).
+\]
+
+(9.12)
+
+\section{ЗАУВАЖЕННЯ}\label{ux437ux430ux443ux432ux430ux436ux435ux43dux43dux44f-1}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Метод розкладу власних функцій є одним із найпотужніших методів
+  розв'язання неоднорідних диференціальних рівнянь у похідних похідних.
+  Пізніше, коли ми ознайомимося з інтегральними перетвореннями,
+  побачимо, що існують й інші методи розв'язання задач такого типу.
+\item
+  Власні функції \(X_n(x)\) , за допомогою якої виконується розклад,
+  залежать від задачі, яку потрібно розв'язати, точніше від рівнянь і
+  граничних умов. Читача просять розв'язати задачу 4 наприкінці лекції,
+  щоб перевірити, чи дійсно він навчився знаходити власні функції
+  \(X_n(x)\) .
+\item
+  Якщо читач пам'ятає основні факти з теорії звичайних диференціальних
+  рівнянь, то він знає, що розв'язки, що відповідають неоднорідним
+  членам вигляду
+\end{enumerate}
+
+\[
+P_n(x) e^{\alpha x}
+\begin{cases} \sin{(\beta x)}, \\ \cos{(\beta x)}, \end{cases}
+\]
+
+можно найти методом неопределенных коэффициентов. То же самое и здесь.
+Задача (9.11) может быть решена таким же способом.
+
+\section{ЗАДАЧІ}\label{ux437ux430ux434ux430ux447ux456}
+
+\section{1. Решение
+задачи}\label{ux440ux435ux448ux435ux43dux438ux435-ux437ux430ux434ux430ux447ux438}
+
+\[
+\begin{array}{ll} (\text{УЧП}) & u_t = u_{xx} + \sin{(3\pi x)}, & 0 < x < 1, \\ (\Gamma \text{У}) & \begin{cases} u \ (0, \ t) = 0, \\ u \ (1, \ t) = 0, \end{cases} & 0 < t < \infty \\ (\text{HV}) & u \ (x, \ 0) = \sin{(\pi x)}, \ 0 \leqslant x \leqslant 1 \end{array}
+\]
+
+дается формулой (9.12). Соответствует ли это решение вашим интуитивным
+представлениям? Что представляет собой полученное решение?
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Решите задачу
+\end{enumerate}
+
+\[
+\begin{aligned}
+(\text{УЧП})\quad & u_t = u_{xx} + \sin(\pi x) + \sin(2\pi x), && 0 < x < 1,\ 0 < t < \infty, \\
+(\text{ГУ})\quad & u(0,t) = 0,\quad u(1,t) = 0, && 0 < t < \infty, \\
+(\text{НУ})\quad & u(x,0) = 0, && 0 \leqslant x \leqslant 1.
+\end{aligned}
+\]
+
+\section{3. Розв'яжіть
+задачу}\label{ux440ux43eux437ux432ux44fux436ux456ux442ux44c-ux437ux430ux434ux430ux447ux443}
+
+(PPP)
+
+\[
+u_t = u_{xx} + \sin(\pi x), \quad 0 < x < 1, \quad 0 < t < \infty,
+\]
+
+(GI)
+
+\[
+\begin{cases} u(0, t) = 0, \\ u(1, t) = 0, \\ u(x, 0) = 1, \quad 0 < x < 1, \end{cases}
+\]
+
+методом разложения по собственным функциям.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Найдите решение задачи
+\end{enumerate}
+
+\[
+\begin{aligned}
+(\text{УЧП})\quad & u_t = u_{xx} + \sin(\lambda_1 x), && 0 < x < 1,\ 0 < t < \infty, \\
+(\text{ГУ})\quad & u(0,t) = 0,\quad u_x(1,t) + u(1,t) = 0, && 0 < t < \infty, \\
+(\text{НУ})\quad & u(x,0) = 0, && 0 \leqslant x \leqslant 1.
+\end{aligned}
+\]
+
+методом разложения по собственным функциям, если \(\lambda_1\) ---
+первый корень уравнения \(\operatorname{tg}\lambda = -\lambda\). Каковы
+собственные функции этой задачи?
+
+\section{5. Решите
+задачу}\label{ux440ux435ux448ux438ux442ux435-ux437ux430ux434ux430ux447ux443}
+
+\[
+\begin{aligned}
+(\text{УЧП})\quad & u_t = u_{xx}, && 0 < x < 1,\ 0 < t < \infty, \\
+(\text{ГУ})\quad & u(0,t) = 0,\quad u(1,t) = \cos t, && 0 < t < \infty, \\
+(\text{НУ})\quad & u(x,0) = \varphi(x), && 0 \leqslant x \leqslant 1.
+\end{aligned}
+\]
+
+Спочатку перетворивши граничні умови в нуль. Отримана задача
+розв'язується методом розкладу за власними функціями.
+
+\section{ІНТЕГРАЛЬНІ ПЕРЕТВОРЕННЯ (СИНУСОЇДАЛЬНІ ТА КОСИНУСОВІ
+ПЕРЕТВОРЕННЯ)}\label{ux456ux43dux442ux435ux433ux440ux430ux43bux44cux43dux456-ux43fux435ux440ux435ux442ux432ux43eux440ux435ux43dux43dux44f-ux441ux438ux43dux443ux441ux43eux457ux434ux430ux43bux44cux43dux456-ux442ux430-ux43aux43eux441ux438ux43dux443ux441ux43eux432ux456-ux43fux435ux440ux435ux442ux432ux43eux440ux435ux43dux43dux44f}
+
+МЕТА ЛЕКЦІЇ: Ввести концепцію інтегрального перетворення та показати, як
+використання інтегральних перетворень дозволяє перейти від CPP з n
+змінними до нового рівняння з n---1 змінними.
+
+Лекція показує, що інтегральні перетворення можна інтерпретувати як
+розклад вхідної дії на елементарні (частотний розклад), визначення
+реакції системи на елементарні впливи та подальше підсумовування всіх
+отриманих результатів.
+
+У інтегральних перетвореннях операція диференціювання переходить у
+операцію множення, і, відповідно, деякі часткові похідні переходять у
+алгебраїчні вирази.
+
+Для розв'язання задач дифузії на необмежених інтервалах вводять
+синусоїдальні та косинусні перетворення. Розв'язок, отриманий у цьому
+випадку, цікавий тим, що містить функцію, яка є додатковою до
+ймовірнісного інтеграла.
+
+Інтегральне перетворення зазвичай називається перетворенням, яке кожній
+функції \(f(t)\) призначає нову функцію \(F(s)\) відповідно до формули
+
+\[
+F(s) = \int_{A}^{B} K(s, t) f(t) dt.
+\]
+
+Зверніть увагу, що початкова функція залежить від t, а отримана функція
+--- від s. Функція \(K(s,t)\) називається ядром перетворення. Це
+головний елемент, який відрізняє одну трансформацію від іншої. Зазвичай
+ядро обирається так, щоб перетворення мало певні задані властивості.
+Межі інтегрування також залежать від типу трансформації.
+
+Голосною, що лежить в основі інтегральних перетворень, є здатність
+позбутися часткових похідних однієї з незалежних змінних. Це означає, що
+перетворене рівняння матиме на одну змінну менше, ніж початкове.
+Наприклад, якщо застосувати інтегральне перетворення до рівняння
+
+Щоб позбутися похідної часу, отримуємо звичайне диференціальне рівняння
+з незалежною змінною X.
+
+\[
+u_{xx} + u_{cy} + u_{zz} = 0
+\]
+
+застосувати перетворення Фур'є до змінної x, тоді похідна \(u_{xx}\)
+буде усунена, і в новому рівнянні залишаться лише дві незалежні змінні y
+та z. Тоді отримуємо звичайне диференціальне рівняння з однією
+незалежною змінною. Іншими словами, інтегральні перетворення спрощують
+початкове завдання. Потім розв'язується перетворення задачі, і,
+застосовуючи обернене перетворення до її розв'язку, отримується
+розв'язок початкового перетворення. Схема описаного алгоритму показана
+на рис. 10.1
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_72_Figure_5.jpeg}}
+
+Рис. 10.1, Загальна схема застосування інтегрованих перетворень.
+
+Фіг. На рисунку 10.1 видно, що кожне перетворення прямого інтеграла
+пов'язане з оберненим перетворенням, яке відновлює початкову функцію з
+трансформованої.
+
+Прямі та обернені перетворення зазвичай називають парою перетворень.
+Таблиця 1. Рисунок 10.1 показує кілька пар перетворень, які ми будемо
+використовувати при розв'язуванні рівнянь із факторами.
+
+\begin{verbatim}
+Слід зазначити, що в цих перетвореннях використовуються два типи символів. Наприклад, у випадку перетворення Лапласа позначення \mathcal{L}[f] вказує, що функція f перетворена, тоді як позначення F(s) означає, що перетворення породжує функцію, яка залежить від s.
+\end{verbatim}
+
+У цій лекції ми не прагнемо вивчати всі пари перетворень. Ми
+зосередимося лише на перетвореннях Фур'є синуса та косинуса (пари 1 і
+2). Трохи пізніше ми вивчаємо іншу з цих пар. Ознайомляючись із
+трансформаціями, ми дізнаємося про їхні переваги та недоліки,
+дізнаємося, як
+
+Таблиця 10.1. Деякі пари інтегральних перетворень
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Синус-перетворення Фур'є:
+\end{enumerate}
+
+\[
+\mathcal{F}_s[f](\omega) = \frac{2}{\pi}\int_0^\infty f(t)\sin(\omega t)\,dt,
+\mathcal{F}_s^{-1}[F](t) = \int_0^\infty F(\omega)\sin(\omega t)\,d\omega.
+\]
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Косинус-перетворення Фур'є:
+\end{enumerate}
+
+\[
+\mathcal{F}_c[f](\omega) = \frac{2}{\pi}\int_0^\infty f(t)\cos(\omega t)\,dt,
+\mathcal{F}_c^{-1}[F](t) = \int_0^\infty F(\omega)\cos(\omega t)\,d\omega.
+\]
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Перетворення Фур'є:
+\end{enumerate}
+
+\[
+\mathcal{F}[f](\omega) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty} f(x)e^{-i\omega x}\,dx,
+\mathcal{F}^{-1}[F](x) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty} F(\omega)e^{i\omega x}\,d\omega.
+\]
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Скінченне синус-перетворення:
+\end{enumerate}
+
+\[
+S_n = \frac{2}{L}\int_0^L f(x)\sin\!\left(\frac{n\pi x}{L}\right) dx,
+f(x) = \sum_{n=1}^{\infty} S_n \sin\!\left(\frac{n\pi x}{L}\right).
+\]
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  Скінченне косинус-перетворення:
+\end{enumerate}
+
+\[
+C_n = \frac{2}{L}\int_0^L f(x)\cos\!\left(\frac{n\pi x}{L}\right) dx,
+f(x) = \frac{C_0}{2} + \sum_{n=1}^{\infty} C_n \cos\!\left(\frac{n\pi x}{L}\right).
+\]
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{5}
+\tightlist
+\item
+  Перетворення Лапласа:
+\end{enumerate}
+
+\[
+\mathcal{L}[f](s) = \int_0^\infty e^{-st}f(t)\,dt,
+\mathcal{L}^{-1}[F](t) = \frac{1}{2\pi i}\int_{\gamma-i\infty}^{\gamma+i\infty} e^{st}F(s)\,ds.
+\]
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{6}
+\tightlist
+\item
+  Перетворення Ханкеля:
+\end{enumerate}
+
+\[
+H\{f\}(\xi) = F_n(\xi) = \int_0^\infty r J_n(\xi r) f(r)\,dr,
+H^{-1}[F_n](r) = \int_0^\infty \xi J_n(\xi r) F_n(\xi)\,d\xi.
+\]
+
+Однак перед тим, як перейти до вивчення інтегральних перетворень, буде
+корисно зрозуміти, що зазвичай називають спектром функції (або
+спектральним розкладом функції).
+
+\section{Спектральна
+функція}\label{ux441ux43fux435ux43aux442ux440ux430ux43bux44cux43dux430-ux444ux443ux43dux43aux446ux456ux44f}
+
+Інтегральні перетворення та спектр функції тісно пов'язані. Насправді
+інтегральне перетворення можна інтерпретувати як розклад функції на
+певний спектр компонент. Цей спектр залежить від обраного перетворення,
+але кожна функція має певний спектр відносно цього перетворення Р и с
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_74_Picture_7.jpeg}}
+
+. 10 2 Розклад періодичної функції на ряд синусами та косинусами;
+Послідовність квадратних імпульсів апроксимується синусами та косинусами
+
+Наприклад, розглянемо розклад періодичної функції на ряд синусами та
+косинусами (ряд Фур'є) 1:
+
+\[
+f(x) = \sum_{n=0}^{\infty} \left[ A_n \cos(nx) + B_n \sin(nx) \right]
+\]
+
+(див. рис. 10.2).
+
+\begin{verbatim}
+Тут коефіцієнти A_n і B_n позначають внесок \cos(nx) і \sin(nx) у функцію f(x), тоді як величина
+\end{verbatim}
+
+\[
+V\overline{A_n^2+B_n^3}
+\]
+
+1) Фур'є-ряди детальніше розглядаються у лекції 11,
+
+(називається спектром функції) показує частку амплітуди функції
+\(f(x)\), що припадає на частоту n.
+
+Наприклад, якщо функція \(f(x)\) --- це просто сума
+
+синуси та косинуси
+
+\[
+f(x) = 1 + \sin x + \frac{1}{5}\sin(3x) + \cos x + \frac{1}{2}\cos(2x) + \frac{1}{4}\cos(4x),
+\]
+
+тоді його спектр (дискретний) виглядатиме так, як показано на рис. 10.3.
+
+\begin{verbatim}
+Зчитуючи значення значення \sqrt{A_n^2 + B_n^2} з графіка, можна визначити амплітудне значення компоненти функції f(x), яка має частоту n.
+\end{verbatim}
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_75_Figure_8.jpeg}}
+
+Рис. 10 3. Дискретний спектр функції \(f(r)\).
+
+Періодичні функції розкладаються на нескінченні ряди (вони мають
+дискретний спектр), тоді як неперіодичні функції повинні мати
+неперервний спектр. Якщо функція визначена лише на скінченному
+інтервалі, її можна періодично розширювати на всю вісь і розкладати на
+ряд Фур'є, який представлятиме нашу функцію в межах визначення області.
+
+І хоча неперіодичну функцію не можна розкласти на нескінченний ряд
+синусами та косинусами, можна спробувати записати неперервний аналог
+ряду Фур'є:
+
+\[
+f(x) = \int_{-\infty}^{+\infty} [C(\omega)\cos(\omega x) + S(\omega)\sin(\omega x)] d\omega,
+\]
+
+\begin{verbatim}
+де функції S(\omega) і C(\omega) слугують мірою спектральної густини синуса і косинуса у функції f(x), а також значення
+\end{verbatim}
+
+\[
+V \overline{S^2(\omega) + C^2(\omega)}
+\]
+
+\begin{verbatim}
+Він слугує мірою загального внеску частотного \omega у функцію f(x) і називається спектром (неперервним) функції f(x). Виходячи з наведеного вище інтуїтивного визначення спектра функції, давайте проаналізуємо інтегральні перетворення «гвинт за гвинтом». Спершу запишемо кілька властивостей цих перетворень, які ми будемо широко використовувати.
+\end{verbatim}
+
+\section{Синусоїдальні та косинусні перетворення
+похідних}\label{ux441ux438ux43dux443ux441ux43eux457ux434ux430ux43bux44cux43dux456-ux442ux430-ux43aux43eux441ux438ux43dux443ux441ux43dux456-ux43fux435ux440ux435ux442ux432ux43eux440ux435ux43dux43dux44f-ux43fux43eux445ux456ux434ux43dux438ux445}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+\end{enumerate}
+
+\[
+\mathcal{F}_s[f'] = -\omega \mathcal{F}_c[f]
+\]
+
+(доведено інтегруванням по частинах).
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+\end{enumerate}
+
+\[
+\mathcal{F}_s[f'] = -\omega \mathcal{F}_c[f]
+\]
+
+\begin{verbatim}
+2. \mathcal{F}_s[f''] = \frac{2}{\pi} \omega f(0) - \omega^2 \mathcal{F}_s[f] (10.1) 3.
+\end{verbatim}
+
+\[
+\mathcal{F}_{\rho}[f'] = \frac{2}{\pi} f(0) + \omega \mathcal{F}_{s}[f]
+\]
+
+.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+\end{enumerate}
+
+\[
+\mathcal{F}_{c}[f'') = -\frac{2}{\pi} f_{c}(0) - \omega^{2} \mathcal{F}_{c}[f].
+\]
+
+Деякі інші властивості прямих і обернених синусоїдальних і спеційних
+перетворень наведені в таблиці наприкінці книги. Тепер покажемо, як
+синусоїдальне перетворення можна використати для розв'язання важливої
+змішаної задачі.
+
+\section{Розв'язок задачі дифузії на напівпрямому синусоїдальному
+метрі}\label{ux440ux43eux437ux432ux44fux437ux43eux43a-ux437ux430ux434ux430ux447ux456-ux434ux438ux444ux443ux437ux456ux457-ux43dux430-ux43dux430ux43fux456ux432ux43fux440ux44fux43cux43eux43cux443-ux441ux438ux43dux443ux441ux43eux457ux434ux430ux43bux44cux43dux43eux43cux443-ux43cux435ux442ux440ux456}
+
+Задача, яку ми хочемо розв'язати, формулюється так:
+
+(PPP)
+
+\[
+u_t = \alpha^2 u_{xx}
+, 0 < x < \infty , 0 < t < \infty , (GU) u(0, t) = A , 0 < t < \infty , (NU) u(x, 0) = 0 , 0 \le x < \infty .
+\]
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_76_Figure_14.jpeg}}
+
+\begin{verbatim}
+Рис. 10.4. Задача дифузії в напівнескінченній області; u\left(0,\,t\right)= = A, u(x, 0) = 0.
+\end{verbatim}
+
+КРОК 1. Розберемо розв'язання проблеми на три досить прості кроки.
+Діятимемо відповідно до наступного плану. На першому кроці виконуємо
+перетворення синуса Фур'є на змінній x.
+
+тоді отримуємо звичайне диференціальне рівняння для змінної t. Для
+реалізації цього плану застосовуємо синусоїдальне перетворення до обох
+частин рівняння з частковими похідними. У результаті ми отримуємо
+
+\[
+\mathcal{F}_s[u_t] = \alpha^2 \mathcal{F}_s[u_{xx}].
+\]
+
+\begin{verbatim}
+Розглянемо кожну частину цього співвідношення. \mathcal{F}_s[u_t] : часткову похідну u_t в цій задачі можна назвати зовнішньою похідною, оскільки ми використовуємо перетворення на x. У цьому випадку можна записати
+\end{verbatim}
+
+\[
+\mathcal{F}_{s}\left[u_{t}\right] = \frac{2}{\pi} \int_{0}^{\infty} u_{t}\left(x, t\right) \sin\left(\omega x\right) dx =
+= \frac{\partial}{\partial t} \left[\frac{2}{\pi} \int_{0}^{\infty} u\left(x, t\right) \sin\left(\omega x\right) dx\right] =
+= \frac{d}{dt} \mathcal{F}_{s}\left[u\right] =
+= \frac{d}{dt} U\left(t\right).
+\]
+
+Тут ми взяли операцію диференціації поза знаком інтеграла, застосовуючи
+відповідну теорему інтегрального числення. Зверніть увагу, що початкова
+функція u залежить від змінних x і t, а також від її образу
+
+\[
+\mathcal{F}_{s}[u] = U(\omega, t)
+\]
+
+залежить від змінних \(\omega\) і t. Нова змінна \(\omega\) відіграє
+роль параметра в новій задачі, і тому можна припустити, що образи
+функцій залежать лише від однієї змінної t:
+
+\[
+\mathcal{F}_s[u] = U(t)
+\]
+
+Для члена \(\mathcal{F}_s[u_{xx}]\) маємо
+
+\[
+\mathcal{F}_s[u_{xx}] = \frac{2}{\pi}\omega u(0,t) - \omega^2 \mathcal{F}_s[u]
+= \frac{2A\omega}{\pi} - \omega^2 U(t).
+\]
+
+Зверніть увагу, що при виведенні відношень (10.1) ми розглядали функцію
+f як функцію однієї змінної x. Тут випадок дещо інший, оскільки
+\(u\left(x,\ t\right)\) залежить і від x, і від t. Однак ті ж формули
+можна використовувати, якщо перетворення виконується однією змінною, а
+решта вважаються константами.
+
+У нашому випадку перетворення виконується змінною x, тобто змінну t
+можна вважати сталою. Звернімо також увагу на той факт, що вже на цьому
+етапі розв'язання задачі використовується гранична умова
+\(u\left(0,\ t\right)=A\) . Підставляючи знайдені вирази у рівняння
+\(u_{t}=\alpha^{2}u_{xx}\) , отримуємо звичайне диференціальне рівняння
+
+\[
+\frac{dU}{dt} = \alpha^2 \left[ -\omega^2 U(t) + \frac{2A\omega}{\pi} \right].
+\]
+
+Єдине, що існує --- це початкова умова функції \(U(t)\). Отримуємо його,
+застосовуючи перетворення до початкової умови \(u(x, 0)\) = 0:
+
+\[
+\mathcal{F}_{s}[u(x, 0)] = U(0) = 0.
+\]
+
+Це завершує перший крок у побудові розв'язку методом інтегрального
+перетворення: замість початкової змішаної задачі ми отримали задачу Коші
+для звичайного диференціального рівняння:
+
+(10.2)
+
+\[
+\begin{aligned} (O \Pi V) & \frac{dU}{di} + \omega^2 \alpha^2 U = \frac{2A\omega \alpha^2}{\pi}, \\ (H V) & U(0) = 0. \end{aligned}
+\]
+
+КРОК 2. Щоб розв'язати отриману задачу Коші, можна використати будь-який
+елементарний метод розв'язання звичайних диференціальних рівнянь. У
+результаті ми отримуємо
+
+\[
+U(t) = \frac{2A}{\pi\omega} (1 - e^{-\omega^2 \alpha^2 t}).
+\]
+
+Отже, перед нами маємо результат застосування синусоїдального
+перетворення до бажаної функції \(u\left(x,\ t\right)\) . Останній крок
+--- застосувати обернене перетворення до функції \(U\left(t\right)\) і
+отримати потрібне рішення \(u\left(x,\ t\right)\) :
+
+\[
+u(x, t) = \mathcal{F}_{x}^{-1}[U].
+\]
+
+КРОК 3. Щоб отримати розв'язок, можна або безпосередньо обчислити
+інтеграл, що входить до оберненого перетворення, або використати таблиці
+перетворень. Використовуючи таблиці, ми знаходимо
+
+\[
+u(x, t) = A \operatorname{erfc}(x/2\alpha \sqrt{t}),
+\]
+
+де erfc(x) --- функція, доповнююча до ймовірнісного інтегралу, а
+визначається відношенням
+
+\[
+\operatorname{erfc}(x) = \frac{2}{\sqrt{2\pi}} \int_{x}^{\infty} e^{-t^{2}} dt.
+\]
+
+Графік цієї функції показано на рис. 10.5.
+
+Ймовірнісний інтеграл і додаткова функція до нього не виражаються через
+елементарні функції. Вони добре популярні, і відповідні таблиці можна
+знайти в довідниках з фізики та хімії.
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_79_Figure_4.jpeg}}
+
+Фіг. 10.5. Графи функцій erf (x) та eric (x).
+
+\section{Інтерпретація
+рішення}\label{ux456ux43dux442ux435ux440ux43fux440ux435ux442ux430ux446ux456ux44f-ux440ux456ux448ux435ux43dux43dux44f}
+
+Розв'язок
+
+\[
+u(x, t) = A \operatorname{erfc}[x/2\alpha V \overline{t}]
+\]
+
+дає багато їжі для роздумів. На рисунку 10.6 показані графіки
+ймовірнісної комплементарної функції на різних значеннях часу t.
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_79_Figure_10.jpeg}}
+
+Рис. 10.6. Розподіл температури в напівнескінченному стрижні, на кінці
+якого підтримується постійна температура.
+
+Вони відрізняються один від одного лише характеристичною шкалою вздовж
+осі x.
+
+\section{ЗАВДАННЯ}\label{ux437ux430ux432ux434ux430ux43dux43dux44f-2}
+
+\begin{itemize}
+\tightlist
+\item
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    Довести ідентичності (10.1).
+  \end{enumerate}
+\item
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \setcounter{enumi}{1}
+  \tightlist
+  \item
+    Розв'яжіть задачу Коші (10.2).
+  \end{enumerate}
+\item
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \setcounter{enumi}{2}
+  \tightlist
+  \item
+    Використайте синусоїдальне або косинусне перетворення для
+    розв'язання задачі
+  \end{enumerate}
+\end{itemize}
+
+\begin{verbatim}
+\begin{aligned}
+(\text{УЧП})\quad & u_t = \alpha^2 u_{xx}, && 0 < x < \infty,\ 0 < t < \infty, \\
+(\text{ГУ})\quad & u_x(0,t) = 0, && 0 < t < \infty, \\
+(\text{НУ})\quad & u(x,0) = H(1-x), && 0 \leqslant x < \infty.
+\end{aligned}
+\end{verbatim}
+
+де \(H(x)\) --- функція Хевісайду
+
+\[
+H(x) =
+\begin{cases} 0, & x < 0, \\ 1, & 0 \le x. \end{cases}
+\]
+
+Входящая в начальное условие функция изображена на рисунке.
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_80_Picture_7.jpeg}}
+
+Как будет выглядеть график решения в различные моменты времени?
+
+\begin{verbatim}
+5. Найдите прообраз константы при синус-преобразовании, т. е. найдите f(x), если  F(\omega) = c = \mathrm{const.}
+\end{verbatim}
+
+\section{\texorpdfstring{РЯДЫ И ПРЕОБРАЗОВАНИЯ ФУРЬЕ МЕТА ЛЕКЦІЇ: Ввести
+понятие ряда Фурье и показать, каким образом периодическую функцию
+\(f(x)\) можно представить в гиде ряда по синусам и
+косинусам:}{РЯДЫ И ПРЕОБРАЗОВАНИЯ ФУРЬЕ МЕТА ЛЕКЦІЇ: Ввести понятие ряда Фурье и показать, каким образом периодическую функцию f(x) можно представить в гиде ряда по синусам и косинусам:}}\label{ux440ux44fux434ux44b-ux438-ux43fux440ux435ux43eux431ux440ux430ux437ux43eux432ux430ux43dux438ux44f-ux444ux443ux440ux44cux435-ux43cux435ux442ux430-ux43bux435ux43aux446ux456ux457-ux432ux432ux435ux441ux442ux438-ux43fux43eux43dux44fux442ux438ux435-ux440ux44fux434ux430-ux444ux443ux440ux44cux435-ux438-ux43fux43eux43aux430ux437ux430ux442ux44c-ux43aux430ux43aux438ux43c-ux43eux431ux440ux430ux437ux43eux43c-ux43fux435ux440ux438ux43eux434ux438ux447ux435ux441ux43aux443ux44e-ux444ux443ux43dux43aux446ux438ux44e-fx-ux43cux43eux436ux43dux43e-ux43fux440ux435ux434ux441ux442ux430ux432ux438ux442ux44c-ux432-ux433ux438ux434ux435-ux440ux44fux434ux430-ux43fux43e-ux441ux438ux43dux443ux441ux430ux43c-ux438-ux43aux43eux441ux438ux43dux443ux441ux430ux43c}
+
+\[
+f(x) = \frac{a_0}{2} + \sum_{n=1}^{\infty} [a_n \cos(n\pi x) + b_n \sin(n\pi x)].
+\]
+
+\begin{verbatim}
+Если же функция f(x) непериодическая и определена на  (-\infty, +\infty) , то показать, как ряд Фурье переходит в *преобразование Фурье* и как функцию f(x) можно разложить в непрерывную совокупность простейших функций. Эго разложение (интеграл Фурье) можно записать в комплексной форме:
+\end{verbatim}
+
+\[
+f(x) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{+\infty} \left[ \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{+\infty} f(x) e^{-i\xi x} dx \right] e^{i\xi x} d\xi,
+\]
+
+откуда получаются прямое и обратное преобразования Фурье
+
+\[
+\mathcal{F}[f] = F(\xi) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{+\infty} f(x) e^{-i\xi x} dx \qquad \text{(пряме перетворення Фур'є),}
+\mathcal{F}^{-1}[F] = f(x) = \frac{1}{\sqrt{2\pi}} \int_{-x}^{+x} F(x) e^{i\xi x} d\xi \qquad \text{(обернене перетворення Фур'є)}.
+\]
+
+Важлива роль рядів Фур'є в теорії диференціальних рівнянь у похідних
+пов'язана з тим, що періодичні функції, визначені в
+\((-\infty, +\infty)\) або функції, визначені на скінченному інтерваті,
+можна розкласти на ряд за допомогою сіпусів і косинусів. Це дозволяє
+спростити початкове завдання. Наприклад, функція пилкоподібної форми
+
+\[
+f(x) = x, -L < x < L,
+\]
+
+\(f(x + 2L) = f(x)\) (условие периодичности),
+
+зображено на рис. 11.1 можна представити як ряд Фур'є
+
+(11.1)
+
+\[
+f(x) = \frac{a_0}{2} + \sum_{n=1}^{\infty} \left[ a_n \cos(n\pi x/L) + b_n \sin(n\pi x/L) \right],
+\]
+
+у яких коефіцієнти Фур'є \(a_n\) і \(b_n\) знаходяться відповідно до
+формул Ейлера
+
+\[
+a_n = \frac{1}{L} \int_{-L}^{L} f(x) \cos(n\pi x/L) dx = 0, \quad n = 0, 1, 2, \dots,
+b_n = \frac{1}{L} \int_{-L}^{L} f(x) \sin(n\pi x/L) dx = -(-1)^n (2L/n\pi), \quad n = 1, 2, \dots.
+\]
+
+\begin{verbatim}
+Эти ингегралы легко вычисляются. Чтобы вывести формулы Эйлера для коэффициентов  a_n  и  b_n , умножим обе части разложения (11.1) на  \sin{(n\pi x/L)}  или  \cos{(n\pi x/L)}  и проинтегрируем получив- Р И С
+\end{verbatim}
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_82_Figure_7.jpeg}}
+
+. 11.1. Разложение пилообразной функции в ряд Фурье.
+
+\begin{verbatim}
+шееся соотношение от -L до L. Ортогональность функций  \{\sin(n\pi x/L)\}  и  \{\cos(n\pi x/L)\}  позволяет срязу получить формулы для коэффициентов  a_n  и  b_n  (см. задачу 6 в конце лекции). Для пилообразной функции разложение в ряд Фурье принимает вид
+\end{verbatim}
+
+(11.3)
+
+\[
+f(x) = \frac{2L}{\pi} \left[ \sin(\pi x/L) - \frac{1}{2} \sin(2\pi x/L) + \frac{1}{3} \sin(3\pi x/L) - \dots \right].
+\]
+
+Каждое слагаемое ряда принято называть гармоникой, частота каждой
+следующей гармоники выше предыдущей. Частоты всех гармоник кратны
+основной частоте, период которой совпадает
+
+\begin{verbatim}
+с периодом функции f(x). Один из недостатков рядов Фурье состоит в том, что в ряд Фурье можно разложить только периодическую функцию. Конечно, если функция определена на конечном интервале (например, f(x) = x при  0 \le x \le 1 ), ее можно периодически продолжить на всю числовую ось и затем использовать разложение (11.1).
+\end{verbatim}
+
+Тот факт, что сумма ряда Фурье определена и периодична вне интервала
+{[}0, 1{]}, ничему не противоречит, поскольку мы интересуемся поведением
+функции только внутри интервала. На самом деле для функции, определенной
+внутри интервала, можно указать много различных разложений в ряд Фурье,
+поскольку функцию можно продолжить за пределы интервала различными
+способами. Сразу же отметим, что полученные ряды будут сходиться к
+исходной функции с различными скоростями.
+
+Читатель не должен думать, что всякую периодическую функцию можно
+разложить в ряд Фурье. Пока мы знаем только, что если функцию \(f(x)\)
+можно разложить в ряд Фурье (11.1), то коэффициенты \(a_n\) и \(b_n\)
+находятся по формулам Эйлера (11.2). Более того, даже если функция
+разложима в ряд Фурье, мы не знаем, можно ли ряд почленно
+дифференцировать. И в самом деле, легко видеть, что производную функции
+\(f(x)\) = x (пилообразной функции) нельзя найти почленным
+дифференцированием ряда Фурье (11.3).
+
+В литературе, перечисленной в конце книги, можно найти точные условия
+разложимости функции \(f(x)\) в ряд Фурье, а также условия почленной
+дифференцируемости получающегося ряда. Нам будет достаточно ознакомиться
+с известной теоремой Дирихле.
+
+\emph{Теорема Дирихле} (достаточные условия разложимости функции в ряд
+Фурье):
+
+Если \(f(x)\)---ограниченная периодическая функция, имеющая на каждом
+периоде конечное число максимумов, минимумов и точек разрыва, то ряд
+Фурье функции \(f(x)\) сходится к \(f(x)\) в каждой точке непрерывности
+функции и к среднему значению пределов функции слева и справа в каждой
+точке разрыва функции \(f(x)\).
+
+\begin{verbatim}
+Например, на рис. 11.1 ряд Фурье сходится к функции f(x) во всех точках, за исключением точк  x=\pm L, \pm 3L, \ldots  (точки разрыва). В каждой точке разрыва ряд сходится к нулю (среднее арифметическое значение функции в точках  \pm L  и  \pm L ).
+\end{verbatim}
+
+Теперь мы педголовлены для знакомства с преобразованием Фурье. Однако
+целесообразно будет познакомиться сначала с понятием частотного спектра
+периодической функции.
+
+\section{Дискретный частотный спектр периодической
+функции.}\label{ux434ux438ux441ux43aux440ux435ux442ux43dux44bux439-ux447ux430ux441ux442ux43eux442ux43dux44bux439-ux441ux43fux435ux43aux442ux440-ux43fux435ux440ux438ux43eux434ux438ux447ux435ux441ux43aux43eux439-ux444ux443ux43dux43aux446ux438ux438.}
+
+Если \(f(x)\) --- периодическая функция, то разложение в ряд Фурье можно
+интерпретировать как представление функции \(f(x)\) последовательностью
+чисел \{\(c_n\)\} вида
+
+\[
+c_n = \sqrt{a_n^2 + b_n^2}, \quad n = 0, 1, 2, \dots,
+\]
+
+где коэффициенты \(c_n\) служат мерой вклада соответствующих частотных
+компонент в функцию \(f(x)\). Например, пилообразная функция \(f(x)\)
+разлагается в ряд Фурье
+
+\[
+f(x) = \frac{2L}{\pi} \left[ \sin(\pi x/L) - \frac{1}{2} \sin(2\pi x/L) + \frac{1}{3} \sin(3\pi x/L) - \dots \right]
+\]
+
+\begin{verbatim}
+и, следовательно, частотный спектр  \{c_n\}  записывается в виде  c_n=2L/n\pi  для  n=1,\ 2,\ \dots  и  c_0=|a_0|=0  (см. рис. 11.2).
+\end{verbatim}
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_84_Figure_8.jpeg}}
+
+PNC. 11 2. Дискретный частотный спектр пилообразной функции a---
+основная частота (период 2L); b---n-ая гармоника (период 2L/n).
+
+Последовательность \{\(c_n\)\} напоминает спектральное разложение белого
+света по цветам в спектроскове.
+
+Введем теперь понятие преобразования Фурье.
+
+\section{Преобразование
+Фурье}\label{ux43fux440ux435ux43eux431ux440ux430ux437ux43eux432ux430ux43dux438ux435-ux444ux443ux440ux44cux435}
+
+\begin{verbatim}
+Как уже отмечалось рансе, непериодические функции, заданные на  (-\infty, +\infty) , не разлагаются в ряды Фурье Однако для некоторых таких функций можно построить аналог ряда Фурье. Не вдаваясь в детали доказательства, можно утверждать, что для непериодических функций, определенных на  (-\infty, \infty) , ряд Фурье
+\end{verbatim}
+
+\[
+f(x_{l} = \frac{a_{0}}{2} + \sum_{n=1}^{\infty} \left[ a_{n} \cos(n\pi x/L) + b_{n} \sin(n\pi x/L) \right]
+\]
+
+переходит в интеграл Фирье (разложение по непрерывному спектру частот)
+
+(11.4)
+
+\[
+f(x) = \int_{0}^{\infty} a(\xi) \cos(\xi x) d\xi + \int_{0}^{\infty} b(\xi) \sin(\xi x) d\xi,
+\]
+
+гле
+
+(11.5)
+
+\[
+a(\xi) = \frac{1}{\pi} \int_{0}^{\infty} f(x) \cos(\xi x) dx
+,  b(\xi) = \frac{1}{\pi} \int_{0}^{\infty} f(x) \sin(\xi x) dx .
+\]
+
+\begin{verbatim}
+Из (11.4) видно, что интеграл Фурье осуществляет разложение функции f(x) в спектр по всем частотам  0 < \xi < \infty  (а не Р И С
+\end{verbatim}
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_85_Figure_7.jpeg}}
+
+11.3. Частотные спектры некоторых функций.
+
+только по частотам, кратным основной частоте, как это было у
+периодических функций). По аналогии с рядами Фурье определим частотный
+спектр по формуле
+
+\[
+C(\xi) = \sqrt{a^2(\xi) + b^2(\xi)}.
+\]
+
+\begin{verbatim}
+Частотний спектр є мірою внеску частоти \xi у функ-
+\end{verbatim}
+
+иню \(f(x)\).
+
+\begin{verbatim}
+На рис. 11.3 изображены некоторые функции f(x) и их спектры. Из рис. 11.3 видно, что функции, графики которых имеют угловые точки, обладают широким частотным спектром. Объясняется это тем, что для передачи излома графкка требуются высокочастотные спектральные компоненты. С другой стороны, если  f(x) = \sin \xi_0 x —простая периодическая функция, то ее частотный спектр обращается в нуль всюду, за исключением точки  \xi = \xi_0 .
+\end{verbatim}
+
+Теперь мы готовы к тому, чтобы познакомиться с экспоненциальной формой
+преобразования Фурье (формулы 11.5 известны как синус- и
+косинус-преобразования Фурье). Воспользуемся фор-
+
+мулой Эйлера
+
+\[
+e^{i\theta} = \cos \theta + i \sin \theta
+\]
+
+и носле несложных преобразований приведем (11.4) к виду
+
+(11.6)
+
+\[
+f(x) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{+\infty} \left[ \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{+\infty} f(x) e^{-i\xi x} dx \right] e^{i\xi x} d\xi,
+\]
+
+которое принято называть интегральным представлением Фурье. Отсюда
+получаем пару интегральных преобразований
+
+(11.7)
+
+\[
+\mathcal{F}[f] = F(\xi) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{+\infty} f(x) e^{-i\xi x} dx
+\]
+
+(прямое преобразование Фурье),
+
+\[
+\mathcal{F}^{-1}[F] = f(x) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{+\infty} F(\xi) e^{i\xi x} d\xi
+\]
+
+(обратное преобразование Фурье).
+
+В следующей лекции мы остановимся на изучении свойств этих
+преобразований.
+
+\section{ЗАУВАЖЕННЯ}\label{ux437ux430ux443ux432ux430ux436ux435ux43dux43dux44f-2}
+
+\begin{verbatim}
+1. Фурье-образ  F(\xi)  функции f(x) может оказаться комплекснозначной функцией. Например, для функции
+\end{verbatim}
+
+\[
+f(x) =
+\begin{cases} 0, & x \le 0, \\ e^{-x}, & x > 0, \end{cases}
+\]
+
+Фур'є-образ має вигляд
+
+\[
+F(\xi) = \frac{1}{\sqrt{2\pi}} \frac{1 - i\xi}{1 + \xi^2}.
+\]
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Абсолютне значення зображення Фур'є \(|F(\xi)|\) називається частотним
+  спектром функції \(f(x)\). Наприклад, частотний спектр функції
+  \(f(x)\) з попереднього зауваження визначається формулою
+\end{enumerate}
+
+\[
+\left|F(\xi)\right| = \sqrt{\frac{1}{2\pi(1+\xi^2)}}
+\]
+
+(зчитувач повинен мати змогу знайти модуль комплексного числа).
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Не всі функції піддаються перетворенню Фур'є (інтеграл (11.7) може не
+  існувати). Наприклад, функції \(f(x)\) = c, \(\sin x\) , \(e^x\) , не
+  мають \(x^2\) образу Фур'є. Лише ті функції, які мають тенденцію
+  швидко нульовою на \(|x| \to \infty\) 1). У прикладних задачах ми
+  застосовуємо перетворення Фур'є до температурних, хвильових та інших
+  фізичних полів, які мають тенденцію до нуля на \(|x| \to \infty\) .
+\end{enumerate}
+
+\section{ЗАВДАННЯ}\label{ux437ux430ux432ux434ux430ux43dux43dux44f-3}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Розташуйте функцію у рядку Фур'є над синусами
+\end{enumerate}
+
+\[
+f(x) =
+\begin{cases} -1, & -1 < x < 0, \\ 1, & 0 \le x < 1, \end{cases}
+f(x+2) = f(x)
+\]
+
+(умова періодичності).
+
+Побудуйте суму перших 2, 3 і 4 членів, щоб слідувати збіжності ряду до
+\(f(x)\). Побудуйте графіки частотного спектра функції \(f(x)\).
+
+\begin{itemize}
+\tightlist
+\item
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \setcounter{enumi}{1}
+  \tightlist
+  \item
+    Покажіть, що якщо розрізнити ряд Фур'є (11.3) функції пилки за
+    членом, отримаємо послідовність, яка не збігається до похідної
+    пилоподібної функції.
+  \end{enumerate}
+\item
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \setcounter{enumi}{2}
+  \tightlist
+  \item
+    Побудуйте частотний спектр наступних періодичних функцій:
+  \end{enumerate}
+\item
+  \begin{enumerate}
+  \def\labelenumi{\alph{enumi})}
+  \tightlist
+  \item
+    \(f(x) = \sin x\) ,
+  \end{enumerate}
+\item
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi})}
+  \setcounter{enumi}{5}
+  \tightlist
+  \item
+    \(f(x) = \sin x + \cos 2x,\) c)
+    \(f(x) = \sin x + \cos x + 0.5 \sin 3x\) .
+  \end{enumerate}
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Знайти \(F(\xi)\) зображення Фур'є та частотний спектр
+  \(C(\xi) = |F(\xi)|\) функцію
+\end{enumerate}
+
+\[
+f(x) =
+\begin{cases} 1, & -1 < x < 1, \\ 0 & \text{в остальных точках.} \end{cases}
+\]
+
+Тут ми говоримо лише про перетворення Власіка-Фур'є. Ед.
+
+\begin{verbatim}
+5. Показати, що абсолютне значення функції F(\xi) = \frac{1}{1+i\xi} дорівнює
+\end{verbatim}
+
+\[
+\left|F(\xi)\right| = \sqrt{\frac{1}{1+\xi^2}}
+\]
+
+\begin{verbatim}
+ПРИМІТКА. Спочатку помножте чисельник і знаменник на 1-i\xi , а потім позбавтеся комплексної одиниці i у знаменнику. ^1 )
+\end{verbatim}
+
+\begin{verbatim}
+6. Перевірити ортогональність функцій \{\sin(n\pi x/L)\} та \{\cos(n\pi x/L)\} на сегменті [-L, L]:
+\end{verbatim}
+
+\[
+\int_{-L}^{L} \sin(m\pi x/L) \sin(n\pi x/L) dx =
+\begin{cases} 0, & m \neq n, \\ L, &m = n, \end{cases}
+\int_{-L}^{L} \cos(m\pi x/L) \cos(n\pi x/L) dx =
+\begin{cases} 0, & m \neq n, \\ L, &m = n, \end{cases}
+\int_{-L}^{L} \sin(m\pi x/L) \cos(n\pi x/L) dx = 0 \text{ npn Bcex } m, n = 1, 2, \dots
+\]
+
+\section{Лекція 12}\label{ux43bux435ux43aux446ux456ux44f-12}
+
+\section{ПЕРЕТВОРЕННЯ ФУР'Є ТА ЙОГО ЗАСТОСУВАННЯ ДО РОЗВ'ЯЗАННЯ
+ДИФЕРЕНЦІАЛЬНИХ РІВНЯНЬ У ПОХІДНИХ
+ПОХІДНИХ}\label{ux43fux435ux440ux435ux442ux432ux43eux440ux435ux43dux43dux44f-ux444ux443ux440ux454-ux442ux430-ux439ux43eux433ux43e-ux437ux430ux441ux442ux43eux441ux443ux432ux430ux43dux43dux44f-ux434ux43e-ux440ux43eux437ux432ux44fux437ux430ux43dux43dux44f-ux434ux438ux444ux435ux440ux435ux43dux446ux456ux430ux43bux44cux43dux438ux445-ux440ux456ux432ux43dux44fux43dux44c-ux443-ux43fux43eux445ux456ux434ux43dux438ux445-ux43fux43eux445ux456ux434ux43dux438ux445}
+
+МЕТА ЛЕКЦІЇ: Проілюструвати важливі властивості перетворення Фур'є та
+показати, як ці властивості можна використовувати для розв'язання PPP.
+Зокрема, щоб показати, як під впливом перетворення Фур'є операція
+диференціації замінюється множенням, а диференціальні рівняння
+перетворюються на алгебранхічні рівняння. У цій лекції вводиться поняття
+згортки.
+
+\begin{verbatim}
+<sup>2)</sup> Легше |F(\xi)| = \frac{|1|}{|1+i\xi|} = \frac{1}{\sqrt{1+\xi^2}} - \Pi_{PVM}, pcd. Якщо функція f(x) визначена в точці -\infty < x < \infty , то її чотиризображення визначається формулою
+\end{verbatim}
+
+(12.1)
+
+\[
+\mathcal{F}[f] = F(\xi) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{+\infty} f(x) e^{-i\xi x} dx.
+\]
+
+\begin{verbatim}
+Отже, якщо у нас є функція f(x), визначена на дійсній осі, ми підставляємо її у формулу (12.1) і отримуємо нову функцію, F(\xi) визначену для -\infty < \xi < \infty . Водночас не слід забувати про конвенції існування раннього перетворення Фур'є (у цьому випадку класичного).
+\end{verbatim}
+
+\begin{verbatim}
+Таблиця 1. 12.1 показує деякі функції та їхні фур'є-образи. Більш розгорнута таблиця функцій та їхніх фур'є-образів наведена в додатку. З наведеної вище таблиці видно, що образ Фур'є функції може виявитися комплекснозначною функцією аргументу \xi . У першому прикладі цієї таблиці функція F(\xi) містить як множник уявну одиницю i, і таким чином є комплекснозначною функцією екзистенційного аргументу ( \xi змінюється від -\infty до +\infty ). Іншими словами, аргумент \xi є реальним, а значення функції є складними.
+\end{verbatim}
+
+Перетворення Фур'є (як і більшість інших інтегральних перетворень)
+виявилося дуже корисним, оскільки воно замінює операцію диференціації на
+операцію множення і таким чином перетворює диференціальні рівняння на
+алгебранхічні рівняння. Існує багато інших властивостей, які роблять
+перетворення Фур'є зручним інструментом для розв'язання задач. Тут ми
+перелічимо лише найважливіші з них.
+
+Таблиця 12.1. Перетворення Фур'є деяких функцій
+
+\begin{verbatim}
+| Функція / (a) | \Gamma Перетворення Фур'є F ( \xi ) |
+\end{verbatim}
+
+\textbar----------------------------------------------------------------------------------\textbar-------------------------------------------------------------------------------------------\textbar{}
+
+1.
+
+\[
+f(x) = \begin{cases} e^{-x}, & x \ge 0, \\ -e^{-x}, & x < 0. \end{cases}
+\]
+
+\begin{verbatim}
+| F(\xi) = -i \sqrt{\frac{2}{\pi}} \frac{\xi}{1 + \xi^2} (Xomnekches funktsia). |
+\end{verbatim}
+
+2.
+
+\[
+f(x) = \begin{cases} 1, & -1 < x < 1, \\ 0, & x \le -1, x \ge 1 \end{cases}
+\]
+
+\begin{verbatim}
+| F(\xi) = \sqrt{\frac{2}{\pi}}\,\frac{\sin \xi}{\xi} |
+\end{verbatim}
+
+\begin{verbatim}
+| 3. f(x) = e^{-x^2} | F(\xi) = \frac{1}{\sqrt{2}} e^{-\xi^2/4} |
+\end{verbatim}
+
+\section{Властивості Властивості перетворення Фур'є Властивість 1 (Пара
+перетворень
+Фур'є)}\label{ux432ux43bux430ux441ux442ux438ux432ux43eux441ux442ux456-ux432ux43bux430ux441ux442ux438ux432ux43eux441ux442ux456-ux43fux435ux440ux435ux442ux432ux43eux440ux435ux43dux43dux44f-ux444ux443ux440ux454-ux432ux43bux430ux441ux442ux438ux432ux456ux441ux442ux44c-1-ux43fux430ux440ux430-ux43fux435ux440ux435ux442ux432ux43eux440ux435ux43dux44c-ux444ux443ux440ux454}
+
+\begin{verbatim}
+Після застосування перетворення Фур'є до функції f(x), визначеної для -\infty < x < \infty , отримуємо нову функцію F(\xi) за формулою
+\end{verbatim}
+
+\[
+\mathscr{F}[f] = F(\xi) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{+\infty} f(x) e^{-i\xi x} dx.
+\]
+
+\begin{verbatim}
+Якщо застосувати до функції, F(\xi) визначеної для -\infty < \xi < \infty , обернене перетворення Фур'є
+\end{verbatim}
+
+\[
+\mathscr{F}^{-1}[F] = f(x) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{+\infty} F(\xi) e^{i\xi x} d\xi,
+\]
+
+\textbf{Тоді} отримуємо початкову функцію \(f(x)\).
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_90_Figure_7.jpeg}}
+
+Рис. 12.1. Графи функції та її фур'є-образу.
+
+Наприклад, (див. рис. 12.1)
+
+\[
+e^{-|x|} \xrightarrow{\mathcal{F}} \sqrt{\frac{2}{\pi}} \xrightarrow{1 + \xi^2} \xrightarrow{\mathcal{F}^{-1}} e^{-|x|}.
+\]
+
+\section{Властивість 2 (Перетворення
+лінійності)}\label{ux432ux43bux430ux441ux442ux438ux432ux456ux441ux442ux44c-2-ux43fux435ux440ux435ux442ux432ux43eux440ux435ux43dux43dux44f-ux43bux456ux43dux456ux439ux43dux43eux441ux442ux456}
+
+Перетворення Фур'є --- це лінійне перетворення, тобто
+
+\[
+\mathscr{F}[af+bg]=a\mathscr{F}[f]+b\mathscr{F}[g].
+\]
+
+Це легко побачити. Читач може витратити кілька хвилин, щоб ознайомитися
+з цією нерухомістю, яка використовується «на кожному кроці». Наприклад,
+перетворення Фур'є виразу
+
+\[
+e^{-x} + 3e^{-x^2}
+\]
+
+має вигляд
+
+\[
+\mathscr{F}[e^{-c}] + 3\mathscr{F}[e^{-c^*}].
+\]
+
+\section{Властивість 3 (Часткова конвертація
+деривативів)}\label{ux432ux43bux430ux441ux442ux438ux432ux456ux441ux442ux44c-3-ux447ux430ux441ux442ux43aux43eux432ux430-ux43aux43eux43dux432ux435ux440ux442ux430ux446ux456ux44f-ux434ux435ux440ux438ux432ux430ux442ux438ux432ux456ux432}
+
+\begin{verbatim}
+Якщо нас цікавить, як перетворення Фур'є діє на похідні, то перш за все слід звернути увагу на змінні, за якими диференційована функція. Наприклад, якщо перетворення Фур'є виконується на змінній \boldsymbol{x} (тобто змінна \boldsymbol{x} інтегрована у перетворення), і якщо часткова похідна функції \boldsymbol{u}(\boldsymbol{x},t) на тій самій змінній \boldsymbol{x} перетворена, то наступні формули перетворення похідних є дійсними
+\end{verbatim}
+
+\[
+\begin{split} \mathcal{F}\left\{u_{x}\right\} &= \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{+\infty} u_{x}\left(x,\,t\right) e^{-i\xi x} dx = i\xi \mathcal{F}\left[u\right], \\ \mathcal{F}\left\{u_{xx}\right\} &= \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{+\infty} u_{xx}\left(x,\,t\right) \, \delta^{-i\xi x} dx = -\xi^{2} \mathcal{F}\left[u\right]. \end{split}
+\]
+
+С другой стороны, если подвергнуть преобразованию частную производную
+\(u_t\)(x, t) (а переменная интегрирования в преобразовании, как и
+прежде, будет x), получаем следующие формулы:
+
+\[
+\begin{aligned} \mathcal{F}\left[u_{t}\right] &= \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{+\infty} u_{t}\left(x, \ t\right) e^{-i\frac{\pi}{2}x} dx = \frac{\partial}{\partial t} \mathcal{F}\left[u\right], \\ \mathcal{F}\left[u_{tt}\right] &= \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{+\infty} u_{tt}\left(x, \ t\right) e^{-i\frac{\pi}{2}x} dx = \frac{\partial^{2}}{\partial t^{2}} \mathcal{F}\left[u\right]. \end{aligned}
+\]
+
+\section{Властивість 4 (Властивість
+згортки)}\label{ux432ux43bux430ux441ux442ux438ux432ux456ux441ux442ux44c-4-ux432ux43bux430ux441ux442ux438ux432ux456ux441ux442ux44c-ux437ux433ux43eux440ux442ux43aux438}
+
+Кожне інтегральне перетворення має так звану властивість згортки. Факт у
+тому, що образ Фур'є добутку двох функцій загалом не відрізняється від
+добутку образів Фур'є цих функцій, тобто
+
+\[
+\mathcal{F}[f(x)g(x)] \neq \mathcal{F}[f]\mathcal{F}[g].
+\]
+
+Однак у теорії перетворень існує операція, яка називається згорткою
+функцій f і g (позначена як f*g), яка певною мірою виконує роль добутку,
+а саме відношення
+
+(12.2)
+
+\[
+\mathcal{F}[/*g] = \mathcal{F}[/]\mathcal{F}[g].
+\]
+
+Що це за загадкова операція під назвою згортка? Вона визначається
+формулою
+
+(12.3)
+
+\[
+(f*g)(x) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{+\infty} f(x-\xi) g(\xi) d\xi.
+\]
+
+Неважко показати, що співвідношення (12,2) дійсно виконується. З
+визначення видно, що згортка двох функцій \(f(x)\) і \(g(x)\) є новою
+функцією (f*g)(x) аргументу x.
+
+\section{Приклад обчислення згортки двох
+функцій}\label{ux43fux440ux438ux43aux43bux430ux434-ux43eux431ux447ux438ux441ux43bux435ux43dux43dux44f-ux437ux433ux43eux440ux442ux43aux438-ux434ux432ux43eux445-ux444ux443ux43dux43aux446ux456ux439}
+
+Нехай задано дві функції
+
+\[
+f(x) = x,
+g(x) = e^{-x^2}.
+\]
+
+Тоді їхня згортка дорівнює
+
+\[
+(f \circ g)(x) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} (x - \xi) e^{-\xi^2} d\xi = x/\sqrt{2}.
+\]
+
+Тут ми використали відому формулу
+
+\[
+\int_{-\infty}^{+\infty} e^{-\xi^2} d\xi = \sqrt{\pi}.
+\]
+
+Важливість концепції згортки (12.3) полягає в тому, що дуже часто,
+розв'язуючи диференціальні рівняння, ми стикаємося з необхідністю
+застосовувати обернене перетворення Фур'є до виразу, який є добутком
+двох образів Фур'є, тобто потрібно знайти
+
+(12.4)
+
+\[
+\mathcal{F}^{-1}\left\{\mathcal{F}\left[f\right]\mathcal{F}\left[g\right]\right\}.
+\]
+
+Застосовуючи обернене перетворення до обох частин (12.2), отримуємо
+
+\[
+f * g = \mathcal{J}^{-1} \{ \mathcal{F} [f] \mathcal{F} [g] \}.
+\]
+
+Отже, щоб визначити (12.4), потрібно знайти прототипи кожного з
+факторів, тобто функцій f і g, а потім обчислити їхню згортку. Тепер ми
+готові розв'язати одну важливу проблему: теорію диференціальних рівнянь
+у похідних похідних.
+
+\section{Розв'язання проблеми
+Коші}\label{ux440ux43eux437ux432ux44fux437ux430ux43dux43dux44f-ux43fux440ux43eux431ux43bux435ux43cux438-ux43aux43eux448ux456}
+
+Розглянемо проблему поширення тепла в \emph{нескінченному} стрижні, якщо
+задано початкову температуру \(u(x, 0) = \varphi(x)\) .
+
+Цю задачу зазвичай називають задачою Коші для рівняння теплопровідності
+або задачою початкових умов
+
+\[
+\begin{array}{llll} (\text{УЧП}) & u_t = \alpha^2 u_{xx}, & -\infty < x < \infty, & 0 < t < \infty, \\ (\text{12.6}) & (\text{HV}) & u(x,0) = q(x), & -\infty < x < \infty. \end{array}
+\]
+
+Розв'язання задачі можна поділити на три основні етапи.
+
+КРОК 1 (Конверсія завдань).
+
+Оскільки просторова змінна x змінюється між \(-\infty\) і \(+\infty\) ,
+ми піддамо рівняння та початкову умову (12,6) перетворенню Фур'є на
+змінній \(x^{(1)}\) (x --- інтегрована змінна у перетворенні). Після
+цього ми отримуємо
+
+\[
+\mathcal{F}[u_t] = \alpha^2 \mathcal{F}[u_{xx}],
+\mathcal{F}[u(x, 0)] = \mathcal{F}[\varphi(x)].
+\]
+
+Воспользуемся свойствами преобразования Фурье. Тогда
+
+\[
+\frac{\frac{dU(t)}{dt} = -\alpha^2 \xi^2 U(t), }{U(0) = \Phi(\xi)} = (\text{here } \Phi - \phi) \text{rje-image funcin } \phi),
+\]
+
+\begin{verbatim}
+где  U(t) = \mathcal{F}[u(x, t)] . Читате ть должен обратить внимание на то, что функция U(t) на салот доле зависит не только от t, но и от  \xi , но, поскольку в дифференциальном уравнении (12.7) величина  \xi  играет роль константы, мы не будем записывать ее в число аргументов, т. е. будем считать, что U = U(t).
+\end{verbatim}
+
+ШАГ 2 (Решение преобразованной задачи).
+
+Поскольку новая переменная играет роль гонстанты в задаче (12.7), ее
+решение легко находится:
+
+(12.8)
+
+\[
+U(t) = \Phi(\xi) e^{-x^2 e^{tt}}.
+\]
+
+ШАГ 3 (Нахождение обратного преобразования). Искомое решение \(u(x, t)\)
+находится по формуле
+
+\[
+u(x, t) = \mathcal{F}^{-1} [U(\xi, t)] =
+= \mathcal{F}^{-1} [\Phi(\xi) e^{-\alpha \xi^2 t}].
+\]
+
+Припускається, що існує перетворення Фур'є цих функцій. Примітка. Ед.
+
+Вот здесь нас выручит теорема о свертке (12.5). Используя эту теорему,
+получаем
+
+(12.9)
+
+\[
+u(x, t) = \mathcal{F}^{-1} \left[ \Phi(\xi) e^{-\alpha r \xi^{2} t} \right] =
+= \mathcal{F}^{-1} \left[ \Phi(\xi) \right] * \mathcal{F}^{-1} \left[ e^{-\alpha^{2} \xi^{2} t} \right] =
+= \Phi(x) * \left[ \frac{1}{2\alpha \sqrt{\pi t}} e^{-x^{2}/4\alpha^{2} t} \right] \text{ (знайдено в таблиці)} =
+= \frac{1}{2\alpha \sqrt{\pi t}} \int_{-\infty}^{+\infty} \Phi(\xi) e^{-(x-\xi)^{2}/4\alpha^{2} t} d\xi.
+\]
+
+Дело сделано! Формула (12.9) дает решение нашей задачи. Прежде чем
+поставить точку, давайте проанализируем полученный результат. Отметим,
+что почынтегральная функция состои с
+
+из двух сомножителей:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Початкової температури \(\phi(\xi)\),
+\item
+  Функції
+\end{enumerate}
+
+\[
+G(x, t) = \frac{1}{2\alpha \sqrt{\pi t}} e^{-(x-\xi)^2/4\alpha^2 t},
+\]
+
+яка називається функцією Гріна або функцією джерела.
+
+Можна показати, що функція джерела \(G(x, t)\) описує відгук системи на
+початковий одиничний температурний імпульс у точці \(x=\xi\).
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_94_Figure_9.jpeg}}
+
+Рис. 12.2. Відгук \(G(x,t)\) на температурний імпульс у точці \(x=\xi\).
+Графік \(G(x,t)\) подібний до кривої нормального розподілу; час відіграє
+роль середньоквадратичного відхилення: при малих \(t\) функція вузька, а
+зі зростанням \(t\) помітно розширюється.
+
+Іншими словами, функція \(G(x, t)\) описує розподіл температури в
+стрижні в момент часу \(t\), якщо на точку \(x=\xi\) подіяв одиничний
+тепловий імпульс (див. рис. 12.2).
+
+Тепер формулі (12.9) можна дати таку інтерпретацію: початкову
+температуру \(u(x,0)=\phi(x)\) можна розглядати як неперервну сукупність
+точкових імпульсів величини \(\phi(\xi)\) у точці \(x=\xi\). Кожен
+точковий імпульс дає розподіл температури \(\phi(\xi)G(x,t)\).
+Підсумковий розподіл знаходиться сумуванням (інтегруванням) температур
+від точкових джерел за формулою (12.9). Пізніше ми побачимо, що це один
+із проявів загального принципу суперпозиції.
+
+\section{ЗАМЕЧАНИЕ}\label{ux437ux430ux43cux435ux447ux430ux43dux438ux435}
+
+Главный недостаток преобразования Фурье в том, что его можно применять
+не ко всем функциям. Например, функции вида
+
+\[
+f(x) = \text{const},
+f(x) = e^x,
+f(x) = \sin x
+\]
+
+не имеют фурье-образа, так как интеграт
+
+\[
+\mathcal{F}[f] = \frac{1}{\sqrt{2\pi}} \int_{-\pi}^{\pi} f(x) e^{-i\xi x} dx
+\]
+
+\begin{verbatim}
+расходится. Фурье-образ имеют только те функции, которые достаточно быстро сгремятся к нулю при  |x| \to \infty . Кроме того, нельзя применять преобразование Фурье по времени для решения задач с начальными условиями, так как  0 < t < \infty  (если не рассматривать продолжения функций на полуось в соответствующем классе функций).
+\end{verbatim}
+
+\section{ЗАДАЧІ}\label{ux437ux430ux434ux430ux447ux456-1}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Найдите фурье-образ функции
+\end{enumerate}
+
+\[
+f(x) =
+\begin{cases} 0, & x \leq 0, \\ e^{-x}, & 0 < x, \end{cases}
+\]
+
+используя таблицы, приведенные в приложении.
+
+\begin{itemize}
+\tightlist
+\item
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \setcounter{enumi}{1}
+  \tightlist
+  \item
+    На 10м переконайтеся, що прямі та обернені перетворення Фур'є є
+    лінійними перетвореннями.
+  \end{enumerate}
+\item
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \setcounter{enumi}{2}
+  \tightlist
+  \item
+    Використовуючи перетворення Фур'є, розв'яжете задачу Коші
+  \end{enumerate}
+\end{itemize}
+
+\[
+\begin{array}{lll} (\text{УЧП}) & u_t = \alpha^2 u_{xx}, & -\infty < x < \infty, \\ (\text{HV}) & u(x, 0) = e^{-x^2}, & -\infty < x < \infty. \end{array}
+\]
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Проверьте справедливость соотношений
+\end{enumerate}
+
+\[
+\begin{aligned} \mathcal{F}\left[u_{x}\right] &= i\xi \mathcal{F}\left[u\right], \\ \mathcal{F}\left[u_{xx}\right] &= -\xi^{2} \mathcal{F}\left[u\right]. \end{aligned}
+\]
+
+УКАЗАНИЕ, Воспользуйтесь интегрированием по частям.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  Перевірити, чи можна записати згортку двох функцій f і g у двох
+  еквівалентних формах
+\end{enumerate}
+
+\[
+(f * g)(x) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{+\infty} f(\xi) g(x - \xi) d\xi
+\]
+
+или
+
+\[
+(f * g)(x) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{+\infty} f(x-\xi) g(\xi) d\xi.
+\]
+
+Лекция 13
+
+\section{МЕТАЛЕКЦІЇ З ТРАНСФОРМАЦІЇ
+ЛАПЛАСА}\label{ux43cux435ux442ux430ux43bux435ux43aux446ux456ux457-ux437-ux442ux440ux430ux43dux441ux444ux43eux440ux43cux430ux446ux456ux457-ux43bux430ux43fux43bux430ux441ux430}
+
+\[
+\mathscr{L}[f] = F(s) = \int\limits_0^\infty f(t)\,e^{-st}dt
+\]
+
+(преобразование Лапласа),
+
+ознайомтеся з формулою зворотного перетворення Лапласа
+
+\[
+\mathscr{L}^{-1}[F] = f(t) = \frac{1}{2\pi t} \int_{c-t\infty}^{c+t\infty} F(s) e^{st} ds
+\]
+
+(обратное преобразование Лапласа)
+
+и проиллюстрировать их свойства.
+
+Перетворення Лапласа має важливу перевагу над перетворенням Фур'є,
+оскільки субінтегративний вираз містить швидко затухаючий коефіцієнт
+\(e^{-st}\) , і тому перетворення Лапласа застосовне до ширшого класу
+функцій порівняно з перетворенням Фур'є. Крім того, перетворення Лапласа
+працює з функціями, визначеними в інтервалі \([0, \infty)\) , що робить
+його особливо зручним для змінної t.
+
+Ознайомившись із базовими властивостями перетворення Лапласа ми
+розв'яжемо кілька важливих задач для диференціальних рівнянь у похідних
+113 усіх інтегральних перетворень, розглянутих у цій книзі ---
+перетворення Лапласа
+
+(13 1)
+
+\[
+\mathscr{Z}[f] = \int_{0}^{\infty} f(t) e^{-st} dt,
+\]
+
+По-перше, існує один із найскладніших методів перекладу найважливіших
+диференціальних рівнів на алгебранхічних рівнях. Крім того, відтворення
+Лапласа дозволяє перетворити диференціальний рівень у попередній
+диференціальний рівень, і можна змінити його настільки,
+\(x, y, z, t \ldots\) що можливо змінити з 0 на \(\infty\)
+(найпоширеніше відтворення Лапласа --- змінювати з 0 на ).
+
+Якщо перетворення Лапласа зупинити до найвищої диференціальної рівності,
+то у випадку падіння часткових диференціальних рівнів перетворення
+Лапласа можливо перевести його на новий диференціальний рівень з меншою
+кількістю змінних або на значущий диференціальний рівень. Перше, що
+потрібно зробити --- це розвинути вже виконані завдання, дії влади
+роботи Лапласа
+
+\section{Властивості перетворення
+Лапласа}\label{ux432ux43bux430ux441ux442ux438ux432ux43eux441ux442ux456-ux43fux435ux440ux435ux442ux432ux43eux440ux435ux43dux43dux44f-ux43bux430ux43fux43bux430ux441ux430}
+
+Свойство 1 (Прямое и обратное преобразования)
+
+Перетворення Лапласа та формула його інверсії мають вигляд
+
+\[
+\mathscr{L}[f] = F(s) = \int_{0}^{\infty} f(t) \, e^{-st} \, dt \quad \text{(Перетворення Лапласа),}
+\]
+
+(13.2)
+
+\[
+\mathscr{L}^{-1}[F] = f(t) = \frac{1}{2\pi i} \int_{c-i\infty}^{c+i\infty} F(s) \, e^{st} \, ds \quad \text{(формула інверсії).}
+\]
+
+Перетворення Лапласа має важливу перевагу над Фур'є-перетворенням. Ця
+перевага зумовлена наявністю затухаючого \(e^{-st}\) множника в
+субінтегративних членах, що дозволяє застосовувати перетворення Лапласа
+до ширшого класу функцій ( \(e^{t\xi t}\) множник у перетворенні Фур'є
+не згас, оскільки модуль цього множника дорівнює одиниці). Більш точне
+уявлення про цей клас функцій дає наступна теорема:
+
+\section{Достатні умови для існування перетворення
+Лапласа}\label{ux434ux43eux441ux442ux430ux442ux43dux456-ux443ux43cux43eux432ux438-ux434ux43bux44f-ux456ux441ux43dux443ux432ux430ux43dux43dux44f-ux43fux435ux440ux435ux442ux432ux43eux440ux435ux43dux43dux44f-ux43bux430ux43fux43bux430ux441ux430}
+
+Ести
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\item
+  для будь-якого додатного числа A функція \(f(t)\) є
+  кусочно-неперервною в інтервалі \(0 \le t \le A\) ;
+\item
+  існують такі константи M, a і T, які \(|f(t)| \leq Me^{at}\) для всіх
+  t \textgreater{} T, тоді перетворення Лапласа
+\end{enumerate}
+
+\[
+\mathscr{L}[f(\ell)] = F(s) = \int_{0}^{\infty} f(\ell) e^{-st} dt
+\]
+
+существует при всех s \textgreater{} a.
+
+Приведем примеры некоторых функций и их преобразований Лапласа
+
+У визначенні перетворення Лапласа мається на увазі, що s є дійсною
+змінною, що належить інтервалу \((0, \infty)\) . Однак можливо (і часто
+бажано) розширити це визначення на комплексні значення s
+
+\[
+\mathscr{L}^{-1}[F] = \frac{1}{2\pi i} \int_{\epsilon - i\infty}^{\epsilon + i\infty} F(s) e^{st} ds.
+\]
+
+Використання цієї формули передбачає знайомство з технікою інтегрування
+вздовж контурів у комплексній площині та теорією дедукцій. Ми не будемо
+відволікатися на вивчення цих питань тут, і коли йдеться про
+перетворення Лапласа, ми використаємо таблицю, наведену в додатку.
+
+\section{Властивість 2 (Перетворення часткових
+похідних)}\label{ux432ux43bux430ux441ux442ux438ux432ux456ux441ux442ux44c-2-ux43fux435ux440ux435ux442ux432ux43eux440ux435ux43dux43dux44f-ux447ux430ux441ux442ux43aux43eux432ux438ux445-ux43fux43eux445ux456ux434ux43dux438ux445}
+
+Нехай \(u(x, t)\) --- функція змінних, і ми хочемо знайти результати
+застосування перетворення Лапласа до різних часткових похідних \(u_t\) ,
+\(u_{tt}\) , \(u_x\) , \(u_{\lambda x}\) . . . . Оскільки перетворення
+Лапласа виконується змінною t (t --- змінна інтегрування), правила
+перетворень мають вигляд
+
+\[
+\mathcal{L}\left[u_{t}\right] = \int_{0}^{\infty} u_{t}(x, t) e^{-st} dt = sU(x, s) - u(x, 0),
+\mathcal{L}\left[u_{tt}\right] = \int_{0}^{\infty} u_{tt}(x, t) e^{-st} dt = s^{2}U(x, s) - su(x, 0) - u_{t}(x, 0),
+\mathcal{L}\left[u_{x}\right] = \int_{0}^{\infty} u_{x}(x, t) e^{-st} dt = \frac{\partial U}{\partial x}(x, s),
+\mathcal{L}\left[u_{xx}\right] = \int_{0}^{\infty} u_{xx}(x, s) e^{-st} dt = \frac{\partial^{2}U}{\partial x^{2}}(x, s),
+\]
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+\end{enumerate}
+
+\[
+f(t) = 1
+,  0 < t < \infty    (M = 1, a = 0)
+\]
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_99_Figure_3.jpeg}}
+
+\[
+F(s) = \int_{0}^{\infty} e^{-st} dt = \frac{1}{s}
+\]
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_99_Figure_5.jpeg}}
+
+2
+
+\[
+f(t) = e^{2t}
+,  0 < t < \infty
+(M = 1,  n = 2 )
+\]
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_99_Figure_7.jpeg}}
+
+\[
+F(s) = \frac{1}{s-2}
+,  s > 2
+\]
+
+a
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_99_Figure_9.jpeg}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+\end{enumerate}
+
+\[
+f(t) = \sin(\omega t)
+(M=1, \alpha=0)
+\]
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_99_Figure_11.jpeg}}
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_99_Figure_12.jpeg}}
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_99_Figure_13.jpeg}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  \(f(t)\) = \(e^{t^2}\) (не имеет преобразования Лапласа)
+\end{enumerate}
+
+Рис. 13.1. Графики некоторых функций и их изображений по Лапласу.
+
+\begin{verbatim}
+где  U\left(x,\,s\right)=\mathcal{L}\left[u\left(x,\,t\right)\right] . Правила преобразования производных  u_{x}  и  u_{xy}  вытекают из теоремы о дифференцировании интеграла по параметру
+\end{verbatim}
+
+\[
+\frac{d}{dx}\int_{a}^{b}f\left(x,\ y\right)dy=\int_{a}^{b}\frac{df}{dx}\left(x,\ y\right)dy,
+\]
+
+а формулы для преобразования производных \(u_t\) и \(u_{tt}\) можно
+получить интегрированием по частям.
+
+\section{Свойство 3 (Теорема о
+свертке)}\label{ux441ux432ux43eux439ux441ux442ux432ux43e-3-ux442ux435ux43eux440ux435ux43cux430-ux43e-ux441ux432ux435ux440ux442ux43aux435}
+
+Свертка играет здесь ту же роль, что и в теории преобразования Фурье, но
+вводится несколько иначе.
+
+\section{Определение конечной
+свертки}\label{ux43eux43fux440ux435ux434ux435ux43bux435ux43dux438ux435-ux43aux43eux43dux435ux447ux43dux43eux439-ux441ux432ux435ux440ux442ux43aux438}
+
+Конечная свертка двух функций f и g определяется формулами
+
+\[
+(f * g) (t) =
+\begin{cases} \int_0^t f(\tau) g(t-\tau) d\tau, \\ \int_0^t f(t-\tau) g(\tau) d\tau \end{cases}
+\]
+
+(Можна довести, що ці інтеграли рівні). Тут інтегрування здійснюється
+вздовж скінченного інтервалу від 0 до t, а не вздовж нескінченної (
+\(\infty\) , \(+\infty\) ), як це було раніше з визначенням нескінченної
+згортки.
+
+Ось приклад скінченної згортки двох функцій. Нехай
+
+\[
+f(t) = t, \quad g(t) = t;
+\]
+
+тоді
+
+\[
+(f * g)(t) = \int_{0}^{t} \tau(t - \tau) d\tau = t^{3}/6.
+\]
+
+Як і у випадку нескінченної згортки, її найважливіша властивість
+визначається формулою
+
+(13.4)
+
+\[
+\mathscr{L}[f * g] = \mathscr{L}[f] \mathscr{L}[g]
+\]
+
+або еквівалентна формула
+
+(13.5)
+
+\[
+\mathscr{L}^{-1}\left\{ \left[\mathscr{L}\left[f\right]\mathscr{L}\left[g\right]\right\} = f*g. \right.
+\]
+
+Ці формули дозволяють змінити перетворення Лапласа у випадках, коли
+образ можна представити як добуток \(\mathscr{L}[f]\) і
+\(\mathscr{L}[g]\) таких множників, для яких
+
+Функції F і G легко знайти. Після пошуку функцій f і g можна знайти їхню
+згортку. Наприклад,
+
+\$\$
+\mathcal{Z}\^{}\{-1\}\left[\frac{1}{s} \cdot \frac{1}{s^2+1}\right] =
+\int\_0\^{}t \sin \tau , d\tau = 1 - \cos t, F(s) = \frac{1}{s}
+\xrightarrow{\mathcal{Z}^{-1}} f(t) = 1 \quad G(s)
+\xrightarrow{\mathcal{Z}^{-1}} g(t) = \sin t. Тепер ми готові до
+важливого змішаного виклику.
+
+\end{document}

@@ -1,0 +1,275 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+  ukrainian,
+]{article}
+\usepackage{xcolor}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{longtable,booktabs,array}
+\newcounter{none} % for unnumbered tables
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\graphicspath{{/Users/kalinicenkovitalijmikolajovic/.codex/worktrees/5c15/Script_for_translate_book/Output_Final/}}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+\ifLuaTeX
+\usepackage[bidi=basic,shorthands=off,provide=*]{babel}
+\else
+\usepackage[bidi=default,shorthands=off,provide=*]{babel}
+\fi
+\ifLuaTeX
+  \usepackage{selnolig} % disable illegal ligatures
+\fi
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdflang={uk},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\author{}
+\date{}
+
+\begin{document}
+
+\section{Как играть в «Блуждающего
+пьяницу»?}\label{ux43aux430ux43a-ux438ux433ux440ux430ux442ux44c-ux432-ux431ux43bux443ux436ux434ux430ux44eux449ux435ux433ux43e-ux43fux44cux44fux43dux438ux446ux443}
+
+ШАГ 1. Блуждания пьяницы начинаются из произвольной точки сетки (в нашем
+случае это точка A).
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_321_Figure_4.jpeg}}
+
+\begin{itemize}
+\tightlist
+\item
+  А начальная точка - - внутренние точки сетки - □ -Конечная точка р;
+\item
+  \(g_i\) вознаграждение в m . \(p_I\)
+\end{itemize}
+
+РИС. 43.1. Игровое поле для игры «Блуждающий пьяница».
+
+ШАГ 2. На каждом ходе игры пьяница случайным образом перебирается в одну
+из четырех соседних точек сетки (в нашем случае соседними для A являются
+точки B, C, D и E и вероятность попадания в каждую из этих точек равна
+0,25).
+
+Таблица 43.1
+
+Вероятность окончания случайного блуждания в граничной точке \(p_i\) и
+величина вознаграждения \(g_i\)
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2523}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.4541}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2752}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.0092}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.0092}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Граничная точка р і
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\(P_{\mathcal{A}}\left(p_{i}\right)\) --- относительная доля блужданий,
+закончившихся в точке \(p_{i}\)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\(g_i\) --- величина вознаграждения при достижении точки \(p_i\)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+1234567891011 & 0,040,150,030,060,170,050,060,150,030,060,160,04 &
+110000000 & & \\
+\end{longtable}
+}
+
+ti
+
+ШАГ 3. После перехода в соседнюю точку процесс блуждания возобновляется.
+Так пьяница идет от точки к точке до тех пор, пока случайным образом не
+окажется в граничной точке \(p_t\) . Здесь он останавливается, а мы
+записываем номер точки \(p_t\) . На этом заканчивается одна случайная
+прогулка.
+
+ШАГ 4. Повторим щаги 1-3 достаточно много раз и найдем относительное
+число прибытий пьяницы в каждую из граничных точек \(p_i\) . В табл.
+43.1 приведены типичные результаты, полученные в результате 100
+случайных прогулок.
+
+ШАГ Б. Предположим, что пьяница получает вознаграждение
+\(g_i = g\left(p_i\right)\) (величина граничного условия в точке \(p_i\)
+, если он достиг точки \(p_i\) ) и предположим, что цель
+игры---вычислить среднее вознаграждение \(R\left(A\right)\) для всех
+случайных прогулок, начинающихся из точки A. Этот средний выигрыш
+определяется по формуле
+
+\begin{verbatim}
+Игра завершается, когда величина  R\left(A\right)  найдена. В соответствии с данными табл. 43.1 для  R\left(A\right)  получаем
+\end{verbatim}
+
+Теперь объясним, зачем нам понадобилось играть в такую игру.
+
+\section{Для чего играть в «Блуждающего
+пьяницу»?}\label{ux434ux43bux44f-ux447ux435ux433ux43e-ux438ux433ux440ux430ux442ux44c-ux432-ux431ux43bux443ux436ux434ux430ux44eux449ux435ux433ux43e-ux43fux44cux44fux43dux438ux446ux443}
+
+Оказывается, что среднее вознаграждение, о котором только что шла речь,
+является приближенным решением задачи Дирихле в точке A. Это интересное
+наблюдение основано на двух фактах.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Предположим, что пъяница начал свою прогулку из точки, лежащей на
+  еранице. Каждая такая прогулка немедленно заканчивается в той же
+  точке, и пъяница получает вознаграждение \(g_i\) . Таким образом,
+  среднее вознаграждение для каждой граничной точки равно \(g_i\) .
+\item
+  Теперь предположим, что прогулка нач нается из внутренней точки. Тогда
+  ясно, что среднее вознаграждечие для точки \(R(A)\) будет средним
+  арифметическим от средних вознаграждений для четырех соседних точек
+\end{enumerate}
+
+\[
+\begin{cases} u(x, 0) = \sin(\pi x), & 0 \le x \le 1, \\ u_t(x, 0) = 0. & 0 \le x \le 1, \end{cases}
+\]
+
+Зададимся еще раз вопросом: почему же среднее значение вознаграждения
+\(R(A)\) аппроксимирует решение задачи Дирихле в точке A? Мы видели, что
+величина \(R(A)\) удовлетворяет двум
+
+уравнениям
+
+(во внутренних точках), \(R(A)\) = \(g_i\) (в граничных точках).
+
+Если \(g_i\) ---это значения функции \(g(x, y)\) из граничного условия в
+граничных точках \(p_i\) , то два наших уравнения точно совпадают с
+двумя уравнениями, которые были получены при решении задачи Дирихле
+методом конечных разностей. То есть величина \(R(A)\) соответствует
+величине \(u_{i,f}\) в разностных уравнениях
+
+(i, j)---внутренняя точка, \(u_{ij} = g_{ij},\) \(g_{ij}\) ---значение
+решения в граничной точке (i, j).
+
+Следовательно, величина \(R(A)\) действительно аппроксимирует решение
+уравнения с частными производными в точке A.
+
+Теперь можно считать, что игра в «Блуждающего пьяницу» состоит из трех
+шагов.
+
+\section{Решение уравнения Лапласа методом
+Монте-Карло}\label{ux440ux435ux448ux435ux43dux438ux435-ux443ux440ux430ux432ux43dux435ux43dux438ux44f-ux43bux430ux43fux43bux430ux441ux430-ux43cux435ux442ux43eux434ux43eux43c-ux43cux43eux43dux442ux435-ux43aux430ux440ux43bux43e}
+
+\begin{itemize}
+\tightlist
+\item
+  Приведенные ниже правила позволяют получить решение в одной внутренней
+  точке квадрата.
+\item
+  ШАГ 1. Совершим некоторое число случайных прогулок, начинающихся в
+  точке А и заканчивающихся в одной из граничных точек. Проследим за
+  тем, сколько раз прогулки заканчивались в каждой граничной точке.
+\item
+  ШАГ 2. После того как все прогулки завершены, для каждой граничной
+  точки вычисляем относительное число прогулок, завершившихся в этой
+  точке. Обозначим эти величины \(P_A(p_i)\) .
+
+  \begin{itemize}
+  \tightlist
+  \item
+    ШАГ 3. Вычисляем приближенное решение \(u(A)\) по формуле
+    \(u(A) = g_1 P_A(p_1) + g_2 P_A(p_2) + \dots + g_N P_A(p_N)\) ,
+  \end{itemize}
+\end{itemize}
+
+где \(g_i\) --- значение функции g в точке \(p_i\) , а N --- число
+граничных точек.
+
+Игру «Блуждающий пьяница» можно модернизировать, чтобы решить более
+сложную задачу. Ниже приводится пример такой модернизации.
+
+Решение задачи Дирихле с переменными коэффициентами.
+
+Рассмотрим эллиптическую краевую вадачу в квадрате
+
+Дайте физическую интерпретацию этой задачи.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Для уравнения \(u_{tt} = u_{xx}\)найдите все решения вида
+\end{enumerate}
+
+\(u_{xx} + (\sin x) u_{yy} = 0\) , \(0 < x < \pi\) , \(0 < y < \pi\) ,
+\((\Gamma Y)\) \(u(x, y) = g(x, y)\) на границе квадрата.
+
+Чтобы решить эту задачу, заменим \(u_{xx}\) , \(u_{yy}\) и \(\sin x\)
+следующим образом:
+
+\$\$
+
+Будет ли решением сумма двух решений такого вида?
+
+\end{document}

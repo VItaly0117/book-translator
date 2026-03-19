@@ -1,0 +1,431 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+  ukrainian,
+]{article}
+\usepackage{xcolor}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+\setmathfont{STIX Two Math}
+\fi
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{graphicx}
+\graphicspath{{/Users/kalinicenkovitalijmikolajovic/.codex/worktrees/5c15/Script_for_translate_book/Output_Final/}}
+\setkeys{Gin}{width=0.82\linewidth,height=0.82\textheight,keepaspectratio}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+\ifLuaTeX
+\usepackage[bidi=basic,shorthands=off,provide=*]{babel}
+\else
+\usepackage[bidi=default,shorthands=off,provide=*]{babel}
+\fi
+\ifLuaTeX
+  \usepackage{selnolig} % disable illegal ligatures
+\fi
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdflang={uk},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\author{}
+\date{}
+
+\begin{document}
+
+\section{ЗАУВАЖЕННЯ}\label{ux437ux430ux443ux432ux430ux436ux435ux43dux43dux44f}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Якщо початкова \emph{швидкість} струни дорівнює нулю, тоді розв'язок
+  (20.6) має вигляд
+\end{enumerate}
+
+\[
+u(x, 0) = \sin(3\pi x/L),
+\]
+
+І це можна інтерпретувати так. Припустимо, ми розклали початкове
+зміщення струни
+
+\[
+\frac{\pi}{2} e^{-a+\omega}
+\]
+
+в ряд по синусам
+
+\[
+u(x, 0) =
+\]
+
+Тогда каждый член такого разложения должен совершать колебания
+
+\[
+\frac{\pi}{2} e^{-a+\omega}
+\]
+
+Якщо ми підсумуємо всі ці коливання, отримаємо розв'язок нашої проблеми.
+Наприклад, припустимо, що
+
+Початкове переміщення струни задається функцією
+\(f(x) = \sin(\pi x/L) + 0.5 \sin(3\pi x/ L) + 0,25 \sin(5\pi x/L)\) .
+
+Повна відповідь системи на початкову умову такого типу дорівнює сумі
+відповідей на кожен терм, тобто
+
+\[
+\begin{cases} 2hx, & 0 \le x \le 0.5, \\ 2h(1-x), & 0.5 \le x \le 1. \end{cases}
+\]
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Член із числом n у розкладі (20.6) називається ** модою осциляції**
+  або ** p-тою гармонікою**. Використовуючи тригонометричні формули, ці
+  гармоніки можна записати як
+\end{enumerate}
+
+\[
+\frac{\pi}{2} e^{-a+\omega}
+\]
+
+де \(R_n\) і \(\delta_n\) --- нові довільні константи (амплітуда та
+фазовий кут). Ця нова форма представлення n-го моду виявляється більш
+корисною для аналізу коливань. Частота коливань od (рад/с) та моду
+визначаються відповідно до формули
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_153_Picture_8.jpeg}}
+
+Какие движения будет совершать струна, если ее отпустить? 6. Решите
+задачу о затухающих колебаниях струны
+
+де T --- натяг струни, p --- лінійна густина струни. Зверніть увагу, що
+частота n-ї гармоніки у n разів більша за основну частоту (n=1). Ця
+властивість частоти не характерна для всіх типів коливань. Приємний звук
+струни скриму або гітари зумовлений множинністю обертонів основної
+частоти. У барабані частоти гармонік високого порядку не є кратними
+основної частоти коливань.
+
+\section{ЗАВДАННЯ}\label{ux437ux430ux432ux434ux430ux43dux43dux44f}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Знайти розв'язок задачі (20.1), якщо початкові умови задаються
+  формулами
+\end{enumerate}
+
+\[
+\frac{\pi}{2} e^{-a+\omega}
+\]
+
+\(u_t(x, 0) = 0.\) Побудувати графіки розв'язків для різних моментів
+часу. Чи є це рішення періодичним у часі? Який у нього період?
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Знайти розв'язок проблеми коливань струн (20.1) за початкових умов
+  вигляду
+\end{enumerate}
+
+\begin{verbatim}
+u_t(x, 0) = \sin(3\pi x/L).  Как выглядит график решения в различные моменты времени?
+\end{verbatim}
+
+\begin{verbatim}
+- 3. Показати це, якщо на рис. 20.2 значення  \lambda \geqslant 0  , тоді розв'язки X(x) T(t) будуть або необмеженими, або ідентичними нулю.
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  Знайти розв'язок проблеми коливань струн за початкових умов вигляду
+\end{itemize}
+
+\[
+\frac{2ax}{(x^2+a^2)^2}
+\]
+
+\begin{verbatim}
+u_1(x, 0) = (3\pi \alpha/L)\sin(3\pi x/L).  5. Гітарна струна довжиною L = 1 тягнеться за середню точку значенням h (див. рис.) Початкове положення струни можна встановити як
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{13}
+\tightlist
+\item
+\end{enumerate}
+
+\[
+\frac{\cos(ax), |x| > \pi/2a}{0, |x| > \pi/2a}
+\]
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{15}
+\tightlist
+\item
+\end{enumerate}
+
+Представляется ли вам разумным полученное решение? Удовлетворяет ли оно
+уравнению с частными производными, граничным и начальным условиям?
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{6}
+\item
+  Как вы будете решать неоднородное уравнение с заданными начальными и
+  граничными условиям?
+\item
+\end{enumerate}
+
+\[
+\frac{1-|x|, |x| < 1}{0, |x| > 1}
+\]
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{18}
+\tightlist
+\item
+\item
+\end{enumerate}
+
+\# ОСЦИЛЯЦІЇ ПУЧКА (РІВНЯННЯ ЧЕТВЕРТОГО ПОРЯДКУ В ЧАСТИННИХ ПОХІДНИХ)
+
+МЕТА ЛЕКЦІЇ: Показати, як проблема осциляції пучка веде до рівняння
+четвертого порядку і як ця задача розв'язується у випадку вільно
+спокійних кінців. Проводиться порівняння коливань променя з вібраціями
+струни скрипки.
+
+Головна різниця між поперечними коливаннями тонкої балки та поперечними
+коливаннями струни полягає в тому, що промінь чинить опір згину. Не
+заглиблюючись у механіку тонких балок, припустимо, що, враховуючи опір
+згинання (замість рівняння хвилі) веде до рівняння четвертого порядку
+
+(21.1)
+
+\[
+\frac{\pi}{2} [\delta(\omega+a) + \delta(\omega-a)]
+rge  \alpha^2 = K/\rho  ,
+\]
+
+K---модуль сдвига (чем больше K, тем жестче балка, тем выше частота
+колебаний),
+
+р --- линейная плотность балки (масса/ед. длины).
+
+Оскільки це перший випадок, коли читач стикається з рівнянням, вищим за
+другий порядок у цій книзі, буде корисно розв'язати типову задачу
+коливань пучка. Пізніше ми ознайомимося з іншими проблемами теорії
+пучків.
+
+\section{Свободно опирающаяся
+балка}\label{ux441ux432ux43eux431ux43eux434ux43dux43e-ux43eux43fux438ux440ux430ux44eux449ux430ux44fux441ux44f-ux431ux430ux43bux43aux430}
+
+Розглянемо невеликі коливання тонкої балки, кінці якої вільно лежать на
+двох опорах. Коли ми кажемо «вільно відпочивати», ми маємо на увазі, що
+кінці балки не рухаються, але
+
+Клони пучка на кінцевих точках можна змінювати (кінці пучка фіксуються
+за допомогою штифтових пристроїв, рис. 21.1).
+
+Совершенно ясно, что на концах балки должны выполняться граничные
+условия
+
+\[
+u_{tt} = -\alpha^2 u_{xxxx},
+\]
+
+\(u(1, t)\) = 0, але зовсім не очевидно, що на кінцях балки мають бути
+виконані ще дві граничні умови:
+
+\[
+f(x) = \int_{0}^{\infty} F(\omega) \sin(\omega x) d\omega
+\]
+
+\(u_{xx}\)(1, t) = 0. Використовуючи теорію тонких балок, можна
+показати, що момент згинання в балці пропорційний значенню \(u_{xx}\) ,
+а момент згинання на вільно лежачому кінці має дорівнювати P I C
+
+\[
+u(0, t) = 0,
+\]
+
+.21.1. Свободно оппрающаяся балка.
+
+Нуль вен. Відповідно, зображення, зображене на рис. 21.1 Осцилюючий
+пучок описується такою змішаною задачею (для простоти значення o
+вважається рівним одиниці):
+
+(21.2)
+
+\[
+0 < x < \infty
+\]
+
+\begin{verbatim}
+2.  f(\alpha x) 
+\end{verbatim}
+
+\[
+u_{xx}(0, t) = 0,
+\]
+
+\begin{verbatim}
+3.  e^{-\alpha x} 
+\end{verbatim}
+
+Щоб розв'язати цю задачу, ми використаємо метод розділення змінних. Ми
+будемо шукати лише періодичні розв'язки, тобто флуктуації
+
+(21.3)
+
+\[
+-\omega^2 F(\omega) + \frac{2}{\pi} \omega f(0)
+\]
+
+Зверніть увагу, що вибір розв'язку вигляду (21.3) фактично означає, що
+ми взяли константу розділення у методі розділення змінних як від'ємну.
+
+Подставим теперь (21.3) в уравнение колебаний балки и получим уравнение
+для \(X\left(x\right)\)
+
+общее решение которого записывается в виде
+
+\[
+\frac{1}{\alpha} F\left(\frac{\omega}{\alpha}\right)
+\]
+
+Щоб визначити коефіцієнти C, D, E та F, підставляємо загальний розв'язок
+у граничні умови
+
+\[
+\frac{2\omega}{\pi (\alpha^2 + \omega^2)}
+x^{-1/2}
+u(x, t) = X(x) [A \sin(\omega t) + B \cos(\omega t)].
+X^{(1V)} - \omega^2 X = 0,
+X(x) = C\cos\sqrt{\omega}x + D\sin\sqrt{\omega}x + E \cosh\sqrt{\omega}x + F \sinh\sqrt{\omega}x.
+\]
+
+Откуда получаем два уравнения
+
+\[
+0 < x < \infty \qquad \qquad 0 < \omega < \infty
+\]
+
+Решая их, находим
+
+,\\
+\(\sin \sqrt{\omega} = 0 \Rightarrow \omega = (n\pi)^2\) ,
+\(n = 1, 2, \dots\)
+
+Другими словами, \emph{собственные частоты} свободно опирающейся балки
+равны
+
+\[
+S_n = \frac{2}{\pi} \int_0^{\pi} f(x) \sin(nx) dx.
+\]
+
+а фундаментальные решения и, (удовлетворяют уравнению и граничным
+условиям (21.2)) записываются в виде
+
+\[
+y = \frac{\pi}{b - a} (x - a).
+\]
+
+А теперь, поскольку уравнение и граничные условия линейны и однородны,
+можно утверждать, что сумма
+
+(21.4)
+
+\[
+f(x) = \sum_{n=1}^{\infty} S_n \sin(nx).
+\]
+
+также удовлетворяет уравнению и граничным условиям. Единственное, что
+нам осталось---это выбрать коэффициенты \(a_n\) и \(b_n\) так, чтобы
+удовлетворить начальным условиям. Подставляя (21.4) в начальные условия,
+получаем
+
+(21.5)
+
+\[
+S_n = \frac{2}{\pi} \int_{0}^{\pi} f(x) \sin(nx) dx
+n = 1, 2, ...
+\]
+
+Воспользовавшись ортогональностью семейства функции (sin (nnx)) на
+отреже {[}0, 1{]}, находим формулы для коэффициентов
+
+(21.6)
+
+\(\frac{\pi}{2}\)e\^{}\{ax\}\[
+\] Таким образом, решение задачи имеет вид (21.4), а коэффициенты
+\(a_n\) и \(b_n\) вычисляются по формулам (21.6)
+
+Чтобы помочь читателю разобраться в этой задаче, приведем простой
+пример.
+
+\end{document}

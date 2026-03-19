@@ -1,0 +1,1287 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+  ukrainian,
+]{article}
+\usepackage{xcolor}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+\setmathfont{STIX Two Math}
+\fi
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{longtable,booktabs,array}
+\newcounter{none} % for unnumbered tables
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\graphicspath{{/Users/kalinicenkovitalijmikolajovic/.codex/worktrees/5c15/Script_for_translate_book/Output_Final/}}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+\ifLuaTeX
+\usepackage[bidi=basic,shorthands=off,provide=*]{babel}
+\else
+\usepackage[bidi=default,shorthands=off,provide=*]{babel}
+\fi
+\ifLuaTeX
+  \usepackage{selnolig} % disable illegal ligatures
+\fi
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdflang={uk},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\author{}
+\date{}
+
+\begin{document}
+
+\section{Задача теплопровідності з похідною в граничній
+умові}\label{ux437ux430ux434ux430ux447ux430-ux442ux435ux43fux43bux43eux43fux440ux43eux432ux456ux434ux43dux43eux441ux442ux456-ux437-ux43fux43eux445ux456ux434ux43dux43eux44e-ux432-ux433ux440ux430ux43dux438ux447ux43dux456ux439-ux443ux43cux43eux432ux456}
+
+Розглянемо пристрій, показаний на рис. 7.1. Припустимо, що верхній
+кінець стрижня підтримується при нульовій температурі, тобто \(u(0, t)\)
+= 0, а нижній кінець занурений у воду, температура якої також стала і
+дорівнює нулю (у цьому випадку --- нуль Р и с
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_50_Picture_4.jpeg}}
+
+. 7.1. Схематичне представлення зсувної задачі.
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_50_Figure_6.jpeg}}
+
+Рис. 7.2. Природа кривих, які задовольняють
+
+\[
+(\Gamma Y) = \begin{cases} u(0, t) = 0, \\ u_x(1, t) = -hu(1, t). \end{cases}
+\]
+
+відповідає певній еталонній температурі). Теплообмін між стрижнем і
+водою відбувається згідно із законом Ньютона, який записується у x=1 як
+наступна гранична умова:
+
+\[
+u_x(1, t) = -hu(1, t).
+\]
+
+Тепер припустимо, що початкова температура стрижня дорівнює \(u(x, 0)\)
+= x, але одразу при t \textgreater{} 0 включаємо граничні умови. Щоб
+визначити температуру в стрижні, необхідно розв'язати проблему зміщення
+
+\begin{verbatim}
+\begin{array}{llll} (\mathrm{УЧ}\Pi) & u_t = \alpha^2 u_{xx}, & 0 < x < 1, & 0 < t < \infty, \\ (7.1) & (\Gamma\mathrm{У}) & \begin{cases} u_t(0, t) = 0 \\ u_x(1, t) + hu_t(1, t) = 0 \end{cases} & \text{(однородные } \Gamma\mathrm{У}), \\ (\mathrm{H}\mathrm{У}) & u_t(x, 0) = x, & 0 \leq x \leq 1. \end{array}
+\end{verbatim}
+
+Щоб використати метод розділення змінних, розбиємо процес розв'язання на
+кілька етапів.
+
+\textbf{КРОК} 1. (Перетворення диференціального рівняння в похідних у
+два звичайних диференціальних рівняння)
+
+Підставляючи \(u(x, t)\) = X(x)\$\(T(t)\)у рівняння (7.1),
+отримуємо\(XT' = \alpha^2 X''T\)Поділивши інші частини цього рівняння
+на\$\alpha\^{}2 XT отримуємо
+
+\[
+\frac{T'}{\alpha^2 T} = \frac{X''}{X} .
+\]
+
+Оскільки ліва частина останнього рівняння залежить лише від часу, а
+права --- лише від x (і оскільки x і t незалежні), обидві сторони
+рівняння мають бути константами. Прирівнюючи обидві частини до однієї
+сталої \(\mu\) , отримуємо
+
+(7.2)
+
+\[
+T' - \mu \alpha^{2} T = 0, X'' - \mu X = 0.
+\]
+
+Процес розщеплення змінних завершено.
+
+КРОК 2. (Визначення константи відокремлення)
+
+По-перше, константа і не повинна бути додатною, інакше \(^{1}\) )
+функція \(T\left( t\right)\) буде зростати експоненційно, що призведе до
+нескінченного підвищення температури u=XT. Очевидно, що таке рішення не
+має фізичного значення.
+
+По-друге, припустимо, що \(\mu = 0\) . Тоді
+
+\[
+X'' = 0
+\]
+
+і, отже.
+
+\[
+X(x) = A + \hat{B}x.
+\]
+
+Однак, оскільки граничні умови вимагають, що
+
+\[
+u(0, t) = X(0) T(t) = 0,
+\]
+
+\(u(1, t) = (hX(1) + X'(1)) T(t) = 0,\) Ми одразу дійшли висновку, що
+
+\[
+X(0) = 0
+\]
+
+\(\Rightarrow A = 0\) \(X'(1) + hX(1) = 0\) \(\Rightarrow B = 0\) .
+
+Це означає, що \(u(x, t) \equiv 0\) . Іншими словами, лише нульове
+розв'язання відповідає нульовій константі розділення. Ми відкинемо його,
+оскільки нас цікавлять ненульові розв'язки.
+
+Якщо, нарешті, \(\mu < 0\) , можна поставити \(\mu = -\lambda^2\) і
+переписати рівняння (7.2) у вигляді
+
+\[
+T' + \lambda^2 \alpha^2 T = 0,
+X' + \lambda^2 X = 0.
+\]
+
+1) Розв'язок \(X(x)\) відповідної задачі з граничним значенням буде лише
+тривіальним, \(X(x)\) = 0. --- Ед. Ед.
+
+Загальні розв'язки цих рівнянь легко знайти:
+
+\[
+T(t) = Ae^{-(\lambda \alpha)^2 t},
+X(x) = B\sin(\lambda x) + C\cos(\lambda x).
+\]
+
+Отже, будь-яка функція провідника
+
+(7.3)
+
+\[
+u(x, t) = e^{-(\lambda \alpha)^2 t} [A \sin(\lambda x) + B \cos(\lambda x)]
+\]
+
+при будь-яких значеннях \(\lambda\) A і B задовольняє рівняння (читач
+може перевірити це самостійно простою заміною).
+
+Тепер нам потрібно з'ясувати, які з цих функцій задовольняють граничним
+умовам
+
+(7.4)
+
+\[
+u(0, t) = 0, u_x(1, t) + hu(1, t) = 0.
+\]
+
+Підстановка розв'язків виду (7.3) у граничні умови (7.4) дозволяє знайти
+відношення, яким мають задовольняти значення \(\lambda\) , \(\Lambda\)
+та B:
+
+\[
+Be^{-(\lambda\alpha)^2 t} = 0 \Rightarrow B = 0,
+\]
+
+\(A\lambda e^{-(\lambda\alpha)^2 t} \cos \lambda + hAe^{-(\lambda\alpha)^2 t} \sin \lambda = 0.\)
+Після простих алгебранхічних перетворень останнє рівняння зводиться до
+вигляду
+
+\[
+tg \lambda = -\lambda/\hbar
+\]
+
+.
+
+Іншими словами, щоб визначити \(\lambda\) , потрібно знайти точки
+перетину графів функцій tg \(\lambda\) і --- \(\lambda/h\) (рисунок
+7.3).
+
+Числові значення значень \(\lambda_1\) , \(\lambda_2\) , \ldots{} можна
+знайти за допомогою комп'ютера, якщо задано значення h Р и с
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_52_Figure_15.jpeg}}
+
+. 7.3. Перетин графів функцій \(tg(\lambda)\) і \(-\lambda/h\) .
+
+викликати власні значення задачі граничного значення
+
+(7.5)
+
+\[
+X'' + \lambda^{2}X = 0, \begin{cases} X(0) = 0 \\ X'(1) + hX(1) = 0. \end{cases}
+\]
+
+Іншими словами, з цими значеннями параметра \(\lambda\) існують
+нетривіальні розв'язки задачі (7.5). Власні значення задачі (7.5)
+визначаються як корені рівняння \(\log \lambda = -\lambda/h\) . Їхні
+числові значення знаходилися на комп'ютері для випадку h = 1. Таблиця
+7.1 показує результати розрахунків перших кількох власних значень.
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}llll@{}}
+\toprule\noalign{}
+n & \(\lambda_B\) & rt . & \(\lambda_n\) \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+123 & 2,024,917,98 & 45 & 11,0814,20 \\
+\end{longtable}
+}
+
+Розв'язки задачі (7.5), що відповідають власним значенням \(\lambda_n\)
+, називаються власними функціями \(X_n(x)\) . Для розглянутого завдання
+власні функції виглядають так:
+
+\[
+X_n(x) = \sin(\lambda_n x)
+\]
+
+і зображені на рис. 7.4.
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_53_Figure_10.jpeg}}
+
+Рис. 7.4. Власні функції \(X_n(x)\) завдання (7.5) при h=1; Усі власні
+функції задовольняють граничні умови.
+
+КРОК 3, (Пошук фундаментальних рішень)
+
+Тепер у нас є нескінченний набір функцій (фундаментальних розв'язків) у
+нашому розпорядженні
+
+\[
+u_n(x, t) = X_n(x) T_n(t) = e^{-(\lambda_n x)^2 t} \sin(\lambda_n x),
+\]
+
+кожна з яких задовольняє рівняння та граничні умови. Залишився ще один
+крок --- загалом
+
+\[
+u(x, t) = \sum_{n=1}^{\infty} a_n X_n(x) T_n(t) =
+= \sum_{n=1}^{\infty} a_n e^{-(\lambda_n c t^2 t)} \sin(\lambda_n x)
+\]
+
+Вибрати коефіцієнти \(a_n\) так, щоб функція \(u(x, t)\) задовольняла
+початкову умову \(u(x, 0)\) = x (у цьому випадку функція \(u(x, t)\)
+задовольнятиме рівняння та граничні умови, оскільки, по-перше, кожен
+член суми їх задовольняє, а по-друге, і рівняння, і граничні умови є
+лінійними та однорідними).
+
+Отже, ймовірність \(a_n\) слід визначати з цієї умови
+
+(7 6)
+
+\[
+u(x, 0) = x = \sum_{n=1}^{\infty} a_n \sin(\lambda_n x).
+\]
+
+Ми маємо зробити останній крок.
+
+КРОК 4. (Розклад початкової умови на ряд за власними функціями)
+
+\begin{verbatim}
+Щоб знайти коефіцієнти a_n у розкладі (7,6) на власні функції, помножте обидві частини цього співвідношення на \sin(\lambda_m x) і інтегруйте від 0 до 1. У результаті ми отримуємо
+\end{verbatim}
+
+\[
+\int_{0}^{2} \xi \sin(\lambda_{m} \xi) d\xi = \sum_{n=1}^{\infty} a_{n} \int_{0}^{1} \sin(\lambda_{n} \xi) \sin(\lambda_{m} \xi) d\xi =
+= a_{m} \int_{0}^{1} \sin^{2}(\lambda_{m} \xi) d\xi =
+= a_{m} \left( \frac{\lambda_{m} - \sin \lambda_{m} \cos \lambda_{m}}{2\lambda_{m}} \right).
+\]
+
+Розв'язавши останнє відношення відносно \(a_m\) і замінивши m на n,
+отримуємо бажаний результат:
+
+(7.7)
+
+\[
+a_n = \frac{2\lambda_n}{(\lambda_n - \sin \lambda_n \cos \lambda_n)} \int_0^{\infty} \xi \sin (\lambda_n \xi) d\xi.
+\]
+
+Таблиця 7.2.
+
+\section{\texorpdfstring{Шанси \(a_n\) у формулі
+(7.8)}{Шанси a\_n у формулі (7.8)}}\label{ux448ux430ux43dux441ux438-a_n-ux443-ux444ux43eux440ux43cux443ux43bux456-7.8}
+
+n \textbar{} an \textbar{} n \textbar{} a\_n \textbar{}
+
+\textbar-------------\textbar-----------------------\textbar---------------\textbar----------------\textbar{}
+
+123 \textbar{} 0,240,22-0,03 \textbar{} 45 \textbar{} -0.11-0.09
+\textbar{}
+
+Отже, розв'язок задачі (7.1) записується у вигляді
+
+(7.8)
+
+\[
+u(x, t) = \sum_{n=1}^{\infty} a_n e^{-i\lambda_n \alpha_n^{2} t} \sin(\lambda_n x),
+\]
+
+де коефіцієнти \(a_n\) задаються формулами (7.7). Перші п'ять
+коефіцієнтів \(a_n\) нашої задачі були знайдені чисельно. Їхні значення
+наведені в Таблиці 1. 7.2.
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_55_Figure_8.jpeg}}
+
+Рис. 7.5. Графічне представлення функції (7.8); межа умовно
+задовольняється у всі моменти часу.
+
+Відповідно, перші три члени розв'язання змішаної задачі
+
+(7.9)
+
+\begin{verbatim}
+\begin{aligned} u_t &= u_{xx}, & 0 < x < 1, & 0 < t < \infty, \\ u_t &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t < \infty, \\ u_x &= 0, & 0 < t
+\end{verbatim}
+
+мають вигляд
+
+\[
+u(x, t) = = 0.24e^{-4t} \sin(2.02x) + 0.22e^{-24t} \sin(4.9x) - 0.03e^{-48.3t} \sin(7.98x) + \dots
+\]
+
+Фіг. На рисунку 7-5 показані графіки цього розв'язку для кількох точок
+часу. Рекомендуємо читачеві відповісти на такі питання: Чи відповідає
+тип рішення, яке ви отримуєте, з вашими інтуїтивними ідеями? Чи
+виконуються граничні умови?
+
+\section{ЗАУВАЖЕННЯ}\label{ux437ux430ux443ux432ux430ux436ux435ux43dux43dux44f}
+
+Задача власних значень (7.5) є особливим випадком більш загальної
+задачі, яку зазвичай називають проблемою Штурма-Ліувіля:
+
+(7.10)
+
+\[
+\begin{aligned} & (\text{ОДУ}) \quad [p(x)y']' - q(x)y + \lambda r(x)y = 0, \quad 0 < x < 1, \\ & (\alpha_1 y(0) + \beta_1 y'(0) = 0, \\ & (\alpha_2 y(1) + \beta_1 y'(1) = 0. \end{aligned}
+\]
+
+Якщо розв'язати задачу з однорідними граничними умовами методом
+розділення змінних, то функції \(X(x)\) завжди знаходяться як розв'язки
+деякої задачі Штурма--Ліувіля. Очевидно, що задача власних значень (7.5)
+є особливим випадком задачі (7.10).
+
+Перелічимо основні властивості задачі (7.10), які були встановлені
+Штурмом і Ліувілем за певних природних обмежень.
+
+функції \(p(x)\), \(q(x)\) та \(r(x)\).
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Існує нескінченна послідовність власних значень, що задовольняють
+  нерівності
+\end{enumerate}
+
+\[
+\lambda_1 < \lambda_2 < \lambda_3 < \ldots < \lambda_n < \ldots \to \infty
+\]
+
+.
+
+\begin{verbatim}
+2. Кожне власне значення \lambda_n відповідає одній (точній до константного множника) ненульовій власній функції y_n(x) .
+\end{verbatim}
+
+\begin{verbatim}
+3. Якщо y_n(x) і y_m(x) дві різні власні функції, що відповідають різним власним значенням \lambda_n і \lambda_m , то вони є ортогональними з вагою r(x) на сегменті [0, 1], тобто вони задовольняють це відношення
+\end{verbatim}
+
+\[
+\int_{0}^{1} r(x) y_{n}(x) y_{m}(x) dx = 0.
+\]
+
+Більше деталей про проблему Штурма-Ліувіля можна знайти в літературі,
+наведеній наприкінці книги.
+
+1) Див., наприклад, Тіхоног А. Н., Самарський А. А. Рівняння
+математичної фізики. --- Москва: Наука, 1972. --- ред. Ед.
+
+\section{ЗАВДАННЯ}\label{ux437ux430ux432ux434ux430ux43dux43dux44f}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Розв'язати наступну задачу для рівняння теплопровідності методом
+  розкладу
+\end{enumerate}
+
+(PPP)
+
+\[
+u_1 = u_{xx}, \quad 0 < x < 1, \quad 0 < t < \infty,
+\]
+
+(GI)
+
+\[
+\begin{cases} u(0, t) = 0, \\ u_x(1, t) = 0, \\ u(x, 0) = x, \quad 0 \le x \le 1. \end{cases}
+\]
+
+Чи відповідає рішення, яке ви знаходите, з інтонативними
+представленнями? Що таке стаціонарне рішення?
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Знайдіть власні цінності та функції проблеми Ассолта-Ліувіля
+\end{enumerate}
+
+(ODY)
+
+\[
+X' + \lambda X = 0, \quad 0 < x < 1,
+\]
+
+(FY)
+
+\[
+\begin{cases} X(0) = 0, \\ X'(1) = 0. \end{cases}
+\]
+
+Задайте специфічні вирази для функцій \(p(x)\), \(q(x)\) та \(r(x)\) із
+загальної задачі Штурма--Ліувіля для цього випадку.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Розв'язати задачу теплопровідності для планки з термоізольованими
+  межами
+\end{enumerate}
+
+(PPP)
+
+\[
+u_t = u_{xx}, \quad 0 < x < 1, \quad 0 < t < \infty,
+\]
+
+(GI)
+
+\[
+\begin{cases} u_x (0, t) = 0, \\ u_x (1, t) = 0, \end{cases} \quad 0 < t < \infty,
+\]
+
+\begin{verbatim}
+(ГУ) u(x, 0) = x, \quad 0 \le x \le 1. Чи відповідає рішення, яке ви отримуєте, з вашою інтерпретацією цієї проблеми? Що таке стаціонарне рішення? Яке його фізичне значення?
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Знайдіть власні цінності та функції завдань
+\end{enumerate}
+
+(ОДА)
+
+\[
+X'' + \lambda X = 0, \quad 0 < x < 1,
+\]
+
+(GI)
+
+\[
+\begin{cases} X'(0) = 0, \\ X'(1) = 0. \end{cases}
+\]
+
+\subsection{ПЕРЕТВОРЕННЯ СКЛАДНИХ РІВНЯНЬ У ПРОСТУ
+ФОРМУ}\label{ux43fux435ux440ux435ux442ux432ux43eux440ux435ux43dux43dux44f-ux441ux43aux43bux430ux434ux43dux438ux445-ux440ux456ux432ux43dux44fux43dux44c-ux443-ux43fux440ux43eux441ux442ux443-ux444ux43eux440ux43cux443}
+
+МЕТА ЛЕКЦІЇ Показати, як PPP для функції \(u(x, t)\) можна перетворити
+на простіший PPP для нової функції \(w(x, t)\). Вибір правильної
+трансформації зазвичай базується на ненавмисному намірі. У нашій лекції
+
+\[
+u_t = \alpha^2 u_{xx} - \beta u,
+u_t = \alpha^2 u_{xx} - v u_x, \quad (v = \text{const})
+\]
+
+переходимо до найпростішого рівняння теплопровідності
+
+\[
+w_1 = \alpha^2 w_{xx}
+\]
+
+внаслідок відповідних перетворень
+
+\[
+u(x, t) = e^{-\beta t} w(x, t)
+u(x, t) = e^{\epsilon t (1 - \delta t - 2) 2\alpha^2} w(x, t).
+\]
+
+\begin{verbatim}
+Розв'язавши просте рівняння теплопровідності за функцією \omega(x,t) , ми можемо знайти розв'язки початкових рівнянь, перетворивши функцію \omega(x,t) відповідно до цих формул (звісно, ці перетворення слід застосовувати і до початкових і граничних умов).
+\end{verbatim}
+
+Після прочитання двох останніх лекцій читач може створити враження, що
+метод розділення змінних застосовується \emph{лише} до рівняння
+
+\[
+u_1 = \alpha^2 u_{xx}
+\]
+
+Насправді рівняння теплопотоку є найпростішим, але не єдиним
+параболічним рівнянням, яке можна розв'язати методом розділення змінних.
+Як уже згадувалося, якщо рівняння є лінійним і однорідним, його можна
+розв'язати, поділивши змінні. Наприклад, двовимірна задача
+теплопровідності в колі описується рівнянням
+
+\[
+u_t = \alpha^2 \left[ u_{rr} + \frac{1}{r} u_r + \frac{1}{r^2} u_{\theta\theta} \right],
+\]
+
+І хоча це рівняння з \emph{змінними коефіцієнтами}, його можна звести до
+трьох звичайних диференціальних рівнянь.
+
+У цій лекції ми покажемо читачеві, що іноді, замість того, щоб
+безпосередньо розв'язувати диференціальне рівняння в похідних, краще
+перетворити його на простіше рівняння, яке можна розв'язати методом
+розділення змінних або іншим методом. Наступний приклад ілюструє цей
+підхід.
+
+\section{Перетворення проблеми з перенесенням бічної поверхні у проблему
+з термічно ізольованою бічною
+поверхнею}\label{ux43fux435ux440ux435ux442ux432ux43eux440ux435ux43dux43dux44f-ux43fux440ux43eux431ux43bux435ux43cux438-ux437-ux43fux435ux440ux435ux43dux435ux441ux435ux43dux43dux44fux43c-ux431ux456ux447ux43dux43eux457-ux43fux43eux432ux435ux440ux445ux43dux456-ux443-ux43fux440ux43eux431ux43bux435ux43cux443-ux437-ux442ux435ux440ux43cux456ux447ux43dux43e-ux456ux437ux43eux43bux44cux43eux432ux430ux43dux43eux44e-ux431ux456ux447ux43dux43eux44e-ux43fux43eux432ux435ux440ux445ux43dux435ux44e}
+
+Розглянемо наступне завдання:
+
+(8.1)
+
+\[
+u_{t} = \alpha^{2}u_{xx} - \beta u, \quad 0 < x < 1, \quad 0 < t < \infty,
+\begin{cases} u(0, t) = 0, \\ u(1, t) = 0, \\ u(x, 0) = \varphi(x), \quad 0 \le x \le 1, \end{cases}
+\]
+
+(8.1)
+
+\[
+(FY) \quad \begin{cases} u(0, t) = 0, \\ u(x, 0) = \varphi(x), \quad 0 \le x \le 1, \end{cases}
+\]
+
+де термін \(-\beta u\) описує потік тепла через бічну поверхню стрижня
+(рис. 8.1).
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_59_Figure_7.jpeg}}
+
+Рис. 81. Задача теплопровідності, описана рівнянням
+\(u_t = \alpha^t u_{\lambda\lambda} - \beta u\) : \(\alpha\) --- це
+втрата гепле через поверхню Боха; \(\delta\) -- дифузія вздовж стрижня.
+
+Наша мета --- ввести нову температурну \(w\left(x,\ t\right)\) замість
+\(u\left(x,\ t\right)\) , щоб рівняння для \(w\left(x,\ t\right)\) стало
+простішим за початкове рівняння
+
+\[
+u_t = \alpha^2 u_{xx} - \beta u
+\]
+
+.
+
+Це досить загальний метод розв'язання диференціальних рівнянь у
+частинних похідних, але вибір відповідного перетворення базується на
+інтуїтивних уявленнях про поведінку розв'язків початкового рівняння.
+Наприклад, у задачі (8.1) температура \(u(x, t)\) у кожній точці \(x_0\)
+змінюється внаслідок двох факторів:
+
+\begin{itemize}
+\tightlist
+\item
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi})}
+  \tightlist
+  \item
+    дифузія тепла вздовж стрижня (через компонентний \(\alpha^2 u_{xx}\)
+    ),
+  \end{enumerate}
+\item
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi})}
+  \setcounter{enumi}{1}
+  \tightlist
+  \item
+    теплопередача через бічну поверхню стрижня (через член RI).
+  \end{enumerate}
+\end{itemize}
+
+Найважливішим елементом нашого міркування є наступне: якщо не було
+дифузії вздовж стрижня ( \(\alpha = 0\) ),
+
+тоді температура в кожній точці стрижня експоненційно знижується до нуля
+згідно із законом
+
+\[
+u(x_0 t) = u(x_0, 0) e^{-\beta t}
+\]
+
+.
+
+Виходячи з цього спостереження, запитаємо, чи можна розв'язок проблеми
+(8.1) представити як утворення двох факторів
+
+\[
+(8.2) u(x, t) = e^{-\beta t}w(x, t)
+\]
+
+або:
+
+\begin{verbatim}
+\begin{pmatrix}
+\end{verbatim}
+
+Температура елемента з \textbackslash{}
+
+Неізольовані боком
+
+\begin{verbatim}
+Поверхня \end{pmatrix}
+\end{verbatim}
+
+де \(w(x, t)\) описує розподіл температури, що виникає лише через
+дифузію. Давайте подивимось, що станеться, якщо підставити цей вираз для
+температури у задачу (8.1). Після виконання відповідних розрахунків
+(читач може зробити їх сам), ми отримаємо
+
+Нова задача майже точно така ж, як і оригінальна, але більше не має
+додатку 6u. Тому замість розв'язання задачі (8.1) ми розв'язуємо
+перетворену задачу (8.3), а потім множимо отриманий розв'язок
+\(w(x, t)\) на \(e^{-\beta t}\) . У нашому випадку розв'язок задачі
+(8.3) вже було отримано раніше методом розділення змінних, тому ми
+можемо одразу записати
+
+(8.4)
+
+\[
+w(x, t) = \sum_{n=1}^{\infty} a_n e^{-(n\pi\alpha)^{\frac{n}{2}}t} \sin(n\pi x),
+a_n = 2 \int_0^{\infty} \phi(\xi) \sin(n\pi \xi) d\xi,
+\]
+
+і, отже, розв'язок початкової задачі (8.1) має вигляд
+
+\[
+u(x, t) = e^{-\beta t}w(x, t).
+\]
+
+Нижче, у розділі «Нотатки», наведено ще один приклад проблеми,
+розв'язаної цим методом.
+
+\section{ПРИМІТКИ}\label{ux43fux440ux438ux43cux456ux442ux43aux438}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Вирішити проблему
+\end{enumerate}
+
+\[
+\begin{aligned}
+u_t &= u_{xx} - u, && 0 < x < 1,\ 0 < t < \infty, \\
+u(0,t) &= 0,\quad u(1,t) = 0, && 0 < t < \infty, \\
+u(x,0) &= \sin(\pi x) + 0.5\sin(3\pi x), && 0 \leqslant x \leqslant 1.
+\end{aligned}
+\]
+
+За методом, описаним вище, ми
+
+\begin{itemize}
+\tightlist
+\item
+  \begin{enumerate}
+  \def\labelenumi{\alph{enumi})}
+  \tightlist
+  \item
+    тимчасово відкинути конвективний член u у початковому рівнянні.
+  \end{enumerate}
+\item
+  \begin{enumerate}
+  \def\labelenumi{\alph{enumi})}
+  \setcounter{enumi}{1}
+  \tightlist
+  \item
+    записати розв'язок змішаної задачі без конвективного члена
+  \end{enumerate}
+\end{itemize}
+
+\[
+u(x, t) = e^{-\pi^2 t} \sin(\pi x) + 0.5e^{-(3\pi)^2 t} \sin(3\pi x),
+\]
+
+\begin{verbatim}
+c) помножимо це розв'язання на конвективний фактор e^{-\beta t}=e^{-t} отримаємо остаточне розв'язання початкової задачі
+\end{verbatim}
+
+\[
+u(x, t) = e^{-t} \left[ e^{-\pi^2 t} \sin(\pi x) + 0.5e^{-(3\pi)^2 t} \sin(3\pi x) \right].
+\]
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Рівняння конвективної дифузії
+\end{enumerate}
+
+\[
+u_t = \alpha^2 u_{xx} - v u_x
+\]
+
+(коефіцієнт і є константою) також можна перетворити у вигляд
+
+\[
+w_t = \alpha^2 w_{xx}.
+\]
+
+Відповідне перетворення має вигляд
+
+\[
+u(x, t) = e^{v(x-vt/2)/2\alpha^2}w(x, t).
+\]
+
+\begin{verbatim}
+Це перетворення підкреслює експоненціальний фактор, який повністю зумовлений рухом середовища. Зверніть увагу, що цей множник описує хвилю, що поширюється зліва направо зі швидкістю \upsilon/2 . Читач матиме можливість скористатися цією трансформацією.
+\end{verbatim}
+
+\section{ЗАВДАННЯ}\label{ux437ux430ux432ux434ux430ux43dux43dux44f-1}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Розв'язати задачу конвективної дифузії
+\end{enumerate}
+
+\[
+\begin{aligned}
+(\text{УЧП})\quad & u_t = u_{xx} - u_x, && 0 < x < 1,\ 0 < t < \infty, \\
+(\text{ГУ})\quad & u(0,t) = 0,\quad u(1,t) = 0, && 0 < t < \infty, \\
+(\text{НУ})\quad & u(x,0) = e^{x/2}, && 0 \leqslant x \leqslant 1.
+\end{aligned}
+\]
+
+методом перетворення до простішого рівняння. На що схожий розв'язок?
+Можна дати таку інтерпретацію цієї задачі: \(u(x,t)\) --- концентрація
+деякої речовини в рухомому середовищі, яке рухається зліва направо зі
+швидкістю \(v = 1\); початковий розподіл концентрації задається функцією
+\(e^{x/2}\), а на межах концентрація підтримується нульовою. Чи
+відповідає ваш розв'язок такій інтерпретації?
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Розв'язати задачу
+\end{enumerate}
+
+\[
+\begin{aligned}
+(\text{УЧП})\quad & u_t = u_{xx} - u + x, && 0 < x < 1,\ 0 < t < \infty, \\
+(\text{ГУ})\quad & u(0,t) = 0,\quad u(1,t) = 1, && 0 < t < \infty, \\
+(\text{НУ})\quad & u(x,0) = 0, && 0 \leqslant x \leqslant 1.
+\end{aligned}
+\]
+
+\begin{itemize}
+\tightlist
+\item
+  а) перетворивши неоднорідні граничні умови на однорідні;
+\item
+  б) перетворивши вихідне рівняння на нове рівняння без члена \(-u\);
+\item
+  в) розв'язавши задачу, що виникає після цих перетворень.
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Розв'язати задачу
+\end{enumerate}
+
+\[
+\begin{aligned}
+(\text{УЧП})\quad & u_t = u_{xx} - u, && 0 < x < 1,\ 0 < t < \infty, \\
+(\text{ГУ})\quad & u(0,t) = 0,\quad u(1,t) = 0, && 0 < t < \infty, \\
+(\text{НУ})\quad & u(x,0) = \sin(\pi x), && 0 \leqslant x \leqslant 1.
+\end{aligned}
+\]
+
+застосовуючи метод розділення змінних безпосередньо до вихідного
+рівняння, не виконуючи жодних попередніх перетворень. Чи збігається
+отриманий розв'язок з розв'язком, знайденим раніше після заміни
+
+\[
+u(x,t) = e^{-t}w(x,t)
+\]
+
+?
+
+\section{РОЗВ'ЯЗАННЯ НЕОДНОРІДНИХ УЧП МЕТОДОМ РОЗКЛАДУ ЗА ВЛАСНИМИ
+ФУНКЦІЯМИ}\label{ux440ux43eux437ux432ux44fux437ux430ux43dux43dux44f-ux43dux435ux43eux434ux43dux43eux440ux456ux434ux43dux438ux445-ux443ux447ux43f-ux43cux435ux442ux43eux434ux43eux43c-ux440ux43eux437ux43aux43bux430ux434ux443-ux437ux430-ux432ux43bux430ux441ux43dux438ux43cux438-ux444ux443ux43dux43aux446ux456ux44fux43cux438}
+
+ЦІЛЬ ЛЕКЦІЇ: Навчитися розв'язувати змішані задачі вигляду
+
+\[
+\begin{aligned}
+(\text{УЧП})\quad & u_t = \alpha^2 u_{xx} + f(x,t), && 0 < x < 1,\ 0 < t < \infty, \\
+(\text{ГУ})\quad & \alpha_1 u_x(0,t) + \beta_1 u(0,t) = 0, && 0 < t < \infty, \\
+& \alpha_2 u_x(1,t) + \beta_2 u(1,t) = 0, && 0 < t < \infty, \\
+(\text{НУ})\quad & u(x,0) = \varphi(x), && 0 \leqslant x \leqslant 1.
+\end{aligned}
+\]
+
+Розв'язок неоднорідного УЧП можна шукати у вигляді ряду
+
+\[
+u(x,t) = \sum_{n=1}^{\infty} T_n(t) X_n(x).
+\]
+
+де \(X_n(x)\) --- власні функції відповідної однорідної задачі
+
+\[
+\begin{aligned}
+(\text{УЧП})\quad & u_t = \alpha^2 u_{xx}, && 0 < x < 1,\ 0 < t < \infty, \\
+(\text{ГУ})\quad & \alpha_1 u_x(0,t) + \beta_1 u(0,t) = 0, && 0 < t < \infty, \\
+& \alpha_2 u_x(1,t) + \beta_2 u(1,t) = 0, && 0 < t < \infty, \\
+(\text{НУ})\quad & u(x,0) = \varphi(x), && 0 \leqslant x \leqslant 1.
+\end{aligned}
+\]
+
+А функції \(T_n(t)\) визначаються як розв'язки деяких звичайних
+диференціальних рівнянь.
+
+На лекції 6 ми ознайомилися з тим, як перетворювати неоднорідні граничні
+умови на однорідні. На жаль, рівняння залишається гетерогенним, і ми
+стоїмо перед завданням
+
+\[
+(9.1) \quad u_{t} = \alpha^{2} u_{xx} + f(x, t), \quad 0 < x < 1, \quad 0 < t < \infty,
+(9.1) \quad (\Gamma Y) \quad
+\begin{cases} \alpha_{1} u_{x}(0, t) + \beta_{1} u(0, t) = 0, \\ \alpha_{2} u_{x}(1, t) + \beta_{2} u(1, t) = 0, \\ u(x, 0) = \varphi(x), \quad 0 \le x \le 1. \end{cases}
+\]
+
+Мета нашої лекції --- опанувати метод розв'язання таких задач. Цей метод
+аналогічний методу варіації довільних констант.
+
+теорія звичайних диференціальних рівнянь називається методом розкладу за
+власними функціями.
+
+Ідея методу надзвичайно проста. Відомо, що розв'язок задачі (9.1) при
+\(f(x, t)\) = 0 (так звана відповідна однорідна задача) записується як
+ряд
+
+\[
+u\left(x,\ t\right)=\sum_{n=1}^{\infty}a_{n}e^{-\left(\lambda_{n}\alpha\right)^{2}}/X_{n}\left(x\right),
+\]
+
+де \(X_n\)(x) --- власні функції задачі Штурма-Ліувіля,
+
+(9.2)
+
+\[
+X'' + \lambda^2 X = 0, \\ \alpha_1 X'(0) + \beta_1 X(0) = 0, \\ \alpha_2 X'(1) + \beta_2 X(1) = 0.
+\]
+
+Запитаймо себе, чи можна також шукати розв'язок гетерогенної проблеми
+(9.1) у вигляді серії власних функцій, але більш загальної форми
+
+\[
+u(x, t) = \sum_{n=1}^{\infty} T_n(t) X_n(x).
+\]
+
+Існують певні фізичні підстави для такого припущення. Насправді терміни
+\(f(x,t)\) описують джерело тепла, розташоване всередині стрижня. Це
+означає, що залежність рішення від часу не буде виражена показниками
+
+\[
+e^{-(\lambda_n\alpha)^2 t}
+\]
+
+,
+
+Це стосувалося однорідного завдання, але з деякими іншими функціями.
+
+Щоб показати цей метод у дії і не ускладнювати подання деталями, ми
+застосуємо його до розв'язання однієї дуже простої задачі.
+
+\section{Построзв'язання методом демаркації за власними
+функціями,}\label{ux43fux43eux441ux442ux440ux43eux437ux432ux44fux437ux430ux43dux43dux44f-ux43cux435ux442ux43eux434ux43eux43c-ux434ux435ux43cux430ux440ux43aux430ux446ux456ux457-ux437ux430-ux432ux43bux430ux441ux43dux438ux43cux438-ux444ux443ux43dux43aux446ux456ux44fux43cux438}
+
+Розглянемо гетерогенну проблему
+
+(9.3) (PY)
+
+\[
+\begin{aligned} u_t &= \alpha^2 u_{xx} + f(x, t), & 0 < x < 1, & 0 < t < \infty, \\ u(0, t) &= 0, & 0 < t < \infty, \\ u(1, t) &= 0, & 0 < t < \infty, \\ u(x, 0) &= \varphi(x), & 0 \leqslant x \leqslant 1. \end{aligned}
+\]
+
+Процес розв'язання задачі подається у вигляді послідовності наступних
+кроків.
+
+КРОК 1. Основна ідея методу полягає в розкладанні густини джерела
+\(f(x, t)\) на ряд власними функціями
+
+\[
+f(x, t) = f_1(t) X_1(x) + f_2(t) X_2(x) + \dots + f_n(t) X_n(x) + \dots
+\]
+
+\begin{verbatim}
+а також визначити реакції системи u_n\left(x,\,t\right) на вплив кожного компонента f_n\left(t\right)X_n\left(x\right) . Якщо знайти всі відповіді, рішення проблеми виглядатиме так:
+\end{verbatim}
+
+\[
+u(x, t) = \sum_{n=1}^{\infty} u_n(x, t).
+\]
+
+Головна складність цього методу --- розклад густини джерела на
+компоненти \(f_n\)(t),\(X_n\)(x) . Виявляється, що \(X_n\)(x) факторами
+в цій задачі є власними векторами системи Штурма--Ліувіля, які виникають
+при розв'язанні відповідної однорідної задачі методом розділення
+змінних, а саме
+
+\[
+\begin{array}{c} u_t = \alpha^2 u_{xx} \quad \text{(отметим, что } f(x, \ t) = 0), \\ u(0, \ t) = 0, \\ u(1, \ t) = 0, \\ u(x, \ 0) = \varphi(x). \end{array}
+\]
+
+Завдання Штурма-Ліувіля в цьому випадку виглядає так:
+
+\[
+X'' + \lambda^2 X = 0,
+\]
+
+\(X(0)\) = 0, \(X(1)\) = 0, а його розв'язки є функціями
+
+\[
+X_n(x) = \sin(n\pi x), \quad n = 1, 2, 3 \dots
+\]
+
+Отже, розклад на густину джерела представлений як ряд
+
+\[
+(9.5) \ f(x,t) = f_1(t) \sin(\pi x) + f_2(t) \sin(2\pi x) + \dots + f_n(t) \sin(n\pi x) + \dots
+\]
+
+\begin{verbatim}
+\mathcal{U} нарешті, щоб знайти функції f_n(t) , помножте обидві сторони останнього відношення на \sin(m\pi x) і інтегруйте від 0 до 1 за координатою x.
+\end{verbatim}
+
+У результаті ми отримуємо
+
+\[
+\int_{0}^{1} f(x, t) \sin(m\pi x) dx = \sum_{n=1}^{\infty} f_{n}(t) \int_{0}^{1} \sin(m\pi x) \sin(n\pi x) dx =
+= \frac{1}{2} f_{m}(t)
+\]
+
+або (після заміни t на p)
+
+(9.6)
+
+\[
+f_{n}(t) = 2 \int_{0}^{1} f(x, t) \sin(n\pi x) dx.
+\]
+
+Останнє співвідношення встановлює співвідношення між коефіцієнтами
+\(f_n(t)\) і часткою джерела тепла \(f(x, t)\).
+
+КРОК 2. (Пошук \(u_n(x, t) = X_n(x) T_n(t)\) реакції на вхідний вплив
+\(f_n(t) X_n(x)\) .)
+
+Замінимо густину джерела на його розклад у рядок
+
+\[
+f(x, t) = \sum_{n=1}^{\infty} f_n(t) \sin(n\pi x)
+\]
+
+і намагатися знайти індивідуальні відповіді, тобто функції,
+\(T_{\mathbf{n}}(t)\) у
+
+\[
+u(x, t) = \sum_{n=1}^{\infty} T_n(t) \sin(n\pi x).
+\]
+
+Оскільки розв'язок задачі має вигляд
+
+\[
+u(x, t) = \sum_{n=1}^{\infty} T_n(t) \sin(n\pi x),
+\]
+
+потім підставимо цей вираз у початкову задачу
+
+\[
+u_{t} = \alpha^{2} u_{xx} + \sum_{n=1}^{\infty} f_{n}(t) \sin(n\pi x),
+u(0, t) = 0,
+u(1, t) = 0,
+u(x, 0) = \varphi(x),
+\]
+
+У результаті ми отримаємо
+
+\[
+\sum_{n=1}^{\infty} T'_n(t) \sin(n\pi x) = -\alpha^2 \sum_{n=1}^{\infty} (n\pi)^2 T_n(t) \sin(n\pi x) + + \sum_{n=1}^{\infty} f_n(t) \sin(\pi n\lambda),
+\]
+
+(9.7)
+
+\[
+\sum_{n=1}^{\infty} T_n(t) \sin 0 = 0
+\]
+
+\begin{verbatim}
+(задовольняється ідентично), \sum_{n=1}^{\infty} T_n(t) \sin (n\pi) = 0 (задовольняється ідентично), \sum_{n=1}^{\infty} T_n(0) \sin (n\pi x) = \phi(x) .
+\end{verbatim}
+
+Переписування рівняння та початкової умови
+
+(PPP)
+
+\[
+\sum_{n=1}^{\infty} [T'_n + (n\pi\alpha)^2 T_n - f_n(t)] \sin(n\pi x) = 0,
+\]
+
+(НУ)
+
+\[
+\sum_{n=1}^{\infty} T_n(0) \sin(n\pi x) = \varphi(x),
+\]
+
+\begin{verbatim}
+можна побачити, що функції T_n(\ell) є розв'язками задачі Коші
+\end{verbatim}
+
+(9.8)
+
+\[
+T_{n} + (n\pi\alpha)^{2} T_{n} = f_{n}(t),
+T_{n}(0) = 2 \int_{0}^{1} \varphi(\xi) \sin(n\pi\xi) d\xi = a_{n}.
+\]
+
+Усі ці TAC легко розв'язати, а їхні рішення записуються у вигляді
+
+\begin{enumerate}
+\def\labelenumi{(\arabic{enumi})}
+\setcounter{enumi}{98}
+\tightlist
+\item
+\end{enumerate}
+
+\[
+T_n(t) = a_n e^{-(n\pi\alpha)^2 t} + \int_0^t e^{-(n\pi\alpha)^2 (t-\tau)} f_n(\tau) d\tau,
+\]
+
+З того місця, де легко отримати повне розв'язання проблеми (9.3):
+
+(9.10)
+
+\[
+u(x, t) = \sum_{n=1}^{\infty} T_n(t) \sin(n\pi x) =
+= \sum_{n=1}^{\infty} \left[ a_n e^{-(n\pi\alpha)^n t} \sin(n\pi x) \right] + \sum_{n=1}^{\infty} \left[ \sin(n\pi x) \int_0^t e^{-(n\pi\alpha)^n (t-\tau)} f_n(\tau) d\tau \right]
+\]
+
+Перехідна частина (обумовлена стаціонарною частиною (умовлена початковою
+умовою) правою частиною \(f(x, t)\)).
+
+Розв'язок (9.10) показує, що температурна реакція складається з двох
+частин: перша частина зумовлена початковими умовами, а друга ---
+густиною джерела \(f(x,t)\). Зверніть увагу, що термін «стаціонарна
+частина» не є найкращим описом другої частини температурної реакції,
+оскільки він не означає, що ця частина не залежить від часу
+(стаціонарний стан може бути періодичним, якщо \(f(x, t)\) є періодичною
+функцією часу t).
+
+Проблема повністю вирішена. Перш ніж перейти до наступної теми, давайте
+покажемо, як використовувати описаний вище метод для розв'язання
+
+Конкретне завдання.
+
+70
+
+\section{Розв'язання конкретної задачі методом декомпозиції за власними
+функціями}\label{ux440ux43eux437ux432ux44fux437ux430ux43dux43dux44f-ux43aux43eux43dux43aux440ux435ux442ux43dux43eux457-ux437ux430ux434ux430ux447ux456-ux43cux435ux442ux43eux434ux43eux43c-ux434ux435ux43aux43eux43cux43fux43eux437ux438ux446ux456ux457-ux437ux430-ux432ux43bux430ux441ux43dux438ux43cux438-ux444ux443ux43dux43aux446ux456ux44fux43cux438}
+
+Розглянемо просту задачу
+
+(9.11)
+
+\[
+\begin{aligned} u_t &= \alpha^2 u_{xx} + \sin{(3\pi x)}, & 0 < x < 1, \\ (\mathbf{FY}) & \begin{cases} u(0, t) &= 0, \\ u(1, t) &= 0, \end{cases} & 0 < t < \infty, \\ (\mathbf{HY}) & u(x, 0) &= \sin{(\pi x)}, & 0 \leq x \leq 1. \end{aligned}
+\]
+
+Наша мета --- обчислити коефіцієнти \(T_n\)(t) при розкладі
+
+\[
+u\left(x,\,t\right)=\sum_{n=1}^{\infty}\,T_{n}\left(t\right)\sin\left(n\pi x\right)
+\]
+
+(Власні функції цієї задачі \(X_n\)(x) збігатися з власними функціями
+попереднього). Якщо підставити цю декомпозицію на початкову задачу,
+отримаємо наступну задачу Коші для визначення функцій \(T_n\)(t) :
+
+\[
+T_n + (n\pi\alpha)^2 T_n = \int_n (t) = 2 \int_0^1 \sin(3\pi x) \sin(n\pi x) dx =
+\begin{cases} 1 &n = 3, \\ 0 & n \neq 3, \end{cases}
+T_n(0) = 2 \int_0^1 \sin(n\xi) \sin(n\pi\xi) d\xi =
+\begin{cases} 1 &n = 1, \\ 0 & n \neq 1. \end{cases}
+\]
+
+Перепишем эти уравнения последовательно для n=1, 2\ldots{}
+
+\begin{verbatim}
+\begin{aligned}
+(n=1)\quad & T_1' + (\pi\alpha)^2 T_1 = 0, && T_1(0) = 1, && T_1(t) = e^{-(\pi\alpha)^2 t}, \\
+(n=2)\quad & T_2' + (2\pi\alpha)^2 T_2 = 0, && T_2(0) = 0, && T_2(t) = 0, \\
+(n=3)\quad & T_3' + (3\pi\alpha)^2 T_3 = 4, && T_3(0) = 0, && T_3(t) = \frac{1}{(3\pi\alpha)^2}\left[1 - e^{-(3\pi\alpha)^2 t}\right], \\
+(n\geqslant 4)\quad & T_n' + (n\pi\alpha)^2 T_n = 0, && T_n(0) = 0, && T_n(t) = 0.
+\end{aligned}
+\end{verbatim}
+
+Отже, розв'язок задачі можна записати у вигляді
+
+\[
+u(x, t) = e^{-(\pi\alpha)^2 t} \sin(\pi x) + \frac{1}{(3\pi\alpha)^2} [1 - e^{-(3\pi\alpha)^2 t}] \sin(3\pi x).
+\]
+
+(9.12)
+
+\section{ЗАУВАЖЕННЯ}\label{ux437ux430ux443ux432ux430ux436ux435ux43dux43dux44f-1}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Метод розкладу власних функцій є одним із найпотужніших методів
+  розв'язання неоднорідних диференціальних рівнянь у похідних похідних.
+  Пізніше, коли ми ознайомимося з інтегральними перетвореннями,
+  побачимо, що існують й інші методи розв'язання задач такого типу.
+\item
+  Власні функції \(X_n(x)\) , за допомогою якої виконується розклад,
+  залежать від задачі, яку потрібно розв'язати, точніше від рівнянь і
+  граничних умов. Читача просять розв'язати задачу 4 наприкінці лекції,
+  щоб перевірити, чи дійсно він навчився знаходити власні функції
+  \(X_n(x)\) .
+\item
+  Якщо читач пам'ятає основні факти з теорії звичайних диференціальних
+  рівнянь, то він знає, що розв'язки, що відповідають неоднорідним
+  членам вигляду
+\end{enumerate}
+
+\[
+P_n(x) e^{\alpha x}
+\begin{cases} \sin{(\beta x)}, \\ \cos{(\beta x)}, \end{cases}
+\]
+
+можно найти методом неопределенных коэффициентов. То же самое и здесь.
+Задача (9.11) может быть решена таким же способом.
+
+\section{ЗАДАЧИ}\label{ux437ux430ux434ux430ux447ux438}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Подставьте разложение (46.8) в задачу (46.7) и получите
+  последовательность задач \(P_0,\ P_1,\ P_2,\ \dots\).
+\item
+  Покажите, что нелинейную задачу
+\end{enumerate}
+
+\[
+\begin{aligned}
+\Delta u + u^2 &= 0, && 0 \leqslant r < 1,\ 0 \leqslant \theta < 2\pi, \\
+u(1,\theta) &= \cos\theta, && 0 \leqslant \theta < 2\pi,
+\end{aligned}
+\]
+
+можно свести к последовательности линейных задач \(P_0,\ P_1,\ P_2\).
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\item
+  Подставьте приближенное решение (46.5) в нелинейную задачу 2 и оцените
+  его точность.
+\item
+  Решите задачу \(P_1\) из примера с возмущенной границей и проверьте,
+  насколько хорошо приближенное решение
+\end{enumerate}
+
+\[
+u(r,\theta) = u_0(r,\theta) + \frac{1}{4}u_1(r,\theta)
+\]
+
+удовлетворяет соотношениям
+
+\[
+\Delta u = 0,
+u\left(1 + \frac{1}{4}\sin\theta,\ \theta\right) = \cos\theta.
+\]
+
+\section{Лекція 47}\label{ux43bux435ux43aux446ux456ux44f-47}
+
+\end{document}

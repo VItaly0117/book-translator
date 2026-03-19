@@ -1,0 +1,272 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+  ukrainian,
+]{article}
+\usepackage{xcolor}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+\setmathfont{STIX Two Math}
+\fi
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{graphicx}
+\graphicspath{{/Users/kalinicenkovitalijmikolajovic/.codex/worktrees/5c15/Script_for_translate_book/Output_Final/}}
+\setkeys{Gin}{width=0.82\linewidth,height=0.82\textheight,keepaspectratio}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+\ifLuaTeX
+\usepackage[bidi=basic,shorthands=off,provide=*]{babel}
+\else
+\usepackage[bidi=default,shorthands=off,provide=*]{babel}
+\fi
+\ifLuaTeX
+  \usepackage{selnolig} % disable illegal ligatures
+\fi
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdflang={uk},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\author{}
+\date{}
+
+\begin{document}
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_316_Figure_2.jpeg}}
+
+\textbf{РИС.} 42.3. Блок-схема розрахунку інтегрального
+\(\int_{a}^{b} f(x) dx\) методом Монте-Карло (100 кидків);
+\(M = \max_{a} f(x)\) .
+
+\section{Випадкові
+числа}\label{ux432ux438ux43fux430ux434ux43aux43eux432ux456-ux447ux438ux441ux43bux430}
+
+Перш ніж перейти до рівняння Монте-Карло з частковими похідними,
+зупинимося на важливому питанні випадкових чисел. Щойно, обчислюючи
+інтеграл, нам потрібно було побудувати послідовність випадкових точок
+\(P_i = (x_i, y_i)\) всередині прямокутника R. Іншими словами,
+x-координата точки P має бути випадковим числом з інтервалу {[}a, b{]},
+а \(y_i\) від інтервалу {[}0, M{]}. Щоб знайти випадкові числа з цих
+інтервалів, звертаємося до послідовності випадкових чисел, рівномірно
+розподілених по сегменту {[}0, 1{]}. Тоді числа, рівномірно розподілені
+на сегменті {[}a, b{]}, можна обчислити за формулою
+
+(початкове зміщення струни), \(u_t\)(x, 0) = \(g(x)\) (початкова
+швидкість струни).
+
+Таким чином, хвильове рівняння відрізняється від рівняння
+теплопровідності, для якого потрібно встановити лише одну початкову
+умову.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  За допомогою хвильового рівняння можна описати розподіл електричного
+  струму в дроті. З законів Кірхгофа отримуємо таку систему двох рівнянь
+  у похідних похідних першого порядку:
+\end{enumerate}
+
+(16.3)
+
+Тепер, звичайно, виникає питання: як отримати послідовність випадкових
+чисел, \(\{r_i: i=1,2,\ldots\}\) рівномірно розподілених на {[}0,1{]}?
+Найпоширенішим методом сьогодні є метод дедукцій (метод порівнянь).
+Використовуючи цей метод, отримуємо послідовність випадкових цілих чисел
+(наприклад, 2120, 1401, 177, 3013,\ldots), потім ліворуч від кожного
+числа розміщується десяткова крапка, так що всі числа знаходяться між
+нулем і одним \((0,212; 0,1401; 0,0177; 0,3013; \ldots)\) .
+
+Отже, щоб отримати послідовність випадкових цілих чисел (між 0 і P), ми
+використаємо метод віднімання.
+
+\section{Отримання випадкових чисел за допомогою методу
+відрахування.}\label{ux43eux442ux440ux438ux43cux430ux43dux43dux44f-ux432ux438ux43fux430ux434ux43aux43eux432ux438ux445-ux447ux438ux441ux435ux43b-ux437ux430-ux434ux43eux43fux43eux43cux43eux433ux43eux44e-ux43cux435ux442ux43eux434ux443-ux432ux456ux434ux440ux430ux445ux443ux432ux430ux43dux43dux44f.}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Як перше випадкове ціле число, обирайте будь-яке число, що знаходиться
+  між 0 і P (число P обирається наперед).
+\item
+  Помножте це випадкове число на певне фіксоване число.
+\end{enumerate}
+
+Попередньо обраний множник M.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\item
+  Додайте до добутку деяке фіксоване ціле число \emph{K}, обране
+  заздалегідь.
+\item
+  Поділити отриману суму на P і залишок
+\end{enumerate}
+
+Виберіть нове випадкове число.
+
+Метод виведення можна записати у формі формули
+\(r_{i+1} \equiv (Mr_i + K) \bmod P\) , що означає, що для отримання
+наступного \(r_{i+1}\) потрібно взяти попередній \(r_i\) , помножити
+його на M, додати результат на K, поділити суму на P і взяти решту
+поділу. Наприклад, якщо P = 100, M = 37, K = 16, \(r_0 = 15\) , то
+отримується наступна послідовність випадкових чисел:
+
+где
+
+ж --- координата вдоль провода,
+
+\emph{t} --- время,
+
+\begin{verbatim}
+i(x, t) — распределение тока вдоль провода,  v\left(x,\ t\right)  — распределение потенциала вдоль провода,
+\end{verbatim}
+
+С -- емкость провода на единицу длины,
+
+G --- утечка на единицу длины,
+
+Р --- сопротивление на единицу длины,
+
+-- индуктивность провода на единицу длины.
+
+Рівняння (16.3) зазвичай називають системою телеграфних рівнянь. У такій
+формі вони зазвичай не використовуються. Щоб перетворити цю систему,
+диференціюйте перше рівняння на x, друге на t, помножте обидві частини
+на C і відніміть від першого. У результаті ми отримуємо
+
+\[
+Mr_1 + K = 2643
+\]
+
+Воспользуемся теперь вторым уравнением из (16.3)
+
+\[
+r = 71
+\]
+
+окончательно получаем
+
+(16.4)
+
+Y
+
+Це рівняння для струму, відоме як телеграфне рівняння, є гіперболічним
+рівнянням другого порядку (якщо, звісно, C і L не дорівнюють нулю,
+інакше рівняння стає параболічним).
+
+Напряжение описывается точно таким же уравнением:
+
+(16.5)
+
+\[
+I = \int_{0}^{1} \int_{0}^{1} \int_{0}^{1} \int_{0}^{1} e^{-(x^{2}+y^{2}+z^{2}+\omega^{2})} dx dy dz dw,
+\]
+
+Если G = R = 0, то уравнения (16.4)---(16.5) упрощаются:
+
+(16.6)
+
+\[
+I = \int_{0}^{1} e^{\sin x} dx.
+\]
+
+\section{\texorpdfstring{ЗАВДАННЯ - 1. Отримайте рівняння (16.5) для
+\emph{and} з системи з двох рівнянь першого порядку
+(16.3)}{ЗАВДАННЯ - 1. Отримайте рівняння (16.5) для and з системи з двох рівнянь першого порядку (16.3)}}\label{ux437ux430ux432ux434ux430ux43dux43dux44f---1.-ux43eux442ux440ux438ux43cux430ux439ux442ux435-ux440ux456ux432ux43dux44fux43dux43dux44f-16.5-ux434ux43bux44f-and-ux437-ux441ux438ux441ux442ux435ux43cux438-ux437-ux434ux432ux43eux445-ux440ux456ux432ux43dux44fux43dux44c-ux43fux435ux440ux448ux43eux433ux43e-ux43fux43eux440ux44fux434ux43aux443-16.3}
+
+\begin{itemize}
+\tightlist
+\item
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \setcounter{enumi}{1}
+  \tightlist
+  \item
+    Знаючи фізичне значення кожного члена хвильового рівняння, що ви
+    можете сказати про поведінку в момент розв'язання наступної задачі:
+  \end{enumerate}
+\end{itemize}
+
+(YYII)
+
+\[
+r_{i+1} \equiv (3r_i + 4) \mod 7, \quad r_0 = 0.
+,  0 < x < 1  ,  0 < t < \infty  ,
+\]
+
+(ГУ)
+
+\$\$ I = \int\emph{\{0\}\^{}\{1\} \int}\{0\}\^{}\{1\}
+\int\_\{0\}\^{}\{1\}
+e\textsuperscript{\{-(x}\{2\}+y\textsuperscript{\{2\}+z}\{2\})\} dx dy
+dz. u(x,y) = g(x,y) =
+
+\begin{cases} u(0, t) = 0, & 0 < t < \infty, \\ u(1, t) = 0, & 0 < t < \infty, \end{cases}
+
+Після того, як цю конкретну задачу буде розв'язано методом Монте-Карло,
+ми розглянемо, як розв'язувати більш загальні задачі за допомогою цього
+методу.
+
+Щоб проілюструвати метод Монте-Карло, розглянемо гру під назвою
+«Блукаючий п'яниця». Щоб грати в цю гру, потрібна таблиця з сіткою
+ліній, як показано на рис. 43.1.
+
+Перейдем к описанию правил игры.
+
+\end{document}

@@ -1,0 +1,170 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+  ukrainian,
+]{article}
+\usepackage{xcolor}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+\setmathfont{STIX Two Math}
+\fi
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{graphicx}
+\graphicspath{{/Users/kalinicenkovitalijmikolajovic/.codex/worktrees/5c15/Script_for_translate_book/Output_Final/}}
+\setkeys{Gin}{width=0.82\linewidth,height=0.82\textheight,keepaspectratio}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+\ifLuaTeX
+\usepackage[bidi=basic,shorthands=off,provide=*]{babel}
+\else
+\usepackage[bidi=default,shorthands=off,provide=*]{babel}
+\fi
+\ifLuaTeX
+  \usepackage{selnolig} % disable illegal ligatures
+\fi
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdflang={uk},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\author{}
+\date{}
+
+\begin{document}
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_358_Figure_2.jpeg}}
+
+ATHBLK1189X
+
+\begin{verbatim}
+\begin{cases} (\text{УЧП}) & \varphi_{uu} + \varphi_{vv} = 0, \quad -\infty < u < \infty, \quad 0 < v < \pi, \\ (\text{47.2}) & \begin{cases} \varphi(u, 0) = 0, \\ \varphi(u, \pi) = 1. \end{cases}
+\end{verbatim}
+
+MATHBLK1190X
+
+\[
+w = u + iv = \ln\left[\frac{z-1}{z+1}\right] =
+\]
+
+MATHBLK1191X
+
+\[
+\begin{cases} u(0, t) = 0, \\ u(1, t) = 0, \end{cases}
+\]
+
+MATHBLK1192X
+
+\[
+= \ln\left[\frac{z-1}{z+1}\right] + i \arg\left[\frac{z-1}{z+1}\right]
+\]
+
+MATHBLK1193X
+
+\[
+v = \arg\left[\frac{z-1}{z+1}\right] = \arg\left[\frac{x+iy-1}{x+1+iy}\right] =
+\]
+
+MATHBLK1194X
+
+\[
+= \arg\left[\frac{x^2+y^2-1+i2y}{(x+1)^2+y^2}\right] =
+\]
+
+MATHBLK1195X
+
+\[
+= \arg\left[\frac{2y}{x^2+y^2-1}\right]
+\]
+
+MATHBLK1196X
+
+\[
+\begin{cases} u(x, 0) = 1, \\ u_t(x, 0) = 0, \end{cases}
+\]
+
+MATHBLK1197X
+
+\[
+\varphi(x, y) = \frac{1}{\pi} \arctan\left[\frac{2y}{x^2 + y^2 - 1}\right].
+\]
+
+MATHBLK1198X
+
+\[
+x^{2} + y^{2} = 1,
+\]
+
+MATHBLK1199X
+
+\[
+(x-1)^{2} + y^{2} = 9,
+\]
+
+MATHBLK1200X
+
+\[
+\begin{aligned} & (\text{УЧП}) & \phi_{xx} + \phi_{yy} = 0, & \text{внутри } D, \\ & (\text{ГУ}) & \begin{cases} \varphi(x, y) = 1 & \text{на } x^2 + y^2 = 1, \\ \varphi(x, y) = 2 & \text{на } (x - 1)^2 + y^2 = 9. \end{cases} \end{aligned}
+\]
+
+MATHBLK1201X
+
+\[
+\begin{split} \frac{d^2S_n\left(t\right)}{dt^2} &= -\left(\pi n\right)^2S_n\left(t\right) + 2n\pi\left[u\left(0,\ t\right) + \left(-1\right)^{n+1}u\left(1,\ t\right)\right] + D_n\left(t\right) = \\ &= -\left(n\pi\right)^2S_n\left(t\right) + D_n\left(t\right), \end{split}
+\]
+
+MATHBLK1202X M
+
+\end{document}
