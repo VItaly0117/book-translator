@@ -1,0 +1,2127 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+  ukrainian,
+]{article}
+\usepackage{xcolor}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+\setmathfont{STIX Two Math}
+\fi
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{longtable,booktabs,array}
+\newcounter{none} % for unnumbered tables
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\graphicspath{{/Users/kalinicenkovitalijmikolajovic/.codex/worktrees/5c15/Script_for_translate_book/Output_Final/}}
+\setkeys{Gin}{width=0.82\linewidth,height=0.82\textheight,keepaspectratio}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+\ifLuaTeX
+\usepackage[bidi=basic,shorthands=off,provide=*]{babel}
+\else
+\usepackage[bidi=default,shorthands=off,provide=*]{babel}
+\fi
+\ifLuaTeX
+  \usepackage{selnolig} % disable illegal ligatures
+\fi
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdflang={uk},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\author{}
+\date{}
+
+\begin{document}
+
+\section{РОЗВ'ЯЗАННЯ ДИФЕРЕНЦІАЛЬНИХ РІВНЯНЬ У ПОХІДНИХ ПОХІДНИХ ЗА
+ДОПОМОГОЮ МЕТОДУ КОНФОРМНИХ
+ВІДОБРАЖЕНЬ}\label{ux440ux43eux437ux432ux44fux437ux430ux43dux43dux44f-ux434ux438ux444ux435ux440ux435ux43dux446ux456ux430ux43bux44cux43dux438ux445-ux440ux456ux432ux43dux44fux43dux44c-ux443-ux43fux43eux445ux456ux434ux43dux438ux445-ux43fux43eux445ux456ux434ux43dux438ux445-ux437ux430-ux434ux43eux43fux43eux43cux43eux433ux43eux44e-ux43cux435ux442ux43eux434ux443-ux43aux43eux43dux444ux43eux440ux43cux43dux438ux445-ux432ux456ux434ux43eux431ux440ux430ux436ux435ux43dux44c}
+
+МЕТА ЛЕКЦІЇ: Показати, як деякі двовимірні граничні задачі можна
+перетворити на інші, простіші задачі за допомогою конформного
+відображення. Припустимо, наприклад, що ми хочемо розв'язати рівняння
+Лапласа
+
+\begin{verbatim}
+\begin{cases} u(0, t) = 0, \\ u_x(1, t) = -u(1, t), \\ u(x, 0) = x, \\ u_t(x, 0) = 0. \end{cases}
+\end{verbatim}
+
+з певною граничною умовою в області комплексної форми (площина змінних x
+і y). Цю задачу можна перетворити на нову, в якій потрібно знайти
+розв'язок рівняння Лапласа
+
+у простішій області (площина змінних і і і).
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_353_Figure_9.jpeg}}
+
+\begin{verbatim}
+У конформному відображенні рівняння Лапласа \varphi_{xx}+\varphi_{yy}=0 у координатній площині (x,y) повертається у рівняння Лапласа \varphi_{nn}\dashv -\varphi_{vo}=0 у координатній площині (u,v). Інші рівняння, такі як \varphi_{xx}+2\varphi_{xy}+\varphi_{yy}=0 , не мають такої властивості. Після розв'язання рівняння Лапласа \varphi(u,v) у простій області (
+\end{verbatim}
+
+\begin{verbatim}
+наприклад, у колі, напівплощині, квадраті) знайдено, достатньо підставити вирази U=U(X, Y), V=V(X, Y) у цей розв'язок, і ми отримаємо розв'язок нашої задачі \phi[u(x, y), v(x, y)] , вираженого через початкові змінні.
+\end{verbatim}
+
+У цій лекції ми розглянемо:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\item
+  про властивості конформних відображень,
+\item
+  як їх будувати (для деяких районів),
+\item
+  як розв'язувати задачі методом конформних відображень.
+\end{enumerate}
+
+Однією з головних труднощів, що виникають при розв'язанні задач меж, є
+складна форма кордонів. Навіть межі відносно простої форми часто роблять
+задачу дуже складною для розв'язання. Звісно, можна спробувати
+розв'язати задачу за допомогою методів теорії збурень, але теорія
+збурень працює добре лише у випадках, коли межа близька до простої.
+
+Однак існує спосіб розв'язати двовимірне рівняння Лапласа в областях з
+комплексною межею. Цей метод базується на конформних відображеннях.
+
+Перш ніж почати розв'язувати задачі цим методом, давайте трохи
+ознайомимося з поняттям конформного відображення та комплексних змінних
+загалом.
+
+\section{Комплексні функції та конформні
+відображення}\label{ux43aux43eux43cux43fux43bux435ux43aux441ux43dux456-ux444ux443ux43dux43aux446ux456ux457-ux442ux430-ux43aux43eux43dux444ux43eux440ux43cux43dux456-ux432ux456ux434ux43eux431ux440ux430ux436ux435ux43dux43dux44f}
+
+У цій лекції ми ознайомимося лише з тими поняттями з теорії функцій
+комплексної змінної, які нам знадобляться пізніше. Представимо
+комплексне число z = x + iy як точку на площині комплексного xy (рис.
+47.1).
+
+Щоб ввести поняття конформного відображення, спершу ознайомимося з
+поняттям функції комплексної змінної
+
+.
+
+Тут z --- це комплексна змінна (з деякої області площини z), а w ---
+нова комплексна змінна, яка отримає значення відповідно до формули w =
+\texttt{f(z)} у новій комплексній площині w.
+
+Наприклад, комплексна функція, визначена в \emph{першому квадранті}
+комплексної z-площини, \texttt{w=z\^{}2} відображає цю область у всю
+півплощину v\textgreater0 у комплексній площині w.
+
+Таблиця 47 2
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.2342}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.2252}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.5405}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Площина d
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\texttt{z\ \textbackslash{}longrightarrow\ z\^{}2}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Площина S
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+0 & & 0 \\
+t1 → t & & -1(2) \\
+Вісь x Перший квадрант & & Позитивна дійсна піввісь верхньої
+півплощини \\
+\end{longtable}
+}
+
+Таблиця 47.2 показує відповідність, яка встановлюється шляхом
+відображення \texttt{w=z\^{}2} між деякими точками на площинах z і w.
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_355_Figure_5.jpeg}}
+
+Рис. 47.1. Площина комплексної змінної
+\texttt{\textbackslash{}boldsymbol\{z\}} та некольорових формул бігунів
+Р И С У Н О К
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_355_Figure_7.jpeg}}
+
+47.2. Відображення першого квадранта площини
+\texttt{\{\textbackslash{}bf\ z\}} у верхню півплощину
+\texttt{\{\textbackslash{}bf\ w\}} .
+
+Інакше кажучи, якщо ми говоримо про комплексісні функції змінної w =
+\texttt{f(z)}, то можна розглянути питання, як криві площини z
+перетворюються на криві в площині
+
+Це питання не ставиться в теорії функцій дійсної змінної, з якою читач
+уже добре знайомий.
+
+Перш ніж рухатися далі, давайте розглянемо, як \texttt{w=z\^{}2} складне
+відображення типів у еквівалентній дійсній формі. Дійсна форма показує,
+як початкові координати (x,y) у площині z перетворюються на нові
+координати (u,v) у площині w \texttt{w=z\^{}2} .
+
+\begin{verbatim}
+\begin{cases} u(x, 0) = x, \\ u_t(x, 0) = 0. \end{cases}
+\end{verbatim}
+
+І давайте окремо прирівняємо реальні та уявні частини в цьому
+співвідношенні. У результаті ми отримуємо
+
+\begin{verbatim}
+\begin{array}{ll} u=x^2-y^2,\\ v=2xy, \end{array}
+\end{verbatim}
+
+(действительная форма отображения \texttt{w=z\^{}2} ).
+
+Ця форма нам знадобиться пізніше. У цьому прикладі це цікаво, оскільки
+показує, як гіперболи в площині z переходять до координатних прямих u =
+const і v = const у площині w.
+
+Тепер перейдемо до вивчення одного конкретного типу функцій комплексної
+змінної, які виконують конформні відображення.
+
+\section{Определение конформного
+отображения}\label{ux43eux43fux440ux435ux434ux435ux43bux435ux43dux438ux435-ux43aux43eux43dux444ux43eux440ux43cux43dux43eux433ux43e-ux43eux442ux43eux431ux440ux430ux436ux435ux43dux438ux44f}
+
+Відображення w=\texttt{f(z)} комплексної площини z у комплексну площину
+w називається конформним у точці \texttt{z\_\{\textbackslash{}bullet\}}
+площини z, якщо похідна
+\texttt{f\textquotesingle{}(z\_\{\textbackslash{}bullet\})\ \textbackslash{}neq\ 0}
+. Відображення \texttt{f(z)} називається конформним у регіоні D, якщо
+\texttt{f\textquotesingle{}(z)\ \textbackslash{}neq\ 0} в кожній точці
+регіону D.
+
+Наприклад, відображення \texttt{f(z)\ =\ z\^{}2} конформно всюди, крім z
+= 0, оскільки
+\texttt{z\textquotesingle{}(z)\ =\ 2z\ \textbackslash{}neq\ 0} для всіх
+\texttt{z\ \textbackslash{}neq\ 0} . З іншого боку, відображення
+\texttt{e\^{}z} конформно по всій площині z, оскільки скрізь
+\texttt{f\textquotesingle{}(z)\ =\ e\^{}z\ \textbackslash{}neq\ 0} . Яке
+призначення конформних відображень? Відповідь полягає в тому, що при
+розв'язанні рівняння Лапласа
+\texttt{\textbackslash{}phi\_\{xx\}\ +\ \textbackslash{}phi\_\{yy\}\ =\ 0}
+в межах деякої області площини змінних x і y, ми можемо розглядати цю
+площину як площину комплексної змінної z. Розглянемо комплексне
+відображення w = \texttt{f(z)} площини z у площину w, у якій введені
+координати (u, v). Коли w = \texttt{f(z}\phi\emph{\{xy\} + \phi}\{uy\} =
+0\texttt{)} відображається, рівняння Лапласа
+\texttt{\textbackslash{}varphi\_\{xx\}\ +\ \textbackslash{}varphi\_\{yy\}\ =\ 0}
+перетворюється у нове диференціальне рівняння в похідних похідних, яке
+залежить від нових координат і v. To --- рівняння, яке
+\texttt{\textbackslash{}phi\_\{xx\}\ +\ \textbackslash{}phi\_\{uu\}\ =\ 0}
+повернеться у рівняння
+\texttt{\textbackslash{}varphi\_\{nn\}\ +\ \textbackslash{}varphi\_\{nn\}\ =\ 0}
+. Таким чином, ми придумаємо ідею знайти конформне відображення, яке
+переносить область з комплексною межею у область з простою межею
+(нагадаємо, що відображення \texttt{w=z\^{}*} переносить межу першого
+квадранта площини z у фактичну вісь площини w).
+
+Ось кілька прикладів, які покажуть, як можна розв'язати диференціальні
+рівняння у похідних за допомогою конформних відображень.
+
+Уравнение Лапласа в верхней полуплоскости.
+
+Припустимо, що нам потрібно розв'язати наступну задачу Діріхле у верхній
+половині видимості (рис. 47.3):
+
+(47.1)
+
+\begin{verbatim}
+можно найти стандартным методом разделения переменных. При этом оказывается, что решение   u\left(x,\,t\right)  , представленное в виде ряда
+\end{verbatim}
+
+Один із способів розв'язання цієї проблеми --- застосувати перетворення
+Фур'є до змінної x, але набагато краще конформно відобразити верхню
+половину площини у площину (u, v). Читачеві не буде складно побачити, що
+конформне відображення
+
+является суперпозицией простейших колебаний. Пространственная часть
+\texttt{X\_n}(x) каждого элементарного колебания является решением
+(собственной функцией) некоторой краевой задачи Штурма---Лиувилля.
+
+\begin{verbatim}
+Итак, мы научились решать волиовое уравнение   u_{II}=c^2u_{xx}   на всей прямой   -\infty < x < \infty  . Формула Даламбера представляет решение в виде суммы двух бегущих волн, распространяющихся в противоположные стороны. Если же рассматривать это же уравнение на ограниченном промежутке 0 < x < L, то бегущих волн уже не станет, так как они будут взаимодействовать с границами. Вместо них возникают другие волны, которые называют стоячими волнами. Посмотрим, например, что случится, если гитарную струну, закрепленную в точках x=0, x=L, привести в движение. Для ответа на этот вопрос нам необходимо решить следующую смешанную задачу гиперболического типа:
+\end{verbatim}
+
+Вона має такі властивості (див. RNS. 47.4).
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Вона відображає верхню півплощину площини z у смуги
+  \texttt{-\textbackslash{}infty\ \textless{}\ u\ \textless{}\ \textbackslash{}infty}
+  , \texttt{0\ \textless{}\ v\ \textless{}\ \textbackslash{}pi} , у
+  площині w.
+\end{enumerate}
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_357_Figure_11.jpeg}}
+
+Фіг. 47.3 Проблема граничного значення у верхній половині площі.
+
+\begin{itemize}
+\tightlist
+\item
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \setcounter{enumi}{1}
+  \tightlist
+  \item
+    Ребро прямої y=0, -1 \textless{} x \textless{} 1, у площині z (де
+    потенціал дорівнює 1), переходить у пряму
+    \texttt{v=\textbackslash{}pi,} -
+    \texttt{\textbackslash{}infty\ \textless{}\ u\ \textless{}\ \textbackslash{}infty}
+    , у площині w. - 3. Два промені x\textgreater1, y=0, і x\textless-1,
+    y=0, у площині z проходять відповідно у позитивний і негативний
+  \end{enumerate}
+\end{itemize}
+
+Читач повинен бути впевнений, що може підтвердити ці твердження.
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_358_Figure_2.jpeg}}
+
+Рис. 47.4. Перетворення складної задачі на легку за допомогою
+конформного відображення.
+
+Важливість цих властивостей полягає в тому, що вони перетворюють
+початкову вадаху (47.1) на дуже просту задачу
+
+(47.2)
+
+\begin{verbatim}
+Розв'язок очевидний: \varphi(u, v) = \frac{1}{\pi}v .
+\end{verbatim}
+
+\begin{verbatim}
+Тепер, щоб знайти розв'язок початкової задачі, потрібно пояснити v через x і y і підставити цей вираз на q(u,v)=v'\pi . Після цього ми отримуємо
+\end{verbatim}
+
+Виявляється, що в цьому випадку хвилі, що рухаються, відбиваються від
+меж так, що отримані коливання стають непоширюючими, а зберігають форму
+в одному положенні, тобто Ф і К
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_359_Figure_10.jpeg}}
+
+47.5. Конформне відображення на кільце.
+
+Це вже не так очевидно, але існують довідники, де можна знайти дисплей
+із вказаними властивостями. Одним із найзагальних є «Довідник конформних
+відображень»
+
+G. Kober 1), яка містить сотні конформних відображень між різними
+регіонами. Якщо читач витратить трохи часу і краще ознайомиться з
+конформними таблицями відображення, він знайде відповідне конформне
+відображення для задачі (47.3). У нашому конкретному випадку це буде
+образ виду
+
+(47.4)
+
+де s=-0,146, а t=-6,85. У своїй еквівалентній дійсній формі це буде
+
+(47.5)
+
+\begin{verbatim}
+\begin{cases} u(x, 0) = f(x), \\ u_t(x, 0) = g(x), \end{cases}
+v = \gamma [y(x-t)],
+\gamma = 2t/[(x-t)^2 + y^2].
+\end{verbatim}
+
+найдем сначала стоячне волны, т. е. решения вида
+
+\begin{verbatim}
+\begin{aligned} \varphi_{uu} + \varphi_{vv} &= 0, & \text{в кольче,} \\ (\Gamma Y) & & & & & & & \\ (\Gamma Y) & & & & & & \\ (\Gamma Y) & & & & & \\ & & & & & \\ (\Gamma Y) & & & & & \\ & & & & \\ & & & & \\ & & & & \\ & & & & \\ & & & \\ & & & \\ & & & \\ & & & \\ & & & \\ & & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & &
+\end{verbatim}
+
+Підставляючи цей вираз у рівняння (20.1) і ділячи змінні, отримуємо дві
+звичайні диференціальні рівняння
+
+\begin{verbatim}
+\varphi(r) = a \ln r + b, \quad r = u^2 + v^2.
+\varphi(u, v) = 0.57 \ln(u^2 + v^2) + 1
+\end{verbatim}
+
+где константа \texttt{\textbackslash{}lambda} --- пока что любое
+действительное число ---
+\texttt{\textbackslash{}infty\ \textless{}\ \textbackslash{}lambda\ \textless{}\ \textbackslash{}infty}
+.
+
+Результаты исследования решений этих двух уравнений при различных
+значениях \texttt{\textbackslash{}lambda} приведены на рис 20.2.
+
+Теперь мы должны \emph{опбросить} те решения, которые либо неограничены
+при \texttt{t\ \textbackslash{}to\ \textbackslash{}infty} , либо
+становятся тождественно равными нулю, если потребовать выполнения
+граничных условий \texttt{u(0,\ t)} = \texttt{u(L,\ t)} = 0.
+
+В качестве упражнения читателю предлагается проверить, что нетривиальные
+и ограниченные решения можно получить только при отрицательных значениях
+параметра \texttt{\textbackslash{}lambda} . Таким образом, наша
+задача--- найти такие значения констант A, B, C, D и отрица-
+
+тельной константы
+\texttt{\textbackslash{}lambda\ =\ -\textbackslash{}beta\^{}2} , чтобы
+выражение
+
+(20.2)
+
+\begin{verbatim}
+\varphi(x, y) = 0.57 \ln(u^2 + v^2) + 1,
+\end{verbatim}
+
+удовлетворяло граничным условиям. Если это удастся, то мы будем
+располагать множеством простейших колебаний струны, каждое из которых
+удовлетворяет уравнению с частными произ- Р И С
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_362_Figure_1.jpeg}}
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_362_Figure_2.jpeg}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Розв'язати змішану задачу Діріхле-Неймана з кутовим порошком за
+  допомогою розчину під кутом 45°
+\end{enumerate}
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_362_Figure_5.jpeg}}
+
+ПРИМІТКА. Комплексна функція
+\texttt{w\ =\ \textbackslash{}ln\ z\ =\ \textbackslash{}ln\ \textbar{}z\textbar{}\ +\ i\ \textbackslash{}arg(z)}
+відображає промінь \texttt{\textbackslash{}theta\ =\ c\_1} у площині z у
+пряму \texttt{v\ =\ c\_1} , а коло \texttt{r\ =\ c\_2} у пряму
+\texttt{u\ =\ \textbackslash{}ln\ c\_2} у площині w (див. рисунки).
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_362_Figure_7.jpeg}}
+
+\section{ТАБЛИЦІ ІНТЕГРАЛЬНИХ
+ПЕРЕТВОРЕНЬ}\label{ux442ux430ux431ux43bux438ux446ux456-ux456ux43dux442ux435ux433ux440ux430ux43bux44cux43dux438ux445-ux43fux435ux440ux435ux442ux432ux43eux440ux435ux43dux44c}
+
+Таблиця A: Експоненціальне перетворення Фур'є,
+
+Таблиця B: Перетворення синуса Фур'є.
+
+Таблиця St Cosine Фур'є-перетворення.
+
+Таблиця Dr скінченне перетворення Фур'є, таблиця та скінченне косинусне
+перетворення Фур'є.
+
+Таблиця D: Трансформація Лапласа.
+
+\section{\texorpdfstring{Прийняті позначення
+\texttt{\textbackslash{}delta\textbackslash{}left(x\textbackslash{}right)}
+---
+дельта-функція,}{Прийняті позначення \textbackslash delta\textbackslash left(x\textbackslash right) --- дельта-функція,}}\label{ux43fux440ux438ux439ux43dux44fux442ux456-ux43fux43eux437ux43dux430ux447ux435ux43dux43dux44f-deltaleftxright-ux434ux435ux43bux44cux442ux430-ux444ux443ux43dux43aux446ux456ux44f}
+
+в начальные условия
+
+\begin{verbatim}
+\begin{cases} 0, x < a, \\ 1, x \geqslant a, \end{cases}
+\end{verbatim}
+
+\begin{verbatim}
+u_t(x, \theta) = g(x)  приводит к двум уравнениям
+\end{verbatim}
+
+\begin{verbatim}
+H(x-a) =
+\end{verbatim}
+
+Функція Хевісайду,
+
+\begin{verbatim}
+H(a-x) = \begin{cases} 1, & x \leqslant a, \\ 0, & x > a, \end{cases}
+\end{verbatim}
+
+дзеркальною функцією Хевісайду.
+
+ТАБЛИЦЯ A. Експоненціальне перетворення Фур'є
+
+Воспользовавшись соотношениями ортогональности
+
+1. f'(x) \textbar{} iωF (ω) \textbar{}
+
+\textbar------------------------------\textbar-------------------------------------------------\textbar{}
+
+\begin{verbatim}
+| 2. f''(x) | -\omega^2 F(\omega) |
+\end{verbatim}
+
+\begin{verbatim}
+| 3. fn (x), (n-та похідна) | (i\omega)^n F(\omega) |
+\end{verbatim}
+
+\begin{verbatim}
+| 4. f(ax), a > 0 | \frac{1}{a} F\left(\frac{\omega}{a}\right) |
+\end{verbatim}
+
+\begin{verbatim}
+| 5. f(x-a) | e^{-ia\omega}F(\omega) |
+\end{verbatim}
+
+\begin{verbatim}
+| 6. e^{-a^2x^2} | \frac{1}{a\sqrt{2}}e^{-\omega^2/4a^2} |
+\end{verbatim}
+
+\begin{verbatim}
+| 7. e^{-a_1 x} | \sqrt{\frac{2}{\pi}} \frac{a}{a^2 + \omega^2} |
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{19}
+\item
+  гріх (ax)
+\item
+\item
+\end{enumerate}
+
+\begin{verbatim}
+\begin{cases} 0, & m \neq n, \\ L/2, & m = n, \end{cases}
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{9}
+\tightlist
+\item
+\item
+\end{enumerate}
+
+находим коэффициенты \texttt{a\_n} и \texttt{b\_n} (20.5)
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{11}
+\tightlist
+\item
+\end{enumerate}
+
+Итак, задача решена. Ее решение записывается в виде
+
+(20.6)
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{12}
+\tightlist
+\item
+\end{enumerate}
+
+а шанси \texttt{a\_n} і \texttt{b\_n} визначаються за формулами (20,5).
+Перед завершенням лекції дозвольте зробити кілька зауважень. \# ПОВАГА
+1. Якщо початкова \emph{швидкість} струни дорівнює нулю, тоді розв'язок
+(20.6) має вигляд
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{13}
+\tightlist
+\item
+\end{enumerate}
+
+І це можна інтерпретувати так. Припустимо, ми розклали початкове
+зміщення струни
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{14}
+\tightlist
+\item
+\end{enumerate}
+
+в ряд по синусам
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{15}
+\tightlist
+\item
+\end{enumerate}
+
+Тогда каждый член такого разложения должен совершать колебания
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{16}
+\tightlist
+\item
+\end{enumerate}
+
+Якщо ми підсумуємо всі ці коливання, отримаємо розв'язок нашої проблеми.
+Наприклад, припустимо, що
+
+\texttt{Початкове\ переміщення\ струни\ задається\ функцією\ \textquotesingle{}f(x)\ =\ \textbackslash{}sin(\textbackslash{}pi\ x/L)\ +\ 0.5\ \textbackslash{}sin(3\textbackslash{}pi\ x/\ L)\ +\ 0,25\ \textbackslash{}sin(5\textbackslash{}pi\ x/L)\textquotesingle{}\ .}
+
+Повна відповідь системи на початкову умову такого типу дорівнює сумі
+відповідей на кожен терм, тобто
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{17}
+\item
+\item
+  Член із числом n у розкладі (20.6) називається ** модою осциляції**
+  або ** p-тою гармонікою**. Використовуючи тригонометричні формули, ці
+  гармоніки можна записати як
+\item
+\end{enumerate}
+
+де \texttt{R\_n} і \texttt{\textbackslash{}delta\_n} --- нові довільні
+константи (амплітуда та фазовий кут). Ця нова форма представлення n-го
+моду виявляється більш корисною для аналізу коливань. Частота коливань
+od (рад/с) та моду визначаються відповідно до формули
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{9}
+\tightlist
+\item
+\end{enumerate}
+
+де T --- натяг струни, p --- лінійна густина струни. Зверніть увагу, що
+частота n-ї гармоніки у n разів більша за основну частоту (n=1). Ця
+властивість частоти не характерна для всіх типів коливань. Приємний звук
+струни скриму або гітари зумовлений множинністю обертонів основної
+частоти. У барабані частоти гармонік високого порядку не є кратними
+основної частоти коливань. \# ЗАВДАННЯ 1. Знайти розв'язок задачі
+(20.1), якщо початкові умови задаються формулами
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{9}
+\tightlist
+\item
+\end{enumerate}
+
+\texttt{u\_t(x,\ 0)\ =\ 0.} Побудувати графіки розв'язків для різних
+моментів часу. Чи є це рішення періодичним у часі? Який у нього період?
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\item
+  Знайти розв'язок проблеми коливань струн (20.1) за початкових умов
+  вигляду
+\item
+\end{enumerate}
+
+\texttt{\textquotesingle{}u\_t(x,\ 0)\ =\ \textbackslash{}sin(3\textbackslash{}pi\ x/L).\textquotesingle{}\ Как\ выглядит\ график\ решения\ в\ различные\ моменты\ времени?}
+
+\begin{itemize}
+\tightlist
+\item
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \setcounter{enumi}{2}
+  \tightlist
+  \item
+    Показати це, якщо на рис. 20.2 значення
+    \texttt{\textbackslash{}lambda\ \textbackslash{}geqslant\ 0} , тоді
+    розв'язки \texttt{X(x)} \texttt{T(t)} будуть або необмеженими, або
+    ідентичними нулю.
+  \end{enumerate}
+\item
+  Знайти розв'язок проблеми коливань струн за початкових умов вигляду
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{11}
+\tightlist
+\item
+\end{enumerate}
+
+\texttt{\textquotesingle{}u\_1(x,\ 0)\ =\ (3\textbackslash{}pi\ \textbackslash{}alpha/L)\textbackslash{}sin(3\textbackslash{}pi\ x/L).\textquotesingle{}\ 5.\ Гітарна\ струна\ довжиною\ L\ =\ 1\ тягнеться\ за\ середню\ точку\ значенням\ h\ (див.\ рис.)\ Початкове\ положення\ струни\ можна\ встановити\ як}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{12}
+\tightlist
+\item
+\item
+\item
+\item
+\end{enumerate}
+
+\begin{verbatim}
+\begin{array}{llll} (\mathrm{Y} \Pi \Pi) & u_{tt} = \alpha^2 u_{xx} - \beta u_t, & 0 < x < 1, & 0 < t < \infty, \\ (\Gamma \mathrm{Y}) & \begin{cases} u \ (0, \ t) = 0, \\ u \ (1, \ t) = 0, \end{cases} & 0 < t < \infty, \\ (\mathrm{H} \mathrm{Y}) & \begin{cases} u \ (x, \ 0) = f \ (x), \\ u_1 \ (x, \ 0) = 0. \end{cases} & 0 \leqslant x \leqslant 1, \end{array}
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{16}
+\tightlist
+\item
+\item
+\item
+\end{enumerate}
+
+\begin{verbatim}
+\begin{array}{ll} (\mathrm{Y} \mathrm{H} \Pi) & u_{tt} = \alpha^2 u_{xx} + Kx, \quad 0 < x < 1, \ 0 < t < \infty, \\ (\mathrm{\Gamma} \mathrm{Y}) & \begin{cases} u \ (0, \ t) = 0, \\ u \ (1, \ t) = 0, \end{cases} & 0 < t < \infty, \\ (\mathrm{H} \mathrm{Y}) & \begin{cases} u \ (x, \ 0) = f \ (x), \\ u_t \ (x, \ 0) = 0. \end{cases} & 0 \leqslant x \leqslant 1, \end{array}
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{18}
+\tightlist
+\item
+\item
+\end{enumerate}
+
+\section{ОСЦИЛЯЦІЇ ПУЧКА (РІВНЯННЯ ЧЕТВЕРТОГО ПОРЯДКУ В ЧАСТИННИХ
+ПОХІДНИХ)}\label{ux43eux441ux446ux438ux43bux44fux446ux456ux457-ux43fux443ux447ux43aux430-ux440ux456ux432ux43dux44fux43dux43dux44f-ux447ux435ux442ux432ux435ux440ux442ux43eux433ux43e-ux43fux43eux440ux44fux434ux43aux443-ux432-ux447ux430ux441ux442ux438ux43dux43dux438ux445-ux43fux43eux445ux456ux434ux43dux438ux445}
+
+МЕТА-ЛЕКЦІЯ: Показати, як проблема осциляції пучка веде до рівняння
+четвертого порядку і як ця задача розв'язується у випадку вільно
+спокійних кінців. Проводиться порівняння коливань променя з вібраціями
+струни скрипки.
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_349_Figure_5.jpeg}}
+
+\begin{verbatim}
+u\left(1+\frac{1}{4}\sin\theta,\ \theta\right)=\cos\theta
+\end{verbatim}
+
+приводят, вообще говоря, к нерезкому заднему фронту (поскольку формула
+Даламбера подразумевает интегрирование функции
+\texttt{\textbackslash{}psi(x)} в пределах от x-ct до x+ct).
+
+Покажем теперь, что принцип Гюйгенса неприменим к цилиндрическим волнам.
+Такого рода решения описывают волны на воде от точечного источника,
+когда задний фронт волны не резкий, а постепенно затухает до нуля.
+
+\section{Двумерное волновое
+уравнение}\label{ux434ux432ux443ux43cux435ux440ux43dux43eux435-ux432ux43eux43bux43dux43eux432ux43eux435-ux443ux440ux430ux432ux43dux435ux43dux438ux435}
+
+Чтобы решить двумерную волновую задачу
+
+(УЧП)
+
+\begin{verbatim}
+u(1+\epsilon\sin\theta, \theta) = \cos\theta, \quad 0 \le \epsilon \le 1/4.
+f(x+h) = f(x) + f'(x)h + f''(x)\frac{h^2}{2!} + \dots,
+\begin{cases} -\infty < x < \infty, \\ -\infty < y < \infty, \end{cases}
+\end{verbatim}
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_350_Figure_2.jpeg}}
+
+\begin{verbatim}
+u(1+\varepsilon\sin\theta,\ \theta)=u(1,\ \theta)+u_r(1,\ \theta)(\varepsilon\sin\theta)+u_{rr}(1,\ \theta)\frac{(\varepsilon\sin\theta)^2}{21}+\ldots
+\end{verbatim}
+
+(НУ)
+
+\begin{verbatim}
+\begin{array}{l} u_{xx} + u_{yy} = 0, \quad 0 < x < 1, \quad 0 < y < 1, \\ u(x, 1) = 0, \quad 0 < x < 1, \quad 0 < y < 1, \\ u(x, 0) = 0, \quad 0 < x < 1, \quad 0 < y < 1, \\ u(0, y) = 1, \quad \frac{\partial u}{\partial x}(1, y) = 0 \end{array}
+\end{verbatim}
+
+Розглянемо розв'язок тривимірної задачі за початкових умов, які залежать
+лише від двох змінних X і Y.
+
+Сделав это, получим, что трехмерная формула
+
+\begin{verbatim}
+\Delta u = 0, \quad 0 < r < 1 + \varepsilon \sin \theta,
+\end{verbatim}
+
+для розв'язку та опише циліндричні хвилі і, отже, дасть розв'язок
+двовимірної задачі. Цей метод називається методом спуску. Після всіх
+розрахунків ми отримуємо 1) (зовсім не тривіальне)
+
+\begin{verbatim}
+u(1, \theta) + u_r(1, \theta) (\varepsilon \sin \theta) + u_{rr}(1, \theta) \frac{(\varepsilon \sin \theta)^2}{2!} + \dots = \cos \theta.
+\end{verbatim}
+
+Перед нами стоїть розв'язок двовимірного хвильового рівняння, і хоча,
+найімовірніше, його практичне застосування передбачає використання
+комп'ютера, цікаво аналізувати його з точки зору принципу Гюйгенса. У
+цьому розв'язці обидва інтеграли початкових збурень розглядаються вздовж
+внутрішньої частини (тут слово «внутрішнє» відіграє вирішальну роль)
+кола з радіусом cte e центр у точці (x, y). Іншими словами, якщо ми
+проаналізуємо це рішення так само, як у тривимірному випадку, то
+побачимо, що початкове збурення поширюється з чітко визначеним переднім
+краєм і розмитим заднім краєм. Отже, принцип Гюйгенса не виконується у
+просторі двох вимірів.
+
+\begin{verbatim}
+Нарешті, припустимо, що початкові збурення  \phi  і  \phi  залежать лише від однієї змінної. У цьому випадку виникають плоскі хвилі, і після застосування методу спуску отримуємо
+\end{verbatim}
+
+\&lt;sup\textgreater2) См., например, Тихонов А. Н., Самарский А. А.
+Уравнения математической физики. --- М.: Наука, 1972 и др. издания. ---
+Прим. ред.
+
+хорошо известную формулу Даламбера
+
+\begin{verbatim}
+(46.8) u = u_0 + \varepsilon u_1 + \varepsilon^2 u_2 + \dots.
+\end{verbatim}
+
+Слід зазначити, що в цьому випадку використання методу спуску вимагає
+нетривіальних розрахунків. За формулою д'Аламбера початкове зміщення f
+призводить до утворення гострого заднього краю, а початкова швидкість f
+його розмиває. Іншими словами, одномірний випадок є незвичайним тим, що
+принцип Гюйгенса виконується для початкових зсув і не застосовується для
+початкових швидкостей. Можна стверджувати, що загалом принцип Гюйгенса
+не виконується в одномірному випадку.
+
+\section{ПОВАГА Ми не описували метод спуску детально, оскільки
+неможливо зупинитися на питанні, як зменшити розмірність інтегралів,
+включених у формули. Усі ці розрахунки можна знайти в навчальній
+літературі, перелік якої наведено наприкінці книги. Загальна ідея
+полягає в тому, що при розв'язанні задач у низьковимірному просторі
+можна використати відоме розв'язання подібної задачі у просторі вищої
+вимірності, а потім спростити його, припускаючи, що початкові та
+граничні умови не залежать від частини змінних. Читачеві має бути
+зрозуміло, що метод спуску можна застосувати не лише до розглянутої
+проблеми.}\label{ux43fux43eux432ux430ux433ux430-ux43cux438-ux43dux435-ux43eux43fux438ux441ux443ux432ux430ux43bux438-ux43cux435ux442ux43eux434-ux441ux43fux443ux441ux43aux443-ux434ux435ux442ux430ux43bux44cux43dux43e-ux43eux441ux43aux456ux43bux44cux43aux438-ux43dux435ux43cux43eux436ux43bux438ux432ux43e-ux437ux443ux43fux438ux43dux438ux442ux438ux441ux44f-ux43dux430-ux43fux438ux442ux430ux43dux43dux456-ux44fux43a-ux437ux43cux435ux43dux448ux438ux442ux438-ux440ux43eux437ux43cux456ux440ux43dux456ux441ux442ux44c-ux456ux43dux442ux435ux433ux440ux430ux43bux456ux432-ux432ux43aux43bux44eux447ux435ux43dux438ux445-ux443-ux444ux43eux440ux43cux443ux43bux438.-ux443ux441ux456-ux446ux456-ux440ux43eux437ux440ux430ux445ux443ux43dux43aux438-ux43cux43eux436ux43dux430-ux437ux43dux430ux439ux442ux438-ux432-ux43dux430ux432ux447ux430ux43bux44cux43dux456ux439-ux43bux456ux442ux435ux440ux430ux442ux443ux440ux456-ux43fux435ux440ux435ux43bux456ux43a-ux44fux43aux43eux457-ux43dux430ux432ux435ux434ux435ux43dux43e-ux43dux430ux43fux440ux438ux43aux456ux43dux446ux456-ux43aux43dux438ux433ux438.-ux437ux430ux433ux430ux43bux44cux43dux430-ux456ux434ux435ux44f-ux43fux43eux43bux44fux433ux430ux454-ux432-ux442ux43eux43cux443-ux449ux43e-ux43fux440ux438-ux440ux43eux437ux432ux44fux437ux430ux43dux43dux456-ux437ux430ux434ux430ux447-ux443-ux43dux438ux437ux44cux43aux43eux432ux438ux43cux456ux440ux43dux43eux43cux443-ux43fux440ux43eux441ux442ux43eux440ux456-ux43cux43eux436ux43dux430-ux432ux438ux43aux43eux440ux438ux441ux442ux430ux442ux438-ux432ux456ux434ux43eux43cux435-ux440ux43eux437ux432ux44fux437ux430ux43dux43dux44f-ux43fux43eux434ux456ux431ux43dux43eux457-ux437ux430ux434ux430ux447ux456-ux443-ux43fux440ux43eux441ux442ux43eux440ux456-ux432ux438ux449ux43eux457-ux432ux438ux43cux456ux440ux43dux43eux441ux442ux456-ux430-ux43fux43eux442ux456ux43c-ux441ux43fux440ux43eux441ux442ux438ux442ux438-ux439ux43eux433ux43e-ux43fux440ux438ux43fux443ux441ux43aux430ux44eux447ux438-ux449ux43e-ux43fux43eux447ux430ux442ux43aux43eux432ux456-ux442ux430-ux433ux440ux430ux43dux438ux447ux43dux456-ux443ux43cux43eux432ux438-ux43dux435-ux437ux430ux43bux435ux436ux430ux442ux44c-ux432ux456ux434-ux447ux430ux441ux442ux438ux43dux438-ux437ux43cux456ux43dux43dux438ux445.-ux447ux438ux442ux430ux447ux435ux432ux456-ux43cux430ux454-ux431ux443ux442ux438-ux437ux440ux43eux437ux443ux43cux456ux43bux43e-ux449ux43e-ux43cux435ux442ux43eux434-ux441ux43fux443ux441ux43aux443-ux43cux43eux436ux43dux430-ux437ux430ux441ux442ux43eux441ux443ux432ux430ux442ux438-ux43dux435-ux43bux438ux448ux435-ux434ux43e-ux440ux43eux437ux433ux43bux44fux43dux443ux442ux43eux457-ux43fux440ux43eux431ux43bux435ux43cux438.}
+
+\section{ЗАВДАННЯ}\label{ux437ux430ux432ux434ux430ux43dux43dux44f}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Показати, що в одномірному випадку розв'язок задачі
+\end{enumerate}
+
+\begin{verbatim}
+P_{0}
+\begin{cases} \Delta u_{0} = 0, & 0 < r < 1 \text{ (внутри круга),} \\ u_{0}(1, \theta) = \cos \theta, & u_{0}(r, \theta) = r \cos \theta, \end{cases}
+\begin{cases} u(x, \ 0) = \varphi(x), \\ u_t(x, \ 0) = 0 \end{cases}
+P_{1}
+\begin{cases} \Delta u_{1} = 0, & 0 < r < 1 \text{ (внутри круга),} \\ u_{1}(1, \theta) = -\sin \theta \frac{\partial u_{0}(1, \theta)}{\partial r} = -\sin \theta \cos \theta \end{cases}
+\begin{aligned} & (\forall \mathsf{Y}\Pi) \quad u_{tt} = c^2 u_{xx}, \\ & (\mathsf{H} \mathsf{Y}) \quad \begin{cases} u\left(x, \ 0\right) = 0, \\ u_t\left(x, \ 0\right) = \phi\left(x\right). \end{cases} \end{aligned}
+u = u_0 + \frac{1}{4}u_1 + \left(\frac{1}{4}\right)^2 u_1 + \cdots
+u_u + \frac{1}{4} u_t
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Результаты задачи 1 используйте для решения следующей задачи:
+\end{enumerate}
+
+(УЧП)
+
+\begin{verbatim}
+u_t = (1+x) u_{xx}, \\ u(x, 0) = q(x), \quad -\infty < x < \infty,
+\end{verbatim}
+
+(НУ)
+
+\begin{verbatim}
+u_1 = (1 + \varepsilon_1) u_{xx}
+u = u_1 + \varepsilon u_1 + \varepsilon^2 u_2 + \cdots
+\begin{cases} u(x, 0) = x, \\ u_t(x, 0) = 0. \end{cases}
+P_{0}
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Проілюструвати та прокоментувати розв'язок тривимірної проблеми
+\end{enumerate}
+
+(УЧП)
+
+\texttt{,\ \textquotesingle{}(x,\ y,\ z)\ \textbackslash{}in\ R\^{}3\textquotesingle{}\ ,\ \textquotesingle{}u\ =\ 0\textquotesingle{}\ u\_t\ =}
+
+\begin{verbatim}
+g(x) = e^{-x^2}.
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Решите аналогичную (см. задачу 3) задачу для двумерного уравнения
+\end{enumerate}
+
+(УЧП)
+
+(НУ)
+
+Зверніть увагу, що в перших двох задачах коефіцієнти є сталими. Читач
+повинен розуміти, що параметр b має бути достатньо малим, а необережний
+ряд може відрізнятися \# ЗАДАЧІ - 1. Подставьте разложение (46.8) в
+задачу (46.7) и получите последовательность задач
+\texttt{P\_0,\textbackslash{}\ P\_1,\textbackslash{}\ P\_2,\textbackslash{}\ \textbackslash{}dots}
+. 2. Покажите, что нелинейную задачу
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  Решите аналогичную (см. задачу 3) задачу для одномерных плоских волн
+\end{enumerate}
+
+(УЧП)
+
+(НУ)
+
+\begin{itemize}
+\tightlist
+\item
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \setcounter{enumi}{5}
+  \tightlist
+  \item
+    Какова физическая природа того факта, что принцип Гюйгенса не
+    справедлив в двумерном случае?
+  \end{enumerate}
+\item
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \setcounter{enumi}{6}
+  \tightlist
+  \item
+    Воспользуйтесь формулой Лейбница
+  \end{enumerate}
+\end{itemize}
+
+\begin{verbatim}
+u(r, \theta) = u_0(r, \theta) + \frac{1}{4}u_1(r, \theta)
+\end{verbatim}
+
+и продифференцируйте интеграл
+
+\begin{verbatim}
+\Delta u = 0,
+\end{verbatim}
+
+по времени t.
+
+\section{СКІНЧЕННІ ПЕРЕТВОРЕННЯ ФУР'Є (ПЕРЕТВОРЕННЯ СИНУСА ТА
+КОСИНУСА)}\label{ux441ux43aux456ux43dux447ux435ux43dux43dux456-ux43fux435ux440ux435ux442ux432ux43eux440ux435ux43dux43dux44f-ux444ux443ux440ux454-ux43fux435ux440ux435ux442ux432ux43eux440ux435ux43dux43dux44f-ux441ux438ux43dux443ux441ux430-ux442ux430-ux43aux43eux441ux438ux43dux443ux441ux430}
+
+МЕТАЛЕКЦІЇ: Введіть два нових інтегральних перетворення (скінченні
+спіусні та косинусні перетворення):
+
+\begin{verbatim}
+q_{xx} + \varphi_{uu} = 0
+\end{verbatim}
+
+(конечное синус-преобразование),
+
+\begin{verbatim}
+q_{uu} + q_{vv} = 0
+\end{verbatim}
+
+(конечное косинус-преобразование),
+
+(обратное синус-преобразование),
+
+\begin{verbatim}
+w = f(z)
+\end{verbatim}
+
+(обратное косинус-преобразование),
+
+\begin{verbatim}
+та показати, як розв'язувати граничні проблеми (зокрема гетерогенні) за допомогою цих перетворень. Раніше ми ознайомилися з регулярними перетвореннями Фур'є та Лапласа і побачили, як застосування цих перетворень до рівняння з частковими похідними зводить задачу до розв'язання звичайного диференціального рівняння. Звичайне перетворення Фур'є означає, що змінна, яку потрібно перетворити, змінюється від  -\infty  до  +\infty  , тому воно використовується для розв'язання задач у вільному просторі (без меж). У цій лекції ми покажемо, як розв'язувати задачі граничних значень (з межами) шляхом перетворення обмежених змінних (це перший раз, коли ми стикаємося з такою трансформацією).
+\end{verbatim}
+
+Давайте на деякий час забудемо про наші завдання і розберемося з самими
+трансформаціями. Дамо визначення перетворень, формули циркуляції та
+основні властивості. Для чого потрібні трансформації і як їх
+використовувати, ми дізнаємося трохи пізніше. Однак, коротко кажучи,
+суть інтегральних перетворень полягає у розкладі функцій, включених у
+задачу як
+
+частотам, решении семейства задач для каждой частоты и после-
+
+дующем суммировании всех полученных результатов.
+
+Почнемо з функції \texttt{f(x)}, визначеної на інтервалі {[}0, L{]}.
+Скінченні синусоїдальні та косинусоїдальні перетворення цієї функції
+визначаються формулами
+
+\begin{verbatim}
+Конечное синус-преобразование  S[f] = S_n = \frac{2}{L} \int_{\sigma}^{L} f(x) \sin(n\pi x/L) dx   n = 1, 2,  \dots   C[f] = C_n = \frac{2}{L} \int_{\sigma}^{L} f(x) \cos(n\pi x/L) dx   n = 0, 1, \dots  Конечное косинус-преобразование
+\end{verbatim}
+
+Читач, ймовірно, помітив, що ці перетворення не відрізняються від формул
+для визначення коефіцієнтів Фур'є, коли їх розкладають на ряд синусами
+або косинусами. Інверсійні формули для цих перетворень є типовими рядами
+Фур'є на синусах і косинусах.
+
+Обратное синус-преобразование
+
+Обратное косинус-преобразование
+
+Отметим, что в обратном косинус-преобразовании суммирование начинается с
+n=0, а в синус-преобразовании --- с n=1.
+
+\section{Приклади синусоїдального
+перетворення}\label{ux43fux440ux438ux43aux43bux430ux434ux438-ux441ux438ux43dux443ux441ux43eux457ux434ux430ux43bux44cux43dux43eux433ux43e-ux43fux435ux440ux435ux442ux432ux43eux440ux435ux43dux43dux44f}
+
+Пусть
+
+\begin{verbatim}
+u + iv = (x + iy)^2 = x^2 - y^2 + 2ixy
+\end{verbatim}
+
+тогда
+
+\begin{verbatim}
+\left\{
+\end{verbatim}
+
+Графік функції \texttt{f(x)} та її перетворення показані на рис. 25.1.
+Обернене перетворення записується як
+
+Чи знаєте ви, як виглядає графік цієї функції з сегментом {[}0, 1{]}?
+Подумай про це. Зверніть увагу, що синусоїдальне перетворення функції
+\texttt{f(x)} визначається лише для додатних цілих чисел n.~Іншими
+словами, скінченний синус і косинус перетворюють функції у чисельні
+послідовності.
+
+\begin{verbatim}
+(\text{УЧП}) \quad u_{tt} = u_{xx} + \sin(\pi x), \quad 0 < x < 1, \quad 0 < t < \infty,
+\begin{cases} (\text{УЧП}) & \varphi_{uu} + \varphi_{vv} = 0, \quad -\infty < u < \infty, \quad 0 < v < \pi, \\ (\text{47.2}) & \begin{cases} \varphi(u, 0) = 0, \\ \varphi(u, \pi) = 1. \end{cases} \end{cases}
+(\text{ГУ}) \quad
+w = u + iv = \ln\left[\frac{z-1}{z+1}\right] =
+\begin{cases} u(0, t) = 0, \\ u(1, t) = 0, \end{cases}
+= \ln\left[\frac{z-1}{z+1}\right] + i \arg\left[\frac{z-1}{z+1}\right]
+v = \arg\left[\frac{z-1}{z+1}\right] = \arg\left[\frac{x+iy-1}{x+1+iy}\right] =
+= \arg\left[\frac{x^2+y^2-1+i2y}{(x+1)^2+y^2}\right] =
+= \arg\left[\frac{2y}{x^2+y^2-1}\right]
+\begin{cases} u(x, 0) = 1, \\ u_t(x, 0) = 0, \end{cases}
+\varphi(x, y) = \frac{1}{\pi} \arctan\left[\frac{2y}{x^2 + y^2 - 1}\right].
+x^{2} + y^{2} = 1,
+\end{verbatim}
+
+Ми можемо розв'язати задачу наступними трьома кроками:
+
+ШАГ І (Определение подходящего преобразования.)
+
+Оскільки змінна x змінюється від 0 до 1, ми використаємо фінальне
+перетворення, а саме синусоїдальне перетворення; Пізніше стане
+зрозуміло, чому. Ми могли б розв'язати цю задачу, використовуючи
+перетворення Лапласа на змінній t (цей метод не відрізняється від
+скінченного синусоїдального перетворення за інтенсивністю праці).
+
+КРОК 2 (Виконати конвертацію).
+
+Для удобства будем использовать обозначение
+\texttt{S\_n(t)\ =\ S{[}u{]}} . Применим синус-преобразование к
+исходному уравнению
+
+\begin{verbatim}
+(x-1)^{2} + y^{2} = 9,
+\end{verbatim}
+
+и воспользуемся тождеством для синус-преобразования, получим
+
+\begin{verbatim}
+\begin{aligned} & (\text{УЧП}) & \phi_{xx} + \phi_{yy} = 0, & \text{внутри } D, \\ & (\text{ГУ}) & \begin{cases} \varphi(x, y) = 1 & \text{на } x^2 + y^2 = 1, \\ \varphi(x, y) = 2 & \text{на } (x - 1)^2 + y^2 = 9. \end{cases} \end{aligned}
+\begin{split} \frac{d^2S_n\left(t\right)}{dt^2} &= -\left(\pi n\right)^2S_n\left(t\right) + 2n\pi\left[u\left(0,\ t\right) + \left(-1\right)^{n+1}u\left(1,\ t\right)\right] + D_n\left(t\right) = \\ &= -\left(n\pi\right)^2S_n\left(t\right) + D_n\left(t\right), \end{split}
+w = 2t \left[ \frac{z-s}{z-t} \right],
+\end{verbatim}
+
+где
+
+\begin{verbatim}
+u = \gamma [(x-s)(x-t)-\gamma^2],
+v = \gamma [y(x-t)],
+\gamma = 2t/[(x-t)^2 + y^2].
+\end{verbatim}
+
+Якщо тепер перетворити початкові умови задачі на граничне значення,
+отримаємо початкові умови для звичайного диференціального рівняння
+
+\begin{verbatim}
+\begin{aligned} \varphi_{uu} + \varphi_{vv} &= 0, & \text{в кольче,} \\ (\Gamma Y) & & & & & & & \\ (\Gamma Y) & & & & & & \\ (\Gamma Y) & & & & & \\ & & & & & \\ (\Gamma Y) & & & & & \\ & & & & \\ & & & & \\ & & & & \\ & & & & \\ & & & \\ & & & \\ & & & \\ & & & \\ & & & \\ & & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \\ & & \end{aligned}
+\begin{cases} 4/n\pi, & n = 1, 3, \dots, \\ 0, & n = 2, 4, \dots, \end{cases}
+\varphi(r) = a \ln r + b, \quad r = u^2 + v^2.
+\varphi(u, v) = 0.57 \ln(u^2 + v^2) + 1
+\varphi(x, y) = 0.57 \ln(u^2 + v^2) + 1,
+\end{verbatim}
+
+Итак, решим теперь новое семейство задач Кощи:
+
+(ОДУ)
+
+\begin{verbatim}
+w = \ln \left[ \frac{z-1}{z+1} \right].
+z = re^{i\theta}
+\begin{cases} 1, & n = 1, \\ 0, & n = 2, 3, \dots, \end{cases}
+\end{verbatim}
+
+\begin{verbatim}
+\begin{aligned} (\text{Y} \forall \Pi) & \qquad \phi_{\text{vx}} + \phi_{yy} = 0, \quad 0 < x < \infty, \quad 0 < y < \infty, \\ \left\{ \begin{array}{l} \phi(x, \ 0) = \begin{cases} 1, & 0 < x < 1, \\ 0, & 1 \leqslant x < \infty, \end{cases} \\ \phi(0, \ y) = \begin{cases} 1, & 0 < y < 1, \\ 0, & 1 \leqslant y < \infty. \end{cases} \end{aligned}
+\end{verbatim}
+
+\begin{verbatim}
+\right.
+\end{verbatim}
+
+\begin{verbatim}
+\begin{cases} S_n(0) = \begin{cases} 4/n\pi, & n = 1, 3, \dots, \\ 0, & n = 2, 4, \dots, \end{cases}
+\end{verbatim}
+
+\begin{verbatim}
+\begin{cases} \frac{dS_n(0)}{dt} = 0. \end{cases}
+H(x-a) =
+\begin{cases} 0, x < a, \\ 1, x \geqslant a, \end{cases}
+\end{verbatim}
+
+В результате получаем
+
+,
+
+где
+
+\begin{verbatim}
+H(x-a) =
+\begin{cases} 0, & x < a, \\ 1, & x \geqslant a, \end{cases}
+\begin{cases} 0, & n = 2, 4, \dots, \\ (4/n\pi)\cos(n\pi t), & n = 3, 5, 7, \dots \end{cases}
+f(x) = \mathcal{F}^{-1}[F] = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{+\infty} F(\omega) e^{-i\omega x} d\omega \qquad F(\omega) = \mathcal{F}[f] = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{+\infty} f(x) e^{-i\omega x} dx
+\end{verbatim}
+
+Следовательно, решение нашей задачи можно представить в виде
+
+\begin{verbatim}
+\begin{cases} 1, |x| < a \\ 0, |x| > a \end{cases}
+\end{verbatim}
+
+\section{ЗАУВАЖЕННЯ}\label{ux437ux430ux443ux432ux430ux436ux435ux43dux43dux44f}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Для решения задачи методом конечного синус- или косинуспреобразования
+  краевые условия при x=0 и x=L должны иметь вид
+\item
+\end{enumerate}
+
+\begin{verbatim}
+\begin{cases} 1, |x| < 1 \\ 0, |x| > 1 \end{cases}
+\begin{cases} u(0, t) = f(t) \\ u(L, t) = g(t) \end{cases}
+\delta(x-a)
+\end{verbatim}
+
+\texttt{f(x)} * \texttt{g(x)}
+
+\begin{verbatim}
+\begin{array}{ll} (\mathrm{Y} \mathrm{U} \Pi) & u_t = u_{xx}, \quad 0 < x < 1, \quad 0 < t < \infty, \\ (\mathrm{\Gamma} \mathrm{Y} & \left\{ \begin{array}{ll} u_x \left( 0, \ t \right) = 0 \\ u_x \left( 1, \ t \right) = 0, \end{array} \end{array}
+\end{verbatim}
+
+\begin{verbatim}
+(1+x^2)^{-1}
+xe^{-a+x^4}, a > 0
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Решите в общем виде задачу
+\end{enumerate}
+
+\texttt{H(x+a)} - \texttt{H(x-a)}
+
+\begin{verbatim}
+\frac{a}{x^2+a^2}
+\end{verbatim}
+
+\begin{verbatim}
+\right. & 0 < t < \infty, \\ (\text{НУ}) & u(x, 0) = 0, \quad 0 \leqslant x \leqslant 1. \end{array}
+\end{verbatim}
+
+\begin{verbatim}
+\frac{2ax}{(x^2+a^2)^2}
+\begin{cases} \cos(ax), |x| > \pi/2a \\ 0, |x| > \pi/2a \end{cases}
+\end{verbatim}
+
+\section{ПРИНЦИП СУПЕРПОЗИЦІЇ Є ОСНОВОЮ ТЕОРІЇ ЛІНІЙНИХ СИСТЕМ
+МЕТАЛЕКЦІЇ: Ознайомити читача з принципом суперпозиції та показати, як
+його можна використати для розкладання початкової задачі на підзадачі,
+потім розв'язання всіх підзадач одразу і, підсумуючи результати,
+знаходження розв'язку початкової проблеми. Ми також хочемо показати, що
+два основні методи розв'язання лінійних рівнянь --- метод розділення
+змінних і метод інтегрального перетворення --- використовують принцип
+суперпозиції.}\label{ux43fux440ux438ux43dux446ux438ux43f-ux441ux443ux43fux435ux440ux43fux43eux437ux438ux446ux456ux457-ux454-ux43eux441ux43dux43eux432ux43eux44e-ux442ux435ux43eux440ux456ux457-ux43bux456ux43dux456ux439ux43dux438ux445-ux441ux438ux441ux442ux435ux43c-ux43cux435ux442ux430ux43bux435ux43aux446ux456ux457-ux43eux437ux43dux430ux439ux43eux43cux438ux442ux438-ux447ux438ux442ux430ux447ux430-ux437-ux43fux440ux438ux43dux446ux438ux43fux43eux43c-ux441ux443ux43fux435ux440ux43fux43eux437ux438ux446ux456ux457-ux442ux430-ux43fux43eux43aux430ux437ux430ux442ux438-ux44fux43a-ux439ux43eux433ux43e-ux43cux43eux436ux43dux430-ux432ux438ux43aux43eux440ux438ux441ux442ux430ux442ux438-ux434ux43bux44f-ux440ux43eux437ux43aux43bux430ux434ux430ux43dux43dux44f-ux43fux43eux447ux430ux442ux43aux43eux432ux43eux457-ux437ux430ux434ux430ux447ux456-ux43dux430-ux43fux456ux434ux437ux430ux434ux430ux447ux456-ux43fux43eux442ux456ux43c-ux440ux43eux437ux432ux44fux437ux430ux43dux43dux44f-ux432ux441ux456ux445-ux43fux456ux434ux437ux430ux434ux430ux447-ux43eux434ux440ux430ux437ux443-ux456-ux43fux456ux434ux441ux443ux43cux443ux44eux447ux438-ux440ux435ux437ux443ux43bux44cux442ux430ux442ux438-ux437ux43dux430ux445ux43eux434ux436ux435ux43dux43dux44f-ux440ux43eux437ux432ux44fux437ux43aux443-ux43fux43eux447ux430ux442ux43aux43eux432ux43eux457-ux43fux440ux43eux431ux43bux435ux43cux438.-ux43cux438-ux442ux430ux43aux43eux436-ux445ux43eux447ux435ux43cux43e-ux43fux43eux43aux430ux437ux430ux442ux438-ux449ux43e-ux434ux432ux430-ux43eux441ux43dux43eux432ux43dux456-ux43cux435ux442ux43eux434ux438-ux440ux43eux437ux432ux44fux437ux430ux43dux43dux44f-ux43bux456ux43dux456ux439ux43dux438ux445-ux440ux456ux432ux43dux44fux43dux44c-ux43cux435ux442ux43eux434-ux440ux43eux437ux434ux456ux43bux435ux43dux43dux44f-ux437ux43cux456ux43dux43dux438ux445-ux456-ux43cux435ux442ux43eux434-ux456ux43dux442ux435ux433ux440ux430ux43bux44cux43dux43eux433ux43e-ux43fux435ux440ux435ux442ux432ux43eux440ux435ux43dux43dux44f-ux432ux438ux43aux43eux440ux438ux441ux442ux43eux432ux443ux44eux442ux44c-ux43fux440ux438ux43dux446ux438ux43f-ux441ux443ux43fux435ux440ux43fux43eux437ux438ux446ux456ux457.}
+
+Припустимо, що інженеру потрібно знайти відгук лінійної системи на
+вхідний ефект f.~Загальний підхід до розв'язання задачі такий:
+
+\begin{itemize}
+\tightlist
+\item
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi})}
+  \tightlist
+  \item
+    розкласти f на елементарні ефекти
+    \texttt{f\ =\ \textbackslash{}sum\ f\_k} ;
+  \end{enumerate}
+\item
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi})}
+  \setcounter{enumi}{1}
+  \tightlist
+  \item
+    знайти реакцію системи \texttt{u\_k} на вплив \texttt{f\_k} ;
+  \end{enumerate}
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  сложить отклики
+  \texttt{u\ =\ \textbackslash{}sum\_\{i=1\}\^{}\{n\}\ u\_\{i\}} .
+\end{enumerate}
+
+Якщо система лінійна, то отримана сума є реакцією системи на вхідний
+ефект f.~Це принцип суперпоезії (див. стор. 26.1).
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_370_Figure_1.jpeg}}
+
+нак залишається питання, як знайти ці характеристики. Відповідь проста:
+ми оберемо характеристики \{{[}\texttt{x(s)}, \texttt{t(s)}{]}: 0
+\textless{} s \textless{} \infty\} так, щоб вони задовольняли систему
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_370_Picture_2.jpeg}}
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_370_Figure_3.jpeg}}
+
+\begin{verbatim}
+\begin{cases} \frac{dx}{ds} = a(x, t), \\ \frac{dt}{ds} = b(x, t). \end{cases}
+-\infty < x < +\infty
+-\infty < y < +\infty
+\end{verbatim}
+
+Ясно, что в этом случае
+
+\begin{verbatim}
+-\infty < z < +\infty
+\end{verbatim}
+
+\begin{verbatim}
+Другими словами, на характеристиках  \{[x(s), t(s)]: 0 < s < \infty\}  уравнение с частными производными становится обыкновенным дифференциальным уравнением. Поясним эти идеи на конкретном примере.
+\end{verbatim}
+
+\section{ПРИМЕР}\label{ux43fux440ux438ux43cux435ux440}
+
+Припустимо, нам потрібно розв'язати наступну задачу Коші з сталими
+коефіцієнтами:
+
+\begin{verbatim}
+\begin{array}{lll}
+\end{verbatim}
+
+\begin{verbatim}
+\begin{array}{llll} (\forall \Pi \Pi) & u_x + u_t + 2u = 0, & -\infty < x < \infty, & 0 < t < \infty \\ (\forall \Psi) & u(x, 0) = \sin x, & -\infty < x < \infty. \end{array}
+-\infty & < x < +\infty & r \geqslant 0, \ 0 \leqslant \theta \leqslant 2\pi, \\
+\frac{dx}{ds} = 1, \quad \frac{dt}{ds} = 1, \quad 0 < s < \infty.
+-\infty & < y < +\infty & -\alpha \leqslant z \leqslant \alpha, \\
+x(s) = s + c_1, \quad t(s) = s + c_2.
+x(0) = \tau,
+-\infty & < z < +\infty & x = r \cos \theta, \\
+x = s + \tau
+x-t=\tau
+y = r \sin \theta, \\
+\frac{du}{ds} + 2u = 0, \quad 0 < s < \infty,
+u(0) = \sin \tau.
+z = z.
+u\left(s,\,\tau\right)=\sin\tau e^{-2s}
+\end{verbatim}
+
+\begin{verbatim}
+\end{array}
+\end{verbatim}
+
+\begin{verbatim}
+x = s + \tau
+s=t
+r \geqslant 0
+u(x, t) = \sin(x-t)e^{-xt}
+\Delta u = 0
+(\forall \Pi) \quad a(x, t) u_x + b(x, t) u_t + c(x, t) u = 0, \quad -\infty < x < \infty, \\ 0 < t < \infty,
+\Delta u + \lambda^2 u = 0
+u(x, 0) = f(x), \quad -\infty < x < \infty.
+\Delta u = k
+\frac{dx}{ds} = a(x, t), \qquad \frac{dt}{ds} = b(x, t).
+\Delta u + k(E - V)u = 0
+x = x (s, \tau),
+t = t (s, \tau).
+\frac{du}{ds} + c[x(s, \tau), t(s, \tau)]u = 0, 0 < s < \infty,
+(\text{УЧП})
+\frac{dx}{ds} = x
+\frac{dt}{ds} = 1
+x = \tau e^s,
+u_{tt} = c^2 \Delta u
+t = s.
+u_{tt} = c^2 \Delta u - hu_t
+\frac{du}{ds} + su = 0, \quad 0 < s < \infty,
+u_t = \alpha^2 u_{xx}
+u(0) = F(\tau).
+u_t = \alpha^2 u_{xx} - hu_x
+u(s, \tau) = F(\tau) e^{-s} \ell^2
+u_t = \alpha^2 u_{xx} - ku
+s=t
+u_t = \alpha^2 u_{xx} + f(x, t)
+u(x, t) = F(xe^{-t}) e^{-t^2/2}
+\end{verbatim}
+
+Уравнение одномерной диффузии Уравнение конвективной диффузии
+
+Уравнение теплопроводности с поглощением Уравнение теплопроводности с
+источником
+
+\section{НЕЛИНЕЙНЫЕ УРАВНЕНИЯ ПЕРВОГО ПОРЯДКА (ЗАКОНЫ
+СОХРАНЕНИЯ)}\label{ux43dux435ux43bux438ux43dux435ux439ux43dux44bux435-ux443ux440ux430ux432ux43dux435ux43dux438ux44f-ux43fux435ux440ux432ux43eux433ux43e-ux43fux43eux440ux44fux434ux43aux430-ux437ux430ux43aux43eux43dux44b-ux441ux43eux445ux440ux430ux43dux435ux43dux438ux44f}
+
+МЕТА ЛЕКЦІЇ: Ввести понятие нелинейных уравнений первого порядка и
+показать, как некоторые из них (так называемые законы сохранения) можно
+использовать для описания физических явлений. Например, закон сохранения
+
+\begin{verbatim}
+u_i + g(u)u_x = 0
+\end{verbatim}
+
+с начальным условием
+
+\begin{verbatim}
+u(x, 0) = \varphi(x)
+\end{verbatim}
+
+используется для описания потока автомобилей на автостраде. Этот пример
+показывает, что уравнения с частными производными применимы не только в
+физике, биологии или технике. Более того, это нелинейное уравнение имеет
+разрывные решения, которые описывают ударные волны, распространяющиеся в
+потоке автомобилей вдоль дороги.
+
+Одно из наиболее важных уравнений в частных производных --- это закон
+сохранения
+
+\begin{verbatim}
+u_t + f_x = 0.
+\end{verbatim}
+
+Этот закон утверждает, что увеличение некоторой физической величины
+\texttt{u\_t} равно изменению потока--- \texttt{f\_x} этой величины
+через поперечное сечение (поток, направленный слева направо, считается
+положительным). В динамике жидкости величина \texttt{u(x,t)} может
+обозначать плотность жидкости в точке x, а величина
+\texttt{f(x,t)}---поток жидкости (т. е. количество жидкости, протекающей
+через поперечное сечение в точке x в момент времени t). Мы не станем в
+этой лекции рассматривать динамику невязкой несжимаемой жидкости. Вместо
+этого мы покажем, как закон сохранения можно использовать для прогноза
+динамики дорожного движения (нас будет интересовать поток автомобилей, а
+не поток молекул воды).
+
+Сначала займемся выводом закона сохранения.
+
+\section{Вывод закона
+сохранения}\label{ux432ux44bux432ux43eux434-ux437ux430ux43aux43eux43dux430-ux441ux43eux445ux440ux430ux43dux435ux43dux438ux44f}
+
+Предположим, что автомобили движутся слева направо по скоростной
+автостраде, у которой нет боковых съездов и въездов. Обозначим
+
+\texttt{u(x,\ t)} --- плотность автомобилей в точке x (число автомобилей
+на единицу длины),
+
+\texttt{f(x,\ t)} --- ноток автомобилей в точке x (число автомобилей,
+проходящих через точку x в одну минуту).
+
+Совершенно очевидно, что на участке дороги {[}a, b{]} изменение числа
+автомобилей (за единицу времени) дается следующими двумя выражениями:
+
+Изменение числа автомобилей на
+\texttt{{[}a,\ b{]}\ =\ \textbackslash{}frac\{d\}\{dt\}\ \textbackslash{}int\_a\^{}b\ u(x,\ t)\ dx}
+
+И
+
+Изменение числа автомобилей на
+\texttt{{[}a,b{]}\ =\ f(a,t)\ -\ f(b,t)\ =\ -\textbackslash{}int\_\{0\}\^{}\{b\}\ \textbackslash{}frac\{\textbackslash{}partial\ f\}\{\textbackslash{}partial\ x\}(x,t)dx}
+.
+
+Последнее соотношение --- следствие основной теоремы интегрального
+исчисления. Приравнивая эти два интеграла, получаем
+
+\begin{verbatim}
+\int_{a}^{b} \frac{\partial u}{\partial t}(x, t) dx = -\int_{a}^{b} \frac{\partial f}{\partial x}(x, t) dx.
+\end{verbatim}
+
+Поскольку промежуток {[}a,b{]} произволен, делаем вывод, что
+подынтегральные функции равны, т е. выполняется закон сохранения
+
+\begin{verbatim}
+u_t + f_x = 0.
+\end{verbatim}
+
+\section{Применение закона сохранения к задаче о дорожном
+движении}\label{ux43fux440ux438ux43cux435ux43dux435ux43dux438ux435-ux437ux430ux43aux43eux43dux430-ux441ux43eux445ux440ux430ux43dux435ux43dux438ux44f-ux43a-ux437ux430ux434ux430ux447ux435-ux43e-ux434ux43eux440ux43eux436ux43dux43eux43c-ux434ux432ux438ux436ux435ux43dux438ux438}
+
+Уравнение \texttt{u\_t\ +\ f\_x\ =\ 0} по форме очень простое. Правда, в
+нем две неизвестные функции! Вопрос в том, как воспользоваться этим
+уравнением и что это нам даст5
+
+В задачах дорожного движения пользуются экспериментально найденной
+зависимостью потока автомобилей \texttt{f(u)} от плотности автомобилей в
+данной точке u. Представляется очевидным, что если плотность u растет,
+то растет и поток f (по крайней мере в точке). Типичная модель дорожного
+движения задается формулой (см. рис. 28.1)
+
+\begin{verbatim}
+f(u) = Au (1-u).
+\end{verbatim}
+
+Используются и другие модели:
+
+\begin{itemize}
+\tightlist
+\item
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi})}
+  \tightlist
+  \item
+    \texttt{f(u)} = ku (линейный рост потока),
+  \end{enumerate}
+\item
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi})}
+  \setcounter{enumi}{1}
+  \tightlist
+  \item
+    \texttt{f(u)\ =\ u\^{}2} (квадратичный рост потока).
+  \end{enumerate}
+\end{itemize}
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_362_Figure_5.jpeg}}
+
+.
+
+Значит, произведение
+
+\begin{verbatim}
+P^{-1}AP =
+\begin{bmatrix} 2 & -2 \\ 1 & 1 \end{bmatrix}
+^{-1}
+\begin{bmatrix} 0 & 8 \\ 2 & 0 \end{bmatrix}
+\begin{bmatrix} 2 & -2 \\ 1 & 1 \end{bmatrix}
+= \\ =
+\begin{bmatrix} 1/4 & 1/2 \\ -1/4 & 1/2 \end{bmatrix}
+\begin{bmatrix} 0 & 8 \\ 2 & 0 \end{bmatrix}
+\begin{bmatrix} 2 & -2 \\ 1 & 1 \end{bmatrix}
+\end{verbatim}
+
+дорівнює діагональній матриці
+
+\begin{verbatim}
+\Lambda =
+\begin{bmatrix} 4 & 0 \\ 0 & -4 \end{bmatrix}
+\end{verbatim}
+
+.
+
+(Читатель может проверить это самостоятельно.)
+
+Тепер можна розв'язати просту систему з двох диференціальних рівнянь у
+похідних у похідних (з відповідними початковими умовами).
+
+\section{\texorpdfstring{Лінійне \texttt{u\_t\ +\ Au\_x\ =\ 0} системне
+рішення.}{Лінійне u\_t + Au\_x = 0 системне рішення.}}\label{ux43bux456ux43dux456ux439ux43dux435-u_t-au_x-0-ux441ux438ux441ux442ux435ux43cux43dux435-ux440ux456ux448ux435ux43dux43dux44f.}
+
+Розглянемо задачу Коші для системи, що містить два рівняння та дві
+початкові умови:
+
+(УЧП 1)
+
+\begin{verbatim}
+\frac{\partial u_1}{\partial t} + 8 \frac{\partial u_2}{\partial x} = 0
+\end{verbatim}
+
+,\\
+(29.3) (УЧП 2)
+\texttt{\textbackslash{}frac\{\textbackslash{}partial\ u\_2\}\{\textbackslash{}partial\ t\}\ +\ 2\ \textbackslash{}frac\{\textbackslash{}partial\ u\_1\}\{\textbackslash{}partial\ x\}\ =\ 0}
+,
+\texttt{-\textbackslash{}infty\ \textless{}\ x\ \textless{}\ \textbackslash{}infty}
+, \texttt{0\ \textless{}\ t\ \textless{}\ \textbackslash{}infty} ,\\
+(HУ 1) \texttt{u\_1(x,\ 0)\ =\ f(x)} ,\\
+\texttt{(HУ\ 2)\ \textquotesingle{}u\_2(x,\ 0)\ =\ g(x)\textquotesingle{}\ ,\ \textquotesingle{}-\textbackslash{}infty\ \textless{}\ x\ \textless{}\ \textbackslash{}infty\textquotesingle{}\ .}
+
+Ця задача може відповідати визначенню \texttt{u\_1(x,\ t)} тиску та
+густини \texttt{u\_2(x,\ t)} як функції просторової координати x і часу
+t за відомими розподілами цих величин у початковий момент.
+
+Запишемо систему рівнянь у матричній формі
+
+\begin{verbatim}
+\begin{bmatrix} \frac{\partial u_1}{\partial t} \\ \frac{\partial u_2}{\partial t} \end{bmatrix}
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+\end{itemize}
+
+\begin{verbatim}
+\begin{bmatrix} 0 & 8 \\ 2 & 0 \end{bmatrix}
+\begin{bmatrix} \frac{\partial u_1}{\partial x} \\ \frac{\partial u_2}{\partial x} \end{bmatrix}
+=
+\begin{bmatrix} 0 \\ 0 \end{bmatrix}
+\end{verbatim}
+
+или (29 ~4)
+
+\begin{verbatim}
+u_t + Au_s = 0
+\end{verbatim}
+
+где
+
+\begin{verbatim}
+A =
+\begin{bmatrix} 0 & 8 \\ 2 & 0 \end{bmatrix}
+, \quad u_1 =
+\begin{bmatrix} \frac{\partial u_1}{\partial t} \\ \frac{\partial u_2}{\partial t} \end{bmatrix}
+, \quad u_x =
+\begin{bmatrix} \frac{\partial u_1}{\partial x} \\ \frac{\partial u_2}{\partial x} \end{bmatrix}
+, \quad 0 =
+\begin{bmatrix} 0 \\ 0 \end{bmatrix}
+\end{verbatim}
+
+.
+
+Введем новые неизвестные функции
+
+\begin{verbatim}
+v =
+\begin{bmatrix} v_1 \\ v_2 \end{bmatrix}
+\end{verbatim}
+
+с помощью преобразования
+
+\begin{verbatim}
+u = Pv
+\end{verbatim}
+
+.
+
+де P --- матриця, стовпці якої містять власні вектори матриці A (матриця
+P, яку вже знають). Виявляється, що після такого перетворення буде
+отримана дуже проста система для визначення v (два рівняння відносно
+нового невідомого \texttt{v\_1} і \texttt{v\_2} виявляються
+незалежними). Це означає, що \texttt{v\_1} і \texttt{v\_2} легко знайти.
+Після \texttt{v\_1} і \texttt{v\_2} знайдено, згідно з формулою
+
+\begin{verbatim}
+u = Pv
+\end{verbatim}
+
+находятся искомые функции и, и и2.
+
+Спершу ж давайте розглянемо, як виглядає система визначення v.
+Диференціюючи дві частини співвідношення u = Pv, отримуємо
+
+(29 5)
+
+\begin{verbatim}
+\frac{\partial u}{\partial t} = P \frac{\partial v}{\partial t},
+\frac{\partial u}{\partial x} = P \frac{\partial v}{\partial x}.
+\end{verbatim}
+
+(Чтобы лучше понять дальнейшее изложение, читателю рекомендуется
+записать эти уравнен я в развернутой форме.)
+
+Теперь подставим соотношения (29.5) в систему
+
+\begin{verbatim}
+u_t + Au_x = 0
+\end{verbatim}
+
+и получим
+
+\begin{verbatim}
+Pv_t + APv_x = 0.
+\end{verbatim}
+
+Если умножить теперь обе части последнего уравнения на
+\texttt{P\^{}\{-1\}} , то получим
+
+\begin{verbatim}
+v_t + P^{-1}APv_x = 0,
+\end{verbatim}
+
+или
+
+\begin{verbatim}
+(29.6) v_t + \Lambda v_x = 0.
+\end{verbatim}
+
+Раньше мы уже видели, что для нашей матрицы
+
+\begin{verbatim}
+\Lambda =
+\begin{bmatrix} 4 & 0 \\ 0 & -4 \end{bmatrix}
+\end{verbatim}
+
+.
+
+Запишем (29.6) в развернутой форме
+
+(29.7)
+
+\begin{verbatim}
+\frac{\frac{\partial v_1}{\partial t} + 4 \frac{\partial v_1}{\partial x} = 0, \\ \frac{\partial v_2}{\partial t} - 4 \frac{\partial v_2}{\partial x} = 0.
+\end{verbatim}
+
+Результатом є система з двох непов'язаних рівнянь, які можна розв'язати
+незалежно. Читач має знати, що розв'язки цих рівнянь --- це хвилі, що
+рухаються
+
+\begin{verbatim}
+v_1(x, t) = \varphi(x-4t),
+\end{verbatim}
+
+\begin{verbatim}
+v_2(x, t) = \psi(x+4t),  где ф и ф-произвольные дифференцируемые функции.
+\end{verbatim}
+
+Таким образом, мы нашли функции \texttt{v\_1} и \texttt{v\_2} . Для
+получения общего решения u нужно вычислить
+
+\begin{verbatim}
+u = Pv =
+\begin{bmatrix} 2 & -2 \\ 1 & 1 \end{bmatrix}
+\begin{bmatrix} v_1 \\ v_2 \end{bmatrix}
+=
+=
+\begin{bmatrix} 2 & -2 \\ 1 & 1 \end{bmatrix}
+\begin{bmatrix} \varphi(x - 4t) \\ \psi(x + 4t) \end{bmatrix}
+=
+=
+\begin{bmatrix} 2\varphi(x - 4t) - 2\psi(x + 4t) \\ \varphi(x - 4t) + \psi(x + 4t) \end{bmatrix}
+\end{verbatim}
+
+.
+
+Другими словами,
+
+(29.8)
+
+\begin{verbatim}
+u_1(x, t) = 2\varphi(x-4t) - 2\psi(x+4t), u_2(x, t) = \varphi(x-4t) + \psi(x+4t).
+\end{verbatim}
+
+Следовательно, мы нашли общее решение системы двух уравнений (29.3).
+
+Типичным решением (а их бесконечное число) могут быть, например, функции
+
+\begin{verbatim}
+\phi(\xi) = \sin \xi, \ \psi(\xi) = \xi^2
+\end{verbatim}
+
+(две произвольные функции)
+
+и, следовательно,
+
+\begin{verbatim}
+u_1(x, t) = 2 \sin(x-4t) - 2(x+4t)^2,
+\end{verbatim}
+
+\begin{verbatim}
+u_2(x, t) = \sin(x-4t) + (x+4t)^2.  Подставим теперь общее решение (29.8) в начальные условия
+\end{verbatim}
+
+\begin{verbatim}
+u_1(x, 0) = f(x),
+\end{verbatim}
+
+\texttt{u\_2}(x, 0) = \texttt{g(x)}, в результате получаем
+
+\begin{verbatim}
+2\varphi(x) - 2\psi(x) = f(x),
+\varphi(x) + \psi(x) = g(x),
+\end{verbatim}
+
+откуда функци і ф и ф легко находятся:
+
+\begin{verbatim}
+\varphi(x) = \frac{1}{4} \left[ f(x) + 2g(x) \right],
+\psi(x) = \frac{1}{4} \left[ 2g(x) - f(x) \right].
+\end{verbatim}
+
+\textbf{Тепе}рь можно написать решение задачи (29.3) в окончательном
+виде
+
+\begin{verbatim}
+u_{1}(x, t) = 2\varphi(x-4t) - 2\psi(x+4t) =
+= \frac{1}{2} \left[ f(x-4t) + 2g(x-4t) \right] - \frac{1}{2} \left[ 2g(x+4t) - f(x+4t) \right],
+\end{verbatim}
+
+(29.9)
+
+\begin{verbatim}
+u_{2}(x, t) = \varphi(x-4t) + \psi(x+4t) =
+= \frac{1}{4} \left[ f(x-4t) + 2g(x-4t) \right] + \frac{1}{4} \left[ 2g(x+4t) - f(x+4t) \right].
+\end{verbatim}
+
+\section{ЗАУВАЖЕННЯ}\label{ux437ux430ux443ux432ux430ux436ux435ux43dux43dux44f-1}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Многие численные методы ориентированы на решение систем уравнений и,
+  значит, многне программы для ЭВМ написаны так, чтобы решать системы
+  уравнений первого порядка. По этой причине, прежде чем воспользоваться
+  программои, приходится преобразовать свое уравнение высокого порядка в
+  систему уравнений первого порядка.
+\item
+  Линейную систему
+\end{enumerate}
+
+\begin{verbatim}
+u_t + A(x, t) u_x + B(x, t) u = 0
+\end{verbatim}
+
+можна розв'язати тим самим методом, що й система \texttt{u\_t} + Au\_x =
+0 . Різниця полягає в тому, що в цьому випадку матриця P із власних
+векторів матриці \texttt{A(x,\ t)} буде функцією від x і t.
+
+\section{ЗАДАЧІ}\label{ux437ux430ux434ux430ux447ux456}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Запишите систему уравнений (29.2) в матричной форме
+\end{enumerate}
+
+\begin{verbatim}
+Au_t + Bu_x + Cu = 0,
+\end{verbatim}
+
+где A, B и C-матрицы третьего порядка.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Найдите собственные векторы и собственные значения матрицы
+\end{enumerate}
+
+\begin{verbatim}
+A =
+\begin{bmatrix} 1 & 1 \\ 4 & 1 \end{bmatrix}
+\end{verbatim}
+
+.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Воспользовавшись результатами задачи 2, решите систему
+\end{enumerate}
+
+\begin{verbatim}
+\begin{cases} \frac{\partial u_1}{\partial t} + \frac{\partial u_1}{\partial x} + \frac{\partial u_2}{\partial x} = 0, \\ \frac{\partial u_2}{\partial t} + 4 \frac{\partial u_1}{\partial x} + \frac{\partial u_2}{\partial x} = 0. \end{cases}
+\end{verbatim}
+
+УКАЗАНИЕ. Запишите сначала систему в матричной форме.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\item
+  Проверьте формулы (29.5), записав их в скалярной форме.
+\item
+  Проверьте, что функции \texttt{u\_1} и \texttt{u\_2} из (29.8)
+  удовлетворяют обоим уравнениям (29.3).
+\end{enumerate}
+
+\section{КОЛЕБАНИЯ МЕМБРАНЫ (ВОЛНОВОЕ УРАВНЕНИЕ В ПОЛЯРНЫХ
+КООРДИНАТАХ)}\label{ux43aux43eux43bux435ux431ux430ux43dux438ux44f-ux43cux435ux43cux431ux440ux430ux43dux44b-ux432ux43eux43bux43dux43eux432ux43eux435-ux443ux440ux430ux432ux43dux435ux43dux438ux435-ux432-ux43fux43eux43bux44fux440ux43dux44bux445-ux43aux43eux43eux440ux434ux438ux43dux430ux442ux430ux445}
+
+МЕТА ЛЕКЦІЇ: Показать, что колебания мембраны можно описать волновым
+уравнением
+
+\begin{verbatim}
+u_{tt} = c^2 \left( u_{rr} + \frac{1}{r} u_r + \frac{1}{r^2} u_{\theta\theta} \right)
+\end{verbatim}
+
+.
+
+Если искать решение этого уравнения в виде стоячих волн:
+
+\begin{verbatim}
+u(r, \theta, t) = P(r) \Theta(\theta) T(t),
+\end{verbatim}
+
+то оно распадается на три обыкновенных дифференциальных уравнения:
+
+\begin{verbatim}
+T'' + \lambda^2 c^2 T = 0
+\end{verbatim}
+
+\begin{verbatim}
+(уравнение гармонических колебаний),  r^2 R'' + rR' + (\lambda^2 r^2 - n^2) R = 0  (уравнение Бесселя), (уравнение гармонических колебаний).
+\end{verbatim}
+
+\begin{verbatim}
+Все произведения  R(r) \Theta(\theta) T(t)  решений этих трех обыкновенных дифференциальных уравнений описывают основные колебания мембраны, а функции  R(r) \Theta(\theta)  описывают форму мембраны. Чтобы найти колебания мембраны при произвольных начальных условиях, мы составим такую комбинацию фундаментальных решений, чтобы начальные условия удовлетворялись.
+\end{verbatim}
+
+\begin{verbatim}
+Цель этой лекции ясна—найти колебания круглой мембраны с заданными начальными и граничными условиями. Для простоты будем считать, что радиус мембраны равен единице, а смещение по границе равно нулю. Пусть  u\left(r,\theta,t\right)  обозначает возвышение точек мембраны под плоскостью равновесия. Нам необходимо решить задачу (см. рис. 30.1)
+\end{verbatim}
+
+\begin{verbatim}
+\begin{array}{llll} (\text{УЧП}) & u_{tt} = c^2 \left( u_{rr} + \frac{1}{r} u_r + \frac{1}{r^2} u_{\theta\theta} \right), & 0 < r < 1, \ 0 < t < \infty, \\ (\text{ГУ}) & u = 0 & \text{при } r = 1, & 0 < t < \infty, \\ (\text{НУ}) & \begin{cases} u = f(r, \ \theta) \\ u_t = g(r, \ \theta) \end{cases} & \text{при } t = 0. \end{array}
+\end{verbatim}
+
+Щоб розв'язати цю задачу, згадаємо проблему коливань скрипкових струн із
+лекції 20, яку розв'язали суперпозицією нескінченної кількості простих
+коливань. Якщо ви використовуєте-
+
+ся этим же подходом, то решения следует искать в виде
+
+\begin{verbatim}
+u(r, \theta, t) = U(r, \theta) T(t)
+\end{verbatim}
+
+.
+
+\begin{verbatim}
+Форма этих колебаний определяется функцией  U(r, \theta)  , а характер осцилляций — множителем T(t).
+\end{verbatim}
+
+Подставив это представление в волновое уравнение (см. задачу 1), получим
+два уравнения
+
+\begin{verbatim}
+\Delta U + \lambda^2 U = 0
+\end{verbatim}
+
+(уравнение Гельм-гольца),
+
+\begin{verbatim}
+T'' + \lambda^2 c^2 T = 0
+\end{verbatim}
+
+(уравнение гармонических колебаний),
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_350_Figure_2.jpeg}}
+
+\begin{verbatim}
+(\text{UBP}) \qquad
+u(1+\varepsilon\sin\theta,\ \theta)=u(1,\ \theta)+u_r(1,\ \theta)(\varepsilon\sin\theta)+u_{rr}(1,\ \theta)\frac{(\varepsilon\sin\theta)^2}{21}+\ldots
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  Разработайте схему метода Монте-Карло для решения смешанной
+  параболической задачи
+\end{enumerate}
+
+\begin{verbatim}
+\Delta u = 0, \quad 0 < r < 1 + \varepsilon \sin \theta,
+\end{verbatim}
+
+\begin{verbatim}
+\right. \end{array}
+\end{verbatim}
+
+\begin{verbatim}
+u(1, \theta) + u_r(1, \theta) (\varepsilon \sin \theta) + u_{rr}(1, \theta) \frac{(\varepsilon \sin \theta)^2}{2!} + \dots = \cos \theta.
+J[y] = \int_{b}^{a} F(x, y, y') dx,
+(46.8) u = u_0 + \varepsilon u_1 + \varepsilon^2 u_2 + \dots.
+J[y] = \int_{0}^{1} [y^{2}(x) + y'^{2}(x)] dx.
+P_{0}
+\frac{df(x)}{dx} = 0
+\begin{cases} \Delta u_{0} = 0, & 0 < r < 1 \text{ (внутри круга),} \\ u_{0}(1, \theta) = \cos \theta, & u_{0}(r, \theta) = r \cos \theta, \end{cases}
+T = \int_{0}^{T} dt = \int_{a}^{L} \frac{dt}{ds} ds = \int_{0}^{L} \frac{ds}{v} = \frac{1}{\sqrt{2mg}} \int_{0}^{L} \frac{ds}{\sqrt{y}} = \frac{1}{\sqrt{2mg}} \int_{a}^{b} \sqrt{\frac{1+y'^{2}}{y}} dy
+J[y] = \int_{a}^{b} F(x, y, y') dx.
+P_{1}
+\frac{df(x)}{dx} = 0
+\begin{cases} \Delta u_{1} = 0, & 0 < r < 1 \text{ (внутри круга),} \\ u_{1}(1, \theta) = -\sin \theta \frac{\partial u_{0}(1, \theta)}{\partial r} = -\sin \theta \cos \theta \end{cases}
+J[y] = \int_{a}^{y} F(x, y, y') dx
+J[y] = \int_{a}^{b} F(x, y, y') dx
+y(a) = A
+J[\overline{y}] \leqslant J[\overline{y} + \varepsilon \eta]
+u_u + \frac{1}{4} u_t
+\varphi(\varepsilon) = J[\bar{y} + \varepsilon \eta]
+u_t = (1+x) u_{xx}, \\ u(x, 0) = q(x), \quad -\infty < x < \infty,
+\frac{d\varphi\left(\varepsilon\right)}{d\varepsilon} = \frac{d}{d\varepsilon} J\left[\overline{y} + \varepsilon\eta\right]|_{\varepsilon=0} =
+u_1 = (1 + \varepsilon_1) u_{xx}
+\end{verbatim}
+
+(Читач має робити це самостійно.) Інтегруючи на частини, ми отримуємо
+
+Оскільки цей інтеграл є нульовим у будь-якій функції
+\texttt{\textbackslash{}eta(x)} , що задовольняє граничні умови
+\texttt{\textbackslash{}eta(a)\ =\ \textbackslash{}eta(b)\ =\ 0} , ми Р
+и с
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_353_Figure_9.jpeg}}
+
+При этом оказывается, что
+\texttt{J{[}\textbackslash{}overline\{y\}{]}\ =\ 0.46} . Если подставить
+в функционал любую другую гладкую функцию, график которой проходит через
+точки (0, 0) и (1, 1), то значение функционала J{[}y{]} станет больше.
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_355_Figure_5.jpeg}}
+
+Соответствующее уравнение Эйлера --- Лагранжа для такого функционала
+будет уже уравнением с частными производными
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_355_Figure_7.jpeg}}
+
+Такого рода функционалы мы рассмотрим в следующей лекции. Однако общая
+философия метода будет иной. Некоторым новым способом мы найдем функцию
+\texttt{u(x,\ y)}, которая минимизирует функционал, а поскольку она
+является решением уравнения Эйлера --- Лагранжа, то тем самым мы найдем
+решение уравнения с частными производными. Другими словами, мы будем
+искать решение уравнения с частными производными методом минимизации
+функционала. В этой лекции все было наоборот: задачу минимизации
+функционала, зависящего от функции одной переменной, мы сводили к
+решению уравнения Эйлера --- Лагранжа. Методы решения дифференциальных
+уравнений путем минимизации соответствующих функционалов принято
+называть прямыми методами вариационного исчисления. Методы минимизации
+функционалов путем решения соответствующих уравнений Эйлера --- Лагранжа
+называются непрямыми методами вариационного исчисления. Следующая лекция
+посвящена хорошо известному прямому методу Ритца. \# ЗАДАЧІ 1. Среди
+всех кривых, удовлетворяющих условиям \texttt{y(0)} = 0, и \texttt{y(1)}
+= 1, найдите ту, которая минимизирует функционал
+
+\begin{verbatim}
+u + iv = (x + iy)^2 = x^2 - y^2 + 2ixy
+\end{verbatim}
+
+Как вы интерпретируете получелный результат? Чему равна величина
+\texttt{J{[}\textbackslash{}overline\{y\}{]}} ? Каков смысл величины
+\texttt{J{[}\textbackslash{}overline\{y\}{]}} ?
+
+\texttt{2.\ Кинетическая\ энергия\ колеблющейся\ материальной\ точки\ определяется\ выражением\ \ \textquotesingle{}KE\ =\ \textbackslash{}frac\{1\}\{2\}\ m\textbackslash{}dot\{y\}\^{}2\textquotesingle{}\ ,\ где\ y\ =\ dy/dt,\ а\ потенциальная\ равна\ \ \textquotesingle{}PE\ =\ \textbackslash{}frac\{1\}\{2\}\ ky\^{}2\textquotesingle{}\ .}
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_343_Figure_2.jpeg}}
+
+Далсе. Приближенное решение
+\texttt{u\_n(x,y)\ =\ a\_1\ \textbackslash{}varphi\_1\ +\ a\_2\ \textbackslash{}varphi\_2\ +\ \textbackslash{}dots\ +\ a\_n\ \textbackslash{}varphi\_n}
+. В это время можно численно найти эначение функционала
+\texttt{J{[}u\_n{]}} . Если необходимо найти значение решения
+\texttt{u\_n(x,y)} в некоторой точке, можно написать небольшую программу
+эля быполнения отой операции. При необходимости можно повторить
+вычисления по этой программе с другими значениями п Рис. 452. Блок-схема
+метода Ритца.
+
+\section{РЕШЕНИЕ УРАВНЕНИЙ С ЧАСТНЫМИ ПРОИЗВОДНЫМИ МЕТОДАМИ ТЕОРИИ
+ВОЗМУЩЕНИЙ МЕТА ЛЕКЦІЇ: Показать, как различные сложные задачи
+(нелинейные уравнения с переменными коэффициентами, области неправильной
+формы и т. д.) можно решить методом возмущения более простых задач.
+Иными словами, мы хотим показать, как следует изменить решение простой
+задачи, чтобы оно давало приближенное решение трудной
+задачи.}\label{ux440ux435ux448ux435ux43dux438ux435-ux443ux440ux430ux432ux43dux435ux43dux438ux439-ux441-ux447ux430ux441ux442ux43dux44bux43cux438-ux43fux440ux43eux438ux437ux432ux43eux434ux43dux44bux43cux438-ux43cux435ux442ux43eux434ux430ux43cux438-ux442ux435ux43eux440ux438ux438-ux432ux43eux437ux43cux443ux449ux435ux43dux438ux439-ux43cux435ux442ux430-ux43bux435ux43aux446ux456ux457-ux43fux43eux43aux430ux437ux430ux442ux44c-ux43aux430ux43a-ux440ux430ux437ux43bux438ux447ux43dux44bux435-ux441ux43bux43eux436ux43dux44bux435-ux437ux430ux434ux430ux447ux438-ux43dux435ux43bux438ux43dux435ux439ux43dux44bux435-ux443ux440ux430ux432ux43dux435ux43dux438ux44f-ux441-ux43fux435ux440ux435ux43cux435ux43dux43dux44bux43cux438-ux43aux43eux44dux444ux444ux438ux446ux438ux435ux43dux442ux430ux43cux438-ux43eux431ux43bux430ux441ux442ux438-ux43dux435ux43fux440ux430ux432ux438ux43bux44cux43dux43eux439-ux444ux43eux440ux43cux44b-ux438-ux442.-ux434.-ux43cux43eux436ux43dux43e-ux440ux435ux448ux438ux442ux44c-ux43cux435ux442ux43eux434ux43eux43c-ux432ux43eux437ux43cux443ux449ux435ux43dux438ux44f-ux431ux43eux43bux435ux435-ux43fux440ux43eux441ux442ux44bux445-ux437ux430ux434ux430ux447.-ux438ux43dux44bux43cux438-ux441ux43bux43eux432ux430ux43cux438-ux43cux44b-ux445ux43eux442ux438ux43c-ux43fux43eux43aux430ux437ux430ux442ux44c-ux43aux430ux43a-ux441ux43bux435ux434ux443ux435ux442-ux438ux437ux43cux435ux43dux438ux442ux44c-ux440ux435ux448ux435ux43dux438ux435-ux43fux440ux43eux441ux442ux43eux439-ux437ux430ux434ux430ux447ux438-ux447ux442ux43eux431ux44b-ux43eux43dux43e-ux434ux430ux432ux430ux43bux43e-ux43fux440ux438ux431ux43bux438ux436ux435ux43dux43dux43eux435-ux440ux435ux448ux435ux43dux438ux435-ux442ux440ux443ux434ux43dux43eux439-ux437ux430ux434ux430ux447ux438.}
+
+Например, мы покажем, как нелинейную задачу
+
+(УЧП)
+
+\begin{verbatim}
+w = \ln \left[ \frac{z-1}{z+1} \right].
+\end{verbatim}
+
+, \texttt{0\ \textless{}\ r\ \textless{}\ 1} ,\\
+\texttt{(ГУ)\ \ \textquotesingle{}u(1,\ \textbackslash{}theta)\ =\ \textbackslash{}cos\ \textbackslash{}theta\textquotesingle{}\ ,\ \ \textquotesingle{}0\ \textbackslash{}le\ \textbackslash{}theta\ \textbackslash{}le\ 2\textbackslash{}pi\textquotesingle{}\ .}
+
+Очень часто задачу, решение которой не известно, можно путем
+непрерывного изменения каких-то параметров свести к близкой, но легко
+решаемой задаче. Тогда и решение исходной задачи будет близко решению
+модифицирующей задачи.
+
+Например, уравнение Лапласа
+
+\begin{verbatim}
+\begin{cases} 1, & n = 1, \\ 0, & n = 2, 3, \dots, \end{cases}
+\end{verbatim}
+
+в помощью семейства уравнений
+
+\begin{verbatim}
+,   0 \le \varepsilon \le 1  ,
+\right.
+,   0 < r < 1  ,   0 \le \theta < 2\pi  ,   u(1, \theta) = g(\theta)  ,   0 \le \theta < 2\pi  ,
+\end{verbatim}
+
+\begin{verbatim}
+при одних граничных условиях (например,   g(\theta) = \cos \theta  ) имеет два различных вещественных решения, а при других (например,   g(\theta) = A \cos \theta   с A > 20,65) эта задача не имеет ни одного вещественного решения. — Прим. ред.
+\end{verbatim}
+
+4) Краевая задача
+
+\begin{verbatim}
+можно непрерывно модифицировать в нелинейное уравнение   \Delta u = u^2 = 0   1).
+\end{verbatim}
+
+На рис. 46.1 изображена схема решения нелинейной задачи путем сведения
+ее к решению уравнения Лапласа2)
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_362_Figure_1.jpeg}}
+
+Рис. 46.1. Схема метода возмущении.
+
+Чтобы найти решение возмущенного уравнения Лапласа
+
+\begin{verbatim}
+u(0, t) = f(t),
+u_{x}(0, t) = 0.
+\end{verbatim}
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_362_Figure_2.jpeg}}
+
+\begin{verbatim}
+x + ct = \text{const},
+\end{verbatim}
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_362_Figure_5.jpeg}}
+
+\begin{verbatim}
+0 < r < 1,     0 \le \theta < 2\pi,     u(1, 0) = 0,     0 \le \theta < 2\pi,
+\end{verbatim}
+
+нмеет два решения (одно --- нулсьое, другое --- нетривиальное), в то
+время как задача
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_362_Figure_7.jpeg}}
+
+\begin{verbatim}
+u(1, \theta) = 0, \quad 0 \le \theta < 2\pi,
+\end{verbatim}
+
+\begin{verbatim}
+\begin{array}{ccccccccccccccccccccccccccccccccccc
+\end{verbatim}
+
+\begin{verbatim}
+\begin{array}{ccc} (\text{УЧ}\Pi) & \Delta u = 0, & 0 < r < 1, \\ (\text{ГУ}) & u(1, \theta) = \cos \theta, & 0 \leqslant \theta \leqslant 2\pi, \end{array}
+H(x-a) =
+u_{tt} = c^2 u_{xx}, \quad 0 < x < L, \quad 0 < t < \infty,
+\begin{cases} 0, x < a, \\ 1, x \geqslant a, \end{cases}
+u(0, t) = g_1(t),
+\end{verbatim}
+
+В результате получаем
+
+\begin{verbatim}
+u_x(0, t) = g_1(t),
+H(x-a) =
+u_x(0, t) - \gamma_1 u(0, t) = g_1(t),
+\begin{cases} 0, & x < a, \\ 1, & x \geqslant a, \end{cases}
+u(0, t) = g_1(t),
+u_x(0, t) = g_1(t),
+f(x) = \mathcal{F}^{-1}[F] = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{+\infty} F(\omega) e^{-i\omega x} d\omega \qquad F(\omega) = \mathcal{F}[f] = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{+\infty} f(x) e^{-i\omega x} dx
+u_x(0, t) - \gamma_1 u(0, t) = g_1(t),
+\begin{cases} \Delta u_{1} = -r^{2} \cos^{2} \theta = -\frac{r^{2}}{2} \left[1 + \cos(2\theta)\right] = -\frac{r^{2}}{2} - \frac{r^{2}}{2} \cos(2\theta), \\ u_{1}(1, \theta) = 0. \end{cases}
+\begin{cases} 1, |x| < a \\ 0, |x| > a \end{cases}
+\Delta u = -\frac{r^2}{2} - \frac{r^3}{2} \cos{(2\theta)}
+\end{verbatim}
+
+\section{ЗАМЕЧ
+АНИЯ}\label{ux437ux430ux43cux435ux447-ux430ux43dux438ux44f}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Для решения задачи методом конечного синус- или косинуспреобразования
+  краевые условия при x=0 и x=L должны иметь вид
+\end{enumerate}
+
+\begin{verbatim}
+u_p(r, \theta) = Ar^4 + Br^4 \cos(2\theta).
+\begin{cases} 1, |x| < 1 \\ 0, |x| > 1 \end{cases}
+u_p(r, \theta) = -\frac{r^4}{32} - \frac{r^4}{24} \cos(2\theta).
+\sum_{n=0}^{\infty} [a_n \cos(n\theta) + b_n \sin(n\theta)] - \frac{1}{32} - \frac{1}{24} \cos(2\theta) = 0.
+\end{verbatim}
+
+\$\$ Отметим, что если величина \texttt{u(0,\ t)} положительна, то
+величина \texttt{u\_x(0,\ t)} также положительна, если \texttt{u(L,\ t)}
+положительна, то \texttt{u\_x(L,\ t)}
+
+\end{document}

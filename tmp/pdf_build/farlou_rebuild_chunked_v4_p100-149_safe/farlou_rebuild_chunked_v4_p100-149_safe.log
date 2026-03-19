@@ -1,0 +1,2339 @@
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.3.6)  18 MAR 2026 20:26
+entering extended mode
+ restricted \write18 enabled.
+ file:line:error style messages enabled.
+ %&-line parsing enabled.
+**farlou_rebuild_chunked_v4_p100-149_safe.tex
+(./farlou_rebuild_chunked_v4_p100-149_safe.tex
+LaTeX2e <2025-11-01>
+L3 programming layer <2026-01-19>
+(/usr/local/texlive/2026/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2025/01/22 v1.4n Standard LaTeX document class
+(/usr/local/texlive/2026/texmf-dist/tex/latex/base/size10.clo
+File: size10.clo 2025/01/22 v1.4n Standard LaTeX file (size option)
+)
+\c@part=\count271
+\c@section=\count272
+\c@subsection=\count273
+\c@subsubsection=\count274
+\c@paragraph=\count275
+\c@subparagraph=\count276
+\c@figure=\count277
+\c@table=\count278
+\abovecaptionskip=\skip49
+\belowcaptionskip=\skip50
+\bibindent=\dimen148
+)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/xcolor/xcolor.sty
+Package: xcolor 2024/09/29 v3.02 LaTeX color extensions (UK)
+
+(/usr/local/texlive/2026/texmf-dist/tex/latex/graphics-cfg/color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: xetex.def on input line 274.
+
+(/usr/local/texlive/2026/texmf-dist/tex/latex/graphics-def/xetex.def
+File: xetex.def 2025/11/01 v5.0p Graphics/color driver for xetex
+)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/graphics/mathcolor.ltx)
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1349.
+Package xcolor Info: Model `RGB' extended on input line 1365.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1367.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1368.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1369.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1370.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1371.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1372.
+)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/geometry/geometry.sty
+Package: geometry 2020/01/02 v5.9 Page Geometry
+
+(/usr/local/texlive/2026/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
+\KV@toks@=\toks17
+)
+(/usr/local/texlive/2026/texmf-dist/tex/generic/iftex/ifvtex.sty
+Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
+
+(/usr/local/texlive/2026/texmf-dist/tex/generic/iftex/iftex.sty
+Package: iftex 2024/12/12 v1.0g TeX engine tests
+))
+\Gm@cnth=\count279
+\Gm@cntv=\count280
+\c@Gm@tempcnt=\count281
+\Gm@bindingoffset=\dimen149
+\Gm@wd@mp=\dimen150
+\Gm@odd@mp=\dimen151
+\Gm@even@mp=\dimen152
+\Gm@layoutwidth=\dimen153
+\Gm@layoutheight=\dimen154
+\Gm@layouthoffset=\dimen155
+\Gm@layoutvoffset=\dimen156
+\Gm@dimlist=\toks18
+)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2025/07/09 v2.17z AMS math features
+\@mathmargin=\skip51
+
+For additional information on amsmath, use the `?' option.
+(/usr/local/texlive/2026/texmf-dist/tex/latex/amsmath/amstext.sty
+Package: amstext 2024/11/17 v2.01 AMS text
+
+(/usr/local/texlive/2026/texmf-dist/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks19
+\ex@=\dimen157
+))
+(/usr/local/texlive/2026/texmf-dist/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen158
+)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/amsmath/amsopn.sty
+Package: amsopn 2022/04/08 v2.04 operator names
+)
+\inf@bad=\count282
+LaTeX Info: Redefining \frac on input line 233.
+\uproot@=\count283
+\leftroot@=\count284
+LaTeX Info: Redefining \overline on input line 398.
+LaTeX Info: Redefining \colon on input line 409.
+\classnum@=\count285
+\DOTSCASE@=\count286
+LaTeX Info: Redefining \ldots on input line 495.
+LaTeX Info: Redefining \dots on input line 498.
+LaTeX Info: Redefining \cdots on input line 619.
+\Mathstrutbox@=\box53
+\strutbox@=\box54
+LaTeX Info: Redefining \big on input line 721.
+LaTeX Info: Redefining \Big on input line 722.
+LaTeX Info: Redefining \bigg on input line 723.
+LaTeX Info: Redefining \Bigg on input line 724.
+\big@size=\dimen159
+LaTeX Font Info:    Redeclaring font encoding OML on input line 742.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 743.
+\macc@depth=\count287
+LaTeX Info: Redefining \bmod on input line 904.
+LaTeX Info: Redefining \pmod on input line 909.
+LaTeX Info: Redefining \smash on input line 939.
+LaTeX Info: Redefining \relbar on input line 969.
+LaTeX Info: Redefining \Relbar on input line 970.
+\c@MaxMatrixCols=\count288
+\dotsspace@=\muskip17
+\c@parentequation=\count289
+\dspbrk@lvl=\count290
+\tag@help=\toks20
+\row@=\count291
+\column@=\count292
+\maxfields@=\count293
+\andhelp@=\toks21
+\eqnshift@=\dimen160
+\alignsep@=\dimen161
+\tagshift@=\dimen162
+\tagwidth@=\dimen163
+\totwidth@=\dimen164
+\lineht@=\dimen165
+\@envbody=\toks22
+\multlinegap=\skip52
+\multlinetaggap=\skip53
+\mathdisplay@stack=\toks23
+LaTeX Info: Redefining \[ on input line 2950.
+LaTeX Info: Redefining \] on input line 2951.
+)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+
+(/usr/local/texlive/2026/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+))
+(/usr/local/texlive/2026/texmf-dist/tex/latex/unicode-math/unicode-math.sty
+(/usr/local/texlive/2026/texmf-dist/tex/latex/l3kernel/expl3.sty
+Package: expl3 2026-01-19 L3 programming layer (loader) 
+
+(/usr/local/texlive/2026/texmf-dist/tex/latex/l3backend/l3backend-xetex.def
+File: l3backend-xetex.def 2025-10-09 L3 backend support: XeTeX
+\g__graphics_track_int=\count294
+\g__pdfannot_backend_int=\count295
+\g__pdfannot_backend_link_int=\count296
+))
+Package: unicode-math 2023/08/13 v0.8r Unicode maths in XeLaTeX and LuaLaTeX
+
+(/usr/local/texlive/2026/texmf-dist/tex/latex/unicode-math/unicode-math-xetex.s
+ty
+Package: unicode-math-xetex 2023/08/13 v0.8r Unicode maths in XeLaTeX and LuaLa
+TeX
+ (/usr/local/texlive/2026/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
+Package: xparse 2025-10-09 L3 Experimental document command parser
+)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/l3packages/l3keys2e/l3keys2e.sty
+Package: l3keys2e 2025-10-09 LaTeX2e option processing using LaTeX3 keys
+) (/usr/local/texlive/2026/texmf-dist/tex/latex/fontspec/fontspec.sty
+Package: fontspec 2025/09/29 v2.9g Font selection for XeLaTeX and LuaLaTeX
+
+(/usr/local/texlive/2026/texmf-dist/tex/latex/fontspec/fontspec-xetex.sty
+Package: fontspec-xetex 2025/09/29 v2.9g Font selection for XeLaTeX and LuaLaTe
+X
+\l__fontspec_script_int=\count297
+\l__fontspec_language_int=\count298
+\l__fontspec_strnum_int=\count299
+\l__fontspec_tmp_int=\count300
+\l__fontspec_tmpa_int=\count301
+\l__fontspec_tmpb_int=\count302
+\l__fontspec_tmpc_int=\count303
+\l__fontspec_em_int=\count304
+\l__fontspec_emdef_int=\count305
+\l__fontspec_strong_int=\count306
+\l__fontspec_strongdef_int=\count307
+\l__fontspec_tmpa_dim=\dimen166
+\l__fontspec_tmpb_dim=\dimen167
+\l__fontspec_tmpc_dim=\dimen168
+
+(/usr/local/texlive/2026/texmf-dist/tex/latex/base/fontenc.sty
+Package: fontenc 2025/07/18 v2.1d Standard LaTeX package
+)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/fontspec/fontspec.cfg)))
+(/usr/local/texlive/2026/texmf-dist/tex/latex/base/fix-cm.sty
+Package: fix-cm 2020/11/24 v1.1t fixes to LaTeX
+
+(/usr/local/texlive/2026/texmf-dist/tex/latex/base/ts1enc.def
+File: ts1enc.def 2001/06/05 v3.0e (jk/car/fm) Standard LaTeX file
+LaTeX Font Info:    Redeclaring font encoding TS1 on input line 47.
+LaTeX Encoding Info:    Redeclaring text command \capitalcedilla (encoding TS1)
+ on input line 49.
+LaTeX Encoding Info:    Redeclaring text command \capitalogonek (encoding TS1) 
+on input line 52.
+LaTeX Encoding Info:    Redeclaring text command \capitalgrave (encoding TS1) o
+n input line 55.
+LaTeX Encoding Info:    Redeclaring text command \capitalacute (encoding TS1) o
+n input line 56.
+LaTeX Encoding Info:    Redeclaring text command \capitalcircumflex (encoding T
+S1) on input line 57.
+LaTeX Encoding Info:    Redeclaring text command \capitaltilde (encoding TS1) o
+n input line 58.
+LaTeX Encoding Info:    Redeclaring text command \capitaldieresis (encoding TS1
+) on input line 59.
+LaTeX Encoding Info:    Redeclaring text command \capitalhungarumlaut (encoding
+ TS1) on input line 60.
+LaTeX Encoding Info:    Redeclaring text command \capitalring (encoding TS1) on
+ input line 61.
+LaTeX Encoding Info:    Redeclaring text command \capitalcaron (encoding TS1) o
+n input line 62.
+LaTeX Encoding Info:    Redeclaring text command \capitalbreve (encoding TS1) o
+n input line 63.
+LaTeX Encoding Info:    Redeclaring text command \capitalmacron (encoding TS1) 
+on input line 64.
+LaTeX Encoding Info:    Redeclaring text command \capitaldotaccent (encoding TS
+1) on input line 65.
+LaTeX Encoding Info:    Redeclaring text command \t (encoding TS1) on input lin
+e 66.
+LaTeX Encoding Info:    Redeclaring text command \capitaltie (encoding TS1) on 
+input line 67.
+LaTeX Encoding Info:    Redeclaring text command \newtie (encoding TS1) on inpu
+t line 68.
+LaTeX Encoding Info:    Redeclaring text command \capitalnewtie (encoding TS1) 
+on input line 69.
+LaTeX Encoding Info:    Redeclaring text symbol \textcapitalcompwordmark (encod
+ing TS1) on input line 70.
+LaTeX Encoding Info:    Redeclaring text symbol \textascendercompwordmark (enco
+ding TS1) on input line 71.
+LaTeX Encoding Info:    Redeclaring text symbol \textquotestraightbase (encodin
+g TS1) on input line 72.
+LaTeX Encoding Info:    Redeclaring text symbol \textquotestraightdblbase (enco
+ding TS1) on input line 73.
+LaTeX Encoding Info:    Redeclaring text symbol \texttwelveudash (encoding TS1)
+ on input line 74.
+LaTeX Encoding Info:    Redeclaring text symbol \textthreequartersemdash (encod
+ing TS1) on input line 75.
+LaTeX Encoding Info:    Redeclaring text symbol \textleftarrow (encoding TS1) o
+n input line 76.
+LaTeX Encoding Info:    Redeclaring text symbol \textrightarrow (encoding TS1) 
+on input line 77.
+LaTeX Encoding Info:    Redeclaring text symbol \textblank (encoding TS1) on in
+put line 78.
+LaTeX Encoding Info:    Redeclaring text symbol \textdollar (encoding TS1) on i
+nput line 79.
+LaTeX Encoding Info:    Redeclaring text symbol \textquotesingle (encoding TS1)
+ on input line 80.
+LaTeX Encoding Info:    Redeclaring text command \textasteriskcentered (encodin
+g TS1) on input line 81.
+LaTeX Encoding Info:    Redeclaring text symbol \textdblhyphen (encoding TS1) o
+n input line 92.
+LaTeX Encoding Info:    Redeclaring text symbol \textfractionsolidus (encoding 
+TS1) on input line 93.
+LaTeX Encoding Info:    Redeclaring text symbol \textzerooldstyle (encoding TS1
+) on input line 94.
+LaTeX Encoding Info:    Redeclaring text symbol \textoneoldstyle (encoding TS1)
+ on input line 95.
+LaTeX Encoding Info:    Redeclaring text symbol \texttwooldstyle (encoding TS1)
+ on input line 96.
+LaTeX Encoding Info:    Redeclaring text symbol \textthreeoldstyle (encoding TS
+1) on input line 97.
+LaTeX Encoding Info:    Redeclaring text symbol \textfouroldstyle (encoding TS1
+) on input line 98.
+LaTeX Encoding Info:    Redeclaring text symbol \textfiveoldstyle (encoding TS1
+) on input line 99.
+LaTeX Encoding Info:    Redeclaring text symbol \textsixoldstyle (encoding TS1)
+ on input line 100.
+LaTeX Encoding Info:    Redeclaring text symbol \textsevenoldstyle (encoding TS
+1) on input line 101.
+LaTeX Encoding Info:    Redeclaring text symbol \texteightoldstyle (encoding TS
+1) on input line 102.
+LaTeX Encoding Info:    Redeclaring text symbol \textnineoldstyle (encoding TS1
+) on input line 103.
+LaTeX Encoding Info:    Redeclaring text symbol \textlangle (encoding TS1) on i
+nput line 104.
+LaTeX Encoding Info:    Redeclaring text symbol \textminus (encoding TS1) on in
+put line 105.
+LaTeX Encoding Info:    Redeclaring text symbol \textrangle (encoding TS1) on i
+nput line 106.
+LaTeX Encoding Info:    Redeclaring text symbol \textmho (encoding TS1) on inpu
+t line 107.
+LaTeX Encoding Info:    Redeclaring text symbol \textbigcircle (encoding TS1) o
+n input line 108.
+LaTeX Encoding Info:    Redeclaring text command \textcircled (encoding TS1) on
+ input line 109.
+LaTeX Encoding Info:    Redeclaring text symbol \textohm (encoding TS1) on inpu
+t line 115.
+LaTeX Encoding Info:    Redeclaring text symbol \textlbrackdbl (encoding TS1) o
+n input line 116.
+LaTeX Encoding Info:    Redeclaring text symbol \textrbrackdbl (encoding TS1) o
+n input line 117.
+LaTeX Encoding Info:    Redeclaring text symbol \textuparrow (encoding TS1) on 
+input line 118.
+LaTeX Encoding Info:    Redeclaring text symbol \textdownarrow (encoding TS1) o
+n input line 119.
+LaTeX Encoding Info:    Redeclaring text symbol \textasciigrave (encoding TS1) 
+on input line 120.
+LaTeX Encoding Info:    Redeclaring text symbol \textborn (encoding TS1) on inp
+ut line 121.
+LaTeX Encoding Info:    Redeclaring text symbol \textdivorced (encoding TS1) on
+ input line 122.
+LaTeX Encoding Info:    Redeclaring text symbol \textdied (encoding TS1) on inp
+ut line 123.
+LaTeX Encoding Info:    Redeclaring text symbol \textleaf (encoding TS1) on inp
+ut line 124.
+LaTeX Encoding Info:    Redeclaring text symbol \textmarried (encoding TS1) on 
+input line 125.
+LaTeX Encoding Info:    Redeclaring text symbol \textmusicalnote (encoding TS1)
+ on input line 126.
+LaTeX Encoding Info:    Redeclaring text symbol \texttildelow (encoding TS1) on
+ input line 127.
+LaTeX Encoding Info:    Redeclaring text symbol \textdblhyphenchar (encoding TS
+1) on input line 128.
+LaTeX Encoding Info:    Redeclaring text symbol \textasciibreve (encoding TS1) 
+on input line 129.
+LaTeX Encoding Info:    Redeclaring text symbol \textasciicaron (encoding TS1) 
+on input line 130.
+LaTeX Encoding Info:    Redeclaring text symbol \textacutedbl (encoding TS1) on
+ input line 131.
+LaTeX Encoding Info:    Redeclaring text symbol \textgravedbl (encoding TS1) on
+ input line 132.
+LaTeX Encoding Info:    Redeclaring text symbol \textdagger (encoding TS1) on i
+nput line 133.
+LaTeX Encoding Info:    Redeclaring text symbol \textdaggerdbl (encoding TS1) o
+n input line 134.
+LaTeX Encoding Info:    Redeclaring text symbol \textbardbl (encoding TS1) on i
+nput line 135.
+LaTeX Encoding Info:    Redeclaring text symbol \textperthousand (encoding TS1)
+ on input line 136.
+LaTeX Encoding Info:    Redeclaring text symbol \textbullet (encoding TS1) on i
+nput line 137.
+LaTeX Encoding Info:    Redeclaring text symbol \textcelsius (encoding TS1) on 
+input line 138.
+LaTeX Encoding Info:    Redeclaring text symbol \textdollaroldstyle (encoding T
+S1) on input line 139.
+LaTeX Encoding Info:    Redeclaring text symbol \textcentoldstyle (encoding TS1
+) on input line 140.
+LaTeX Encoding Info:    Redeclaring text symbol \textflorin (encoding TS1) on i
+nput line 141.
+LaTeX Encoding Info:    Redeclaring text symbol \textcolonmonetary (encoding TS
+1) on input line 142.
+LaTeX Encoding Info:    Redeclaring text symbol \textwon (encoding TS1) on inpu
+t line 143.
+LaTeX Encoding Info:    Redeclaring text symbol \textnaira (encoding TS1) on in
+put line 144.
+LaTeX Encoding Info:    Redeclaring text symbol \textguarani (encoding TS1) on 
+input line 145.
+LaTeX Encoding Info:    Redeclaring text symbol \textpeso (encoding TS1) on inp
+ut line 146.
+LaTeX Encoding Info:    Redeclaring text symbol \textlira (encoding TS1) on inp
+ut line 147.
+LaTeX Encoding Info:    Redeclaring text symbol \textrecipe (encoding TS1) on i
+nput line 148.
+LaTeX Encoding Info:    Redeclaring text symbol \textinterrobang (encoding TS1)
+ on input line 149.
+LaTeX Encoding Info:    Redeclaring text symbol \textinterrobangdown (encoding 
+TS1) on input line 150.
+LaTeX Encoding Info:    Redeclaring text symbol \textdong (encoding TS1) on inp
+ut line 151.
+LaTeX Encoding Info:    Redeclaring text symbol \texttrademark (encoding TS1) o
+n input line 152.
+LaTeX Encoding Info:    Redeclaring text symbol \textpertenthousand (encoding T
+S1) on input line 153.
+LaTeX Encoding Info:    Redeclaring text symbol \textpilcrow (encoding TS1) on 
+input line 154.
+LaTeX Encoding Info:    Redeclaring text symbol \textbaht (encoding TS1) on inp
+ut line 155.
+LaTeX Encoding Info:    Redeclaring text symbol \textnumero (encoding TS1) on i
+nput line 156.
+LaTeX Encoding Info:    Redeclaring text symbol \textdiscount (encoding TS1) on
+ input line 157.
+LaTeX Encoding Info:    Redeclaring text symbol \textestimated (encoding TS1) o
+n input line 158.
+LaTeX Encoding Info:    Redeclaring text symbol \textopenbullet (encoding TS1) 
+on input line 159.
+LaTeX Encoding Info:    Redeclaring text symbol \textservicemark (encoding TS1)
+ on input line 160.
+LaTeX Encoding Info:    Redeclaring text symbol \textlquill (encoding TS1) on i
+nput line 161.
+LaTeX Encoding Info:    Redeclaring text symbol \textrquill (encoding TS1) on i
+nput line 162.
+LaTeX Encoding Info:    Redeclaring text symbol \textcent (encoding TS1) on inp
+ut line 163.
+LaTeX Encoding Info:    Redeclaring text symbol \textsterling (encoding TS1) on
+ input line 164.
+LaTeX Encoding Info:    Redeclaring text symbol \textcurrency (encoding TS1) on
+ input line 165.
+LaTeX Encoding Info:    Redeclaring text symbol \textyen (encoding TS1) on inpu
+t line 166.
+LaTeX Encoding Info:    Redeclaring text symbol \textbrokenbar (encoding TS1) o
+n input line 167.
+LaTeX Encoding Info:    Redeclaring text symbol \textsection (encoding TS1) on 
+input line 168.
+LaTeX Encoding Info:    Redeclaring text symbol \textasciidieresis (encoding TS
+1) on input line 169.
+LaTeX Encoding Info:    Redeclaring text symbol \textcopyright (encoding TS1) o
+n input line 170.
+LaTeX Encoding Info:    Redeclaring text symbol \textordfeminine (encoding TS1)
+ on input line 171.
+LaTeX Encoding Info:    Redeclaring text symbol \textcopyleft (encoding TS1) on
+ input line 172.
+LaTeX Encoding Info:    Redeclaring text symbol \textlnot (encoding TS1) on inp
+ut line 173.
+LaTeX Encoding Info:    Redeclaring text symbol \textcircledP (encoding TS1) on
+ input line 174.
+LaTeX Encoding Info:    Redeclaring text symbol \textregistered (encoding TS1) 
+on input line 175.
+LaTeX Encoding Info:    Redeclaring text symbol \textasciimacron (encoding TS1)
+ on input line 176.
+LaTeX Encoding Info:    Redeclaring text symbol \textdegree (encoding TS1) on i
+nput line 177.
+LaTeX Encoding Info:    Redeclaring text symbol \textpm (encoding TS1) on input
+ line 178.
+LaTeX Encoding Info:    Redeclaring text symbol \texttwosuperior (encoding TS1)
+ on input line 179.
+LaTeX Encoding Info:    Redeclaring text symbol \textthreesuperior (encoding TS
+1) on input line 180.
+LaTeX Encoding Info:    Redeclaring text symbol \textasciiacute (encoding TS1) 
+on input line 181.
+LaTeX Encoding Info:    Redeclaring text symbol \textmu (encoding TS1) on input
+ line 182.
+LaTeX Encoding Info:    Redeclaring text symbol \textparagraph (encoding TS1) o
+n input line 183.
+LaTeX Encoding Info:    Redeclaring text symbol \textperiodcentered (encoding T
+S1) on input line 184.
+LaTeX Encoding Info:    Redeclaring text symbol \textreferencemark (encoding TS
+1) on input line 185.
+LaTeX Encoding Info:    Redeclaring text symbol \textonesuperior (encoding TS1)
+ on input line 186.
+LaTeX Encoding Info:    Redeclaring text symbol \textordmasculine (encoding TS1
+) on input line 187.
+LaTeX Encoding Info:    Redeclaring text symbol \textsurd (encoding TS1) on inp
+ut line 188.
+LaTeX Encoding Info:    Redeclaring text symbol \textonequarter (encoding TS1) 
+on input line 189.
+LaTeX Encoding Info:    Redeclaring text symbol \textonehalf (encoding TS1) on 
+input line 190.
+LaTeX Encoding Info:    Redeclaring text symbol \textthreequarters (encoding TS
+1) on input line 191.
+LaTeX Encoding Info:    Redeclaring text symbol \texteuro (encoding TS1) on inp
+ut line 192.
+LaTeX Encoding Info:    Redeclaring text symbol \texttimes (encoding TS1) on in
+put line 193.
+LaTeX Encoding Info:    Redeclaring text symbol \textdiv (encoding TS1) on inpu
+t line 194.
+))
+\g__um_fam_int=\count308
+\g__um_fonts_used_int=\count309
+\l__um_primecount_int=\count310
+\g__um_primekern_muskip=\muskip18
+
+(/usr/local/texlive/2026/texmf-dist/tex/latex/unicode-math/unicode-math-table.t
+ex))) (/usr/local/texlive/2026/texmf-dist/tex/latex/lm/lmodern.sty
+Package: lmodern 2015/05/01 v1.6.1 Latin Modern Fonts
+LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
+(Font)                  OT1/cmr/m/n --> OT1/lmr/m/n on input line 22.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `normal'
+(Font)                  OML/cmm/m/it --> OML/lmm/m/it on input line 23.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
+(Font)                  OMS/cmsy/m/n --> OMS/lmsy/m/n on input line 24.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
+(Font)                  OMX/cmex/m/n --> OMX/lmex/m/n on input line 25.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  OT1/cmr/bx/n --> OT1/lmr/bx/n on input line 26.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `bold'
+(Font)                  OML/cmm/b/it --> OML/lmm/b/it on input line 27.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
+(Font)                  OMS/cmsy/b/n --> OMS/lmsy/b/n on input line 28.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
+(Font)                  OMX/cmex/m/n --> OMX/lmex/m/n on input line 29.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
+(Font)                  OT1/cmr/bx/n --> OT1/lmr/bx/n on input line 31.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
+(Font)                  OT1/cmss/m/n --> OT1/lmss/m/n on input line 32.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
+(Font)                  OT1/cmr/m/it --> OT1/lmr/m/it on input line 33.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
+(Font)                  OT1/cmtt/m/n --> OT1/lmtt/m/n on input line 34.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
+(Font)                  OT1/cmr/bx/n --> OT1/lmr/bx/n on input line 35.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
+(Font)                  OT1/cmss/bx/n --> OT1/lmss/bx/n on input line 36.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
+(Font)                  OT1/cmr/bx/it --> OT1/lmr/bx/it on input line 37.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
+(Font)                  OT1/cmtt/m/n --> OT1/lmtt/m/n on input line 38.
+)
+
+Package fontspec Info: 
+(fontspec)             DejaVu Serif scale = 0.8303715005541494.
+
+
+Package fontspec Info: 
+(fontspec)             DejaVu Serif scale = 1.
+
+
+Package fontspec Info: 
+(fontspec)             DejaVu Serif scale = 0.8303715005541494.
+
+
+Package fontspec Info: 
+(fontspec)             DejaVu Serif scale = 1.
+
+
+Package fontspec Info: 
+(fontspec)             DejaVu Serif/B scale = 0.8303715005541494.
+
+
+Package fontspec Info: 
+(fontspec)             DejaVu Serif/B scale = 1.
+
+
+Package fontspec Info: 
+(fontspec)             DejaVu Serif/I scale = 0.8303715005541494.
+
+
+Package fontspec Info: 
+(fontspec)             DejaVu Serif/I scale = 1.
+
+
+Package fontspec Info: 
+(fontspec)             DejaVu Serif/BI scale = 0.8303715005541494.
+
+
+Package fontspec Info: 
+(fontspec)             DejaVu Serif/BI scale = 1.
+
+
+Package fontspec Info: 
+(fontspec)             Font family 'DejaVuSerif(0)' created for font 'DejaVu
+(fontspec)             Serif' with options
+(fontspec)             [Scale=MatchLowercase,Ligatures=TeX,Scale=1].
+(fontspec)              
+(fontspec)              This font family consists of the following NFSS
+(fontspec)             series/shapes:
+(fontspec)              
+(fontspec)             - 'normal' (m/n) with NFSS spec.: <->s*[1]"DejaVu
+(fontspec)             Serif/OT:script=latn;language=dflt;mapping=tex-text;"
+(fontspec)             - 'bold' (b/n) with NFSS spec.: <->s*[1]"DejaVu
+(fontspec)             Serif/B/OT:script=latn;language=dflt;mapping=tex-text;"
+(fontspec)             - 'italic' (m/it) with NFSS spec.: <->s*[1]"DejaVu
+(fontspec)             Serif/I/OT:script=latn;language=dflt;mapping=tex-text;"
+(fontspec)             - 'bold italic' (b/it) with NFSS spec.: <->s*[1]"DejaVu
+(fontspec)             Serif/BI/OT:script=latn;language=dflt;mapping=tex-text;"
+
+
+LaTeX Font Info:    Font shape `TU/DejaVuSerif(0)/m/n' will be
+(Font)              scaled to size 10.0pt on input line 24.
+
+Package fontspec Info: 
+(fontspec)             DejaVu Serif scale = 0.9999970602156039.
+
+
+Package fontspec Info: 
+(fontspec)             DejaVu Serif scale = 0.9999970602156039.
+
+
+Package fontspec Info: 
+(fontspec)             DejaVu Serif/B scale = 0.9999970602156039.
+
+
+Package fontspec Info: 
+(fontspec)             DejaVu Serif/I scale = 0.9999970602156039.
+
+
+Package fontspec Info: 
+(fontspec)             DejaVu Serif/BI scale = 0.9999970602156039.
+
+
+Package fontspec Info: 
+(fontspec)             Font family 'DejaVuSerif(1)' created for font 'DejaVu
+(fontspec)             Serif' with options [Scale=MatchLowercase].
+(fontspec)              
+(fontspec)              This font family consists of the following NFSS
+(fontspec)             series/shapes:
+(fontspec)              
+(fontspec)             - 'normal' (m/n) with NFSS spec.:
+(fontspec)             <->s*[0.9999970602156039]"DejaVu
+(fontspec)             Serif/OT:script=latn;language=dflt;"
+(fontspec)             - 'bold' (b/n) with NFSS spec.:
+(fontspec)             <->s*[0.9999970602156039]"DejaVu
+(fontspec)             Serif/B/OT:script=latn;language=dflt;"
+(fontspec)             - 'italic' (m/it) with NFSS spec.:
+(fontspec)             <->s*[0.9999970602156039]"DejaVu
+(fontspec)             Serif/I/OT:script=latn;language=dflt;"
+(fontspec)             - 'bold italic' (b/it) with NFSS spec.:
+(fontspec)             <->s*[0.9999970602156039]"DejaVu
+(fontspec)             Serif/BI/OT:script=latn;language=dflt;"
+
+LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `normal'
+(Font)                  OT1/lmr/m/n --> TU/DejaVuSerif(1)/m/n on input line 24.
+
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
+(Font)                  OT1/lmr/m/it --> TU/DejaVuSerif(1)/m/it on input line 2
+4.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
+(Font)                  OT1/lmr/bx/n --> TU/DejaVuSerif(1)/b/n on input line 24
+.
+
+Package fontspec Info: 
+(fontspec)             DejaVu Sans scale = 0.9491044946861198.
+
+
+Package fontspec Info: 
+(fontspec)             DejaVu Sans scale = 0.9491044946861198.
+
+
+Package fontspec Info: 
+(fontspec)             DejaVu Sans/B scale = 0.9491044946861198.
+
+
+Package fontspec Info: 
+(fontspec)             DejaVu Sans/I scale = 0.9491044946861198.
+
+
+Package fontspec Info: 
+(fontspec)             DejaVu Sans/BI scale = 0.9491044946861198.
+
+
+Package fontspec Info: 
+(fontspec)             Font family 'DejaVuSans(0)' created for font 'DejaVu
+(fontspec)             Sans' with options
+(fontspec)             [Scale=MatchLowercase,Ligatures=TeX].
+(fontspec)              
+(fontspec)              This font family consists of the following NFSS
+(fontspec)             series/shapes:
+(fontspec)              
+(fontspec)             - 'normal' (m/n) with NFSS spec.:
+(fontspec)             <->s*[0.9491044946861198]"DejaVu
+(fontspec)             Sans/OT:script=latn;language=dflt;mapping=tex-text;"
+(fontspec)             - 'bold' (b/n) with NFSS spec.:
+(fontspec)             <->s*[0.9491044946861198]"DejaVu
+(fontspec)             Sans/B/OT:script=latn;language=dflt;mapping=tex-text;"
+(fontspec)             - 'italic' (m/it) with NFSS spec.:
+(fontspec)             <->s*[0.9491044946861198]"DejaVu
+(fontspec)             Sans/I/OT:script=latn;language=dflt;mapping=tex-text;"
+(fontspec)             - 'bold italic' (b/it) with NFSS spec.:
+(fontspec)             <->s*[0.9491044946861198]"DejaVu
+(fontspec)             Sans/BI/OT:script=latn;language=dflt;mapping=tex-text;"
+
+
+Package fontspec Info: 
+(fontspec)             DejaVu Sans scale = 0.9491044946861198.
+
+
+Package fontspec Info: 
+(fontspec)             DejaVu Sans scale = 0.9491044946861198.
+
+
+Package fontspec Info: 
+(fontspec)             DejaVu Sans/B scale = 0.9491044946861198.
+
+
+Package fontspec Info: 
+(fontspec)             DejaVu Sans/I scale = 0.9491044946861198.
+
+
+Package fontspec Info: 
+(fontspec)             DejaVu Sans/BI scale = 0.9491044946861198.
+
+
+Package fontspec Info: 
+(fontspec)             Font family 'DejaVuSans(1)' created for font 'DejaVu
+(fontspec)             Sans' with options [Scale=MatchLowercase].
+(fontspec)              
+(fontspec)              This font family consists of the following NFSS
+(fontspec)             series/shapes:
+(fontspec)              
+(fontspec)             - 'normal' (m/n) with NFSS spec.:
+(fontspec)             <->s*[0.9491044946861198]"DejaVu
+(fontspec)             Sans/OT:script=latn;language=dflt;"
+(fontspec)             - 'bold' (b/n) with NFSS spec.:
+(fontspec)             <->s*[0.9491044946861198]"DejaVu
+(fontspec)             Sans/B/OT:script=latn;language=dflt;"
+(fontspec)             - 'italic' (m/it) with NFSS spec.:
+(fontspec)             <->s*[0.9491044946861198]"DejaVu
+(fontspec)             Sans/I/OT:script=latn;language=dflt;"
+(fontspec)             - 'bold italic' (b/it) with NFSS spec.:
+(fontspec)             <->s*[0.9491044946861198]"DejaVu
+(fontspec)             Sans/BI/OT:script=latn;language=dflt;"
+
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
+(Font)                  OT1/lmss/m/n --> TU/DejaVuSans(1)/m/n on input line 25.
+
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
+(Font)                  OT1/lmss/bx/n --> TU/DejaVuSans(1)/b/n on input line 25
+.
+
+Package fontspec Info: 
+(fontspec)             DejaVu Sans Mono scale = 0.9491044946861198.
+
+
+Package fontspec Info: 
+(fontspec)             DejaVu Sans Mono scale = 0.9491044946861198.
+
+
+Package fontspec Info: 
+(fontspec)             DejaVu Sans Mono/B scale = 0.9491044946861198.
+
+
+Package fontspec Info: 
+(fontspec)             DejaVu Sans Mono/I scale = 0.9491044946861198.
+
+
+Package fontspec Info: 
+(fontspec)             DejaVu Sans Mono/BI scale = 0.9491044946861198.
+
+
+Package fontspec Info: 
+(fontspec)             Font family 'DejaVuSansMono(0)' created for font
+(fontspec)             'DejaVu Sans Mono' with options
+(fontspec)             [Scale=MatchLowercase,WordSpace={1,0,0},HyphenChar=None,
+PunctuationSpace=WordSpace].
+(fontspec)              
+(fontspec)              This font family consists of the following NFSS
+(fontspec)             series/shapes:
+(fontspec)              
+(fontspec)             - 'normal' (m/n) with NFSS spec.:
+(fontspec)             <->s*[0.9491044946861198]"DejaVu Sans
+(fontspec)             Mono/OT:script=latn;language=dflt;"
+(fontspec)             - 'bold' (b/n) with NFSS spec.:
+(fontspec)             <->s*[0.9491044946861198]"DejaVu Sans
+(fontspec)             Mono/B/OT:script=latn;language=dflt;"
+(fontspec)             - 'italic' (m/it) with NFSS spec.:
+(fontspec)             <->s*[0.9491044946861198]"DejaVu Sans
+(fontspec)             Mono/I/OT:script=latn;language=dflt;"
+(fontspec)             - 'bold italic' (b/it) with NFSS spec.:
+(fontspec)             <->s*[0.9491044946861198]"DejaVu Sans
+(fontspec)             Mono/BI/OT:script=latn;language=dflt;"
+
+
+Package fontspec Info: 
+(fontspec)             DejaVu Sans Mono scale = 0.9491044946861198.
+
+
+Package fontspec Info: 
+(fontspec)             DejaVu Sans Mono scale = 0.9491044946861198.
+
+
+Package fontspec Info: 
+(fontspec)             DejaVu Sans Mono/B scale = 0.9491044946861198.
+
+
+Package fontspec Info: 
+(fontspec)             DejaVu Sans Mono/I scale = 0.9491044946861198.
+
+
+Package fontspec Info: 
+(fontspec)             DejaVu Sans Mono/BI scale = 0.9491044946861198.
+
+
+Package fontspec Info: 
+(fontspec)             Font family 'DejaVuSansMono(1)' created for font
+(fontspec)             'DejaVu Sans Mono' with options [Scale=MatchLowercase].
+(fontspec)              
+(fontspec)              This font family consists of the following NFSS
+(fontspec)             series/shapes:
+(fontspec)              
+(fontspec)             - 'normal' (m/n) with NFSS spec.:
+(fontspec)             <->s*[0.9491044946861198]"DejaVu Sans
+(fontspec)             Mono/OT:script=latn;language=dflt;"
+(fontspec)             - 'bold' (b/n) with NFSS spec.:
+(fontspec)             <->s*[0.9491044946861198]"DejaVu Sans
+(fontspec)             Mono/B/OT:script=latn;language=dflt;"
+(fontspec)             - 'italic' (m/it) with NFSS spec.:
+(fontspec)             <->s*[0.9491044946861198]"DejaVu Sans
+(fontspec)             Mono/I/OT:script=latn;language=dflt;"
+(fontspec)             - 'bold italic' (b/it) with NFSS spec.:
+(fontspec)             <->s*[0.9491044946861198]"DejaVu Sans
+(fontspec)             Mono/BI/OT:script=latn;language=dflt;"
+
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
+(Font)                  OT1/lmtt/m/n --> TU/DejaVuSansMono(1)/m/n on input line
+ 26.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
+(Font)                  OT1/lmtt/m/n --> TU/DejaVuSansMono(1)/b/n on input line
+ 26.
+
+Package fontspec Info: 
+(fontspec)             STIX Two Math scale = 1.097339879865542.
+
+
+Package fontspec Info: 
+(fontspec)             Could not resolve font "STIX Two Math/B" (it probably
+(fontspec)             doesn't exist).
+
+
+Package fontspec Info: 
+(fontspec)             STIX Two Math scale = 1.097339879865542.
+
+
+Package fontspec Info: 
+(fontspec)             Font family 'STIXTwoMath(0)' created for font 'STIX Two
+(fontspec)             Math' with options
+(fontspec)             [Scale=MatchLowercase,BoldItalicFont={},ItalicFont={},Sm
+allCapsFont={},Script=Math].
+(fontspec)              
+(fontspec)              This font family consists of the following NFSS
+(fontspec)             series/shapes:
+(fontspec)              
+(fontspec)             - 'normal' (m/n) with NFSS spec.:
+(fontspec)             <->s*[1.097339879865542]"STIX Two
+(fontspec)             Math/OT:script=math;language=dflt;"
+
+LaTeX Font Info:    Font shape `TU/STIXTwoMath(0)/m/n' will be
+(Font)              scaled to size 10.97336pt on input line 27.
+
+Package fontspec Info: 
+(fontspec)             STIX Two Math scale = 1.097339879865542.
+
+
+Package fontspec Info: 
+(fontspec)             Could not resolve font "STIX Two Math/B" (it probably
+(fontspec)             doesn't exist).
+
+
+Package fontspec Info: 
+(fontspec)             STIX Two Math scale = 1.097339879865542.
+
+
+Package fontspec Info: 
+(fontspec)             STIX Two Math scale = 1.097339879865542.
+
+
+Package fontspec Info: 
+(fontspec)             STIX Two Math scale = 1.097339879865542.
+
+
+Package fontspec Info: 
+(fontspec)             Font family 'STIXTwoMath(1)' created for font 'STIX Two
+(fontspec)             Math' with options
+(fontspec)             [Scale=MatchLowercase,BoldItalicFont={},ItalicFont={},Sm
+allCapsFont={},Script=Math,SizeFeatures={{Size=8.5-},{Size=6.25-8.5,Font=STIX
+(fontspec)             Two Math,Style=MathScript},{Size=-6.25,Font=STIX Two
+(fontspec)             Math,Style=MathScriptScript}}].
+(fontspec)              
+(fontspec)              This font family consists of the following NFSS
+(fontspec)             series/shapes:
+(fontspec)              
+(fontspec)             - 'normal' (m/n) with NFSS spec.:
+(fontspec)             <8.5->s*[1.097339879865542]"STIX Two
+(fontspec)             Math/OT:script=math;language=dflt;"<6.25-8.5>s*[1.097339
+879865542]"STIX
+(fontspec)             Two
+(fontspec)             Math/OT:script=math;language=dflt;+ssty=0;"<-6.25>s*[1.0
+97339879865542]"STIX
+(fontspec)             Two Math/OT:script=math;language=dflt;+ssty=1;"
+
+LaTeX Font Info:    Font shape `TU/STIXTwoMath(1)/m/n' will be
+(Font)              scaled to size 10.97336pt on input line 27.
+LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
+(Font)              `operators' in the math version `normal' on input line 27.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
+(Font)                  OT1/lmr/m/n --> TU/STIXTwoMath(1)/m/n on input line 27.
+
+LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
+(Font)              `operators' in the math version `bold' on input line 27.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  OT1/lmr/bx/n --> TU/STIXTwoMath(1)/b/n on input line 27
+.
+
+Package fontspec Info: 
+(fontspec)             STIX Two Math scale = 1.097339879865542.
+
+
+Package fontspec Info: 
+(fontspec)             STIX Two Math scale = 1.097449613853529.
+
+
+Package fontspec Info: 
+(fontspec)             Could not resolve font "STIX Two Math/B" (it probably
+(fontspec)             doesn't exist).
+
+
+Package fontspec Info: 
+(fontspec)             STIX Two Math scale = 1.097339879865542.
+
+
+Package fontspec Info: 
+(fontspec)             STIX Two Math scale = 1.097449613853529.
+
+
+Package fontspec Info: 
+(fontspec)             STIX Two Math scale = 1.097339879865542.
+
+
+Package fontspec Info: 
+(fontspec)             STIX Two Math scale = 1.097449613853529.
+
+
+Package fontspec Info: 
+(fontspec)             STIX Two Math scale = 1.097339879865542.
+
+
+Package fontspec Info: 
+(fontspec)             STIX Two Math scale = 1.097449613853529.
+
+
+Package fontspec Info: 
+(fontspec)             Font family 'STIXTwoMath(2)' created for font 'STIX Two
+(fontspec)             Math' with options
+(fontspec)             [Scale=MatchLowercase,BoldItalicFont={},ItalicFont={},Sm
+allCapsFont={},Script=Math,SizeFeatures={{Size=8.5-},{Size=6.25-8.5,Font=STIX
+(fontspec)             Two Math,Style=MathScript},{Size=-6.25,Font=STIX Two
+(fontspec)             Math,Style=MathScriptScript}},ScaleAgain=1.0001,FontAdju
+stment={\fontdimen
+(fontspec)             8\font =7.02295pt\relax \fontdimen 9\font
+(fontspec)             =6.41942pt\relax \fontdimen 10\font =5.15749pt\relax
+(fontspec)             \fontdimen 11\font =7.02295pt\relax \fontdimen 12\font
+(fontspec)             =6.41942pt\relax \fontdimen 13\font =3.95041pt\relax
+(fontspec)             \fontdimen 14\font =3.95041pt\relax \fontdimen 15\font
+(fontspec)             =2.76529pt\relax \fontdimen 16\font =2.30441pt\relax
+(fontspec)             \fontdimen 17\font =2.30441pt\relax \fontdimen 18\font
+(fontspec)             =2.52388pt\relax \fontdimen 19\font =1.75574pt\relax
+(fontspec)             \fontdimen 22\font =2.83113pt\relax \fontdimen 20\font
+(fontspec)             =0pt\relax \fontdimen 21\font =0pt\relax }].
+(fontspec)              
+(fontspec)              This font family consists of the following NFSS
+(fontspec)             series/shapes:
+(fontspec)              
+(fontspec)             - 'normal' (m/n) with NFSS spec.:
+(fontspec)             <8.5->s*[1.097449613853529]"STIX Two
+(fontspec)             Math/OT:script=math;language=dflt;"<6.25-8.5>s*[1.097449
+613853529]"STIX
+(fontspec)             Two
+(fontspec)             Math/OT:script=math;language=dflt;+ssty=0;"<-6.25>s*[1.0
+97449613853529]"STIX
+(fontspec)             Two Math/OT:script=math;language=dflt;+ssty=1;"
+
+LaTeX Font Info:    Encoding `OMS' has changed to `TU' for symbol font
+(Font)              `symbols' in the math version `normal' on input line 27.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
+(Font)                  OMS/lmsy/m/n --> TU/STIXTwoMath(2)/m/n on input line 27
+.
+LaTeX Font Info:    Encoding `OMS' has changed to `TU' for symbol font
+(Font)              `symbols' in the math version `bold' on input line 27.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
+(Font)                  OMS/lmsy/b/n --> TU/STIXTwoMath(2)/b/n on input line 27
+.
+
+Package fontspec Info: 
+(fontspec)             STIX Two Math scale = 1.097339879865542.
+
+
+Package fontspec Info: 
+(fontspec)             STIX Two Math scale = 1.097230145877555.
+
+
+Package fontspec Info: 
+(fontspec)             Could not resolve font "STIX Two Math/B" (it probably
+(fontspec)             doesn't exist).
+
+
+Package fontspec Info: 
+(fontspec)             STIX Two Math scale = 1.097339879865542.
+
+
+Package fontspec Info: 
+(fontspec)             STIX Two Math scale = 1.097230145877555.
+
+
+Package fontspec Info: 
+(fontspec)             STIX Two Math scale = 1.097339879865542.
+
+
+Package fontspec Info: 
+(fontspec)             STIX Two Math scale = 1.097230145877555.
+
+
+Package fontspec Info: 
+(fontspec)             STIX Two Math scale = 1.097339879865542.
+
+
+Package fontspec Info: 
+(fontspec)             STIX Two Math scale = 1.097230145877555.
+
+
+Package fontspec Info: 
+(fontspec)             Font family 'STIXTwoMath(3)' created for font 'STIX Two
+(fontspec)             Math' with options
+(fontspec)             [Scale=MatchLowercase,BoldItalicFont={},ItalicFont={},Sm
+allCapsFont={},Script=Math,SizeFeatures={{Size=8.5-},{Size=6.25-8.5,Font=STIX
+(fontspec)             Two Math,Style=MathScript},{Size=-6.25,Font=STIX Two
+(fontspec)             Math,Style=MathScriptScript}},ScaleAgain=0.9999,FontAdju
+stment={\fontdimen
+(fontspec)             8\font =0.74619pt\relax \fontdimen 9\font
+(fontspec)             =1.4814pt\relax \fontdimen 10\font =1.4814pt\relax
+(fontspec)             \fontdimen 11\font =3.292pt\relax \fontdimen 12\font
+(fontspec)             =7.35216pt\relax \fontdimen 13\font =0pt\relax }].
+(fontspec)              
+(fontspec)              This font family consists of the following NFSS
+(fontspec)             series/shapes:
+(fontspec)              
+(fontspec)             - 'normal' (m/n) with NFSS spec.:
+(fontspec)             <8.5->s*[1.097230145877555]"STIX Two
+(fontspec)             Math/OT:script=math;language=dflt;"<6.25-8.5>s*[1.097230
+145877555]"STIX
+(fontspec)             Two
+(fontspec)             Math/OT:script=math;language=dflt;+ssty=0;"<-6.25>s*[1.0
+97230145877555]"STIX
+(fontspec)             Two Math/OT:script=math;language=dflt;+ssty=1;"
+
+LaTeX Font Info:    Encoding `OMX' has changed to `TU' for symbol font
+(Font)              `largesymbols' in the math version `normal' on input line 2
+7.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
+(Font)                  OMX/lmex/m/n --> TU/STIXTwoMath(3)/m/n on input line 27
+.
+LaTeX Font Info:    Encoding `OMX' has changed to `TU' for symbol font
+(Font)              `largesymbols' in the math version `bold' on input line 27.
+
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
+(Font)                  OMX/lmex/m/n --> TU/STIXTwoMath(3)/b/n on input line 27
+.
+
+(/usr/local/texlive/2026/texmf-dist/tex/latex/upquote/upquote.sty
+Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verba
+tim
+
+(/usr/local/texlive/2026/texmf-dist/tex/latex/base/textcomp.sty
+Package: textcomp 2024/04/24 v2.1b Standard LaTeX package
+))
+(/usr/local/texlive/2026/texmf-dist/tex/latex/microtype/microtype.sty
+Package: microtype 2026/03/01 v3.2d Micro-typographical refinements (RS)
+
+(/usr/local/texlive/2026/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+Package: etoolbox 2025/10/02 v2.5m e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count311
+)
+\MT@toks=\toks24
+\MT@tempbox=\box55
+\MT@count=\count312
+LaTeX Info: Redefining \noprotrusionifhmode on input line 1084.
+LaTeX Info: Redefining \leftprotrusion on input line 1085.
+\MT@prot@toks=\toks25
+LaTeX Info: Redefining \rightprotrusion on input line 1104.
+LaTeX Info: Redefining \textls on input line 1449.
+\MT@outer@kern=\dimen169
+LaTeX Info: Redefining \microtypecontext on input line 2053.
+LaTeX Info: Redefining \textmicrotypecontext on input line 2070.
+\MT@listname@count=\count313
+
+(/usr/local/texlive/2026/texmf-dist/tex/latex/microtype/microtype-xetex.def
+File: microtype-xetex.def 2026/03/01 v3.2d Definitions specific to xetex (RS)
+LaTeX Info: Redefining \lsstyle on input line 443.
+LaTeX Info: Redefining \lslig on input line 451.
+\MT@outer@space=\skip54
+)
+Package microtype Info: Loading configuration file microtype.cfg.
+
+(/usr/local/texlive/2026/texmf-dist/tex/latex/microtype/microtype.cfg
+File: microtype.cfg 2026/03/01 v3.2d microtype main configuration file (RS)
+)
+LaTeX Info: Redefining \microtypesetup on input line 3065.
+)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/parskip/parskip.sty
+Package: parskip 2021-03-14 v2.0h non-zero parskip adjustments
+
+(/usr/local/texlive/2026/texmf-dist/tex/latex/kvoptions/kvoptions.sty
+Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
+
+(/usr/local/texlive/2026/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
+Package: ltxcmds 2023-12-04 v1.26 LaTeX kernel commands for general use (HO)
+)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty
+Package: kvsetkeys 2022-10-05 v1.19 Key value parser (HO)
+)))
+(/usr/local/texlive/2026/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2024/12/31 v1.2e Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/local/texlive/2026/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2024/08/06 v1.4g Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/local/texlive/2026/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2023/12/02 v1.11 sin cos tan (DPC)
+)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: xetex.def on input line 106.
+)
+\Gin@req@height=\dimen170
+\Gin@req@width=\dimen171
+)
+\pandoc@box=\box56
+
+(/usr/local/texlive/2026/texmf-dist/tex/generic/babel/babel.sty
+Package: babel 2026/02/14 v26.3 The multilingual framework for LuaLaTeX, pdfLaT
+eX and XeLaTeX
+\babel@savecnt=\count314
+LaTeX Encoding Info:    Redeclaring text command \ij (encoding OT1) on input li
+ne 2078.
+LaTeX Encoding Info:    Redeclaring text command \IJ (encoding OT1) on input li
+ne 2080.
+LaTeX Encoding Info:    Redeclaring text command \ij (encoding T1) on input lin
+e 2082.
+LaTeX Encoding Info:    Redeclaring text command \IJ (encoding T1) on input lin
+e 2083.
+LaTeX Encoding Info:    Ignoring declaration for text command \ij (encoding ?) 
+on input line 2084.
+LaTeX Encoding Info:    Ignoring declaration for text command \IJ (encoding ?) 
+on input line 2086.
+LaTeX Encoding Info:    Ignoring declaration for text command \SS (encoding ?) 
+on input line 2111.
+\U@D=\dimen172
+\l@unhyphenated=\language91
+
+(/usr/local/texlive/2026/texmf-dist/tex/generic/babel/xebabel.def)
+\bbl@readstream=\read2
+\bbl@dirlevel=\count315
+
+(/usr/local/texlive/2026/texmf-dist/tex/generic/babel/locale/uk/babel-ukrainian
+.tex)
+Package babel Info: Importing data for ukrainian
+(babel)             from babel-uk.ini. Reported on input line 4330.
+) (/usr/local/texlive/2026/texmf-dist/tex/latex/bookmark/bookmark.sty
+Package: bookmark 2023-12-10 v1.31 PDF bookmarks (HO)
+
+(/usr/local/texlive/2026/texmf-dist/tex/latex/hyperref/hyperref.sty
+Package: hyperref 2026-01-29 v7.01p Hypertext links for LaTeX
+
+(/usr/local/texlive/2026/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty
+Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
+)
+(/usr/local/texlive/2026/texmf-dist/tex/generic/pdfescape/pdfescape.sty
+Package: pdfescape 2019/12/09 v1.15 Implements pdfTeX's escape features (HO)
+
+(/usr/local/texlive/2026/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
+Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO
+)
+
+(/usr/local/texlive/2026/texmf-dist/tex/generic/infwarerr/infwarerr.sty
+Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
+)
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode not found.
+))
+(/usr/local/texlive/2026/texmf-dist/tex/latex/hycolor/hycolor.sty
+Package: hycolor 2020-01-27 v1.10 Color options for hyperref/bookmark (HO)
+)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/hyperref/nameref.sty
+Package: nameref 2026-01-29 v2.58 Cross-referencing by name of section
+
+(/usr/local/texlive/2026/texmf-dist/tex/latex/refcount/refcount.sty
+Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
+)
+(/usr/local/texlive/2026/texmf-dist/tex/generic/gettitlestring/gettitlestring.s
+ty
+Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
+)
+\c@section@level=\count316
+) (/usr/local/texlive/2026/texmf-dist/tex/generic/stringenc/stringenc.sty
+Package: stringenc 2019/11/29 v1.12 Convert strings between diff. encodings (HO
+)
+)
+\@linkdim=\dimen173
+\Hy@linkcounter=\count317
+\Hy@pagecounter=\count318
+
+(/usr/local/texlive/2026/texmf-dist/tex/latex/hyperref/pd1enc.def
+File: pd1enc.def 2026-01-29 v7.01p Hyperref: PDFDocEncoding definition (HO)
+)
+(/usr/local/texlive/2026/texmf-dist/tex/generic/intcalc/intcalc.sty
+Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
+)
+\Hy@SavedSpaceFactor=\count319
+
+(/usr/local/texlive/2026/texmf-dist/tex/latex/hyperref/puenc.def
+File: puenc.def 2026-01-29 v7.01p Hyperref: PDF Unicode definition (HO)
+)
+Package hyperref Info: Option `unicode' set `true' on input line 4072.
+Package hyperref Info: Hyper figures OFF on input line 4201.
+Package hyperref Info: Link nesting OFF on input line 4206.
+Package hyperref Info: Hyper index ON on input line 4209.
+Package hyperref Info: Plain pages OFF on input line 4216.
+Package hyperref Info: Backreferencing OFF on input line 4221.
+Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
+Package hyperref Info: Bookmarks ON on input line 4468.
+\c@Hy@tempcnt=\count320
+
+(/usr/local/texlive/2026/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip19
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+LaTeX Info: Redefining \url on input line 4807.
+\XeTeXLinkMargin=\dimen174
+
+(/usr/local/texlive/2026/texmf-dist/tex/generic/bitset/bitset.sty
+Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
+
+(/usr/local/texlive/2026/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty
+Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
+)
+))
+\Fld@menulength=\count321
+\Field@Width=\dimen175
+\Fld@charsize=\dimen176
+Package hyperref Info: Hyper figures OFF on input line 6084.
+Package hyperref Info: Link nesting OFF on input line 6089.
+Package hyperref Info: Hyper index ON on input line 6092.
+Package hyperref Info: backreferencing OFF on input line 6099.
+Package hyperref Info: Link coloring OFF on input line 6104.
+Package hyperref Info: Link coloring with OCG OFF on input line 6109.
+Package hyperref Info: PDF/A mode OFF on input line 6114.
+\Hy@abspage=\count322
+\c@Item=\count323
+\c@Hfootnote=\count324
+)
+Package hyperref Info: Driver (autodetected): hxetex.
+
+(/usr/local/texlive/2026/texmf-dist/tex/latex/hyperref/hxetex.def
+File: hxetex.def 2026-01-29 v7.01p Hyperref driver for XeTeX
+\pdfm@box=\box57
+\c@Hy@AnnotLevel=\count325
+\HyField@AnnotCount=\count326
+\Fld@listcount=\count327
+\c@bookmark@seq@number=\count328
+
+(/usr/local/texlive/2026/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
+Package: rerunfilecheck 2025-06-21 v1.11 Rerun checks for auxiliary files (HO)
+
+(/usr/local/texlive/2026/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
+Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
+)
+Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
+84.
+)
+\Hy@SectionHShift=\skip55
+) (/usr/local/texlive/2026/texmf-dist/tex/latex/bookmark/bkm-dvipdfm.def
+File: bkm-dvipdfm.def 2023-12-10 v1.31 bookmark driver for dvipdfm (HO)
+\BKM@id=\count329
+))
+(/usr/local/texlive/2026/texmf-dist/tex/latex/xurl/xurl.sty
+Package: xurl 2022/01/09 v 0.10 modify URL breaks
+)
+(./farlou_rebuild_chunked_v4_p100-149_safe.aux)
+\openout1 = `farlou_rebuild_chunked_v4_p100-149_safe.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 86.
+LaTeX Font Info:    ... okay on input line 86.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 86.
+LaTeX Font Info:    ... okay on input line 86.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 86.
+LaTeX Font Info:    ... okay on input line 86.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 86.
+LaTeX Font Info:    ... okay on input line 86.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 86.
+LaTeX Font Info:    ... okay on input line 86.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 86.
+LaTeX Font Info:    ... okay on input line 86.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 86.
+LaTeX Font Info:    ... okay on input line 86.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 86.
+LaTeX Font Info:    ... okay on input line 86.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 86.
+LaTeX Font Info:    ... okay on input line 86.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 86.
+LaTeX Font Info:    ... okay on input line 86.
+
+*geometry* driver: auto-detecting
+*geometry* detected driver: xetex
+*geometry* verbose mode - [ preamble ] result:
+* driver: xetex
+* paper: <default>
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(71.13188pt, 472.03123pt, 71.13188pt)
+* v-part:(T,H,B)=(71.13188pt, 652.70622pt, 71.13188pt)
+* \paperwidth=614.295pt
+* \paperheight=794.96999pt
+* \textwidth=472.03123pt
+* \textheight=652.70622pt
+* \oddsidemargin=-1.1381pt
+* \evensidemargin=-1.1381pt
+* \topmargin=-38.1381pt
+* \headheight=12.0pt
+* \headsep=25.0pt
+* \topskip=10.0pt
+* \footskip=30.0pt
+* \marginparwidth=65.0pt
+* \marginparsep=11.0pt
+* \columnsep=10.0pt
+* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+LaTeX Info: Redefining \microtypecontext on input line 86.
+Package microtype Info: Applying patch `item' on input line 86.
+Package microtype Info: Applying patch `toc' on input line 86.
+Package microtype Info: Applying patch `eqnum' on input line 86.
+Package microtype Info: Applying patch `footnote' on input line 86.
+Package microtype Info: Applying patch `verbatim' on input line 86.
+LaTeX Info: Redefining \microtypesetup on input line 86.
+Package microtype Info: Character protrusion enabled (level 2).
+Package microtype Info: Using protrusion set `basicmath'.
+Package microtype Info: No adjustment of tracking.
+Package microtype Info: No adjustment of spacing.
+Package microtype Info: No adjustment of kerning.
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `DejaVuSerif' (encoding: TU).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
+Package hyperref Info: Link coloring OFF on input line 86.
+File: /Users/kalinicenkovitalijmikolajovic/.codex/worktrees/5c15/Script_for_tra
+nslate_book/Output_Final/images/_page_101_Picture_7.jpeg Graphic file (type bmp
+)
+</Users/kalinicenkovitalijmikolajovic/.codex/worktrees/5c15/Script_for_translat
+e_book/Output_Final/images/_page_101_Picture_7.jpeg>
+LaTeX Font Info:    Font shape `TU/DejaVuSansMono(0)/m/n' will be
+(Font)              scaled to size 9.49112pt on input line 98.
+
+Overfull \hbox (2786.93181pt too wide) in paragraph at lines 119--119
+[]\TU/DejaVuSansMono(0)/m/n/10 (Ми перетворили лише рівняння та граничну умову,
+ а не початкову умову.) Маємо звичайне диференціальне рівняння другого порядку,
+ але з однією граничною умовою при x=0. Насправді існує ще одна гранична умова.
+ Він визначається фізичними міркуваннями і фіксується як U(x) \to 0 , коли x \t
+o +\infty . Зверніть увагу, що для спрощення позначення ми опустили параметр s 
+із аргументів функції U(x) всюди, оскільки рівняння (13.7) є диференціальним рі
+внянням лише відносно x.Щоб розв[]язати задачу (13.7), запишіть загальне рішенн
+я (загальний розв[]язок однорідного + часткового розв[]язку гетерогенного) TAC:
+[] 
+ []
+
+File: /Users/kalinicenkovitalijmikolajovic/.codex/worktrees/5c15/Script_for_tra
+nslate_book/Output_Final/images/_page_102_Figure_7.jpeg Graphic file (type bmp)
+
+</Users/kalinicenkovitalijmikolajovic/.codex/worktrees/5c15/Script_for_translat
+e_book/Output_Final/images/_page_102_Figure_7.jpeg>
+[1
+
+]
+Overfull \hbox (952.69363pt too wide) in paragraph at lines 133--133
+[]\TU/DejaVuSansMono(0)/m/n/10 Рис. 13.3. Граф ймовірнісного інтеграла (eri) та
+ його комплементарної функції (eric).Інакше температура буде зростати нескінчен
+но зі збільшенням координати X). Визначаючи сталу c_2 з граничної умови при x=0
+, отримуємо фінальний вираз для U\left(x\right) (13.8)[] 
+ []
+
+
+Overfull \hbox (30.81287pt too wide) in paragraph at lines 137--137
+[]\TU/DejaVuSansMono(0)/m/n/10 U(x) = u_0 \left\{ \frac{e^{-V \widehat{s} x}}{s
+(V \widehat{s} + 1)} \right\} + \frac{1}{s}.[] 
+ []
+
+
+Overfull \hbox (114.62018pt too wide) in paragraph at lines 141--141
+[]\TU/DejaVuSansMono(0)/m/n/10 Залишається зробити останній крок. Щоб визначити
+ температурне поле, потрібно обчислити u\left(x,\,t\right)[] 
+ []
+
+
+Overfull \hbox (356.51872pt too wide) in paragraph at lines 153--153
+[]\TU/DejaVuSansMono(0)/m/n/10 u(x, t) = u_0 - u_0 \left[ \text{eric} \left( \f
+rac{x}{2} \sqrt{t} \right) + \text{eric} \left( \sqrt{t} + \frac{x}{2} \sqrt{t}
+ \right) e^{x+t} \right],[] 
+ []
+
+File: /Users/kalinicenkovitalijmikolajovic/.codex/worktrees/5c15/Script_for_tra
+nslate_book/Output_Final/images/_page_103_Figure_7.jpeg Graphic file (type bmp)
+
+</Users/kalinicenkovitalijmikolajovic/.codex/worktrees/5c15/Script_for_translat
+e_book/Output_Final/images/_page_103_Figure_7.jpeg>
+[2]
+Overfull \hbox (17.47978pt too wide) in paragraph at lines 219--219
+[]\TU/DejaVuSansMono(0)/m/n/10 H\left[y[][]\left(r\right)+\frac{1}{r}\ y[]\left
+(r\right)\right]=-\xi^{2}H\left[y\right].[] 
+ []
+
+File: /Users/kalinicenkovitalijmikolajovic/.codex/worktrees/5c15/Script_for_tra
+nslate_book/Output_Final/images/_page_104_Figure_9.jpeg Graphic file (type bmp)
+
+</Users/kalinicenkovitalijmikolajovic/.codex/worktrees/5c15/Script_for_translat
+e_book/Output_Final/images/_page_104_Figure_9.jpeg>
+[3]
+Underfull \hbox (badness 1102) in paragraph at lines 268--270
+[]\TU/DejaVuSerif(0)/m/n/10 Дайте фізичну інтерпретацію цієї задачі.4. Розв’яза
+ти задачу з граничним значен-
+ []
+
+[4]
+Overfull \hbox (40.33652pt too wide) in paragraph at lines 302--302
+[]\TU/DejaVuSansMono(0)/m/n/10 (\Gamma Y) \quad \begin{cases} u(0, t) = 0, \\ u
+(1, t) = f(t), \end{cases} \quad 0 < t < \infty,[] 
+ []
+
+
+Underfull \hbox (badness 1616) in paragraph at lines 304--312
+[]\TU/DejaVuSerif(0)/m/n/10 Сподіваємося, що розв’язання цієї задачі (14.1) буд
+е легким, оскільки ми знаємо
+ []
+
+[5]
+Underfull \hbox (badness 1308) in paragraph at lines 403--403
+[]\TU/DejaVuSansMono(0)/m/n/10 \overline{B}^2 - 4\overline{A}\overline{C} = (B^
+2 - 4AC) (\xi_x \eta_y -
+ []
+
+
+Overfull \hbox (272.71144pt too wide) in paragraph at lines 403--403
+[]\TU/DejaVuSansMono(0)/m/n/10 \overline{B} = 2 \left( V \overline{A} \xi_x + V
+ \overline{C} \xi_y \right) \left( V \overline{A} \eta_x + V \overline{C} \eta_
+y \right).[] 
+ []
+
+File: /Users/kalinicenkovitalijmikolajovic/.codex/worktrees/5c15/Script_for_tra
+nslate_book/Output_Final/images/_page_115_Picture_14.jpeg Graphic file (type bm
+p)
+</Users/kalinicenkovitalijmikolajovic/.codex/worktrees/5c15/Script_for_translat
+e_book/Output_Final/images/_page_115_Picture_14.jpeg>
+[6]
+Overfull \hbox (1133.6417pt too wide) in paragraph at lines 413--413
+[]\TU/DejaVuSansMono(0)/m/n/10 15.5 Диаграмма, иллюстрирующая функциональную за
+висимость переменных  \xi   и   \tau  , поскольку   \xi   зависит и от x, и от 
+t. Переменная   \tau   зависит только от t. Это все, что касается преобразовани
+й. Теперь подставим найденные выражения   u_t  ,   u_x   и   u_{vx}   в уравнен
+ие (15 2) и получим[] 
+ []
+
+
+Overfull \hbox (156.52391pt too wide) in paragraph at lines 417--417
+[]\TU/DejaVuSansMono(0)/m/n/10 \overline{B} = 2 \sqrt{\overline{A}} \left[ \sqr
+t{\overline{A}} \, \eta_x + \sqrt{\overline{C}} \, \eta_y \right].[] 
+ []
+
+
+Overfull \hbox (38.4318pt too wide) in paragraph at lines 427--427
+[]\TU/DejaVuSansMono(0)/m/n/10 .Следовательно, новая задача с начальным условие
+м в персменных   \xi   и   \tau   имеет вид(УЧП)[] 
+ []
+
+
+Overfull \hbox (884.12428pt too wide) in paragraph at lines 435--435
+[]\TU/DejaVuSansMono(0)/m/n/10 (НУ)   u(\xi, 0) = 1 - H(\xi), \quad -\infty < \
+xi < \infty.  Так как   \xi = x   при t = 0, то новые граничные условия совпада
+ют со старыми. Эта задача была решена в лекции 12 с помощью интегрального преоб
+разования Фурье, и ее решение записывается в виде[] 
+ []
+
+[7]
+Overfull \hbox (739.36586pt too wide) in paragraph at lines 466--466
+[]\TU/DejaVuSansMono(0)/m/n/10 \begin{cases} \frac{1}{2} \left[ 1 + \operatorna
+me{erf} \left( \frac{-\xi}{2\sqrt{D\tau}} \right) \right], & \xi < 0, \\ \frac{
+1}{2} \operatorname{erfc} \left( \frac{\xi}{2\sqrt{D\tau}} \right), & 0 \leq \x
+i. \end{cases}[] 
+ []
+
+
+Overfull \hbox (367.94691pt too wide) in paragraph at lines 466--466
+[]\TU/DejaVuSansMono(0)/m/n/10 \overline{A}u_{\xi\xi} + \overline{B}u_{\xi\eta}
+ + \overline{C}u_{\eta\eta} + \overline{D}u_{\xi} + \overline{E}u_{\eta} + \ove
+rline{F}u = \overline{G}[] 
+ []
+
+LaTeX Font Info:    Font shape `TU/STIXTwoMath(1)/m/n' will be
+(Font)              scaled to size 7.68135pt on input line 481.
+LaTeX Font Info:    Font shape `TU/STIXTwoMath(1)/m/n' will be
+(Font)              scaled to size 6.03534pt on input line 481.
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 4
+81.
+(/usr/local/texlive/2026/texmf-dist/tex/latex/lm/omllmm.fd
+File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    Font shape `TU/STIXTwoMath(2)/m/n' will be
+(Font)              scaled to size 10.97443pt on input line 481.
+LaTeX Font Info:    Font shape `TU/STIXTwoMath(2)/m/n' will be
+(Font)              scaled to size 7.6821pt on input line 481.
+LaTeX Font Info:    Font shape `TU/STIXTwoMath(2)/m/n' will be
+(Font)              scaled to size 6.03593pt on input line 481.
+LaTeX Font Info:    Font shape `TU/STIXTwoMath(3)/m/n' will be
+(Font)              scaled to size 10.97229pt on input line 481.
+LaTeX Font Info:    Font shape `TU/STIXTwoMath(3)/m/n' will be
+(Font)              scaled to size 7.6806pt on input line 481.
+LaTeX Font Info:    Font shape `TU/STIXTwoMath(3)/m/n' will be
+(Font)              scaled to size 6.03476pt on input line 481.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 481
+.
+
+(/usr/local/texlive/2026/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/microtype/mt-msa.cfg
+File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 481
+.
+
+(/usr/local/texlive/2026/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/microtype/mt-msb.cfg
+File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
+)
+LaTeX Font Info:    Font shape `TU/DejaVuSerif(0)/m/n' will be
+(Font)              scaled to size 7.0pt on input line 481.
+
+Overfull \hbox (15.5751pt too wide) in paragraph at lines 480--482
+\TU/DejaVuSansMono(0)/m/n/10 x}{2\sqrt{Dt}}\right) \right], & Vt > x, \\ \frac{
+1}{2} \operatorname{erfc}\left(\frac{x
+ []
+
+LaTeX Font Info:    Font shape `TU/DejaVuSerif(0)/b/n' will be
+(Font)              scaled to size 10.0pt on input line 489.
+
+Overfull \hbox (86.04973pt too wide) in paragraph at lines 498--498
+[][]\TU/DejaVuSansMono(0)/m/n/10 \begin{array}{ll} u_t = u_{xx} - 2u_x, & -\inf
+ty < x < \infty, \ 0 < t < \infty, \\ u(x, 0) = \sin x, & -
+ []
+
+
+Overfull \hbox (107.00157pt too wide) in paragraph at lines 510--510
+[][]\TU/DejaVuSansMono(0)/m/n/10 \begin{array}{ll} u_t = u_{xx} - 2u_x, & -\inf
+ty < x < \infty, \ 0 < t < \infty, \\ u(x, 0) = e^x \sin x, & -
+ []
+
+LaTeX Font Info:    Font shape `TU/DejaVuSerif(0)/m/n' will be
+(Font)              scaled to size 12.0pt on input line 522.
+LaTeX Font Info:    Font shape `TU/DejaVuSerif(0)/b/n' will be
+(Font)              scaled to size 12.0pt on input line 522.
+
+Overfull \hbox (385.08934pt too wide) in paragraph at lines 542--542
+[][]\TU/DejaVuSansMono(0)/m/n/10 \overline{A}u_{\xi\xi} + \overline{B}u_{\xi\et
+a} + \overline{C}u_{\eta\eta} + \overline{D}u_{\xi} + \overline{E}u_{\eta} + \o
+verline{F}u = \overline{G},[][] 
+ []
+
+LaTeX Font Info:    Font shape `TU/DejaVuSerif(0)/m/n' will be
+(Font)              scaled to size 14.4pt on input line 552.
+LaTeX Font Info:    Font shape `TU/DejaVuSerif(0)/b/n' will be
+(Font)              scaled to size 14.4pt on input line 552.
+[8]
+Overfull \hbox (320.32915pt too wide) in paragraph at lines 592--592
+\TU/DejaVuSansMono(0)/m/n/10 4x^2y^2[] , і ми зведемо це рівняння до канонічної
+ форми в першому квадранті x>0, y>0.КРОК 1 (Перше перетворення)Запишемо характе
+ристичні рівняння[] 
+ []
+
+./farlou_rebuild_chunked_v4_p100-149_safe.tex:594: Missing $ inserted.
+<inserted text> 
+                $
+l.594 \frac{dy}{dx}
+                    = \frac{B + \sqrt{B^2 - 4AC}}{2A} =
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+./farlou_rebuild_chunked_v4_p100-149_safe.tex:594: Extra }, or forgotten $.
+\frac  #1#2->{\begingroup #1\endgroup \@@over #2}
+                                                 
+l.594 \frac{dy}{dx}
+                    = \frac{B + \sqrt{B^2 - 4AC}}{2A} =
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+
+LaTeX Warning: Command \textasciitilde invalid in math mode on input line 596.
+
+./farlou_rebuild_chunked_v4_p100-149_safe.tex:597: Missing $ inserted.
+<inserted text> 
+                $
+l.597 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (133.66731pt too wide) in paragraph at lines 618--618
+\TU/DejaVuSansMono(0)/m/n/10 \eta ; ви можете поміняти їх місцями, якщо хочете.
+) Після цього перетворення початкове рівняння набуває вигляду[] 
+ []
+
+
+Overfull \hbox (38.43175pt too wide) in paragraph at lines 626--626
+[]\TU/DejaVuSansMono(0)/m/n/10 \begin{split} u_{tt} &= \alpha^2 u_{xx} + F\left
+(x, \ t\right), \\ u_{tt} &= \alpha^2 u_{xx} -
+ []
+
+
+Overfull \hbox (665.08214pt too wide) in paragraph at lines 632--632
+[]\TU/DejaVuSansMono(0)/m/n/10 КРОК 3 (Отримання нового рівняння)Нову канонічну
+ форму можна отримати, обчисливши всі коефіцієнти \overline{A}, \overline{B}, \
+overline{C}, \overline{D}, \overline{E}, \overline{F} і \overline{G} у рівнянні
+[] 
+ []
+
+[9]
+File: /Users/kalinicenkovitalijmikolajovic/.codex/worktrees/5c15/Script_for_tra
+nslate_book/Output_Final/images/_page_119_Figure_10.jpeg Graphic file (type bmp
+)
+</Users/kalinicenkovitalijmikolajovic/.codex/worktrees/5c15/Script_for_translat
+e_book/Output_Final/images/_page_119_Figure_10.jpeg>
+File: /Users/kalinicenkovitalijmikolajovic/.codex/worktrees/5c15/Script_for_tra
+nslate_book/Output_Final/images/_page_120_Figure_2.jpeg Graphic file (type bmp)
+
+</Users/kalinicenkovitalijmikolajovic/.codex/worktrees/5c15/Script_for_translat
+e_book/Output_Final/images/_page_120_Figure_2.jpeg>
+
+Overfull \hbox (105.09671pt too wide) in paragraph at lines 660--660
+[]\TU/DejaVuSansMono(0)/m/n/10 за формулами (41.5) з \xi = y^2 та \eta = x^2 . 
+Зробивши це, отримуємо канонічну форму еліптичного рівняння[] 
+ []
+
+[10]
+LaTeX Font Info:    Font shape `TU/DejaVuSerif(0)/b/it' will be
+(Font)              scaled to size 14.4pt on input line 668.
+
+Overfull \hbox (2701.22002pt too wide) in paragraph at lines 682--682
+[]\TU/DejaVuSansMono(0)/m/n/10 - Гіперболічно.2. Наш інтерес до класифікації ди
+ференціальних рівнянь у похідних пов[]язаний із тим, що три основні типи рівнян
+ь описують три різні типи фізичних явищ, і ми хотіли б отримати математичну кла
+сифікацію цих трьох класів фізичних явищ.# ЗАВДАННЯ1. Які з цих параболічних і 
+еліптичних рівнянь записані у канонічній формі?a) u_t = u_{xx} + hu,б) u_{xy} +
+ u_{xx} + 3u = \sin x,в) u_{xx} + 2u_{yy} = 0,г) u_{xx} = \sin^2 x?2. Перетворі
+ть параболічне рівняння u_{xx} + 2u_{xy} + u_{yy} + u = 2 до канонічної форми.3
+. Перетворіть еліптичне рівняння u_{xx} + 2u_{yy} + x^2 u_x = e^{-
+ []
+
+
+Overfull \hbox (200.33226pt too wide) in paragraph at lines 682--682
+\TU/DejaVuSansMono(0)/m/n/10 x^2/2} до канонічної форми.# МЕТОД МОНТЕ-КАРЛО (ВС
+ТУП)МЕТА ЛЕКЦІЇ: Пояснити основні ідени, що лежать в основі методу Монте-
+ []
+
+
+Overfull \hbox (945.07481pt too wide) in paragraph at lines 682--682
+\TU/DejaVuSansMono(0)/m/n/10 Карло, і показати, як цей метод можна використовув
+ати для розв[]язання різних задач. Виявляється, що за допомогою азартних ігор м
+ожна змоделювати (загалом, на комп[]ютері) наближені розв[]язки реальних задач.
+ Як простий приклад можна вказати обчислення інтеграла[] 
+ []
+
+File: /Users/kalinicenkovitalijmikolajovic/.codex/worktrees/5c15/Script_for_tra
+nslate_book/Output_Final/images/_page_121_Picture_9.jpeg Graphic file (type bmp
+)
+</Users/kalinicenkovitalijmikolajovic/.codex/worktrees/5c15/Script_for_translat
+e_book/Output_Final/images/_page_121_Picture_9.jpeg>
+
+Overfull \hbox (1524.10756pt too wide) in paragraph at lines 702--702
+[]\TU/DejaVuSansMono(0)/m/n/10 кидаючи дротик у одиничний квадрат \{(x, y): 0 <
+ x < 1, 0 < y < 1\} Після приблизно 100 кидків відносна частина дротиків, що оп
+ускається нижче кривої y = x^2 , вважається приблизним значенням інтеграла. Уза
+гальнення такої гри (з випадковим киданням дрогіка) завжди містить процедуру ге
+нерації послідовності випадкових чисел.У цій лекції ми коротко опишемо метод Мо
+нте-
+ []
+
+
+Overfull \hbox (213.66525pt too wide) in paragraph at lines 702--702
+\TU/DejaVuSansMono(0)/m/n/10 Карло, а в наступній лекції покажемо, як його вико
+ристовувати для розв[]язання диференціальних рівнянь у похіднихМетоди Монте-
+ []
+
+
+Overfull \hbox (967.93132pt too wide) in paragraph at lines 702--702
+\TU/DejaVuSansMono(0)/m/n/10 Карло зазвичай називають групою методів розв[]язан
+ня детермінованих задач (тобто задач без випадковості), у яких суттєво використ
+овуються елементи випадковості. Загальна філософія етнічних методів показана на
+ рис. 42 1.Ймовірнісна граДеторміноване завдання \rho —
+ []
+
+
+Overfull \hbox (404.1365pt too wide) in paragraph at lines 702--702
+\TU/DejaVuSansMono(0)/m/n/10 розв[]язання задачі (наприклад, обчислення інтегра
+ла, розв[]язання UBP тощо).Результат = \hat{p} Наближення p Рішення = p Рис. 42
+.1. Загальна теорія методу Монте-
+ []
+
+[11]
+LaTeX Font Info:    Font shape `TU/DejaVuSerif(0)/m/it' will be
+(Font)              scaled to size 10.0pt on input line 704.
+
+Overfull \hbox (1160.30737pt too wide) in paragraph at lines 712--712
+[]\TU/DejaVuSansMono(0)/m/n/10 (детерміноване завдання). Щоб використати метод 
+Монте-Карло, потрібно винайти гру на удачу, яка дає приблизне значення цього ін
+теграла.Звісно, можна придумати багато різних ігор. Остаточна версія залежить в
+ід точності розрахунків, простоти гри тощо. Очевидний варіант гри для обчисленн
+я інтегралу —
+ []
+
+
+Overfull \hbox (38.43181pt too wide) in paragraph at lines 712--712
+\TU/DejaVuSansMono(0)/m/n/10 кинути дротик у прямокутний R = \{(x,y): a \le x \
+le b, 0 \le y \le \max f(x)\} (див. рис. 42.2)[] 
+ []
+
+File: /Users/kalinicenkovitalijmikolajovic/.codex/worktrees/5c15/Script_for_tra
+nslate_book/Output_Final/images/_page_126_Figure_14.jpeg Graphic file (type bmp
+)
+</Users/kalinicenkovitalijmikolajovic/.codex/worktrees/5c15/Script_for_translat
+e_book/Output_Final/images/_page_126_Figure_14.jpeg>
+
+Overfull \hbox (411.75528pt too wide) in paragraph at lines 722--722
+[]\TU/DejaVuSansMono(0)/m/n/10 = \int_{0}^{d} \left[\frac{\partial F}{\partial 
+\overline{y}} \eta\left(x\right) + \frac{\partial F}{\partial \overline{y[]}} \
+eta[]\left(x\right)\right] dx = 0.[] 
+ []
+
+
+Overfull \hbox (46.05052pt too wide) in paragraph at lines 728--728
+[]\TU/DejaVuSansMono(0)/m/n/10 \frac{d\varphi(e)}{de} \equiv \int_{a}^{b} \left
+\{ \frac{\partial F}{\partial \overline{y}} -
+ []
+
+
+Overfull \hbox (160.3333pt too wide) in paragraph at lines 728--728
+\TU/DejaVuSansMono(0)/m/n/10 \frac{\partial}{\partial x} \left[ \frac{\partial 
+F}{\partial \overline{y[]}} \right] \right\} \, \eta(x) \, dx = 0.[] 
+ []
+
+
+Overfull \hbox (169.85686pt too wide) in paragraph at lines 734--734
+[]\TU/DejaVuSansMono(0)/m/n/10 \frac{\partial F}{\partial \overline{y}} - \frac
+{d}{dx} \left[ \frac{\partial F}{\partial \overline{y[]}} \right] = 0[] 
+ []
+
+
+Underfull \hbox (badness 1424) in paragraph at lines 736--744
+\TU/DejaVuSerif(0)/m/n/10 шениями волиового уравнения. На рисунке 17.1 изображе
+на простейшая бегущая
+ []
+
+
+Overfull \hbox (44.14587pt too wide) in paragraph at lines 747--747
+[]\TU/DejaVuSansMono(0)/m/n/10 \frac{\partial F}{\partial y} - \frac{d}{dx} \le
+ft[ \frac{\partial F}{\partial y[]} \right] = 0[] 
+ []
+
+
+Overfull \hbox (844.12518pt too wide) in paragraph at lines 764--764
+[]\TU/DejaVuSansMono(0)/m/n/10 Если теперь проинтегрировать второе уравнение (1
+7.5), то получится алгебранческая система двух уравнений относительно неизвестн
+ых функций   \varphi(x)   и   \psi(x)  . В самом деле, после интегрирования в п
+ределах от   x_0   до x получаем(17.6)[] 
+ []
+
+
+Overfull \hbox (314.6151pt too wide) in paragraph at lines 772--772
+[]\TU/DejaVuSansMono(0)/m/n/10 Решаем теперь уравнение (17.6) совместно с первы
+м уравнением (17.5) и получаем следующие выражения для функций   \varphi(x)   и
+   \psi(x)  :(17.7)[] 
+ []
+
+[12]
+File: /Users/kalinicenkovitalijmikolajovic/.codex/worktrees/5c15/Script_for_tra
+nslate_book/Output_Final/images/_page_129_Figure_2.jpeg Graphic file (type bmp)
+
+</Users/kalinicenkovitalijmikolajovic/.codex/worktrees/5c15/Script_for_translat
+e_book/Output_Final/images/_page_129_Figure_2.jpeg>
+ [13]
+Overfull \hbox (4.1469pt too wide) in paragraph at lines 838--838
+[]\TU/DejaVuSansMono(0)/m/n/10 J\left[u\right] = \iint\limits_{D} F\left(x,\ y,
+\ u,\ u_{x},\ u_{y}\right) \, dx \, dy.[] 
+ []
+
+
+Underfull \hbox (badness 2401) in paragraph at lines 856--856
+\TU/DejaVuSerif(0)/b/n/14.4 произвольные функции, а общее решение обыкно-
+ []
+
+[14]
+Overfull \hbox (823.17325pt too wide) in paragraph at lines 870--870
+[]\TU/DejaVuSansMono(0)/m/n/10 - 3 Метод нахождения общего решения уравнения с 
+частными производными и подстановки этого решения в начальные условия не являет
+ся общим методом решения уравнений с частными производными. Решение, которое ра
+ссматривается в данной лекции,—
+ []
+
+
+Overfull \hbox (1006.02562pt too wide) in paragraph at lines 870--870
+\TU/DejaVuSansMono(0)/m/n/10 единственный пример использования этого метода. Об
+ычно невозможно найти общее решение уравнения с частными производными, но даже 
+если удается это сделать, оказывается очень сложным подставить это решение в кр
+аевые условия.# ЗАДАЧН1. Проверьте, что решение Даламбера (17-
+ []
+
+
+Overfull \hbox (107.0014pt too wide) in paragraph at lines 870--870
+\TU/DejaVuSansMono(0)/m/n/10 8) удовлетворяет начальным условиям задачи (17.1).
+2. Подставьте (17.7) в общее решение   u(x, t) = \psi(x -
+ []
+
+
+Overfull \hbox (7.95634pt too wide) in paragraph at lines 870--870
+\TU/DejaVuSansMono(0)/m/n/10 ct) + \psi(x + \epsilon t)   и получите формулу Да
+ламбера.3. Найдите решение задачи Коши:[] 
+ []
+
+[15]
+Overfull \hbox (9.86102pt too wide) in paragraph at lines 937--937
+[]\TU/DejaVuSansMono(0)/m/n/10 u(x, t) = \frac{1}{2} [f(x-ct) + f(x+ct)] + \fra
+c{1}{2c} \int_{x-ct}^{x+ct} g(\xi) d\xi.[] 
+ []
+
+
+Overfull \hbox (17.48pt too wide) in paragraph at lines 948--948
+[]\TU/DejaVuSansMono(0)/m/n/10 (Y \text{ ЧП}) \qquad u_{tt} = c^2 u_{xx}, \quad
+ -\infty < x < \infty, \quad 0 < t < \infty,[] 
+ []
+
+File: /Users/kalinicenkovitalijmikolajovic/.codex/worktrees/5c15/Script_for_tra
+nslate_book/Output_Final/images/_page_133_Figure_5.jpeg Graphic file (type bmp)
+
+</Users/kalinicenkovitalijmikolajovic/.codex/worktrees/5c15/Script_for_translat
+e_book/Output_Final/images/_page_133_Figure_5.jpeg>
+File: /Users/kalinicenkovitalijmikolajovic/.codex/worktrees/5c15/Script_for_tra
+nslate_book/Output_Final/images/_page_134_Figure_2.jpeg Graphic file (type bmp)
+
+</Users/kalinicenkovitalijmikolajovic/.codex/worktrees/5c15/Script_for_translat
+e_book/Output_Final/images/_page_134_Figure_2.jpeg>
+[16]
+Overfull \hbox (29.15588pt too wide) in paragraph at lines 980--984
+[]\TU/DejaVuSerif(0)/m/n/10 . 18.3. Интерпретация задачи с начальной скоростью 
+в x1-плоскости. \TU/DejaVuSansMono(0)/m/n/10 x_{\bullet}+ct_{\bullet}
+ []
+
+
+Overfull \hbox (773.65074pt too wide) in paragraph at lines 994--994
+[]\TU/DejaVuSansMono(0)/m/n/10 J[u_n] = \int_0^1 \int_0^1 \left\{ \left[ \sum_{
+j=1}^n a_j \frac{\partial \varphi_j}{\partial x} \right]^2 + \left[ \sum_{j=1}^
+n a_j \frac{\partial \varphi_j}{\partial y} \right]^2 + 2f \sum_{j=1}^n a_j \va
+rphi_j \right\} dx dy[] 
+ []
+
+
+Overfull \hbox (1478.39426pt too wide) in paragraph at lines 994--994
+[]\TU/DejaVuSansMono(0)/m/n/10 \frac{\partial J\left[u_{n}\right]}{\partial a_{
+1}} = 2 \int_{0}^{1} \int_{0}^{1} \left\{ \sum_{j=1}^{n} \left[ \frac{\partial 
+\varphi_{j}}{\partial x} \frac{\partial \varphi_{j}}{\partial x} + \frac{\parti
+al \varphi_{j}}{\partial y} \frac{\partial \varphi_{1}}{\partial y} \frac{\part
+ial \}{\partial y} \right] a_{j} + f \varphi_{1} \right\} dx dy = 0,[] 
+ []
+
+
+Overfull \hbox (44.1459pt too wide) in paragraph at lines 1005--1005
+[]\TU/DejaVuSansMono(0)/m/n/10 где  A = (A_{IJ})  матрица размером  n \times n 
+, элементы которой вычисляются по формулам(45.3)[] 
+ []
+
+
+Overfull \hbox (1215.54399pt too wide) in paragraph at lines 1019--1019
+[]\TU/DejaVuSansMono(0)/m/n/10 а  a=(a_i) — неизвестный вектор, компоненты кото
+рого являются коэффициентами в приближенном решении  a_n(x,y)=a_1\varphi_1(x,y)
++a_2\varphi_2(x,y)+\ldots+a_n\varphi_n(x,y) .ШАГ 3. Решаем линейную систему Aa 
+= b относительно коэффициентов  a_1, a_2, \ldots, a_n  и получаем приближенную 
+минимизирующую функцию[] 
+ []
+
+[17]
+Overfull \hbox (950.78935pt too wide) in paragraph at lines 1043--1043
+[]\TU/DejaVuSansMono(0)/m/n/10 \begin{array}{llll} (\text{Y}4\Pi) & u_{tt} = c^
+2 u_{xx}, & 0 < x < \infty, & 0 < t < \infty, \\ (\Gamma \text{Y}) & u(0, t) = 
+0, & 0 < t < \infty, \\ (\text{H}\text{Y}) & \begin{cases} u(x, 0) = f(x), \\ u
+_t(x, 0) = g(x). \end{cases} & 0 < x < \infty, \\ \end{array}[] 
+ []
+
+
+Overfull \hbox (895.55235pt too wide) in paragraph at lines 1066--1066
+[]\TU/DejaVuSansMono(0)/m/n/10 "Теперь перед нами проблема, которой не было в з
+адаче о бесконечной струне. Решение   u\left(x,\t\right)   должно быть определе
+но всюду только внутри первого квадранта   (x>0,\,t>0)   плоскости переменных x
+ и t. Значит, мы должны уметь вычислить функции[] 
+ []
+
+
+Overfull \hbox (333.66234pt too wide) in paragraph at lines 1074--1074
+[]\TU/DejaVuSansMono(0)/m/n/10 при всех   -\infty < x-ct < \infty  ,   \psi(x+c
+t)   при всех   0 < x+ct < \infty  .К сожалению, первая из формул (18.7) позвол
+яет вычислять   \varphi(x-
+ []
+
+
+Overfull \hbox (339.37639pt too wide) in paragraph at lines 1074--1074
+\TU/DejaVuSansMono(0)/m/n/10 ct)   только при   x-ct\geqslant 0  , поскольку в 
+начальных данных функции f(x) и g(x) определены только для положительных значен
+ий аргумента.Если   x-
+ []
+
+
+Overfull \hbox (186.99924pt too wide) in paragraph at lines 1086--1086
+[]\TU/DejaVuSansMono(0)/m/n/10 \begin{split} u\left(x,\,t\right) &= \phi\left(x
+-ct\right) + \psi\left(x+ct\right) = \\ &= \frac{1}{2} \left[ f\left(x-
+ []
+
+
+Overfull \hbox (183.18983pt too wide) in paragraph at lines 1086--1086
+\TU/DejaVuSansMono(0)/m/n/10 ct\right) + f\left(x+ct\right) \right] + \frac{1}{
+2c} \int\limits_{x-ct}^{x+ct} g\left(\xi\right) \, d\xi. \end{split}[] 
+ []
+
+
+Overfull \hbox (375.56584pt too wide) in paragraph at lines 1096--1096
+[]\TU/DejaVuSansMono(0)/m/n/10 Что же делать, если x < ct? Пришла пора воспольз
+оваться граничным условием u(0,t)=0. С помощью этого граничного условия мы дооп
+ределяем функцию   \varphi(x-
+ []
+
+[18]
+Overfull \hbox (61.28827pt too wide) in paragraph at lines 1118--1118
+[]\TU/DejaVuSansMono(0)/m/n/10 u_0 \rightarrow u = \sum_{k=0}^{\infty} \varepsi
+lon^k u_k \rightarrow u = \sum_{k=0}^{\infty} u_k[] 
+ []
+
+File: /Users/kalinicenkovitalijmikolajovic/.codex/worktrees/5c15/Script_for_tra
+nslate_book/Output_Final/images/_page_137_Figure_9.jpeg Graphic file (type bmp)
+
+</Users/kalinicenkovitalijmikolajovic/.codex/worktrees/5c15/Script_for_translat
+e_book/Output_Final/images/_page_137_Figure_9.jpeg>
+
+Overfull \hbox (183.18988pt too wide) in paragraph at lines 1127--1127
+\TU/DejaVuSansMono(0)/m/n/10 возмущение отражается от границы;   \delta  —возму
+щение распространяется вдоль характеристики из точки (  x_0+ct_0  , 0).[] 
+ []
+
+
+Overfull \hbox (2362.18105pt too wide) in paragraph at lines 1133--1133
+[]\TU/DejaVuSansMono(0)/m/n/10 1. Решение (18.8) полностью соогветствует нашим 
+представлениям о полубесконечной струне с граничным условием u(0, t) = 0. При  
+ x \geqslant ct   оно совпадает с формулой Даламбера для бесконечной струны. Ес
+ли x < ct, то формула модифицируется таким образом, что в нее включается волна,
+ отраженная от границы (при отражении знак волны меняется на противоположный).2
+. Если граничное условие u(0, t) = 0 изменить на другое, то и решение (18.8), е
+стественно, изменится. Можно получить в явном виде решения для граничных услови
+й[] 
+ []
+
+
+Overfull \hbox (486.03911pt too wide) in paragraph at lines 1152--1152
+[]\TU/DejaVuSansMono(0)/m/n/10 x - ct = \text{const}  называются характеристика
+ми. Возмущение распространяется вдоль характеристик. Понятие характеристики тес
+но связано с уравнениями гиперболического типа.[] 
+ []
+
+[19]
+Overfull \hbox (265.09248pt too wide) in paragraph at lines 1174--1174
+[]\TU/DejaVuSansMono(0)/m/n/10 имеет только вулевое решение. - Прим. ред.2) Зде
+сь и ниже речь идет об отыскании одного из решений (второе таким методом не нах
+одится).—
+ []
+
+
+Overfull \hbox (516.51456pt too wide) in paragraph at lines 1174--1174
+\TU/DejaVuSansMono(0)/m/n/10 Прим ред.3) Эта «ракета», во-первых, не при всех г
+раничных условиях долетает до є=1 (где при опредсленных вещественных граничных 
+условиях открывается мир комплексных решений) и, во-
+ []
+
+
+Overfull \hbox (23.19402pt too wide) in paragraph at lines 1174--1174
+\TU/DejaVuSansMono(0)/m/n/10 вторых, ни при каких в не долетает до второго веще
+ственного решения, когда оно существует.—
+ []
+
+
+Overfull \hbox (1211.73471pt too wide) in paragraph at lines 1174--1174
+\TU/DejaVuSansMono(0)/m/n/10 Прим. ред.ции  u_0 ,  u_1 ,  u_2 , ..., входящие в
+ степенной ряд (46.1). В оставшейся части лекции мы покажем, как этим методом м
+ожно решить различные краевые задачи.# Решение нелинейного уравнения \Delta u +
+ u^2 = 0 методом возмущенийПредположим, что нам нужно решить следующую нелинейн
+ую задачу Дирихле:(46.2)[] 
+ []
+
+File: /Users/kalinicenkovitalijmikolajovic/.codex/worktrees/5c15/Script_for_tra
+nslate_book/Output_Final/images/_page_139_Figure_3.jpeg Graphic file (type bmp)
+
+</Users/kalinicenkovitalijmikolajovic/.codex/worktrees/5c15/Script_for_translat
+e_book/Output_Final/images/_page_139_Figure_3.jpeg>
+File: /Users/kalinicenkovitalijmikolajovic/.codex/worktrees/5c15/Script_for_tra
+nslate_book/Output_Final/images/_page_139_Figure_8.jpeg Graphic file (type bmp)
+
+</Users/kalinicenkovitalijmikolajovic/.codex/worktrees/5c15/Script_for_translat
+e_book/Output_Final/images/_page_139_Figure_8.jpeg>
+[20]
+Underfull \hbox (badness 2237) in paragraph at lines 1208--1208
+[][]\TU/DejaVuSerif(0)/b/n/14.4 ВОЛНОВОЕ УРАВНЕНИЕ И ГРАНИЧНЫЕ УСЛОВИЯ
+ []
+
+
+Overfull \hbox (72.71657pt too wide) in paragraph at lines 1227--1227
+[]\TU/DejaVuSansMono(0)/m/n/10 u_0 (1, \theta) + \varepsilon u_1 (1, \theta) + 
+\varepsilon^2 u_2 (1, \theta) + \ldots = \cos \theta.[] 
+ []
+
+
+Overfull \hbox (878.40994pt too wide) in paragraph at lines 1238--1238
+[]\TU/DejaVuSansMono(0)/m/n/10 u_x(L, t) - \gamma_2 u(L, t) = g_2(t).  Могут вс
+тречаться и произвольные комбинации этих трех типоз граничных условий. В лекции
+ будет показан физический смысл этих граничных условий.Итак, пока что мы рассмо
+трели единственный вид волнового движения—
+ []
+
+
+Overfull \hbox (327.94798pt too wide) in paragraph at lines 1238--1238
+\TU/DejaVuSansMono(0)/m/n/10 поперечные колебания струны. Читатель должен поним
+ать, что это только один из видов волновых движений.Ниже приведен перечень осно
+вных типов волн:-
+ []
+
+
+Overfull \hbox (63.19298pt too wide) in paragraph at lines 1298--1298
+[]\TU/DejaVuSansMono(0)/m/n/10 \begin{cases} \Delta u_{1} = -u_{0}^{2}, \\ u_{1
+}(1, \theta) = 0, \\ u_{2}(1, \theta). \end{cases}[] 
+ []
+
+[21]
+Overfull \hbox (779.36493pt too wide) in paragraph at lines 1334--1334
+[]\TU/DejaVuSansMono(0)/m/n/10 - 3) Підставити y_h + y_p у початкову умову та в
+изначити константи.Ми використаємо цей метод для розв[]язання нашої проблеми. У
+ нашій задачі P_1 загальний розв[]язок однорідного рівняння \Delta u=0 має вигл
+яд із розділеними змінними[] 
+ []
+
+
+Overfull \hbox (931.74225pt too wide) in paragraph at lines 1338--1338
+[]\TU/DejaVuSansMono(0)/m/n/10 \begin{aligned} u_{tt} &= c^2 u_{xx}, & 0 < x < 
+1, & 0 < t < \infty, \\ u(0, t) &= g_1(t), & 0 < t < \infty, \\ u(1, t) &= g_2(
+t), & 0 < t < \infty, \\ (HY) &\begin{cases} u(x, 0) &= f(x), \\ u_t(x, 0) &= g
+(x), \end{cases} & 0 \leqslant x \leqslant 1, \end{aligned}[] 
+ []
+
+
+Overfull \hbox (53.6695pt too wide) in paragraph at lines 1397--1397
+[]\TU/DejaVuSansMono(0)/m/n/10 u \left( 1 + \frac{1}{4} \sin \theta, \ \theta \
+right) = \cos \theta, \quad 0 \le \theta \le 2\pi.[] 
+ []
+
+[22]
+Overfull \hbox (377.47032pt too wide) in paragraph at lines 1430--1430
+[]\TU/DejaVuSansMono(0)/m/n/10 u(1+\varepsilon\sin\theta,\ \theta)=u(1,\ \theta
+)+u_r(1,\ \theta)(\varepsilon\sin\theta)+u_{rr}(1,\ \theta)\frac{(\varepsilon\s
+in\theta)^2}{21}+\ldots[] 
+ []
+
+
+Underfull \hbox (badness 1028) in paragraph at lines 1456--1456
+[][]\TU/DejaVuSerif(0)/b/n/14.4 ЗАДАЧІ Опираясь на интуитивные представления о
+ []
+
+
+Overfull \hbox (333.66226pt too wide) in paragraph at lines 1463--1463
+[]\TU/DejaVuSansMono(0)/m/n/10 \begin{cases} \Delta u_{0} = 0, & 0 < r < 1 \tex
+t{ (внутри круга),} \\ u_{0}(1, \theta) = \cos \theta, & u_{0}(r, \theta) = r \
+cos \theta, \end{cases}[] 
+ []
+
+
+Overfull \hbox (712.70024pt too wide) in paragraph at lines 1467--1467
+[]\TU/DejaVuSansMono(0)/m/n/10 \begin{array}{ll} (\mathrm{Y} \, \Pi) & u_{tt} =
+ c^2 u_{xx}, \quad 0 < x < 1, \quad 0 < t < \infty, \\ (\mathrm{\Gamma} \, \mat
+hrm{Y}) & \left\{ \begin{array}{ll} u \, (0, \, t) = 0, \\ u \, (1, \, t) = \si
+n t, \end{array}[] 
+ []
+
+
+Overfull \hbox (13.67055pt too wide) in paragraph at lines 1475--1475
+[]\TU/DejaVuSansMono(0)/m/n/10 \begin{cases} \Delta u_{1} = 0, & 0 < r < 1 \tex
+t{ (внутри круга),} \\ u_{1}(1, \theta) = -
+ []
+
+
+Overfull \hbox (49.85997pt too wide) in paragraph at lines 1475--1475
+\TU/DejaVuSansMono(0)/m/n/10 \sin \theta \frac{\partial u_{0}(1, \theta)}{\part
+ial r} = -\sin \theta \cos \theta \end{cases}[] 
+ []
+
+[23]
+Overfull \hbox (175.57094pt too wide) in paragraph at lines 1504--1504
+[]\TU/DejaVuSansMono(0)/m/n/10 \dfrac{\partial u_1}{\partial t} - \dfrac{\parti
+al^2 u_1}{\partial x^2} = x\,\dfrac{\partial^2 u_0}{\partial x^2}, \\[] 
+ []
+
+
+Overfull \hbox (409.85065pt too wide) in paragraph at lines 1512--1512
+[]\TU/DejaVuSansMono(0)/m/n/10 Зауважимо, що в перших двох задачах коефіцієнти 
+сталі. Параметр \varepsilon має бути достатньо малим, інакше нескінченний ряд м
+оже виявитися розбіжним.### ЗАДАЧИ[] 
+ []
+
+
+Overfull \hbox (129.85791pt too wide) in paragraph at lines 1512--1512
+[]\TU/DejaVuSansMono(0)/m/n/10 1. Подставьте разложение (46.8) в задачу (46.7) 
+и получите последовательность задач []P_0,\ P_1,\ P_2,\ \dots[].[] 
+ []
+
+
+Underfull \hbox (badness 3803) in paragraph at lines 1550--1550
+\TU/DejaVuSerif(0)/b/n/14.4 ТОДУ КОНФОРМНИХ ВІДОБРАЖЕНЬМЕТА ЛЕКЦІЇ:
+ []
+
+
+Overfull \hbox (53.66953pt too wide) in paragraph at lines 1554--1554
+[][]\TU/DejaVuSansMono(0)/m/n/10 \begin{cases} u(0, t) = 0, \\ u_x(1, t) = -u(1
+, t), \\ u(x, 0) = x, \\ u_t(x, 0) = 0. \end{cases}[][] 
+ []
+
+File: /Users/kalinicenkovitalijmikolajovic/.codex/worktrees/5c15/Script_for_tra
+nslate_book/Output_Final/images/_page_147_Picture_5.jpeg Graphic file (type bmp
+)
+</Users/kalinicenkovitalijmikolajovic/.codex/worktrees/5c15/Script_for_translat
+e_book/Output_Final/images/_page_147_Picture_5.jpeg>
+[24]
+Overfull \hbox (1442.2048pt too wide) in paragraph at lines 1577--1577
+[][]\TU/DejaVuSansMono(0)/m/n/10 Залишилося лише обрати шанси  c_n  так, щоб пр
+и t = 0 початкові умови  u\left(x,\ 0\right)=f\left(x\right)  і  u_t\left(x,\ 0
+\right)=g\left(x\right)  були виконані.Задачу о колебаниях гитарной струны мы р
+ешим методом разделения переменных.# Розв[]язання проблеми коливань обмеженої с
+труни методом розділення зміннихЧтобы решить смешанную задачу(УЧП)[][] 
+ []
+
+File: /Users/kalinicenkovitalijmikolajovic/.codex/worktrees/5c15/Script_for_tra
+nslate_book/Output_Final/images/_page_149_Figure_5.jpeg Graphic file (type bmp)
+
+</Users/kalinicenkovitalijmikolajovic/.codex/worktrees/5c15/Script_for_translat
+e_book/Output_Final/images/_page_149_Figure_5.jpeg>
+[25]
+Overfull \hbox (82.24017pt too wide) in paragraph at lines 1606--1606
+[][]\TU/DejaVuSansMono(0)/m/n/10 u(0, t) = X(0)T(t) = D\bigl[A\sin(\alpha\beta 
+t) + B\cos(\alpha\beta t)\bigr] = 0 \Rightarrow D = 0,[][] 
+ []
+
+
+Overfull \hbox (221.28413pt too wide) in paragraph at lines 1612--1612
+[][]\TU/DejaVuSansMono(0)/m/n/10 u(L, t) = X(L)T(t) = C\sin(\beta L)\bigl[A\sin
+(\alpha\beta t) + B\cos(\alpha\beta t)\bigr] = 0 \Rightarrow \sin(\beta L) = 0.
+[][] 
+ []
+
+
+Underfull \hbox (badness 3260) in paragraph at lines 1614--1617
+[]\TU/DejaVuSerif(0)/m/n/10 Другими словами, константа разделения \TU/DejaVuSan
+sMono(0)/m/n/10 \beta \TU/DejaVuSerif(0)/m/n/10 должна удовлетворять уравнению
+ []
+
+
+Overfull \hbox (489.84853pt too wide) in paragraph at lines 1629--1629
+[][]\TU/DejaVuSansMono(0)/m/n/10 u_n(x, t) = X_n(x)T_n(t) = \sin\!\left(\frac{n
+\pi x}{L}\right)\left[a_n \sin\!\left(\frac{n\pi \alpha t}{L}\right) + b_n \cos
+\!\left(\frac{n\pi \alpha t}{L}\right)\right].[][] 
+ []
+
+
+Overfull \hbox (4.14687pt too wide) in paragraph at lines 1635--1635
+[][]\TU/DejaVuSansMono(0)/m/n/10 u_n(x, t) = R_n \sin\!\left(\frac{n\pi x}{L}\r
+ight)\cos\!\left(\frac{n\pi \alpha (t -
+ []
+
+File: /Users/kalinicenkovitalijmikolajovic/.codex/worktrees/5c15/Script_for_tra
+nslate_book/Output_Final/images/_page_114_Figure_4.jpeg Graphic file (type bmp)
+
+</Users/kalinicenkovitalijmikolajovic/.codex/worktrees/5c15/Script_for_translat
+e_book/Output_Final/images/_page_114_Figure_4.jpeg>
+[26]
+File: /Users/kalinicenkovitalijmikolajovic/.codex/worktrees/5c15/Script_for_tra
+nslate_book/Output_Final/images/_page_114_Figure_7.jpeg Graphic file (type bmp)
+
+</Users/kalinicenkovitalijmikolajovic/.codex/worktrees/5c15/Script_for_translat
+e_book/Output_Final/images/_page_114_Figure_7.jpeg>
+
+Overfull \hbox (61.28824pt too wide) in paragraph at lines 1675--1675
+[][]\TU/DejaVuSansMono(0)/m/n/10 u_{\alpha\alpha} - u_{\beta\beta} = \frac{-\be
+ta u_{\alpha} - \alpha u_{\beta}}{2\alpha\beta}.[][] 
+ []
+
+[27]
+File: /Users/kalinicenkovitalijmikolajovic/.codex/worktrees/5c15/Script_for_tra
+nslate_book/Output_Final/images/_page_117_Figure_3.jpeg Graphic file (type bmp)
+
+</Users/kalinicenkovitalijmikolajovic/.codex/worktrees/5c15/Script_for_translat
+e_book/Output_Final/images/_page_117_Figure_3.jpeg>
+ [28]
+File: /Users/kalinicenkovitalijmikolajovic/.codex/worktrees/5c15/Script_for_tra
+nslate_book/Output_Final/images/_page_117_Figure_6.jpeg Graphic file (type bmp)
+
+</Users/kalinicenkovitalijmikolajovic/.codex/worktrees/5c15/Script_for_translat
+e_book/Output_Final/images/_page_117_Figure_6.jpeg>
+
+Overfull \hbox (524.1334pt too wide) in paragraph at lines 1783--1783
+[]\TU/DejaVuSansMono(0)/m/n/10 Це можливо, але лише шляхом введення складних ко
+ординат. Щоб знайти ці комплексні координати  \xi  і  \eta  , розв[]яжемо харак
+теристичні рівняння, так само як у гіперболічному випадку:[] 
+ []
+
+
+Overfull \hbox (59.38365pt too wide) in paragraph at lines 1806--1806
+[][]\TU/DejaVuSansMono(0)/m/n/10 \begin{cases} -\infty < x < \infty, \\ -\infty
+ < y < \infty, \\ -\infty < z < \infty, \end{cases}[][] 
+ []
+
+
+Overfull \hbox (2.24214pt too wide) in paragraph at lines 1806--1806
+[][]\TU/DejaVuSansMono(0)/m/n/10 u(\xi, \tau) = \frac{1}{2\sqrt{D\pi\tau}} \int
+_{-\infty}^{+\infty} e^{-\beta^2} e^{-
+ []
+
+
+Overfull \hbox (312.71046pt too wide) in paragraph at lines 1806--1806
+[][]\TU/DejaVuSansMono(0)/m/n/10 \begin{aligned} u_{tt} &= c^2 \Delta u, \\ (HY
+) & \begin{cases} u(x, y, z, 0) = 0, \\ u_t(x, y, z, 0) = \psi(x, y, z), \end{c
+ases} \end{aligned}[][] 
+ []
+
+
+Overfull \hbox (53.6695pt too wide) in paragraph at lines 1806--1806
+\TU/DejaVuSansMono(0)/m/n/10 \frac{1}{\Delta x \rho u_t} \left( x, \ t \right) 
+- \Delta x \gamma \dot{u} \left( x, \ t \right)[][] 
+ []
+
+File: /Users/kalinicenkovitalijmikolajovic/.codex/worktrees/5c15/Script_for_tra
+nslate_book/Output_Final/images/_page_134_Figure_7.jpeg Graphic file (type bmp)
+
+</Users/kalinicenkovitalijmikolajovic/.codex/worktrees/5c15/Script_for_translat
+e_book/Output_Final/images/_page_134_Figure_7.jpeg>
+[29]
+Overfull \hbox (585.08447pt too wide) in paragraph at lines 1826--1826
+[][]\TU/DejaVuSansMono(0)/m/n/10 \begin{aligned} & (\text{УЧП}) & \phi_{xx} + \
+phi_{yy} = 0, & \text{внутри } D, \\ & (\text{ГУ}) & \begin{cases} \varphi(x, y
+) = 1 & \text{на } x^2 + y^2 = 1, \\ \varphi(x, y) = 2 & \text{на } (x -
+ []
+
+
+Overfull \hbox (379.37524pt too wide) in paragraph at lines 1830--1830
+[][]\TU/DejaVuSansMono(0)/m/n/10 является теперь функцией коэффициентов   a_1a_
+2\dots a_n  . Следовательно, для того чтобы найти минимум функционала J, прирав
+няем нулю частные производные[][] 
+ []
+
+File: /Users/kalinicenkovitalijmikolajovic/.codex/worktrees/5c15/Script_for_tra
+nslate_book/Output_Final/images/_page_135_Figure_5.jpeg Graphic file (type bmp)
+
+</Users/kalinicenkovitalijmikolajovic/.codex/worktrees/5c15/Script_for_translat
+e_book/Output_Final/images/_page_135_Figure_5.jpeg>
+
+Overfull \hbox (941.26543pt too wide) in paragraph at lines 1845--1845
+[]\TU/DejaVuSansMono(0)/m/n/10 Рис. 18.5. Решение задачи (18.4) в различные мом
+енты времени.Этим завершается наша интерпретация формулы Даламбера в плоскости 
+переменных   \boldsymbol{x}   и t. В оставшейся части лекции мы займемся решени
+ем смешанной задачи для полубесконечной струны:(18.6)[] 
+ []
+
+
+Overfull \hbox (291.75853pt too wide) in paragraph at lines 1853--1853
+[]\TU/DejaVuSansMono(0)/m/n/10 Единственное отличие в том, что аппроксимирующие
+ функции   \phi_1, \phi_2, \phi_3, \ldots, \phi_n   должны удовлетворять гранич
+ным условиям:[] 
+ []
+
+
+Overfull \hbox (5160.20358pt too wide) in paragraph at lines 1861--1861
+[]\TU/DejaVuSansMono(0)/m/n/10 является иравнение Лапласа, но это доказательств
+о проводится аналогично тому, как это делалось в лекции 44 для функционала, зав
+исящего от функции одной переменной.3. В книгах по вариационному исчислению пок
+азано, как строить энергетический функционал не только для уравнения Пуассона с
+ граничным условием Дирихле u=0, но и для многих других дифференциальных уравне
+ний и многих других типов граничных условий. Следовательно, большое число краев
+ых задач можно решить, минимизируя соответствующие энергетические функционалы.4
+. Чем большее значение п мы выбираем, тем меньшее значение   J[\bar{u}_n]   пол
+учается. Значит, с увеличением n растет точность л приближенного решения диффер
+енциального уравнения. Один из методов определения и, основан на последовательн
+ом вычислении функционала   J[u_n]   для возрастающих значений n. Вычисления пр
+екращаются, если с ростом п функционал перестает практически уменьшаться.5. Есл
+и и велико, то проведение вычислений по методу Ритца требует привлечения ЭВМ. Н
+а рис. 45.2 (с. 345) приведена блок-
+ []
+
+
+Overfull \hbox (640.32082pt too wide) in paragraph at lines 1861--1861
+\TU/DejaVuSansMono(0)/m/n/10 схема решения краевой задачи методом Ритца.Пользов
+атель должен позаботиться о подпрограмме, которая должна вычислять значения про
+бных функций. Такая подпрограмма может иметь вид:SUBROUTINE BC (X.Y.PHI)-
+ []
+
+
+Overfull \hbox (217.47475pt too wide) in paragraph at lines 1861--1861
+\TU/DejaVuSansMono(0)/m/n/10 SUBROUTINE PROVIDED BY THE USER TO C - EVALUATE TH
+E - FUNCTIONS PHI(1), PHI(2), ..., PHI(N) DIMENSION PHI(20)PHI(1) = X\*Y\*(1-
+ []
+
+
+Overfull \hbox (442.23073pt too wide) in paragraph at lines 1861--1861
+\TU/DejaVuSansMono(0)/m/n/10 X)\*(1-Y) PHI(2) = X^*PHI(1)   (используемые функц
+ии)PHI(3) = Y\*PHI(1)PHI(N) = (что получится)RETURN END# **ЗА**ДАЧИНайдите энер
+гетический функционал для задачи(УЧП)[] 
+ []
+
+[30]
+Overfull \hbox (1188.87802pt too wide) in paragraph at lines 1909--1909
+[][]\TU/DejaVuSansMono(0)/m/n/10 где A=0.06 и B=0.04. Как найти потенциальную э
+нергию этого решения? Мы рекомендуем читателю вспомнить синуспреобразование и с
+амостоятельно получить решение   u\left(x,y\right)  .<sup>\*)</sup> При такой з
+амене возникает особенность в т. x=1. Лучше ввести функцию z(x) по формуле z(x)
+=y(x)=x. Прим. ред.[][] 
+ []
+
+File: /Users/kalinicenkovitalijmikolajovic/.codex/worktrees/5c15/Script_for_tra
+nslate_book/Output_Final/images/_page_144_Picture_4.jpeg Graphic file (type bmp
+)
+</Users/kalinicenkovitalijmikolajovic/.codex/worktrees/5c15/Script_for_translat
+e_book/Output_Final/images/_page_144_Picture_4.jpeg>
+[31] (./farlou_rebuild_chunked_v4_p100-149_safe.aux)
+ ***********
+LaTeX2e <2025-11-01>
+L3 programming layer <2026-01-19>
+ ***********
+ )
+(\end occurred inside a group at level 1)
+
+### simple group (level 1) entered at line 594 ({)
+### bottom level 
+Here is how much of TeX's memory you used:
+ 19968 strings out of 468168
+ 398442 string characters out of 5432816
+ 968329 words of memory out of 5000000
+ 48411 multiletter control sequences out of 15000+600000
+ 631580 words of font info for 105 fonts, out of 8000000 for 9000
+ 1348 hyphenation exceptions out of 8191
+ 90i,6n,116p,3535b,734s stack positions out of 10000i,1000n,20000p,200000b,200000s
+
+Output written on farlou_rebuild_chunked_v4_p100-149_safe.pdf (31 pages).

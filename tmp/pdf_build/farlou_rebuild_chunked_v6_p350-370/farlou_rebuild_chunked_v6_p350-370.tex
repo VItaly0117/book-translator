@@ -1,0 +1,247 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+  ukrainian,
+]{article}
+\usepackage{xcolor}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+\setmathfont{STIX Two Math}
+\fi
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{graphicx}
+\graphicspath{{/Users/kalinicenkovitalijmikolajovic/.codex/worktrees/5c15/Script_for_translate_book/Output_Final/}}
+\setkeys{Gin}{width=0.74\linewidth,height=0.78\textheight,keepaspectratio}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+\ifLuaTeX
+\usepackage[bidi=basic,shorthands=off,provide=*]{babel}
+\else
+\usepackage[bidi=default,shorthands=off,provide=*]{babel}
+\fi
+\ifLuaTeX
+  \usepackage{selnolig} % disable illegal ligatures
+\fi
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdflang={uk},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\author{}
+\date{}
+
+\begin{document}
+
+\subsection{Лекція 47}\label{ux43bux435ux43aux446ux456ux44f-47}
+
+\section{РОЗВ'ЯЗАННЯ ДВОВИМІРНИХ ЗАДАЧ МЕТОДОМ КОНФОРМНИХ
+ВІДОБРАЖЕНЬ}\label{ux440ux43eux437ux432ux44fux437ux430ux43dux43dux44f-ux434ux432ux43eux432ux438ux43cux456ux440ux43dux438ux445-ux437ux430ux434ux430ux447-ux43cux435ux442ux43eux434ux43eux43c-ux43aux43eux43dux444ux43eux440ux43cux43dux438ux445-ux432ux456ux434ux43eux431ux440ux430ux436ux435ux43dux44c}
+
+МЕТА ЛЕКЦІЇ: Показати, як деякі двовимірні крайові задачі для рівняння
+Лапласа можна звести до простіших задач за допомогою конформного
+відображення.
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_353_Figure_9.jpeg}}
+
+Ідея методу полягає в тому, що складну область на площині \((x,y)\)
+замінюють простішою областю на площині \((u,v)\) за допомогою
+комплексного відображення \(w=f(z)\), де
+
+\[
+z = x + iy, \qquad w = u + iv.
+\]
+
+Для конформних відображень гармонічність зберігається: якщо
+\(\varphi(x,y)\) задовольняє рівняння Лапласа в початковій області, то
+після переходу до нових координат ми знову дістаємо рівняння Лапласа,
+але вже в геометрично простішій області.
+
+У цій лекції розглянуто:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  основні властивості конформних відображень;
+\item
+  приклади побудови таких відображень;
+\item
+  застосування методу до задач Діріхле.
+\end{enumerate}
+
+\section{Комплексні функції та конформні
+відображення}\label{ux43aux43eux43cux43fux43bux435ux43aux441ux43dux456-ux444ux443ux43dux43aux446ux456ux457-ux442ux430-ux43aux43eux43dux444ux43eux440ux43cux43dux456-ux432ux456ux434ux43eux431ux440ux430ux436ux435ux43dux43dux44f}
+
+Комплексну функцію записують у вигляді
+
+\[
+w = f(z).
+\]
+
+Вона переводить точки площини \(z\) у точки площини \(w\). Наприклад,
+відображення
+
+\[
+w = z^2
+\]
+
+переносить перший квадрант площини \(z\) у верхню півплощину площини
+\(w\).
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_355_Figure_5.jpeg}}
+
+Рис. 47.1. Площина комплексної змінної \(z\).
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_355_Figure_7.jpeg}}
+
+Рис. 47.2. Відображення першого квадранта площини \(z\) у верхню
+півплощину площини \(w\).
+
+Щоб побачити це в дійсних координатах, підставимо \(z=x+iy\) у формулу
+\(w=z^2\):
+
+\[
+w = (x+iy)^2 = x^2 - y^2 + 2ixy.
+\]
+
+Отже,
+
+\[
+u = x^2 - y^2, \qquad v = 2xy.
+\]
+
+Це і є дійсна форма того самого відображення. Вона показує, як криві у
+площині \((x,y)\) переходять у криві в площині \((u,v)\).
+
+\section{Означення конформного
+відображення}\label{ux43eux437ux43dux430ux447ux435ux43dux43dux44f-ux43aux43eux43dux444ux43eux440ux43cux43dux43eux433ux43e-ux432ux456ux434ux43eux431ux440ux430ux436ux435ux43dux43dux44f}
+
+Відображення \(w=f(z)\) називається конформним у точці \(z_0\), якщо
+\(f'(z_0)\neq 0\). Воно називається конформним в області \(D\), якщо ця
+умова виконується в кожній точці області.
+
+Геометрично це означає, що відображення зберігає кути між кривими. Саме
+ця властивість робить його корисним для розв'язування крайових задач:
+складну межу можна перенести в простішу, не зруйнувавши структуру
+задачі.
+
+\section{Рівняння Лапласа у верхній
+півплощині}\label{ux440ux456ux432ux43dux44fux43dux43dux44f-ux43bux430ux43fux43bux430ux441ux430-ux443-ux432ux435ux440ux445ux43dux456ux439-ux43fux456ux432ux43fux43bux43eux449ux438ux43dux456}
+
+Розглянемо задачу Діріхле у верхній півплощині. Основна ідея полягає в
+тому, щоб підібрати відображення, яке переведе верхню півплощину у
+горизонтальну смугу. Для цього використовується класичне перетворення
+
+\[
+w = \ln\left(\frac{z-1}{z+1}\right).
+\]
+
+Це відображення переносить верхню півплощину у смугу
+
+\[
+-\infty < u < \infty, \qquad 0 < v < \pi.
+\]
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_357_Figure_11.jpeg}}
+
+Рис. 47.3. Крайова задача у верхній півплощині.
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_358_Figure_2.jpeg}}
+
+Рис. 47.4. Перетворення складної задачі на простішу за допомогою
+конформного відображення.
+
+У смузі розв'язок уже знаходиться елементарно. Якщо на одній межі задано
+нульовий потенціал, а на іншій одиничний, то
+
+\[
+\varphi(u,v) = \frac{v}{\pi}.
+\]
+
+Далі потрібно виразити \(v\) через початкові координати \(x\) і \(y\) та
+підставити цей вираз у знайдену формулу.
+
+\section{Область між двома
+колами}\label{ux43eux431ux43bux430ux441ux442ux44c-ux43cux456ux436-ux434ux432ux43eux43cux430-ux43aux43eux43bux430ux43cux438}
+
+Другий типовий приклад полягає у відображенні області між двома
+неконцентричними колами на кільце. Після такого перетворення задача
+Діріхле зводиться до стандартної задачі в кільці, яку вже можна
+розв'язувати у полярних координатах.
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_359_Figure_10.jpeg}}
+
+Рис. 47.5. Конформне відображення області на кільце.
+
+Суть методу лишається тією самою:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  знайти зручне конформне відображення;
+\item
+  перенести задачу у простішу область;
+\item
+  розв'язати її в нових координатах;
+\item
+  повернутися до початкових змінних.
+\end{enumerate}
+
+Саме тому конформні відображення є одним із найсильніших інструментів
+для двовимірних гармонічних задач.
+
+\end{document}

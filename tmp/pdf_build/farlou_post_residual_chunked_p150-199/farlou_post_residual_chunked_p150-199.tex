@@ -1,0 +1,203 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+  ukrainian,
+]{article}
+\usepackage{xcolor}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+\setmathfont{STIX Two Math}
+\fi
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{graphicx}
+\graphicspath{{/Users/kalinicenkovitalijmikolajovic/.codex/worktrees/5c15/Script_for_translate_book/Output_Final/}}
+\setkeys{Gin}{width=0.82\linewidth,height=0.82\textheight,keepaspectratio}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+\ifLuaTeX
+\usepackage[bidi=basic,shorthands=off,provide=*]{babel}
+\else
+\usepackage[bidi=default,shorthands=off,provide=*]{babel}
+\fi
+\ifLuaTeX
+  \usepackage{selnolig} % disable illegal ligatures
+\fi
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdflang={uk},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\author{}
+\date{}
+
+\begin{document}
+
+\section{Модель колеблющейся
+балки}\label{ux43cux43eux434ux435ux43bux44c-ux43aux43eux43bux435ux431ux43bux44eux449ux435ux439ux441ux44f-ux431ux430ux43bux43aux438}
+
+Рассмотрим свободно опирающуюся балку, изображенную на рис. 21.2. Пусть
+начальные условия таковы:
+
+\[
+C_n = \frac{2}{\pi} \int_0^{\pi} f(x) \cos(nx) dx.
+\]
+
+\(u_1(x, 0) = 0\) Мы могли бы найти решение, подставив функции \(f(x)\)
+и \(g(x)\) в формулы (21.6), однако легко видеть, что
+
+\[
+y = \frac{\pi}{b-a}(x-a).
+\]
+
+для всех \(n=1,\,2,\,\ldots,\) \(b_1=1,\,b_2=0,\,b_3=0,5\)
+\(b_n=0,\,n=4,\,5,\,\ldots\)
+
+Следовательно, решение имеет вид
+
+\[
+f(x) = \frac{C_0}{2} + \sum_{n=1}^{\infty} C_n \cos(nx).
+\]
+
+.
+
+Интересно сравнить это решение с решением для струны при тех же
+начальных условиях. Если заглянуть в лекцию 20, там можно найти решение
+соответствующей задачи для струны:
+
+\[
+0 \le x \le \pi \qquad n = 0, 1, 2, \dots
+\]
+
+.
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_158_Figure_1.jpeg}}
+
+РИС 21.2. Простые колебания свободно опирающейся балки.
+
+Другими словами, балка колеблется на более высоких частотах, чем струна.
+Отметим, что в том и другом случаях высшие частоты кратны основным
+частотам колебаний.
+
+\section{ЗАМЕЧАНИЯ}\label{ux437ux430ux43cux435ux447ux430ux43dux438ux44f}
+
+\begin{itemize}
+\item
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    Вообще говоря, балку можно закрепить тремя способами:
+  \end{enumerate}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    а) оставить свободной (незакрепленной),
+  \item
+    б) свободно опереть.
+  \item
+    в) жестко закрепить.
+  \end{itemize}
+\end{itemize}
+
+Схематически эти способы закрепления изображены на рис. 21.3.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Еще одна важная задача --- колебания балки с заделанным концом (см.
+  рис. 213). Благодаря нестандартным граничным условиям
+\end{enumerate}
+
+\(u_x\)(0, t) = 0, \(u_{xx}\)(1, t) = 0, \(u_{xx}\)(1, t) = 0, решение
+уже не будет выражаться в виде ряда из произведений синусов и косинусов.
+Оно будет иметь более сложную структуру
+
+\[
+(\text{УЧП}) \quad u_{tt} + u_{xxxx} = 0, \quad 0 < x < 1, \quad 0 < t < \infty,
+\]
+
+где собственные функции \(X_n\)(x) являются линейными комбинациями
+синусов, косинусов, гиперболических синусов и гиперболических косинусов.
+Решение этой задачи можно найта в руководствах по теории упругости.
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_159_Figure_2.jpeg}}
+
+РИС. 21.3. Типичные задачи для балки: a---защемленная балка; b---балка,
+жестко заделанная с обоих концов; a---левый конец жестко заделан, правый
+свободно опирается.
+
+\subsubsection{ЗАДАЧИ}\label{ux437ux430ux434ux430ux447ux438}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Решите задачу для балки с закрепленным концом.
+\end{enumerate}
+
+\[
+(\text{ГУ}) \quad
+\begin{cases} u(0, t) &= 0, \\ u_x(0, t) &= 0, \\ u_{xx}(1, t) &= 0, \\ u_{xxx}(1, t) &= 0, \end{cases}
+\]
+
+\begin{verbatim}
+\begin{cases}
+\end{verbatim}
+
+\end{document}

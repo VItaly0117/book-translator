@@ -1,0 +1,371 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+  ukrainian,
+]{article}
+\usepackage{xcolor}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+\setmathfont{STIX Two Math}
+\fi
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{graphicx}
+\graphicspath{{/Users/kalinicenkovitalijmikolajovic/.codex/worktrees/5c15/Script_for_translate_book/Output_Final/}}
+\setkeys{Gin}{width=0.82\linewidth,height=0.82\textheight,keepaspectratio}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+\ifLuaTeX
+\usepackage[bidi=basic,shorthands=off,provide=*]{babel}
+\else
+\usepackage[bidi=default,shorthands=off,provide=*]{babel}
+\fi
+\ifLuaTeX
+  \usepackage{selnolig} % disable illegal ligatures
+\fi
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdflang={uk},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\author{}
+\date{}
+
+\begin{document}
+
+\section{ФОРМУЛА ДАЛАМБЕРА МЕТА ЛЕКЦІЇ: Построить решение задачи Коши
+для волнового
+уравнения}\label{ux444ux43eux440ux43cux443ux43bux430-ux434ux430ux43bux430ux43cux431ux435ux440ux430-ux43cux435ux442ux430-ux43bux435ux43aux446ux456ux457-ux43fux43eux441ux442ux440ux43eux438ux442ux44c-ux440ux435ux448ux435ux43dux438ux435-ux437ux430ux434ux430ux447ux438-ux43aux43eux448ux438-ux434ux43bux44f-ux432ux43eux43bux43dux43eux432ux43eux433ux43e-ux443ux440ux430ux432ux43dux435ux43dux438ux44f}
+
+и \emph{\{yy\}=\(u_{l+1,\ j}\)-2u}\{l,~j\}+\(u_{l-1,\ j}\), (центральные
+разностные производные),
+
+і підставляють їх у рівняння похідних похідних. Відповідна сітка
+показана на рис. 43.2. Розв'язавши отримане рівняння за \(u_{i,l}\) ,
+отримуємо
+
+Посмотрим внимательно на это уравнение. Коэффициенты при
+\(u_{i+1,\ j},\ u_i,\ j+i,\ u_l,\ j-1\) н \(u_{i-1},\ j\) положительны,
+и их сумма равна единице. Другими словами, решение \(u_i,\ j\) является
+взвешенным средним решений в четырех соседних точках. Следовательно,
+можно Р И С
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_324_Picture_9.jpeg}}
+
+. 43.2. Узлы сетки для случайного маршруга.
+
+модифицировать «Блуждающего пьяницу» так, чтобы вероятности перехода в
+соседние точки были не 0,25, а равнялись бы коэффициенту в
+соответствующем члене. Другими словами, если пьяница находится в точке
+(i, j), то он переходит в точку
+
+Ця задача описує рух нескінченної струни за заданих початкових умов.
+Його розв'язав у 1750 році французький математик д'Аламбер. Формула
+Д'Аламбера
+
+с вероятностью \(\frac{1}{2(1+\sin x_j)}\) , \((i, j-1)\) с вероятностью
+\(\frac{1}{2(1+\sin x_j)}\) , \((i+1, j)\) с вероятностью
+\(\frac{\sin x_j}{2(1+\sin x_j)}\) , \((i-1, j)\) с вероятностью
+\(\frac{\sin x_j}{2(1+\sin x_j)}\) .
+
+В остальном игра не меняется. Модификация для других задач может
+оказаться более хитроумной, но основная идея остается той же. Читатель
+может заняться разработкой своих игр для решения других задач.
+Параболический случай рассмотрен в разделе «Задачи». \# ЗАУВАЖЕННЯ 1.
+Отметим, что если относительные частоты попадания \(P_A(p_l)\) известны,
+то можно легко найти величину \(u\left(A\right)\) при других граничных
+условиях \(g_l\) . Для этого достаточно подставить \(g_l\) в формулу
+
+полегшує пошук розв'язку, якщо початкові умови відомі. Крім того, це
+дозволяє дати цікаву фізичну інтерпретацію розв'язку мовою хвиль, що
+рухаються.
+
+\begin{verbatim}
+Як читач, ймовірно, пам'ятає, у параболічному випадку ми спочатку розв'язали задачі дифузії на скінченному відрізку (методом розділення змінних), а лише потім переходили до необмежених інтервалів (-  \infty < x < \infty  ), де застосовували перетворення Фур'є. У гіперболічному випадку ми зробимо навпаки. Почнемо з розв'язання одномірного хвильового рівняння на всій дійсній осі, тобто з задачі Коші
+\end{verbatim}
+
+(17.1)
+
+а не разыгрывать вновь случайные прогулки.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Во многих случаях исследователя интересует решение уравнения с
+  частными производными в одной точке. Если граница области сложна и
+  уравнение зависит от трех или четырех независимых переменных, метод
+  Монте-Карло может оказаться удобным. Методы Монте-Карло возникли при
+  решении очень трудных задач диффузии нейтронов. Эти задачи невозможно
+  решать аналитически. \# ЗАДАЧІ
+\item
+  Построить блок-схему игры «Блуждающий пьяница» для решения задачи
+\end{enumerate}
+
+(УЧП)
+
+, 0 \textless{} x \textless{} 1 , 0 \textless{} y \textless{} 1 , (ГУ)
+\(u(x, y)\) = \(g(x, y)\) на границе,
+
+\begin{itemize}
+\item
+  у вузлах внутрішньої сітки, якщо кількість вузлів сітки довільна. 2.
+  Напишіть програму для розв'язання задачі відповідно до блок-схеми з
+  завдання 1.
+\item
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \setcounter{enumi}{2}
+  \tightlist
+  \item
+    Як модифікувати гру для вирішення проблеми
+  \end{enumerate}
+\end{itemize}
+
+(УЧП)
+
+содержащей только начальные условия. Эту задачу можно было бы решить
+либо с помощью преобразования Фурье (по переменной t), либо с помощью
+преобразования Лапласа (по переменной t). Однако мы воспользуемся другим
+методом (методом канонических координат), который, как мы надеемся,
+заинтересует читателя. Этот метод базируется на тех же идеях, что и
+метод перехода к движущейся системе отсчета, с которым мы познакомились
+в лекции 15. Итак, приступим к решению задачи (17.1).
+
+\section{Решение одномерного волнового уравнения. Формула
+Даламбера}\label{ux440ux435ux448ux435ux43dux438ux435-ux43eux434ux43dux43eux43cux435ux440ux43dux43eux433ux43e-ux432ux43eux43bux43dux43eux432ux43eux433ux43e-ux443ux440ux430ux432ux43dux435ux43dux438ux44f.-ux444ux43eux440ux43cux443ux43bux430-ux434ux430ux43bux430ux43cux431ux435ux440ux430}
+
+Решение задачи (17.1) разобьем на несколько шагов:
+
+ШАГ 1 (Замена координат (x, t) новыми каноническими координатами
+\((\xi, \eta)\) ).
+
+Для решения задачи (17.1) воспользуемся тем, что если заменить две
+независимые переменные x и t новыми пространственновременными
+координатами
+
+, 0 \textless{} x \textless{} 1 , 0 \textless{} y \textless{} 1 , (ГУ)
+\(u(x, y)\) = \(g(x, y)\) на границе?
+
+Как выглядит в этой игре случайная прогулка?
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Можете ли вы так модифицировать игру, чтобы решить задачу
+\end{enumerate}
+
+\[
+\begin{array}{l} u_{xx} + u_{yy} = 0, \quad 0 < x < 1, \quad 0 < y < 1, \\ u(x, 1) = 0, \quad 0 < x < 1, \quad 0 < y < 1, \\ u(x, 0) = 0, \quad 0 < x < 1, \quad 0 < y < 1, \\ u(0, y) = 1, \quad \frac{\partial u}{\partial x}(1, y) = 0 \end{array}
+\]
+
+то уравнение
+
+\begin{verbatim}
+\begin{aligned}
+(\text{УЧП})\quad & u_t = \alpha^2 u_{xx} - \beta u_x - \gamma u, && 0 < x < 1,\ 0 < t < \infty, \\
+(\text{ГУ})\quad & u(0,t) = f(t),\quad u(1,t) = g(t), && 0 < t < \infty, \\
+(\text{НУ})\quad & u(x,0) = \varphi(x), && 0 \leqslant x \leqslant 1.
+\end{aligned}
+\end{verbatim}
+
+преобразуется в уравнение
+
+ПРИМІТКА. Замінимо це рівняння на скінченну різницю Кренка--Ніколсона,
+виразимо \(u_{i+1,j}\) через п'ять значень \(u_{i+1,j-1}\) ,
+\(u_{i+1,j+1}\) , \(u_{i,j+1}\) , \(u_{i,j+1}\) , \(u_{i,j+1}\) у
+суміжних точках.
+
+\section{КАЛЬКУЛЮС ВАРІАЦІЙ (РІВНЯННЯ
+ЕЙЛЕРА--ЛАГРАНЖА)}\label{ux43aux430ux43bux44cux43aux443ux43bux44eux441-ux432ux430ux440ux456ux430ux446ux456ux439-ux440ux456ux432ux43dux44fux43dux43dux44f-ux435ux439ux43bux435ux440ux430ux43bux430ux433ux440ux430ux43dux436ux430}
+
+МЕТА ЛЕКЦІЇ: Ввести поняття функціоналу (функцію з функції) і пояснити,
+як функціонали природно виникають у фізиці. Типовий функціонал є
+інтегралом
+
+.
+
+Це легко перевірити, якщо ви використовуєте формули перетворення
+координат:
+
+(17.2)
+
+що є функцією функції y (припускається, що інтегративна функція
+\(F\left(x,\,y,\,y'\right)\) задана). Приклад функціональності:
+
+Подставляя эти выражения для производных в волновое уравнение, получим
+
+Ми покажемо, як знайти функцію \(\overline{y}(x)\) , яка мінімізує
+функціональність J{[}y{]}. Виявляється, що мінімізуюча функція має
+\(\overline{y}\) задовольняти так зване рівняння Ейлера-Лагранжа. Це
+рівняння виконує ту ж роль, що й необхідна умова мінімуму
+
+.. Первый шаг сделан.
+
+КРОК 2 (Розв'язання трансформованого рівняння).
+
+Перетворене рівняння легко розв'язати двома послідовними інтегруваннями
+(спочатку змінною ξ, а потім η). Після інтегрування на ξ отримуємо
+
+функції \(f(x)\) у точці x у диференціальному численні.
+
+Варіаційне числення тісно пов'язане з диференціальними рівняннями, але,
+на жаль, більшість студентів його не вивчає. Ця лекція (і наступна) є
+вступом до варіаційного числення та показує, як можна розв'язувати
+диференціальні рівняння в похідних на основі варіаційних принципів.
+
+Калькулюс варіацій виник одночасно з математичним аналізом у зв'язку з
+розв'язанням задач максимізації та мінімізації функцій функцій (які
+називаються функціоналами). Першою задачею варіаційного числення була
+задача брахістохрона, сформульована Йоганном Бернуллі у 1696 році.
+
+Бернуллі показав, що час сходження записується у формі
+
+\begin{verbatim}
+— произвольная функция от  \eta  .
+\end{verbatim}
+
+Интегрирование последнего соотношения по \textbf{η} приводит к общему
+решению
+
+і, отже, є функцією \(T\{y\}\) з функції. Оскільки багато функціоналів
+впорядковані таким чином, ми зосередимося на вивченні загальної
+функціональності
+
+(44.1)
+
+\begin{verbatim}
+де  \phi(\eta)  — примітивна функція  \phi_1(\eta)  , а  \psi(\xi)  — довільна функція. Отже, загальний розв'язок рівняння
+\end{verbatim}
+
+Тепер сформульуємо головну мету наших лекцій: знайти функцію, яка дає
+мінімум (або максимум) функціоналу (44.1). Стратегія пошуку буде такою
+ж, як при пошуку мінімуму функції в диференціальному численні. Там ми
+знайшли критичні точки функції за умовою f'(x) = 0. У варіаційному
+численні все буде трохи складніше, оскільки аргумент більше не є
+числовою змінною, а функцією. Однак загальний підхід залишається
+незмінним: ми обчислимо так звану функціональну похідну функції \(y(x)\)
+і прирівняємо її до нуля. Це нове рівняння буде аналогічним
+
+записывается в виде
+
+(17.3)
+
+з диференціального числення, але тепер це буде звичайне диференціальне
+рівняння, відоме як рівняння Ейлера-Лагранжа. Нам просто потрібно знайти
+це рівняння і розв'язати з ним деякі проблеми.
+
+Мінімізація функціональності
+
+\begin{verbatim}
+де  \phi(\eta)  і  \psi(\xi)  є довільними функціями своїх аргументів. Наприклад, читач може перевірити, що
+\end{verbatim}
+
+Розглянемо задачу пошуку функції \(y(x)\), яка мінімізує
+функціональність
+
+\begin{verbatim}
+u(\xi, \eta) = 1/\eta + tg \xi,   u(\xi, \eta) = \eta^2 + e  являются решениями уравнения  u_{\mathrm{ }nh}=0  . Второй шаг сделан.  \text{IIIA}\Gamma  3 (Возвращение к старым координатам x и t).
+\end{verbatim}
+
+Для нахождения общего решения, т. е. всех решений уравнения
+\(u_{tt} = c^2 u_{xx}\),подставим
+
+у класі гладких функцій, які задовольняють граничні умови
+
+, \(y(b)\) = B (див. рис. 44.2).
+
+\begin{verbatim}
+Нехай існує y = \overline{y}(x) потрібна функція, і розглянемо малу варіацію функції \overline{y} , тобто функцію \overline{y} + \varepsilon \eta(x) , де \varepsilon — мале число, а \eta(x) — гладка функція, яка задовольняє
+\end{verbatim}
+
+\begin{verbatim}
+граничні умови \eta(a) = \eta(b) = 0 (див. рис. 44.2). Очевидно, що якщо обчислити інтеграл J з близької функції y + \varepsilon \eta , то функціонал буде збільшуватися, тобто
+\end{verbatim}
+
+в решение
+
+\begin{verbatim}
+за всі \epsilon . Іншими словами, графік \phi\left(\epsilon\right)=J\left[\overline{y}+\epsilon\eta\right] як функція, \epsilon буде виглядати як рис. 44.3.
+\end{verbatim}
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_329_Figure_5.jpeg}}
+
+Фіг. 44.1. Завдання брахістохрани (змінна кількість завдань була
+скоригована).
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_329_Figure_7.jpeg}}
+
+\begin{verbatim}
+Рис. 44.2. Варіація функції: a — варіація функції \overline{y} = \overline{y}(x) + \epsilon \eta(x) ; \delta є мінімізуючою функцією \overline{y}(x) .
+\end{verbatim}
+
+З Фіг. 44.3 Очевидно, що в цьому випадку необхідно обчислити похідну від
+
+В результате получаем
+
+(17.4)
+
+\begin{verbatim}
+Po E, поставити \varepsilon = 0 і прирівняти отриманий вираз до нуля, тобто
+\end{verbatim}
+
+Это общее решение волнового уравнения. С физической точки эрения оно
+интересно тем, что представляет сумму двух бегущих волн Р И С
+
+\end{document}
