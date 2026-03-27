@@ -1,0 +1,3 @@
+base_pdf	/Users/kalinicenkovitalijmikolajovic/.codex/worktrees/5c15/Script_for_translate_book/Output_Final/manual_help_pass_23_targeted/farlou_full_book_targeted_v23.pdf
+appended_reference_page	/Users/kalinicenkovitalijmikolajovic/.codex/worktrees/5c15/Script_for_translate_book/Output_Final/farlou_s_uravneniia_s_chastnymi_proizvodnymi_dlia_nauchnykh_uk_final.pdf#page=226
+total_pages	190

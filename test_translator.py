@@ -11,6 +11,7 @@ from book_translator import (
     _filter_chunk_by_local_page_monotonicity,
     _needs_residual_translation,
     _normalize_chunk_export_style,
+    _prepare_markdown_for_pdf,
     _build_pdf_via_tex,
     _join_markdown_segments,
     _maybe_retranslate_chunk_text,
@@ -227,6 +228,90 @@ class TestBookTranslator:
         assert "`\\Дельта u + u^2 = 0`" in safe_text
         assert "~~~\n\\qquad u_{\\theta}(r, \\theta) = r \\cos \\theta,\n~~~" in safe_text
         assert "`тривиальное решение 'X\\left(x\\right)'`" in safe_text
+
+    def test_prepare_markdown_for_pdf_preserves_valid_display_math_block(self):
+        markdown = (
+            "(13.5)\n\n"
+            "$$\n"
+            "\\mathscr{L}^{-1}\\left\\{\\mathscr{L}[f]\\mathscr{L}[g]\\right\\} = f * g.\n"
+            "$$\n"
+        )
+
+        prepared = _prepare_markdown_for_pdf(markdown)
+
+        assert "\\mathscr{L}^{-1}" in prepared
+        assert "\\mathscr{L}[f]" in prepared
+        assert "textsuperscript" not in prepared
+        assert "textbackslash" not in prepared
+
+    def test_prepare_markdown_for_pdf_keeps_valid_cases_and_aligned_as_math(self):
+        markdown = (
+            "(2.2)\n\n"
+            "$$\n"
+            "\\begin{cases}\n"
+            "u(0,t)=T_1,\\\\\n"
+            "u(L,t)=T_2.\n"
+            "\\end{cases}\n"
+            "$$\n\n"
+            "(2.4)\n\n"
+            "$$\n"
+            "\\begin{aligned}\n"
+            "(\\text{УЧП})\\quad & u_t=\\alpha^2u_{xx}, \\\\\n"
+            "(\\text{ГУ})\\quad & u(0,t)=T_1.\n"
+            "\\end{aligned}\n"
+            "$$\n"
+        )
+
+        prepared = _prepare_markdown_for_pdf(markdown)
+
+        assert "~~~" not in prepared
+        assert "\\begin{cases}" in prepared
+        assert "\\begin{aligned}" in prepared
+
+    def test_prepare_markdown_for_pdf_does_not_cross_pair_multiline_display_fences(self):
+        markdown = (
+            "$$\n"
+            "\\int_0^1 x^2\\,dx\n"
+            "$$\n\n"
+            "Текст между блоками.\n\n"
+            "$$\n"
+            "\\varphi(r)=a\\ln r+b.\n"
+            "$$\n"
+        )
+
+        prepared = _prepare_markdown_for_pdf(markdown)
+
+        assert "$$\n\\int_0^1 x^2\\,dx\n$$" in prepared
+        assert "$$\n\\varphi(r)=a\\ln r+b.\n$$" in prepared
+        assert "$\\varphi$(r)=a\\ln r+b." not in prepared
+
+    def test_prepare_markdown_for_pdf_keeps_pure_math_lines_stable_when_fences_desync(self):
+        markdown = (
+            "$$\n"
+            "Незавершений блок OCR\n\n"
+            "Текст між блоками.\n\n"
+            "$$\n"
+            "w=\\ln\\left(\\frac{z-1}{z+1}\\right)=u+iv\n"
+            "$$\n\n"
+            "$$\n"
+            "\\varphi(x,y)=\\frac{1}{\\pi}\\arctan\\left(\\frac{2y}{x^2+y^2-1}\\right).\n"
+            "$$\n"
+        )
+
+        prepared = _prepare_markdown_for_pdf(markdown)
+
+        assert "\\left($\\frac" not in prepared
+        assert "w=\\ln\\left(\\frac{z-1}{z+1}\\right)=u+iv" in prepared
+        assert "$\\varphi$(" not in prepared
+        assert "{$\\pi$}" not in prepared
+
+    def test_prepare_markdown_for_pdf_keeps_neutralized_code_span_as_code(self):
+        markdown = "(13.4)\n\n`L[f * g] = L[f] L[g]`\n"
+
+        prepared = _prepare_markdown_for_pdf(markdown)
+
+        assert "`L[f * g] = L[f] L[g]`" in prepared
+        assert "$$\nL[f * g] = L[f] L[g]\n$$" not in prepared
 
     def test_split_markdown_into_page_chunks_uses_page_markers_and_headings(self):
         markdown = (
@@ -520,6 +605,66 @@ class TestBookTranslator:
 
         assert output_pdf.exists()
         assert output_pdf.name == "demo.pdf"
+
+    def test_build_pdf_via_tex_uses_tex_math_dollars_by_default(self, mocker, tmp_path):
+        fake_pypandoc = MagicMock()
+        mocker.patch.dict(sys.modules, {"pypandoc": fake_pypandoc})
+        mocker.patch("book_translator.shutil.which", return_value="/usr/bin/xelatex")
+
+        captured: dict[str, str] = {}
+
+        def fake_convert_text(_text, _to, format, outputfile, extra_args):
+            captured["format"] = format
+            Path(outputfile).write_text(
+                "\\usepackage{graphicx}\n\\usepackage{lmodern}\n\\begin{document}\nTest\n\\end{document}\n",
+                encoding="utf-8",
+            )
+
+        fake_pypandoc.convert_text.side_effect = fake_convert_text
+
+        def fake_run(_cmd, cwd, **_kwargs):
+            pdf_path = Path(cwd) / "demo.pdf"
+            pdf_path.write_bytes(b"%PDF-1.4\n%mock\n")
+            return mocker.Mock(returncode=0, stdout="", stderr="")
+
+        mocker.patch("book_translator.subprocess.run", side_effect=fake_run)
+
+        _build_pdf_via_tex(
+            md_text="Test $$x^2$$",
+            output_stem="demo",
+            output_dir=tmp_path,
+            res_path=".",
+        )
+
+        assert captured["format"] == "markdown+raw_tex+tex_math_dollars"
+
+    def test_build_pdf_only_from_markdown_tries_raw_text_before_prepared(self, mocker, tmp_path):
+        build_calls: list[dict[str, object]] = []
+
+        def fake_build_pdf_via_tex(**kwargs):
+            build_calls.append(kwargs)
+            pdf_path = Path(kwargs["output_dir"]) / f"{kwargs['output_stem']}.pdf"
+            pdf_path.parent.mkdir(parents=True, exist_ok=True)
+            pdf_path.write_bytes(b"%PDF-1.4\n%mock\n")
+            return pdf_path
+
+        mocker.patch("book_translator._build_pdf_via_tex", side_effect=fake_build_pdf_via_tex)
+        prepare_mock = mocker.patch("book_translator._prepare_markdown_for_pdf", return_value="prepared")
+        safe_prepare_mock = mocker.patch("book_translator._prepare_markdown_for_safe_pdf", return_value="safe")
+
+        result = book_translator._build_pdf_only_from_markdown(
+            md_text="Source $$x^2$$",
+            output_stem="demo",
+            output_dir=tmp_path,
+            images_dir=tmp_path / "images",
+        )
+
+        assert result.exists()
+        assert len(build_calls) == 1
+        assert build_calls[0]["md_text"] == "Source $$x^2$$"
+        assert build_calls[0]["input_format"] == "markdown+raw_tex+tex_math_dollars"
+        prepare_mock.assert_not_called()
+        safe_prepare_mock.assert_not_called()
 
     def test_safe_second_pass_cleanup_reverts_when_math_placeholders_leak(self, mocker):
         mocker.patch(

@@ -1498,7 +1498,10 @@ def _is_malformed_pdf_math(content: str) -> bool:
     if r"\begin{array}" in content and not stripped_array_body:
         return True
 
-    if re.search(r'^\s*\\begin\{[A-Za-z*]+\}\s*$', content, flags=re.MULTILINE):
+    # A valid multiline math environment such as \begin{cases}...\end{cases}
+    # often starts with a standalone begin-line. Treat only a lone unmatched
+    # begin-line as malformed; otherwise the balance check below should decide.
+    if re.fullmatch(r'\s*\\begin\{[A-Za-z*]+\}\s*', content):
         return True
 
     if re.search(r'^\s*(#|- |\d+\.)', content, flags=re.MULTILINE):
@@ -1531,6 +1534,11 @@ def _render_pure_pdf_math_or_code(content: str) -> str:
 def _looks_like_math_line(line: str) -> bool:
     stripped = line.strip()
     if not stripped:
+        return False
+
+    # If a line was explicitly neutralized as inline code, keep it out of the
+    # math heuristics so later PDF cleanup does not re-promote it into TeX.
+    if re.fullmatch(r'`[^`\n]+`', stripped):
         return False
 
     if stripped.startswith(("![](", "|", "#")):
@@ -1631,6 +1639,9 @@ def _render_inline_pdf_math_or_code(content: str) -> str:
 
 
 def _sanitize_inline_pdf_math_line(line: str) -> str:
+    if _looks_like_math_line(line):
+        return line
+
     placeholders: dict[str, str] = {}
     placeholder_index = 0
 
@@ -1715,6 +1726,10 @@ def _wrap_remaining_tex_fragments(text: str) -> str:
             continue
 
         if in_code_block or in_display_math or not stripped or "$" in line or line.lstrip().startswith("![]("):
+            wrapped_lines.append(line)
+            continue
+
+        if _looks_like_math_line(line):
             wrapped_lines.append(line)
             continue
 
@@ -2892,20 +2907,34 @@ def _build_pdf_only_from_markdown(
 ) -> Path:
     export_md_text = _remove_pdf_only_sections(md_text)
     res_path = _build_resource_path(output_dir, images_dir)
-    pdf_md_text = _prepare_markdown_for_pdf(export_md_text)
 
     try:
         generated_pdf = _build_pdf_via_tex(
-            md_text=pdf_md_text,
+            md_text=export_md_text,
             output_stem=output_stem,
             output_dir=output_dir,
             res_path=res_path,
             graphics_root_dir=images_dir.parent,
+            input_format="markdown+raw_tex+tex_math_dollars",
         )
         log.info("  Generated PDF: %s", generated_pdf)
         return generated_pdf
     except Exception as exc:
-        log.warning("  Primary PDF generation failed, retrying in safe-text mode: %s", exc)
+        log.warning("  Raw strict PDF generation failed, retrying with prepared markdown: %s", exc)
+        pdf_md_text = _prepare_markdown_for_pdf(export_md_text)
+        try:
+            generated_pdf = _build_pdf_via_tex(
+                md_text=pdf_md_text,
+                output_stem=output_stem,
+                output_dir=output_dir,
+                res_path=res_path,
+                graphics_root_dir=images_dir.parent,
+                input_format="markdown+raw_tex+tex_math_dollars",
+            )
+            log.info("  Generated PDF after markdown preparation: %s", generated_pdf)
+            return generated_pdf
+        except Exception as prepared_exc:
+            log.warning("  Prepared strict PDF generation failed, retrying in safe-text mode: %s", prepared_exc)
         safe_pdf_md_text = _prepare_markdown_for_safe_pdf(export_md_text)
         generated_safe_pdf = _build_pdf_via_tex(
             md_text=safe_pdf_md_text,
@@ -2914,6 +2943,7 @@ def _build_pdf_only_from_markdown(
             res_path=res_path,
             graphics_root_dir=images_dir.parent,
             allow_partial_output=True,
+            input_format="markdown+raw_tex+tex_math_dollars",
         )
         final_pdf_path = output_dir / f"{output_stem}.pdf"
         shutil.copy2(generated_safe_pdf, final_pdf_path)
@@ -3399,17 +3429,16 @@ def _prepare_markdown_for_pdf(md_text: str) -> str:
 
     prepared = _INLINE_ENV_MATH_PATTERN.sub(promote_inline_environment, prepared)
 
-    def sanitize_block_math(match: re.Match[str]) -> str:
-        inner = match.group(0)[2:-2]
-        return _render_pdf_math_or_code(inner)
+    def sanitize_inline_display_math(match: re.Match[str]) -> str:
+        return _render_pdf_math_or_code(match.group(1))
 
-    prepared = re.sub(r"\$\$(.*?)\$\$", sanitize_block_math, prepared, flags=re.DOTALL)
-
-    def sanitize_bracket_math(match: re.Match[str]) -> str:
-        inner = match.group(0)[2:-2]
-        return _render_pdf_math_or_code(inner)
-
-    prepared = re.sub(r"\\\[(.*?)\\\]", sanitize_bracket_math, prepared, flags=re.DOTALL)
+    # Do not rewrite multiline $$...$$ or \[...\] fences here. In OCR-heavy
+    # chapters a stray fence earlier in the file can make a DOTALL regex pair
+    # the wrong delimiters and corrupt an otherwise valid display block.
+    # Existing fenced display math is preserved as-is; only same-line display
+    # math gets normalized through the math/code sanitizer.
+    prepared = re.sub(r"\$\$([^\n]+?)\$\$", sanitize_inline_display_math, prepared)
+    prepared = re.sub(r"\\\[([^\n]+?)\\\]", sanitize_inline_display_math, prepared)
     prepared = sanitize_bare_math_paragraphs(prepared)
     prepared = _sanitize_inline_pdf_math(prepared)
     prepared = _wrap_remaining_tex_fragments(prepared)
@@ -3451,7 +3480,7 @@ def _inject_graphics_path(tex_text: str, graphics_root_dir: Path) -> str:
     graphics_root = graphics_root_dir.absolute().as_posix().rstrip("/") + "/"
     graphics_line = (
         f"\\graphicspath{{{{{graphics_root}}}}}\n"
-        "\\setkeys{Gin}{width=0.74\\linewidth,height=0.78\\textheight,keepaspectratio}\n"
+        "\\setkeys{Gin}{width=0.66\\linewidth,height=0.70\\textheight,keepaspectratio}\n"
     )
 
     if "\\graphicspath{" in tex_text:
@@ -3512,6 +3541,7 @@ def _build_pdf_via_tex(
     res_path: str,
     graphics_root_dir: Optional[Path] = None,
     allow_partial_output: bool = False,
+    input_format: str = "markdown+raw_tex+tex_math_dollars",
 ) -> Path:
     try:
         import pypandoc
@@ -3539,7 +3569,7 @@ def _build_pdf_via_tex(
     pypandoc.convert_text(
         md_text,
         "tex",
-        format="markdown+raw_tex",
+        format=input_format,
         outputfile=str(tex_path),
         extra_args=tex_extra_args,
     )

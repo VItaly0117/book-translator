@@ -5,18 +5,6 @@ import shutil
 from pathlib import Path
 import pypandoc
 
-# 1. СПИСОК ФАЙЛОВ ДЛЯ УДАЛЕНИЯ (Весь зоопарк костылей)
-GARBAGE_SCRIPTS = [
-    "final_cure.py",
-    "god_mode.py",
-    "kill_hallucinations.py",
-    "latex_healer.py",
-    "nuke.py",
-    "pandoc_fix_all.py",
-    "silver_bullet.py",
-    "pandoc_whisperer.py"
-]
-
 def clean_project(base_dir: Path):
     print("🧹 Очистка проекта от старых скриптов-костылей...")
     deleted_count = 0
