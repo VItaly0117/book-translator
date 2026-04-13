@@ -3493,6 +3493,35 @@ def _inject_graphics_path(tex_text: str, graphics_root_dir: Path) -> str:
     return tex_text
 
 
+def _inject_pdf_layout_tuning(tex_text: str) -> str:
+    if "\\clubpenalty=10000" in tex_text:
+        return tex_text
+
+    tuning_block = (
+        "\\usepackage{float}\n"
+        "\\usepackage[section]{placeins}\n"
+        "\\raggedbottom\n"
+        "\\clubpenalty=10000\n"
+        "\\widowpenalty=10000\n"
+        "\\displaywidowpenalty=10000\n"
+        "\\brokenpenalty=10000\n"
+        "\\emergencystretch=2em\n"
+        "\\allowdisplaybreaks[2]\n"
+        "\\setlength{\\textfloatsep}{12pt plus 2pt minus 4pt}\n"
+        "\\setlength{\\floatsep}{10pt plus 2pt minus 2pt}\n"
+        "\\setlength{\\intextsep}{10pt plus 2pt minus 2pt}\n"
+        "\\makeatletter\n"
+        "\\def\\fps@figure{htbp}\n"
+        "\\makeatother\n"
+    )
+
+    marker = "\\begin{document}\n"
+    if marker in tex_text:
+        return tex_text.replace(marker, tuning_block + marker, 1)
+
+    return tuning_block + tex_text
+
+
 def _inject_pdf_fonts(tex_text: str) -> str:
     if "\\setmainfont{" in tex_text:
         return tex_text
@@ -3577,6 +3606,7 @@ def _build_pdf_via_tex(
     tex_text = tex_path.read_text(encoding="utf-8")
     tex_text = _inject_pdf_fonts(tex_text)
     tex_text = _inject_graphics_path(tex_text, graphics_root_dir or output_dir)
+    tex_text = _inject_pdf_layout_tuning(tex_text)
     tex_path.write_text(tex_text, encoding="utf-8")
 
     latex_cmd = [
