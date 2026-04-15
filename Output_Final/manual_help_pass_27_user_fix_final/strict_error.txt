@@ -1,0 +1,14 @@
+./farlou_full_book_user_fix_v27.tex:5508: Missing $ inserted.
+./farlou_full_book_user_fix_v27.tex:5508: Extra }, or forgotten $.
+./farlou_full_book_user_fix_v27.tex:5510: Missing $ inserted.
+./farlou_full_book_user_fix_v27.tex:5603: Missing $ inserted.
+./farlou_full_book_user_fix_v27.tex:5603: Missing $ inserted.
+./farlou_full_book_user_fix_v27.tex:5603: Missing $ inserted.
+./farlou_full_book_user_fix_v27.tex:5603: Extra }, or forgotten $.
+./farlou_full_book_user_fix_v27.tex:5604: Missing $ inserted.
+./farlou_full_book_user_fix_v27.tex:6170: Missing $ inserted.
+./farlou_full_book_user_fix_v27.tex:6170: Missing $ inserted.
+./farlou_full_book_user_fix_v27.tex:6552: Missing $ inserted.
+./farlou_full_book_user_fix_v27.tex:6555: Missing $ inserted.
+./farlou_full_book_user_fix_v27.tex:7335: Missing $ inserted.
+./farlou_full_book_user_fix_v27.tex:7338: Missing $ inserted.

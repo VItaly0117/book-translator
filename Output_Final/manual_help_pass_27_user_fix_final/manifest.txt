@@ -1,0 +1,5 @@
+source_md=Output_Final/reference_keep/current_working_v24_my_fix.md
+output_pdf=Output_Final/manual_help_pass_27_user_fix_final/farlou_full_book_user_fix_v27.pdf
+output_md=Output_Final/manual_help_pass_27_user_fix_final/farlou_full_book_user_fix_v27.md
+compile_mode=partial
+input_format=markdown-yaml_metadata_block+raw_tex+tex_math_dollars

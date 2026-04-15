@@ -1864,6 +1864,18 @@ def _replace_nearest_section_before_marker(
 def _repair_known_pdf_math_artifacts(text: str) -> str:
     text = text.replace("(чорт)(x)", "(f * g)(x)")
     text = text.replace(r"\sqrt{2$\pi$}", r"\sqrt{2\pi}")
+    text = text.replace(r"\begin{array}{ll}", r"\begin{array}{lll}")
+    text = text.replace(r"\begin{array}{lll}", r"\begin{array}{llll}")
+    text = text.replace(r"\Лямбда", r"\Lambda")
+    text = text.replace(r"r_\лямбда", r"r_x")
+    text = text.replace(r"\Дельта", r"\Delta")
+    text = text.replace(r"(\text{\GammaY})", r"(\text{ГУ})")
+    text = text.replace(r"(\text{YUII})", r"(\text{УЧП})")
+    text = text.replace(r"\left( \Gamma \text{Y} \right)", r"(\text{ГУ})")
+    text = text.replace(r"(\text{UCH}\Pi)", r"(\text{УЧП})")
+    text = text.replace(r"(\text{UBP})", r"(\text{УЧП})")
+    text = text.replace(r"(\text{HY})", r"(\text{НУ})")
+    text = text.replace(r"(HY)", r"(\text{НУ})")
     text = re.sub(
         r"5\.\s*Перевірити, чи можна записати згортку двох функцій f і g у двох еквівалентних формах\s*"
         r"\(f \* g\)\(x\)\s*=\s*\\frac\{1\}\{\\sqrt\{2\\pi\}\}\s*\\int_\{-\\infty\}\^\{\+\\infty\}\s*f\(\\xi\)\s*g\(x\s*-\s*\\xi\)\s*d\\xi\s*"
@@ -2776,6 +2788,40 @@ def _repair_known_pdf_math_artifacts(text: str) -> str:
     return text
 
 
+def _normalize_display_math_fences(text: str) -> str:
+    """
+    Normalize OCR-heavy display math markers before the PDF-specific math
+    splitter runs.
+
+    The source manuscript often contains stray standalone ``$$`` lines and
+    broken ``$$ content`` line prefixes. We keep already valid ``$$...$$``
+    blocks intact and only trim genuinely broken fence lines so later math
+    heuristics can wrap the surviving content into proper display math blocks
+    without destroying correct display math.
+    """
+
+    normalized_lines: list[str] = []
+
+    for line in text.splitlines():
+        stripped = line.lstrip()
+        if stripped == "$$":
+            continue
+
+        if stripped.startswith("$$") and stripped.endswith("$$"):
+            normalized_lines.append(line)
+            continue
+
+        if stripped.startswith("$$"):
+            line = re.sub(r'^\s*\${2,}\s*', '', line)
+
+        if stripped.endswith("$$"):
+            line = re.sub(r'\s*\${2,}\s*$', '', line)
+
+        normalized_lines.append(line)
+
+    return "\n".join(normalized_lines)
+
+
 def _collect_page_markers(text: str) -> list[tuple[int, int]]:
     markers: list[tuple[int, int]] = []
     for match in _PAGE_MARKER_PATTERN.finditer(text):
@@ -3420,6 +3466,7 @@ def _prepare_markdown_for_pdf(md_text: str) -> str:
 
     prepared = clean_markdown_formatting(md_text)
     prepared = _remove_pdf_only_sections(prepared)
+    prepared = _normalize_display_math_fences(prepared)
     prepared = _normalize_image_links(prepared, IMAGES_DIR)
     prepared = prepared.replace(r'\$\$', '$$').replace(r'\$', '$').replace(r'\_', '_')
     prepared = prepared.replace(r'\rm ', r'\mathrm{ }').replace(r'\rm', r'\mathrm')
@@ -3491,6 +3538,35 @@ def _inject_graphics_path(tex_text: str, graphics_root_dir: Path) -> str:
         return tex_text.replace(marker, marker + graphics_line, 1)
 
     return tex_text
+
+
+def _inject_pdf_layout_tuning(tex_text: str) -> str:
+    if "\\clubpenalty=10000" in tex_text:
+        return tex_text
+
+    tuning_block = (
+        "\\usepackage{float}\n"
+        "\\usepackage[section]{placeins}\n"
+        "\\raggedbottom\n"
+        "\\clubpenalty=10000\n"
+        "\\widowpenalty=10000\n"
+        "\\displaywidowpenalty=10000\n"
+        "\\brokenpenalty=10000\n"
+        "\\emergencystretch=2em\n"
+        "\\allowdisplaybreaks[2]\n"
+        "\\setlength{\\textfloatsep}{12pt plus 2pt minus 4pt}\n"
+        "\\setlength{\\floatsep}{10pt plus 2pt minus 2pt}\n"
+        "\\setlength{\\intextsep}{10pt plus 2pt minus 2pt}\n"
+        "\\makeatletter\n"
+        "\\def\\fps@figure{htbp}\n"
+        "\\makeatother\n"
+    )
+
+    marker = "\\begin{document}\n"
+    if marker in tex_text:
+        return tex_text.replace(marker, tuning_block + marker, 1)
+
+    return tuning_block + tex_text
 
 
 def _inject_pdf_fonts(tex_text: str) -> str:
@@ -3577,6 +3653,7 @@ def _build_pdf_via_tex(
     tex_text = tex_path.read_text(encoding="utf-8")
     tex_text = _inject_pdf_fonts(tex_text)
     tex_text = _inject_graphics_path(tex_text, graphics_root_dir or output_dir)
+    tex_text = _inject_pdf_layout_tuning(tex_text)
     tex_path.write_text(tex_text, encoding="utf-8")
 
     latex_cmd = [
