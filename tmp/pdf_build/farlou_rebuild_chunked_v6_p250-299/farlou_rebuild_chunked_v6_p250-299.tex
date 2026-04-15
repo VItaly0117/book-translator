@@ -1,0 +1,1291 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+  ukrainian,
+]{article}
+\usepackage{xcolor}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+\setmathfont{STIX Two Math}
+\fi
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{graphicx}
+\graphicspath{{/Users/kalinicenkovitalijmikolajovic/.codex/worktrees/5c15/Script_for_translate_book/Output_Final/}}
+\setkeys{Gin}{width=0.66\linewidth,height=0.70\textheight,keepaspectratio}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+\ifLuaTeX
+\usepackage[bidi=basic,shorthands=off,provide=*]{babel}
+\else
+\usepackage[bidi=default,shorthands=off,provide=*]{babel}
+\fi
+\ifLuaTeX
+  \usepackage{selnolig} % disable illegal ligatures
+\fi
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdflang={uk},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\author{}
+\date{}
+
+\usepackage{float}
+\usepackage[section]{placeins}
+\raggedbottom
+\clubpenalty=10000
+\widowpenalty=10000
+\displaywidowpenalty=10000
+\brokenpenalty=10000
+\emergencystretch=2em
+\allowdisplaybreaks[2]
+\setlength{\textfloatsep}{12pt plus 2pt minus 4pt}
+\setlength{\floatsep}{10pt plus 2pt minus 2pt}
+\setlength{\intextsep}{10pt plus 2pt minus 2pt}
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\begin{document}
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_273_Picture_10.jpeg}}
+
+36 1 Радіальний потік тепла з точкового джерела; A --- тепло виділяється
+в початку.
+
+\begin{equation*}
+u(r) = \frac{-q}{2\pi} \ln r = \frac{q}{2\pi} \ln \frac{1}{r}.
+\end{equation*}
+
+(Розв'язок зображено на рис. 36.2.)
+
+В електростатиці різниця потужності \(t(B)\) до \(u(A)\) дорівнює
+роботі, яку потрібно виконати для переміщення одного позитивного заряду
+з точки A в точку B (рисунок 36.2).
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_273_Figure_15.jpeg}}
+
+Рис. 36.2. Потенціал точкового заряду у двовимірному випадку. Тут
+\(\alpha\) --- робота, потрібна для переміщення одиничного заряду з
+точки A до точки B.
+
+Стік можна інтерпретувати як від'ємне джерело, так що стік -q створює
+потенціал
+
+\begin{equation*}
+u\left(r\right)=-\frac{q}{2\pi}\ln\frac{1}{r}.
+\end{equation*}
+
+На цьому завершується обговорення потенціалів точкових зарядів. Тепер ми
+готові розв'язати неоднорідне рівняння за допомогою методу функції
+Гріна.
+
+\section{Рівняння Пуассона в
+крузі}\label{ux440ux456ux432ux43dux44fux43dux43dux44f-ux43fux443ux430ux441ux441ux43eux43dux430-ux432-ux43aux440ux443ux437ux456}
+
+Розглянемо важливу задачу.
+
+(36.2)
+
+\[
+\begin{aligned}
+(\text{УЧП})\quad & u_{rr} + \frac{1}{r} u_r + \frac{1}{r^2} u_{\theta\theta} = f(r, \theta), && 0 < r < 1,\ 0 \le \theta \le 2\pi, \\
+(\text{ГУ})\quad & u(1, \theta) = 0, && 0 \le \theta \le 2\pi.
+\end{aligned}
+\]
+
+Метод функції Гріна складається з двох кроків.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Встановіть заряд точкової одиниці в точці \((\rho, \varphi)\) і
+  знайдіть \(G(r, \theta, \rho, \varphi)\) потенціал, створений цим
+  зарядом і який на межі дорівнює нулю.
+\item
+  Підсумуйте окремі відповіді, \(G(r, \theta, \rho, \phi)\), зважені
+  правильною частиною (щільністю заряду) \(f(r, \theta)\), вздовж усього
+  кола. У результаті ми отримуємо те рішення, яке шукаємо
+\end{enumerate}
+
+\begin{equation*}
+u\left(r,\theta\right) = \int_{0}^{2\pi} \int_{0}^{1} G\left(r,\theta,\rho,\varphi\right) f\left(\rho,\varphi\right)\rho\, d\rho\, d\varphi.
+\end{equation*}
+
+Тепер знайдемо вихідну функцію для нашого завдання.
+
+\section{\texorpdfstring{Означення функції джерела
+\(G(r, \theta, \rho, \phi)\)}{Означення функції джерела G(r, \textbackslash theta, \textbackslash rho, \textbackslash phi)}}\label{ux43eux437ux43dux430ux447ux435ux43dux43dux44f-ux444ux443ux43dux43aux446ux456ux457-ux434ux436ux435ux440ux435ux43bux430-gr-theta-rho-phi}
+
+Замінимо праву частину \(f(r,\theta)\) рівняння точковим джерелом
+одиничної величини, розташованим у точці \((\rho, \varphi)\).
+Математично таке джерело описується дельта-функцією. Наше завдання ---
+знайти потенціал цього джерела за умови, що на межі кола потенціал
+дорівнює нулю. Така функція і називається функцією Гріна, або функцією
+джерела.
+
+Див. В. С. Володимиров, Узагальнені функції в математичній фізиці,
+Москва, Наука, 1976. -- Примітка редактора.
+
+потенціал точкового заряду дорівнює
+
+\begin{equation*}
+\frac{1}{2\pi} \ln \left( \frac{1}{r} \right)
+\end{equation*},
+
+де \(r\) --- відстань від заряду до точки спостереження.
+
+Шуканий потенціал має такий фізичний зміст:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  У теорії теплопровідності це стаціонарна температура всередині круга,
+  якщо джерело тепла розташоване в точці \((\rho,\varphi)\), а на межі
+  підтримується нульова температура.
+\item
+  Для мембрани це відхилення від положення рівноваги, якщо край
+  закріплено на нулі, а в точці \((\rho,\varphi)\) прикладено
+  зосереджене навантаження.
+\item
+  В електростатиці це розподіл потенціалу всередині круга, якщо точковий
+  позитивний заряд розташований у точці \((\rho,\varphi)\), а коло
+  заземлено.
+\end{enumerate}
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_275_Picture_11.jpeg}}
+
+Рис. 36.3. Функція Гріна для точкового джерела, розташованого в точці
+\((\rho, \phi)\), всередині одиничного кола.
+
+Тепер побудуємо функцію Гріна; за формою вона буде подібна до графіка на
+рис. 36.3.
+
+\section{Побудова
+розв'язку}\label{ux43fux43eux431ux443ux434ux43eux432ux430-ux440ux43eux437ux432ux44fux437ux43aux443}
+
+КРОК 1. Оскільки
+
+\begin{equation*}
+\frac{1}{2\pi} \ln \frac{1}{R}
+\end{equation*}
+
+--- це потенціал поля в точці \(P=(r,\theta)\), який створюється
+одиничним точковим зарядом, розміщеним у точці \(Q=(\rho,\phi)\).
+Залишається лише модифікувати цю функцію так, щоб на межі кола вона
+перетворювалася на нуль.
+
+КРОК 2. З експерименту відомо, що рівнопотенціальні лінії точкових
+зарядів є колами (рис. 36.4).
+
+Основна ідея побудови функції Гріна така: потрібно розмістити інший,
+від'ємний, заряд поза колом так, щоб сумарний потенціал на колі \(r=1\)
+був сталим. Потім цю константу можна відняти й отримати нульовий
+потенціал на межі.
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_276_Picture_3.jpeg}}
+
+Рис. 36.4. Потенціал поля, утвореного двома протилежно зарядженими
+частинками; A і B --- лінії сталого потенціалу.
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_276_Picture_5.jpeg}}
+
+Рис. 36.5. Заряди \(Q\) і \(\overline{Q}\) створюють сталий потенціал на
+колі \(r=1\).
+
+Легко побачити, що якщо негативний заряд розміщений у точці
+\(\bar{Q} = (\bar{\rho}, \bar{\phi}) = (1/\rho, \phi)\), то повний
+потенціал
+
+\begin{equation*}
+u(r, \theta) = \frac{1}{2\pi} \ln \frac{1}{R} - \frac{1}{2\pi} \ln \frac{1}{\overline{R}}
+\end{equation*}
+
+буде сталою на колі \(r=1\). Тут відстані від зарядів до точки
+спостереження позначено через \(R\) і \(\overline{R}\) (див. рис. 36.5).
+Можна показати, що значення потенціалу на колі \(r=1\) дорівнює
+
+\begin{equation*}
+-\frac{1}{2\pi}\ln\rho
+\end{equation*}
+
+(додатна константа).
+
+З урахуванням цього результату будуємо функцію Гріна
+
+(36.3)
+
+\begin{verbatim}
+\begin{equation*}
+G(r, \theta, \rho, \phi) =
+\frac{1}{2\pi} \ln \frac{1}{R}
+- \frac{1}{2\pi} \ln \frac{1}{\overline{R}}
++ \frac{1}{2\pi} \ln \rho
+\end{equation*}
+\end{verbatim}
+
+Отже, функція Гріна складається з потенціалу додатного заряду в точці
+\(Q\), потенціалу від'ємного заряду в точці \(\overline{Q}\) та
+коригувальної константи, яка забезпечує нульове граничне значення.
+
+де
+
+\begin{equation*}
+\begin{aligned}
+R &= \sqrt{r^2 - 2\rho r \cos(\theta - \phi) + \rho^2},\\
+\overline{R} &= \sqrt{r^2 - 2\frac{r}{\rho}\cos(\theta - \phi) + \frac{1}{\rho^2}}.
+\end{aligned}
+\end{equation*}
+
+Це формули для відстаней між відповідними точками в полярних
+координатах. Щоб знайти розв'язок початкової задачі, потрібно
+просумувати внесок усіх таких елементарних джерел. Переходимо до
+останнього кроку.
+
+КРОК 3. Суперпозиція імпульсних характеристик Цей крок досить простий. З
+відношення
+
+\begin{equation*}
+u(r, \theta) = \int_{0}^{2\pi} \int_{0}^{1} G(r, \theta, \rho, \varphi) f(\rho, \varphi) \rho d\rho d\varphi
+\end{equation*}
+
+отримуємо
+
+(36.4)
+
+\begin{equation*}
+u(r, \theta) = \frac{1}{2\pi} \int_{0}^{2\pi} \int_{0}^{1}
+\ln \left(\frac{\rho \overline{R}}{R}\right) f(\rho, \varphi)\,\rho\, d\rho\, d\varphi.
+\end{equation*}
+
+Формула (36.4) виражає розв'язок задачі Діріхле для рівняння Пуассона
+всередині кола через функцію Гріна цієї задачі. Якщо щільність заряду
+\(f(r, \theta)\) відома, то інтеграл можна обчислити, наприклад,
+чисельно. \# ЗАУВАЖЕННЯ
+
+Зауваження 1. Задачу
+
+\begin{equation*}
+\begin{aligned}
+(\text{УЧП}) \quad & \Delta u = 0, \quad 0 < r < 1, \quad 0 \leqslant \theta < 2\pi, \\
+(\text{ГУ}) \quad & u(1, \theta) = g(\theta), \quad 0 \leqslant \theta \leqslant 2\pi.
+\end{aligned}
+\end{equation*}
+
+також можна розв'язати за допомогою методу \emph{функції Гріна}. У цьому
+випадку розв'язок має вигляд
+
+\begin{equation*}
+u(r, \theta) = \int_{0}^{2\pi} \frac{\partial G}{\partial r}(r, \theta, 1, \varphi)\, g(\varphi)\, d\varphi.
+\end{equation*}
+
+Останнє співвідношення можна переписати в більш обчислювально зручному
+вигляді, явно підставивши вираз для \(\partial G/\partial r\). У
+результаті отримуємо інтегральну формулу Пуассона, виведену раніше в
+лекції 33.
+
+(36.5)
+
+\begin{equation*}
+u(r, \theta) = \frac{1}{2\pi} \int_{0}^{2\pi}
+\left[ \frac{1 - r^2}{1 - 2r\cos(\theta - \varphi) + r^2} \right] g(\varphi)\, d\varphi.
+\end{equation*}
+
+Зауваження 2. Розв'язок загальної задачі Діріхле
+
+\begin{equation*}
+\begin{aligned}
+(\text{УЧП}) \quad & \Delta u = f(r, \theta), \quad 0 < r < 1, \quad 0 \le \theta < 2\pi, \\
+(\text{ГУ}) \quad & u(1, \theta) = g(\theta), \quad 0 \le \theta \le 2\pi.
+\end{aligned}
+\end{equation*}
+
+знаходиться як сума розв'язків (36.4) і (36.5).
+
+Зауваження 3. Метод функцій Гріна дозволяє отримати розв'язки багатьох
+задач в областях різної форми. Однак для кожної області, а точніше для
+кожного оператора та граничної умови, потрібно знайти власну функцію
+Гріна, і це не завжди легко зробити.
+
+Зауваження 4. Щоб дійсно знайти розв'язок за формулою (36.4), у
+більшості випадків необхідно обчислити інтеграли на комп'ютері. \#
+ЗАВДАННЯ
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Знайти потенціал точкового джерела у тривимірному просторі.
+\item
+  Знайти функцію Гріна \(G(x,y,\xi,\eta)\) для рівняння Лапласа у
+  верхній півплощині \(y>0\). Іншими словами, знайти потенціал у точці
+  \((x,y)\), якщо точковий заряд розташований у \((\xi,\eta)\), а
+  потенціал на межі \(y=0\) дорівнює нулю.
+\end{enumerate}
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_278_Figure_11.jpeg}}
+
+ПРИМІТКА. Якщо від'ємний заряд розмістити в точці
+\(\overline{Q}=(\xi,-\eta)\), то сумарний потенціал на прямій \(y=0\)
+зануляється. Це і є основа методу дзеркальних відображень.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\item
+  Використовуючи результати задачі 2, знайдіть розв'язок рівняння
+  Пуассона \(\Delta u=-k\) у верхній півплощині з нульовою граничною
+  умовою.
+\item
+  Як би ви побудували функцію Гріна для першого квадранта \(x>0\),
+  \(y>0\)?
+\item
+  Інший підхід до розв'язання рівняння Пуассона такий. Припустимо, що
+  потрібно розв'язати задачу
+\end{enumerate}
+
+\[
+\begin{aligned}
+(\text{УЧП})\quad & \Delta u = 1, && 0 < r < 1,\quad 0 \le \theta < 2\pi,\\
+(\text{ГУ})\quad & u(1,\theta)=\sin\theta, && 0 \le \theta \le 2\pi.
+\end{aligned}
+\]
+
+Спочатку спробуйте знайти частинний розв'язок підстановкою
+
+\[
+u_p(r,\theta)=Ar^2.
+\]
+
+Після цього підставте вираз \(u_p\) в рівняння Пуассона і знайдіть
+константу \(A\). Далі подайте шуканий розв'язок у вигляді \(u=w+u_p\),
+де функція \(w(r,\theta)\) задовольняє відповідну однорідну задачу з
+модифікованими граничними умовами. Знайдіть \(w(r,\theta)\) і запишіть
+остаточний розв'язок \(u(r,\theta)\). Ретельно проаналізуйте отриману
+відповідь.
+
+\section{Частина 5. ЧИСЕЛЬНІ ТА ПРИБЛИЗНІ
+МЕТОДИ}\label{ux447ux430ux441ux442ux438ux43dux430-5.-ux447ux438ux441ux435ux43bux44cux43dux456-ux442ux430-ux43fux440ux438ux431ux43bux438ux437ux43dux456-ux43cux435ux442ux43eux434ux438}
+
+\subsection{Лекція 37}\label{ux43bux435ux43aux446ux456ux44f-37}
+
+\section{ЧИСЕЛЬНІ РОЗВ'ЯЗКИ (ЕЛІПТИЧНІ
+ЗАДАЧІ)}\label{ux447ux438ux441ux435ux43bux44cux43dux456-ux440ux43eux437ux432ux44fux437ux43aux438-ux435ux43bux456ux43fux442ux438ux447ux43dux456-ux437ux430ux434ux430ux447ux456}
+
+МЕТА ЛЕКЦІЇ: Показати, як рівняння в частинних похідних можна звести до
+систем алгебраїчних рівнянь, якщо замінити похідні наближеннями
+скінченних різниць. Розв'язуючи ці системи ітеративними методами, можна
+отримати наближені розв'язки еліптичних задач.
+
+На цей момент ми вже бачили кілька точних методів розв'язання лінійних
+рівнянь у частинних похідних. Проте більшість із них працює лише для
+простих рівнянь і простих областей. У реальних прикладних задачах цього
+часто недостатньо, тому доводиться вдаватися до чисельних методів.
+
+У цій та наступних двох лекціях ми покажемо, як розв'язувати еліптичні,
+гіперболічні та параболічні рівняння методом скінченних різниць. Спершу
+ознайомимося з самим поняттям скінченних різниць, а потім покажемо, як
+застосовувати їх до задачі Діріхле в квадраті.
+
+\section{Апроксимації скінченних
+різниць}\label{ux430ux43fux440ux43eux43aux441ux438ux43cux430ux446ux456ux457-ux441ux43aux456ux43dux447ux435ux43dux43dux438ux445-ux440ux456ux437ux43dux438ux446ux44c}
+
+Згадаємо ряд Тейлора для функції \(f(x)\):
+
+\[
+f(x+h)=f(x)+f'(x)h+\frac{f''(x)}{2!}h^2+\dots
+\]
+
+Якщо обмежитися першими двома членами, отримаємо
+
+\[
+f(x+h)\cong f(x)+f'(x)h,
+\]
+
+звідки випливає права різницева похідна
+
+\[
+(37.1)\qquad f'(x)\cong \frac{f(x+h)-f(x)}{h}.
+\]
+
+У розкладі Тейлора можна замінити \(h\) на \(-h\) і отримати ліву
+різницеву похідну:
+
+\[
+(37.2)\qquad f'(x)\cong \frac{f(x)-f(x-h)}{h}.
+\]
+
+Розкладаючи \(f(x-h)\) і \(f(x+h)\) в ряд Тейлора та відкидаючи члени
+вищого порядку, отримуємо центральну різницеву похідну:
+
+\[
+(37.3)\qquad f'(x)\simeq \frac{f(x+h)-f(x-h)}{2h}.
+\]
+
+Якщо в ряду Тейлора залишити ще один член, то для другої похідної маємо
+
+\[
+(37.4)\qquad f''(x)\cong \frac{f(x+h)-2f(x)+f(x-h)}{h^2}.
+\]
+
+Тепер поширимо поняття скінченних різниць на часткові похідні. Виходячи
+з розкладів Тейлора для функції двох змінних,
+
+\[
+\begin{aligned}
+u(x+h,y)&=u(x,y)+u_x(x,y)h+u_{xx}(x,y)\frac{h^2}{2!}+\dots,\\
+u(x-h,y)&=u(x,y)-u_x(x,y)h+u_{xx}(x,y)\frac{h^2}{2!}-\dots.
+\end{aligned}
+\]
+
+отримуємо такі наближення:
+
+\[
+\begin{aligned}
+u_x(x,y) &\cong \frac{u(x+h,y)-u(x,y)}{h},\\
+u_{xx}(x,y) &\cong \frac{u(x+h,y)-2u(x,y)+u(x-h,y)}{h^2},\\
+u_y(x,y) &\cong \frac{u(x,y+k)-u(x,y)}{k},\\
+u_{yy}(x,y) &\cong \frac{u(x,y+k)-2u(x,y)+u(x,y-k)}{k^2}.
+\end{aligned}
+\]
+
+У цих формулах часткові похідні апроксимуються правою, центральною та
+лівою різницею, але в цій лекції ми будемо використовувати лише
+центральні наближення.
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_282_Figure_5.jpeg}}
+
+Фіг. 37.1 Сітка для задачі Діріхле всередині квадрата.
+
+Щоб ознайомитися з основними правилами використання апроксимації
+скінченних різниць, розв'яжемо просту задачу Діріхле.
+
+Розв'язання задачі Діріхле методом скінченної різниці
+
+Нехай потрібно розв'язати задачу Діріхле
+
+\[
+\begin{aligned}
+(\text{УЧП})\quad & u_{xx}+u_{yy}=0, && 0<x<1,\quad 0<y<1,\\
+(\text{ГУ})\quad & u=0, && \text{на верхній та бічних сторонах квадрата},\\
+& u(x,0)=\sin(\pi x), && 0\le x\le 1.
+\end{aligned}
+\]
+
+Намалюємо сітку на площині \((x,y)\), як показано на рис. 37.1. Зручно
+(особливо якщо ми збираємося користуватися комп'ютером) використовувати
+такі позначення:
+
+\[
+\begin{aligned}
+u(x,y)&=u_{ij},\\
+u(x,y+k)&=u_{i+1,j},\\
+u(x,y-k)&=u_{i-1,j},\\
+u(x-h,y)&=u_{i,j-1},\\
+u(x+h,y)&=u_{i,j+1},\\
+u_x(x,y)&\cong \frac{u_{i,j+1}-u_{i,j-1}}{2h},\\
+u_y(x,y)&\cong \frac{u_{i+1,j}-u_{i-1,j}}{2k},\\
+u_{xx}(x,y)&\cong \frac{u_{i,j+1}-2u_{i,j}+u_{i,j-1}}{h^2},\\
+u_{yy}(x,y)&\cong \frac{u_{i+1,j}-2u_{i,j}+u_{i-1,j}}{k^2}.
+\end{aligned}
+\]
+
+Основна ідея розв'язання задачі Діріхле базується на заміні часткових
+похідних у рівнянні Лапласа їхніми скінченнорізницевими апроксимаціями.
+Зробивши це і використавши компактну нотацію, отримуємо різницеве
+рівняння
+
+\[
+\Delta u \cong
+\frac{u_{i,j+1}-2u_{i,j}+u_{i,j-1}}{h^2}
+\]
+
+\begin{itemize}
+\tightlist
+\item
+\end{itemize}
+
+\[
+\frac{u_{i+1,j}-2u_{i,j}+u_{i-1,j}}{k^2}
+=0.
+\]
+
+У випадку \(h=k\) рівняння Лапласа приводиться до вигляду
+
+\[
+u_{i+1,j}+u_{i-1,j}+u_{i,j+1}+u_{i,j-1}-4u_{ij}=0.
+\]
+
+Розв'язавши його відносно \(u_{ij}\), отримуємо
+
+\[
+u_{ij}=\frac{1}{4}\left(u_{i+1,j}+u_{i-1,j}+u_{i,j+1}+u_{i,j-1}\right).
+\]
+
+Отже, значення розв'язку у внутрішньому вузлі апроксимується середнім
+значенням розв'язку в чотирьох сусідніх вузлах. На цьому і ґрунтується
+метод Лібмана.
+
+\section{Алгоритм чисельного розв'язання задачі Діріхле (метод
+Лібмана)}\label{ux430ux43bux433ux43eux440ux438ux442ux43c-ux447ux438ux441ux435ux43bux44cux43dux43eux433ux43e-ux440ux43eux437ux432ux44fux437ux430ux43dux43dux44f-ux437ux430ux434ux430ux447ux456-ux434ux456ux440ux456ux445ux43bux435-ux43cux435ux442ux43eux434-ux43bux456ux431ux43cux430ux43dux430}
+
+КРОК 1. Присвоїмо значенням \(u_{ij}\) у внутрішніх вузлах початкове
+наближення, наприклад середнє значення всіх граничних умов.
+
+КРОК 2. Перераховуємо значення у всіх внутрішніх вузлах, замінюючи старе
+значення середнім значенням чотирьох сусідніх точок. Після кількох
+ітерацій процес збігається до наближеного розв'язку задачі.
+
+\section{ЗАУВАЖЕННЯ}\label{ux437ux430ux443ux432ux430ux436ux435ux43dux43dux44f}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Якщо взяти сітку з чотирма внутрішніми точками \((m=n=4)\), то система
+  набуває вигляду
+\end{enumerate}
+
+\[
+\begin{aligned}
+-4u_{22} + u_{23} + u_{32} &= -\sin(\pi/3),\\
+u_{22} - 4u_{23} + u_{33} &= -\sin(2\pi/3),\\
+u_{22} - 4u_{32} + u_{33} &= 0,\\
+u_{23} + u_{32} - 4u_{33} &= 0.
+\end{aligned}
+\]
+
+Цю систему потрібно розв'язувати відносно \(u_{22}\), \(u_{23}\),
+\(u_{32}\) та \(u_{33}\). Розв'язок такої системи можна знайти
+ітеративним методом. Метод Лібмана також є одним з ітеративних методів.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\item
+  Якщо зменшити кроки сітки \(h\) і \(k\), то отримаємо систему рівнянь
+  того самого типу, але більшого розміру.
+\item
+  Систему рівнянь можна записати у матричній формі:
+\end{enumerate}
+
+\begin{verbatim}
+\begin{bmatrix}
+\end{verbatim}
+
+-4 \& 1 \& 1 \& 0 \textbackslash{}
+
+1 \& -4 \& 0 \& 1 \textbackslash{}
+
+1 \& 0 \& -4 \& 1 \textbackslash{}
+
+0 \& 1 \& 1 \& -4
+
+\[
+\end{bmatrix}
+\begin{bmatrix}
+u_{22}\\
+u_{23}\\
+u_{32}\\
+u_{33}
+\end{bmatrix}
+=
+\begin{bmatrix}
+-\sin(\pi/3)\\
+-\sin(2\pi/3)\\
+\]
+
+0\textbackslash{}
+
+0
+
+\[
+\end{bmatrix}
+\approx
+\begin{bmatrix}
+\]
+
+-0.86\textbackslash{}
+
+-0.86\textbackslash{}
+
+0\textbackslash{}
+
+0
+
+\begin{verbatim}
+\end{bmatrix}.
+\end{verbatim}
+
+Зі збільшенням кількості рівнянь матриця коефіцієнтів стає розрідженою,
+тобто містить багато нулів. Такі системи розв'язуються спеціальними
+методами, серед яких особливо важливі метод Якобі, метод Гаусса-Зайделя
+та послідовна верхня релаксація.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\item
+  При розв'язанні задачі Неймана ті \emph{похідні}, що входять до
+  граничної умови, також слід замінити різницею апроксимаціями.
+\item
+  Таким чином ви зможете розв'язувати задачі такого типу.
+\end{enumerate}
+
+а) \(u_{xx} + u_{yy} = f(x, y)\)
+
+б) \(x u_{xx} + u_{yy} + 2u = \sin(x - y)\)
+
+в) \(\sin x\,u_{xx} + u_{xy} + 3u = 0\)
+
+(гетерогенні рівняння зі змінними коефіцієнтами).
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{5}
+\tightlist
+\item
+  Якщо область, у якій розв'язується задача, має неправильну форму, її
+  можна покрити сіткою і наближати розв'язок у вузлах, найближчих до
+  межі, інтерполюючи граничні умови. Після цього задачу розв'язують
+  звичайним способом.
+\end{enumerate}
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_285_Figure_8.jpeg}}
+
+Фіг. 37.2. Поблизу криволінійної межі нові граничні умови отримують
+інтерполяцією.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{6}
+\tightlist
+\item
+  Існують спеціальні програмні пакети для чисельного розв'язання
+  еліптичних задач. Один з відомих прикладів --- пакет ELLPACK, який
+  дозволяє працювати з дво- та тривимірними задачами в різних
+  координатних системах і для досить широкого класу граничних умов.
+\end{enumerate}
+
+\section{ЗАВДАННЯ}\label{ux437ux430ux432ux434ux430ux43dux43dux44f}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Отримайте наближення для другої похідної
+\end{enumerate}
+
+\[
+f''(x)\approx \frac{f(x+h)-2f(x)+f(x-h)}{h^2}.
+\]
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\item
+  Виконайте дві ітерації для задачі Діріхле (37.5) методом Лібмана.
+\item
+  До якої алгебраїчної системи зводиться задача Діріхле для рівняння
+  Пуассона в квадраті
+\end{enumerate}
+
+\[
+\begin{aligned}
+(\text{УЧП})\quad & u_{xx}+u_{yy}=f(x,y), && 0<x<1,\quad 0<y<1,\\
+(\text{ГУ})\quad & u(x,y)=g(x,y), && \text{на межі квадрата},
+\end{aligned}
+\]
+
+якщо розв'язувати її методом скінченних різниць?
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Розв'яжіть задачу 3 для рівняння
+\end{enumerate}
+
+\[
+u_{xx}+u_{yy}+2u=0,\qquad 0<x<1,\quad 0<y<1,
+\]
+
+за умови \(u(x,y)=g(x,y)\) на межі квадрата.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  Як би ви розв'язували задачу Неймана в квадраті
+\end{enumerate}
+
+\[
+\begin{aligned}
+(\text{УЧП})\quad & u_{xx}+u_{yy}=0, && 0<x<1,\quad 0<y<1,\\
+(\text{ГУ})\quad & u=0 && \text{на трьох сторонах квадрата},\\
+& \frac{\partial u}{\partial x}(1,y)=1, && 0\le y\le 1,
+\end{aligned}
+\]
+
+методом скінченних різниць?
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{5}
+\tightlist
+\item
+  Побудуйте блок-схему алгоритму розв'язання задачі Діріхле в квадраті
+\end{enumerate}
+
+\[
+\begin{aligned}
+(\text{УЧП})\quad & u_{xx}+u_{yy}=f(x,y), && 0<x<1,\quad 0<y<1,\\
+(\text{ГУ})\quad & u(x,y)=g(x,y), && \text{на межі квадрата},
+\end{aligned}
+\]
+
+для довільної кількості вузлів сітки. Якщо знаєте мову програмування,
+напишіть програму для виконання цих обчислень.
+
+\section{ЯВНІ РІЗНИЦЕВІ
+СХЕМИ}\label{ux44fux432ux43dux456-ux440ux456ux437ux43dux438ux446ux435ux432ux456-ux441ux445ux435ux43cux438}
+
+МЕТА ЛЕКЦІЇ: Ввести поняття явної різницевої схеми і показати, як її
+можна застосовувати до задач теплопровідності та хвильових задач.
+Основна ідея полягає в тому, щоб замінити похідні скінченними різницями
+і отримати формули, які безпосередньо виражають розв'язок на новому
+часовому шарі через значення на попередньому шарі.
+
+На відміну від стаціонарних еліптичних задач, де значення у внутрішніх
+вузлах сітки визначаються одночасно, для задач, що залежать від часу,
+можна обчислювати розв'язок послідовно:
+\(t=\Delta t,\ 2\Delta t,\ 3\Delta t,\dots\) \# Явна схема для рівняння
+теплопровідності
+
+Розглянемо задачу теплопровідності для стрижня, початкова температура
+якого дорівнює нулю. Температура лівого кінця фіксована, а на правому
+кінці виконується умова теплообміну з навколишнім середовищем:
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_288_Figure_3.jpeg}}
+
+Фіг. 38.1. Сітка для рівняння теплопровідності.
+
+Нехай температура середовища задається функцією \(g(t)\). Тоді маємо
+задачу
+
+\[
+\begin{aligned}
+(38.1)\quad (\text{УЧП})\quad & u_t=u_{xx}, && 0<x<1,\quad 0<t<\infty,\\
+(\text{ГУ})\quad & u(0,t)=1,\quad u_x(1,t)=-\left[u(1,t)-g(t)\right], && 0<t<\infty,\\
+(\text{НУ})\quad & u(x,0)=0, && 0\le x\le 1.
+\end{aligned}
+\]
+
+Побудуємо прямокутну сітку з вузлами
+
+\[
+\begin{aligned}
+x_j&=jh,\qquad j=0,1,2,\dots,n,\\
+t_i&=ik,\qquad i=0,1,2,\dots,m.
+\end{aligned}
+\]
+
+Позначимо через \(u_{i,j}\) наближене значення функції \(u(x_j,t_i)\).
+Значення на лівій межі та на початковому шарі відомі з умов задачі. Щоб
+знайти решту значень, замінимо похідні наближеннями
+
+\[
+\begin{aligned}
+u_t(x_j,t_i)&\approx \frac{u_{i+1,j}-u_{i,j}}{k},\\
+u_{xx}(x_j,t_i)&\approx \frac{u_{i,j+1}-2u_{i,j}+u_{i,j-1}}{h^2}.
+\end{aligned}
+\]
+
+Підставляючи ці вирази в рівняння теплопровідності, дістаємо явну
+формулу
+
+\[
+(38.2)\qquad u_{i+1,j}=u_{i,j}+\frac{k}{h^2}\left[u_{i,j+1}-2u_{i,j}+u_{i,j-1}\right].
+\]
+
+Щоб врахувати праву граничну умову, замінимо похідну \(u_x(1,t)\) лівою
+різницею:
+
+\[
+\frac{u_{i,n}-u_{i,n-1}}{h}=-\left[u_{i,n}-g_i\right],
+\qquad g_i=g(ik).
+\]
+
+Звідси отримуємо
+
+\[
+(38.4)\qquad u_{i,n}=\frac{u_{i,n-1}+h g_i}{1+h}.
+\]
+
+Формули (38.2) і (38.4) дають повну явну схему для послідовного переходу
+від одного часового шару до наступного.
+
+\section{Алгоритм обчислень за явною
+схемою}\label{ux430ux43bux433ux43eux440ux438ux442ux43c-ux43eux431ux447ux438ux441ux43bux435ux43dux44c-ux437ux430-ux44fux432ux43dux43eux44e-ux441ux445ux435ux43cux43eux44e}
+
+КРОК 1. Обчислити значення розв'язку на шарі \(t=\Delta t\) за формулою
+
+\[
+u_{2,j}=u_{1,j}+\frac{k}{h^2}\left[u_{1,j+1}-2u_{1,j}+u_{1,j-1}\right],
+\qquad j=2,3,\dots,n-1.
+\]
+
+КРОК 2. Значення на правій межі знайти з (38.4):
+
+\[
+u_{2,n}=\frac{u_{2,n-1}+h g_2}{1+h}.
+\]
+
+КРОК 3. Для переходу до шарів \(t=2\Delta t,\ 3\Delta t,\dots\)
+повторювати кроки 1 і 2, щоразу використовуючи значення з попереднього
+часового шару.
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_290_Figure_3.jpeg}}
+
+Фіг. 38.2. Ілюстрація явної різницевої схеми.
+
+\section{ЗАУВАЖЕННЯ}\label{ux437ux430ux443ux432ux430ux436ux435ux43dux43dux44f-1}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Явна схема має істотний недолік: якщо часовий крок занадто великий
+  порівняно з кроком за просторовою координатою, похибки округлення
+  можуть швидко зрости і зруйнувати чисельний розв'язок. Для рівняння
+  теплопровідності зазвичай потрібно, щоб
+\end{enumerate}
+
+\[
+\frac{k}{h^2}\le 0.5.
+\]
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\item
+  Зменшення кроків \(\Delta t\) і \(\Delta x\) зазвичай підвищує
+  точність, але водночас збільшує обсяг обчислень. Залежність повної
+  похибки від кроку сітки показано на рис. 38.5.
+\item
+  Для гіперболічної задачі
+\end{enumerate}
+
+\[
+\begin{aligned}
+(\text{УЧП})\quad & u_{tt}=u_{xx}, && 0<x<1,\quad 0<t<\infty,\\
+(\text{ГУ})\quad & u(0,t)=g_1(t),\quad u(1,t)=g_2(t), && 0<t<\infty,\\
+(\text{НУ})\quad & u(x,0)=\varphi(x),\quad u_t(x,0)=\psi(x), && 0\le x\le 1
+\end{aligned}
+\]
+
+також можна побудувати явну різницеву схему. Для цього використовують
+центральні різниці
+
+\[
+\begin{aligned}
+u_{tt}(x,t)&\approx \frac{u(x,t+k)-2u(x,t)+u(x,t-k)}{k^2},\\
+u_{xx}(x,t)&\approx \frac{u(x+h,t)-2u(x,t)+u(x-h,t)}{h^2}.
+\end{aligned}
+\]
+
+а початкову умову для швидкості наближують рівністю
+
+\[
+u_t(x,0)\approx \frac{u(x,k)-u(x,0)}{k}
+=\frac{u(x,k)-\varphi(x)}{k}.
+\]
+
+Звідси отримуємо явну схему
+
+\[
+(38.5)\qquad u(x,t+k)=2u(x,t)-u(x,t-k)+\left(\frac{k}{h}\right)^2
+\left[u(x+h,t)-2u(x,t)+u(x-h,t)\right].
+\]
+
+Щоб почати обчислення, потрібно спочатку знайти значення на шарі
+\(t=\Delta t\):
+
+\[
+u(x,k)=\varphi(x)+k\psi(x).
+\]
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_291_Figure_4.jpeg}}
+
+Фіг. 38.3. Алгоритм розв'язання гіперболічної задачі за явною схемою.
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_292_Figure_6.jpeg}}
+
+Фіг. 38.4. Використання масивів при реалізації явної схеми.
+
+\section{ЗАВДАННЯ}\label{ux437ux430ux432ux434ux430ux43dux43dux44f-1}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Побудуйте явну скінченнорізницеву схему для задачі
+\end{enumerate}
+
+\[
+\begin{aligned}
+(\text{УЧП})\quad & u_t=u_{xx}, && 0<x<1,\quad 0<t<\infty,\\
+(\text{ГУ})\quad & u(0,t)=0,\quad u(1,t)=0, && 0<t<\infty,\\
+(\text{НУ})\quad & u(x,0)=\sin(\pi x), && 0\le x\le 1.
+\end{aligned}
+\]
+
+Вважаючи \(h=\Delta x=0.1\), знайдіть чисельний розв'язок при
+\(t_1=0.005\), \(t_2=0.010\), \(t_3=0.015\) і побудуйте графік розв'язку
+для \(t=0.015\).
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_293_Figure_6.jpeg}}
+
+Фіг. 38.5. Залежність повної похибки від кроку сітки.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\item
+  Розв'яжіть задачу 1 аналітично методом розділення змінних і порівняйте
+  значення у вузлах сітки з чисельним розв'язком.
+\item
+  Побудуйте блок-схему для чисельного розв'язання наведеної вище
+  гіперболічної задачі.
+\item
+  Розв'яжіть задачу 1 з новою граничною умовою при \(x=1\):
+\end{enumerate}
+
+\[
+u_x(1,t)=-\left[u(1,t)-1\right].
+\]
+
+\section{СХЕМИ НЕЯВНИХ РІЗНИЦЬ (СХЕМА
+КРАНКА-НІКОЛСОНА)}\label{ux441ux445ux435ux43cux438-ux43dux435ux44fux432ux43dux438ux445-ux440ux456ux437ux43dux438ux446ux44c-ux441ux445ux435ux43cux430-ux43aux440ux430ux43dux43aux430-ux43dux456ux43aux43eux43bux441ux43eux43dux430}
+
+МЕТА ЛЕКЦІЇ: Показати, як задачі, що залежать від часу, можна
+розв'язувати за допомогою неявної різницевої схеми. У такій схемі
+значення на новому часовому шарі вже не виражаються явно через
+попередній шар; замість цього на кожному кроці потрібно розв'язувати
+систему алгебраїчних рівнянь.
+
+Перевага неявних схем над явними полягає в тому, що вони дозволяють
+брати значно більший часовий крок без руйнування розв'язку через
+накопичення похибок округлення. Для параболічних задач ми використаємо
+відому схему Кранка-Ніколсона.
+
+Як уже зазначалося в попередній лекції, явна схема для рівняння
+теплопровідності працює надійно лише тоді, коли кроки сітки \(\Delta t\)
+і \(\Delta x\) задовольняють умову
+
+\[
+\frac{\Delta t}{(\Delta x)^2}\le 0.5.
+\]
+
+Інакше схема стає чисельно нестабільною. Наприклад, якщо
+\(\Delta x=0.1\), то часовий крок не повинен перевищувати
+\texttt{0.5\textbackslash{}Delta\ x\^{}2=0.005}, і для переходу від
+\(t=0\) до \(t=1\) потрібно зробити 200 кроків.
+
+Неявні схеми дають можливість працювати з більшими часовими кроками.
+Ціна за це --- необхідність на кожному часовому кроці розв'язувати
+систему алгебраїчних рівнянь.
+
+\section{Неявна схема для рівняння
+теплопровідності}\label{ux43dux435ux44fux432ux43dux430-ux441ux445ux435ux43cux430-ux434ux43bux44f-ux440ux456ux432ux43dux44fux43dux43dux44f-ux442ux435ux43fux43bux43eux43fux440ux43eux432ux456ux434ux43dux43eux441ux442ux456}
+
+Розглянемо задачу
+
+\[
+\begin{aligned}
+(39.2)\quad (\text{УЧП})\quad & u_t=u_{xx}, && 0<x<1,\quad 0<t<\infty,\\
+(\text{ГУ})\quad & u(0,t)=0,\quad u(1,t)=0, && 0<t<\infty,\\
+(\text{НУ})\quad & u(x,0)=1, && 0<x<1.
+\end{aligned}
+\]
+
+Використаємо такі наближення для часткових похідних:
+
+\[
+\begin{aligned}
+u_t(x,t) &\cong \frac{u(x,t+k)-u(x,t)}{k},\\
+u_{xx}(x,t) &\cong
+\frac{\lambda}{h^2}\bigl[u(x+h,t+k)-2u(x,t+k)+u(x-h,t+k)\bigr]\\
+&\qquad +\frac{1-\lambda}{h^2}\bigl[u(x+h,t)-2u(x,t)+u(x-h,t)\bigr].
+\end{aligned}
+\]
+
+Тут параметр \(\lambda\) належить відрізку \([0,1]\). При
+\(\lambda=0.5\) отримуємо схему Кранка-Ніколсона, а при \(\lambda=0\)
+--- звичайну явну схему.
+
+Після підстановки цих апроксимацій у рівняння теплопровідності отримуємо
+
+\[
+\frac{u_{i+1,j}-u_{i,j}}{k}
+=
+\frac{\lambda}{h^2}\left(u_{i+1,j+1}-2u_{i+1,j}+u_{i+1,j-1}\right)
+\]
+
+\begin{itemize}
+\tightlist
+\item
+\end{itemize}
+
+\[
+\frac{1-\lambda}{h^2}\left(u_{i,j+1}-2u_{i,j}+u_{i,j-1}\right).
+\]
+
+Позначаючи \(r=k/h^2\) і переносячи всі невідомі з верхнього часового
+шару в ліву частину, одержуємо різницеву схему
+
+\[
+(39.4)\qquad -\lambda r\,u_{i+1,j+1}
++(1+2\lambda r)u_{i+1,j}
+-\lambda r\,u_{i+1,j-1}
+=
+r(1-\lambda)u_{i,j+1}
++[1-2r(1-\lambda)]u_{i,j}
++r(1-\lambda)u_{i,j-1}.
+\]
+
+Якщо індекс \(i\) зафіксовано, а \(j\) пробігає значення
+\(2,3,\dots,n-1\), то співвідношення (39.4) задають систему з \(n-2\)
+рівнянь для \(n-2\) невідомих \(u_{i+1,2},u_{i+1,3},\dots,u_{i+1,n-1}\).
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_296_Figure_5.jpeg}}
+
+Фіг. 39.1. Сітка для схеми неявних різниць.
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/_page_296_Figure_7.jpeg}}
+
+Фіг. 39.2. Шаблон неявної схеми \(u_{i+1,4},\ldots,u_{i+1,n-1}\).
+
+Фіг. 39.2 дає візуальне уявлення про структуру кожного рівняння системи
+(39.4).
+
+\section{Алгоритм розв'язання задачі
+(39.2)}\label{ux430ux43bux433ux43eux440ux438ux442ux43c-ux440ux43eux437ux432ux44fux437ux430ux43dux43dux44f-ux437ux430ux434ux430ux447ux456-39.2}
+
+КРОК 1. Виберіть значення параметра \(\lambda\), де \(0\le\lambda\le1\).
+
+КРОК 2. Нехай, наприклад, \(h=\Delta x=0.2\) і \(k=\Delta t=0.08\). Тоді
+\(r=k/h^2=2\). Візьмемо \(\lambda=0.5\); це і є схема Кранка-Ніколсона.
+Для перших чотирьох внутрішніх вузлів нового часового шару одержуємо
+систему
+
+\[
+\begin{aligned}
+3u_{22}-u_{23} &= 1,\\
+-u_{22}+3u_{23}-u_{24} &= 1,\\
+-u_{23}+3u_{24}-u_{25} &= 1,\\
+-u_{24}+3u_{25} &= 1.
+\end{aligned}
+\]
+
+У матричній формі це записується так:
+
+\begin{verbatim}
+(39.5)\qquad
+\begin{bmatrix}
+\end{verbatim}
+
+3 \& -1 \& 0 \& 0\textbackslash{}
+
+-1 \& 3 \& -1 \& 0\textbackslash{}
+
+0 \& -1 \& 3 \& -1\textbackslash{}
+
+0 \& 0 \& -1 \& 3
+
+\[
+\end{bmatrix}
+\begin{bmatrix}
+u_{22}\\
+u_{23}\\
+u_{24}\\
+u_{25}
+\end{bmatrix}
+=
+\begin{bmatrix}
+\]
+
+1\textbackslash{}
+
+1\textbackslash{}
+
+1\textbackslash{}
+
+1
+
+\begin{verbatim}
+\end{bmatrix}.
+\end{verbatim}
+
+Матриця цієї системи є тридіагональною. Такі системи зручно розв'язувати
+методом прогонки. Для загальної системи
+
+\[
+\begin{bmatrix}
+b_1 & c_1 & 0 & \cdots & 0\\
+a_1 & b_2 & c_2 & \cdots & 0\\
+0 & a_2 & b_3 & \ddots & \vdots\\
+\vdots & \ddots & \ddots & \ddots & c_{n-1}\\
+0 & \cdots & 0 & a_{n-1} & b_n
+\end{bmatrix}
+\begin{bmatrix}
+x_1\\
+x_2\\
+x_3\\
+\vdots\\
+x_n
+\end{bmatrix}
+=
+\begin{bmatrix}
+d_1\\
+d_2\\
+d_3\\
+\vdots\\
+d_n
+\end{bmatrix}
+\]
+
+вводимо коефіцієнти
+
+\[
+c_1^*=\frac{c_1}{b_1},\qquad d_1^*=\frac{d_1}{b_1},
+\]
+
+а далі рекурентно обчислюємо
+
+\[
+c_j^*=\frac{c_j}{b_j-a_{j-1}c_{j-1}^*},\qquad d_j^*=\frac{d_j-a_{j-1}d_{j-1}^*}{b_j-a_{j-1}c_{j-1}^*},
+\qquad j=2,3,\dots,n.
+\]
+
+Після цього розв'язок знаходиться зворотною підстановкою:
+
+\[
+x_n=d_n^*,\qquad x_j=d_j^*-c_j^*x_{j+1},\qquad j=n-1,n-2,\dots,1.
+\]
+
+Застосувавши цей метод до системи (39.5), отримуємо
+
+\[
+u_{22}=0.60,\qquad u_{23}=0.80,\qquad u_{24}=0.80,\qquad u_{25}=0.60.
+\]
+
+Це наближені значення розв'язку у внутрішніх точках сітки на шарі
+\(t=\Delta t\). Щоб перейти до наступного моменту часу, потрібно знову
+розв'язати аналогічну тридіагональну систему.
+
+У неявній схемі обсяг обчислень на кожному кроці більший, ніж у явній,
+зате хорошу точність можна отримати навіть при значно більшому часовому
+кроці.
+
+\section{ЗАВДАННЯ}\label{ux437ux430ux432ux434ux430ux43dux43dux44f-2}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Виведіть рівняння (39.4) з різницевої схеми, що передує йому.
+\item
+  Побудуйте неявну скінченнорізницеву схему для задачі
+\end{enumerate}
+
+\[
+\begin{aligned}
+(\text{УЧП})\quad & u_t=u_{xx}, && 0<x<1,\quad 0<t<\infty,\\
+(\text{ГУ})\quad & u(0,t)=1,\quad u_x(1,t)+u(1,t)=g(t), && 0<t<\infty,\\
+(\text{НУ})\quad & u(x,0)=0, && 0\le x\le 1.
+\end{aligned}
+\]
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Як за допомогою неявної схеми розв'язати задачу
+\end{enumerate}
+
+\[
+\begin{aligned}
+(\text{УЧП})\quad & u_t=u_{xx}+u, && 0<x<1,\quad 0<t<\infty,\\
+(\text{ГУ})\quad & u(0,t)=0,\quad u(1,t)=0, && 0<t<\infty,\\
+(\text{НУ})\quad & u(x,0)=\sin(\pi x), && 0\le x\le 1?
+\end{aligned}
+\]
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\item
+  Як виглядає шаблон рівняння (39.4), коли \(\lambda=1\)?
+\item
+  Побудуйте блок-схему для розв'язання рівняння теплопровідності (39.2).
+  Якщо можливо, напишіть комп'ютерну програму. Корисно також розв'язати
+  цю задачу чисельно для різних значень \(\lambda\) і порівняти
+  результати з аналітичним розв'язком.
+\end{enumerate}
+
+\end{document}
