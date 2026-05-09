@@ -225,7 +225,7 @@ class TestBookTranslator:
 
         safe_text = _prepare_markdown_for_safe_pdf(markdown)
 
-        assert "`\\Дельта u + u^2 = 0`" in safe_text
+        assert "`\\Delta u + u^2 = 0`" in safe_text
         assert "~~~\n\\qquad u_{\\theta}(r, \\theta) = r \\cos \\theta,\n~~~" in safe_text
         assert "`тривиальное решение 'X\\left(x\\right)'`" in safe_text
 

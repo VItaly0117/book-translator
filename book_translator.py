@@ -1196,6 +1196,27 @@ def unmask_elements(
 
         result = re.sub(pattern, lambda _m, r=replacement: r, result)
 
+    # Inline masks can occasionally capture already-created block placeholders
+    # when the source Markdown has unbalanced dollar delimiters. Restore those
+    # nested placeholders as well so literal MATHBLK/MATHINL tokens never leak
+    # into the final book.
+    for _ in range(3):
+        unresolved = [
+            placeholder
+            for placeholder in elements_dict
+            if placeholder in result
+        ]
+        if not unresolved:
+            break
+        for placeholder in unresolved:
+            original = elements_dict[placeholder]
+            is_block = (
+                placeholder.startswith("MATHBLK")
+                or placeholder.startswith("IMGTOKEN")
+            )
+            replacement = f"\n\n{original}\n\n" if is_block else f" {original} "
+            result = result.replace(placeholder, replacement)
+
     result = re.sub(r"\n{3,}", "\n\n", result)
 
     log.info("Stage 4 – Unmasking complete. %d element(s) restored.", len(elements_dict))
@@ -3527,7 +3548,7 @@ def _inject_graphics_path(tex_text: str, graphics_root_dir: Path) -> str:
     graphics_root = graphics_root_dir.absolute().as_posix().rstrip("/") + "/"
     graphics_line = (
         f"\\graphicspath{{{{{graphics_root}}}}}\n"
-        "\\setkeys{Gin}{width=0.66\\linewidth,height=0.70\\textheight,keepaspectratio}\n"
+        "\\setkeys{Gin}{width=0.58\\linewidth,height=0.55\\textheight,keepaspectratio}\n"
     )
 
     if "\\graphicspath{" in tex_text:
@@ -3547,6 +3568,7 @@ def _inject_pdf_layout_tuning(tex_text: str) -> str:
     tuning_block = (
         "\\usepackage{float}\n"
         "\\usepackage[section]{placeins}\n"
+        "\\usepackage{fancyhdr}\n"
         "\\raggedbottom\n"
         "\\clubpenalty=10000\n"
         "\\widowpenalty=10000\n"
@@ -3554,9 +3576,16 @@ def _inject_pdf_layout_tuning(tex_text: str) -> str:
         "\\brokenpenalty=10000\n"
         "\\emergencystretch=2em\n"
         "\\allowdisplaybreaks[2]\n"
-        "\\setlength{\\textfloatsep}{12pt plus 2pt minus 4pt}\n"
-        "\\setlength{\\floatsep}{10pt plus 2pt minus 2pt}\n"
-        "\\setlength{\\intextsep}{10pt plus 2pt minus 2pt}\n"
+        "\\setlength{\\textfloatsep}{18pt plus 3pt minus 4pt}\n"
+        "\\setlength{\\floatsep}{14pt plus 3pt minus 3pt}\n"
+        "\\setlength{\\intextsep}{16pt plus 3pt minus 3pt}\n"
+        "\\setlength{\\headheight}{14pt}\n"
+        "\\pagestyle{fancy}\n"
+        "\\fancyhf{}\n"
+        "\\renewcommand{\\headrulewidth}{0.3pt}\n"
+        "\\renewcommand{\\sectionmark}[1]{}\n"
+        "\\fancyhead[R]{\\small\\nouppercase{\\rightmark}}\n"
+        "\\fancyfoot[C]{\\thepage}\n"
         "\\makeatletter\n"
         "\\def\\fps@figure{htbp}\n"
         "\\makeatother\n"
@@ -3569,6 +3598,22 @@ def _inject_pdf_layout_tuning(tex_text: str) -> str:
     return tuning_block + tex_text
 
 
+def _inject_lecture_marks(tex_text: str) -> str:
+    """Keep running headers on lecture names instead of every section title."""
+    def mark_lecture(match: re.Match[str]) -> str:
+        section = match.group(0)
+        title = match.group("title")
+        if "Лекція" not in title:
+            return section
+        return f"{section}\n\\markright{{{title}}}"
+
+    return re.sub(
+        r"\\section\{(?P<title>Лекція[^{}]*)\}",
+        mark_lecture,
+        tex_text,
+    )
+
+
 def _inject_pdf_fonts(tex_text: str) -> str:
     if "\\setmainfont{" in tex_text:
         return tex_text
@@ -3577,10 +3622,10 @@ def _inject_pdf_fonts(tex_text: str) -> str:
     font_block = (
         "\\usepackage{lmodern}\n"
         "\\ifPDFTeX\\else\n"
-        "\\setmainfont{DejaVu Serif}\n"
-        "\\setsansfont{DejaVu Sans}\n"
-        "\\setmonofont{DejaVu Sans Mono}\n"
-        "\\setmathfont{STIX Two Math}\n"
+        "\\IfFontExistsTF{DejaVu Serif}{\\setmainfont{DejaVu Serif}}{\\setmainfont{Times New Roman}}\n"
+        "\\IfFontExistsTF{DejaVu Sans}{\\setsansfont{DejaVu Sans}}{\\setsansfont{Arial}}\n"
+        "\\IfFontExistsTF{DejaVu Sans Mono}{\\setmonofont{DejaVu Sans Mono}}{\\setmonofont{Consolas}}\n"
+        "\\IfFontExistsTF{STIX Two Math}{\\setmathfont{STIX Two Math}}{\\setmathfont{Cambria Math}}\n"
         "\\fi\n"
     )
 
@@ -3654,6 +3699,7 @@ def _build_pdf_via_tex(
     tex_text = _inject_pdf_fonts(tex_text)
     tex_text = _inject_graphics_path(tex_text, graphics_root_dir or output_dir)
     tex_text = _inject_pdf_layout_tuning(tex_text)
+    tex_text = _inject_lecture_marks(tex_text)
     tex_path.write_text(tex_text, encoding="utf-8")
 
     latex_cmd = [
