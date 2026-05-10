@@ -1337,6 +1337,16 @@ def _normalize_image_links(md_text: str, images_dir: Path) -> str:
     return _MARKDOWN_IMAGE_LINK_PATTERN.sub(replace_link, md_text)
 
 
+def _separate_markdown_images(md_text: str) -> str:
+    """Keep image paragraphs visually separated from nearby formulas/text."""
+    def separate(match: re.Match[str]) -> str:
+        image = match.group(0).strip()
+        return f"\n\n{image}\n\n"
+
+    separated = _MARKDOWN_IMAGE_LINK_PATTERN.sub(separate, md_text)
+    return re.sub(r"\n{3,}", "\n\n", separated)
+
+
 def _restore_unresolved_placeholders(md_text: str, source_md_text: str) -> str:
     unresolved = sorted(set(_UNRESOLVED_PLACEHOLDER_PATTERN.findall(md_text)))
     if not unresolved:
@@ -3489,6 +3499,7 @@ def _prepare_markdown_for_pdf(md_text: str) -> str:
     prepared = _remove_pdf_only_sections(prepared)
     prepared = _normalize_display_math_fences(prepared)
     prepared = _normalize_image_links(prepared, IMAGES_DIR)
+    prepared = _separate_markdown_images(prepared)
     prepared = prepared.replace(r'\$\$', '$$').replace(r'\$', '$').replace(r'\_', '_')
     prepared = prepared.replace(r'\rm ', r'\mathrm{ }').replace(r'\rm', r'\mathrm')
 
@@ -3548,7 +3559,7 @@ def _inject_graphics_path(tex_text: str, graphics_root_dir: Path) -> str:
     graphics_root = graphics_root_dir.absolute().as_posix().rstrip("/") + "/"
     graphics_line = (
         f"\\graphicspath{{{{{graphics_root}}}}}\n"
-        "\\setkeys{Gin}{width=0.58\\linewidth,height=0.55\\textheight,keepaspectratio}\n"
+        "\\setkeys{Gin}{width=0.54\\linewidth,height=0.50\\textheight,keepaspectratio}\n"
     )
 
     if "\\graphicspath{" in tex_text:
@@ -3570,21 +3581,23 @@ def _inject_pdf_layout_tuning(tex_text: str) -> str:
         "\\usepackage[section]{placeins}\n"
         "\\usepackage{fancyhdr}\n"
         "\\raggedbottom\n"
+        "\\linespread{1.04}\n"
         "\\clubpenalty=10000\n"
         "\\widowpenalty=10000\n"
         "\\displaywidowpenalty=10000\n"
         "\\brokenpenalty=10000\n"
         "\\emergencystretch=2em\n"
         "\\allowdisplaybreaks[2]\n"
-        "\\setlength{\\textfloatsep}{18pt plus 3pt minus 4pt}\n"
-        "\\setlength{\\floatsep}{14pt plus 3pt minus 3pt}\n"
-        "\\setlength{\\intextsep}{16pt plus 3pt minus 3pt}\n"
-        "\\setlength{\\headheight}{14pt}\n"
+        "\\setlength{\\textfloatsep}{26pt plus 4pt minus 4pt}\n"
+        "\\setlength{\\floatsep}{22pt plus 4pt minus 3pt}\n"
+        "\\setlength{\\intextsep}{24pt plus 4pt minus 3pt}\n"
+        "\\setlength{\\headheight}{24pt}\n"
+        "\\setlength{\\headsep}{14pt}\n"
         "\\pagestyle{fancy}\n"
         "\\fancyhf{}\n"
         "\\renewcommand{\\headrulewidth}{0.3pt}\n"
         "\\renewcommand{\\sectionmark}[1]{}\n"
-        "\\fancyhead[R]{\\small\\nouppercase{\\rightmark}}\n"
+        "\\fancyhead[R]{\\scriptsize\\parbox[t]{0.74\\textwidth}{\\raggedleft\\nouppercase{\\rightmark}}}\n"
         "\\fancyfoot[C]{\\thepage}\n"
         "\\makeatletter\n"
         "\\def\\fps@figure{htbp}\n"
@@ -3600,12 +3613,25 @@ def _inject_pdf_layout_tuning(tex_text: str) -> str:
 
 def _inject_lecture_marks(tex_text: str) -> str:
     """Keep running headers on lecture names instead of every section title."""
+    def shorten_title(title: str) -> str:
+        normalized = re.sub(r"\s+", " ", title).strip()
+        if len(normalized) <= 92:
+            return normalized
+        return normalized[:89].rstrip(" ,.;:") + "..."
+
     def mark_lecture(match: re.Match[str]) -> str:
         section = match.group(0)
         title = match.group("title")
         if "Лекція" not in title:
             return section
-        return f"{section}\n\\markright{{{title}}}"
+        return f"{section}\n\\markright{{{shorten_title(title)}}}"
+
+    tex_text = re.sub(
+        r"\\section\{\\texorpdfstring\{.*?\}\{(?P<title>Лекція[^{}]*)\}\}",
+        mark_lecture,
+        tex_text,
+        flags=re.DOTALL,
+    )
 
     return re.sub(
         r"\\section\{(?P<title>Лекція[^{}]*)\}",
