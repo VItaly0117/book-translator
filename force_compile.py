@@ -1,27 +1,8 @@
 import os
 import sys
 import re
-import shutil
 from pathlib import Path
 import pypandoc
-
-def clean_project(base_dir: Path):
-    print("🧹 Очистка проекта от старых скриптов-костылей...")
-    deleted_count = 0
-    for script_name in GARBAGE_SCRIPTS:
-        script_path = base_dir / script_name
-        if script_path.exists():
-            try:
-                script_path.unlink()
-                print(f"  🗑️ Удален: {script_name}")
-                deleted_count += 1
-            except Exception as e:
-                print(f"  ❌ Не удалось удалить {script_name}: {e}")
-    if deleted_count == 0:
-        print("  ✨ Проект уже чист.")
-    else:
-        print(f"  ✅ Удалено файлов: {deleted_count}\n")
-
 
 def prep_markdown_for_nonstop(md_text: str) -> str:
     """Делает базовую очистку, чтобы компилятор не подавился фатальными ошибками."""
@@ -94,21 +75,16 @@ if __name__ == "__main__":
     print("🔥 FORCE COMPILER & CLEANER 🔥")
     print("="*60)
     
-    BASE_DIR = Path(__file__).parent
-    
-    # 1. Удаляем мусор
-    clean_project(BASE_DIR)
-    
-    # 2. Спрашиваем путь к файлу
+    # Спрашиваем путь к файлу
     if len(sys.argv) > 1:
         file_path = sys.argv[1]
     else:
         file_path = input("📄 Введите путь к финальному .md файлу:\n> ").strip()
-        
+
     md_file = Path(file_path)
     if not md_file.exists() or not md_file.is_file():
         print("❌ Ошибка: файл не найден!")
         sys.exit(1)
-        
-    # 3. Принудительно собираем
+
+    # Принудительно собираем
     force_compile_pdf(md_file)
