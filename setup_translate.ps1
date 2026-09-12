@@ -27,7 +27,10 @@ param(
     # Share of VRAM the translator may take. The rest is left for the desktop, so the
     # machine stays usable and nothing gets pushed out of memory mid-run.
     [ValidateRange(0.3, 1.0)]
-    [double]$GpuUtilization = 0.8
+    [double]$GpuUtilization = 0.8,
+    # Where model blobs live. Ollama defaults to the system drive, which is usually the
+    # one without room for several gigabytes of weights.
+    [string]$ModelsDir
 )
 
 # Deliberately NOT 'Stop': under Windows PowerShell 5.1 anything a native program writes
@@ -155,9 +158,32 @@ Good "ollama: $ollamaExe"
 $env:OLLAMA_NUM_PARALLEL = '1'
 $env:OLLAMA_KEEP_ALIVE = '30m'
 
+$overheadChanged = $false
+
+# Models are gigabytes each and Ollama puts them on the system drive by default. Moving
+# the store is a matter of one variable plus relocating whatever is already there.
+if ($ModelsDir) {
+    New-Item -ItemType Directory -Force -Path $ModelsDir | Out-Null
+    $defaultStore = Join-Path $env:USERPROFILE '.ollama\models'
+    if ((Test-Path $defaultStore) -and -not (Get-ChildItem $ModelsDir -ErrorAction SilentlyContinue)) {
+        $gb = [math]::Round(((Get-ChildItem $defaultStore -Recurse -File -ErrorAction SilentlyContinue |
+                              Measure-Object -Property Length -Sum).Sum / 1GB), 2)
+        Warn "moving $gb GB of existing models to $ModelsDir"
+        Get-Process -Name 'ollama', 'ollama app' -ErrorAction SilentlyContinue |
+            Stop-Process -Force -ErrorAction SilentlyContinue
+        Start-Sleep -Seconds 2
+        Move-Item (Join-Path $defaultStore '*') $ModelsDir -Force -ErrorAction SilentlyContinue
+        $overheadChanged = $true
+    }
+    $previousDir = [Environment]::GetEnvironmentVariable('OLLAMA_MODELS', 'User')
+    if ("$previousDir" -ne "$ModelsDir") { $overheadChanged = $true }
+    [Environment]::SetEnvironmentVariable('OLLAMA_MODELS', $ModelsDir, 'User')
+    $env:OLLAMA_MODELS = $ModelsDir
+    Good "model store: $ModelsDir"
+}
+
 # Hold back the rest of the card. OLLAMA_GPU_OVERHEAD is read when the server starts,
 # so a server already running with a different value has to be restarted.
-$overheadChanged = $false
 if ($reserveBytes -gt 0) {
     $previous = [Environment]::GetEnvironmentVariable('OLLAMA_GPU_OVERHEAD', 'User')
     if ("$previous" -ne "$reserveBytes") { $overheadChanged = $true }
