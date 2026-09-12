@@ -1,0 +1,146 @@
+# Глосарій термінів книги (Farlow, PDE for Scientists and Engineers) EN -> UK
+# Формат: англійський термін <TAB> український відповідник <TAB> примітка
+# Рядки з # ігноруються. Порядок не має значення, зіставлення без урахування регістру.
+#
+# Використання: ocr/translate_book.py --glossary glossary/terms_uk.tsv
+# У підказку моделі потрапляють лише ті терміни, що реально є на сторінці.
+
+# --- абревіатури: саме тут модель вигадує своє, тому вони закріплені жорстко ---
+PDE	рівняння з частинними похідними	не «РДЗ»; абревіатура РЧП
+PDEs	рівняння з частинними похідними
+ODE	звичайне диференціальне рівняння	абревіатура ЗДР
+BC	гранична умова	абревіатура ГУ
+BCs	граничні умови	не «БК»
+IC	початкова умова	абревіатура ПУ
+ICs	початкові умови
+IBVP	початково-крайова задача	не «ІБВП»
+BVP	крайова задача
+IVP	задача Коші
+
+# --- базова лексика: найчастіші кальки з російської ---
+solution	розв'язок	не «рішення»
+solutions	розв'язки
+solve	розв'язувати
+solving	розв'язування
+numerical	чисельний	не «числовий»
+approximate	наближений
+approximation	наближення
+equation	рівняння
+equations	рівняння
+function	функція
+functions	функції
+variable	змінна
+variables	змінні
+derivative	похідна
+partial derivative	частинна похідна
+integral	інтеграл
+series	ряд
+domain	область
+boundary	межа
+value	значення
+constant	стала
+coefficient	коефіцієнт
+error	похибка
+proof	доведення
+theorem	теорема
+property	властивість
+
+# --- рівняння та задачі ---
+heat equation	рівняння теплопровідності
+wave equation	хвильове рівняння
+Laplace equation	рівняння Лапласа
+Poisson equation	рівняння Пуассона
+diffusion equation	рівняння дифузії
+diffusion-convection equation	рівняння дифузії-конвекції
+Euler-Lagrange equation	рівняння Ейлера-Лагранжа
+Dirichlet problem	задача Діріхле
+Neumann problem	задача Неймана
+boundary-value problem	крайова задача
+initial-value problem	задача з початковими умовами
+well-posed	коректно поставлена
+
+# --- типи рівнянь ---
+hyperbolic	гіперболічний
+parabolic	параболічний
+elliptic	еліптичний
+linear	лінійний
+nonlinear	нелінійний
+homogeneous	однорідний
+nonhomogeneous	неоднорідний
+order	порядок
+
+# --- методи ---
+separation of variables	метод відокремлення змінних
+integral transform	інтегральне перетворення
+integral transforms	інтегральні перетворення
+Fourier series	ряд Фур'є
+Fourier transform	перетворення Фур'є
+Laplace transform	перетворення Лапласа
+sine transform	синус-перетворення
+finite sine transform	скінченне синус-перетворення
+cosine transform	косинус-перетворення
+Hankel transform	перетворення Ганкеля
+convolution	згортка
+Green's function	функція Гріна
+conformal mapping	конформне відображення
+finite-difference	скінченно-різницевий
+finite difference	скінченні різниці
+explicit method	явний метод
+implicit method	неявний метод
+Crank-Nicolson	Кранка-Ніколсона
+Monte Carlo	Монте-Карло
+least squares	найменші квадрати
+characteristic curves	характеристичні криві
+characteristics	характеристики
+superposition	суперпозиція
+orthogonality	ортогональність
+convergence	збіжність
+eigenvalue	власне значення
+eigenvalues	власні значення
+eigenfunction	власна функція
+eigenfunctions	власні функції
+harmonic	гармонічний
+steady state	усталений стан
+transient	перехідний
+
+# --- фізика задач ---
+temperature	температура
+heat	тепло
+heat flow	тепловий потік
+heat source	джерело тепла
+thermal conductivity	теплопровідність
+diffusivity	коефіцієнт температуропровідності
+flux	потік
+rod	стрижень
+string	струна
+vibrating string	струна, що коливається
+membrane	мембрана
+plate	пластина
+insulated	теплоізольований
+concentration	концентрація
+pollutant	забруднювач
+potential	потенціал
+displacement	зміщення
+density	густина
+velocity	швидкість
+
+# --- геометрія та координати ---
+coordinates	координати
+polar coordinates	полярні координати
+cylindrical coordinates	циліндричні координати
+spherical coordinates	сферичні координати
+half-plane	півплощина
+upper-half plane	верхня півплощина
+unit circle	одиничне коло
+disk	круг
+region	область
+grid	сітка
+mesh	сітка
+node	вузол
+step size	крок
+
+# --- оператори ---
+Laplacian	лапласіан
+gradient	градієнт
+divergence	дивергенція
+operator	оператор

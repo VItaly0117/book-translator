@@ -1,0 +1,1068 @@
+{
+ "3-gram": [
+  [
+   "partial differential equations",
+   64
+  ],
+  [
+   "numerical and approximate",
+   49
+  ],
+  [
+   "sine and cosine",
+   26
+  ],
+  [
+   "monte carlo methods",
+   15
+  ],
+  [
+   "one-dimensional wave equation",
+   15
+  ],
+  [
+   "pde bcs ics",
+   15
+  ],
+  [
+   "dirichlet problem pde",
+   15
+  ],
+  [
+   "finite sine transform",
+   12
+  ],
+  [
+   "approximate methods numerical",
+   12
+  ],
+  [
+   "parabolic and elliptic",
+   11
+  ],
+  [
+   "methods for solving",
+   11
+  ],
+  [
+   "monte carlo method",
+   11
+  ],
+  [
+   "scientists and engineers",
+   10
+  ],
+  [
+   "john wiley sons",
+   10
+  ],
+  [
+   "ordinary differential equations",
+   10
+  ],
+  [
+   "inside the circle",
+   10
+  ],
+  [
+   "equations for scientists",
+   9
+  ],
+  [
+   "initial and boundary",
+   9
+  ],
+  [
+   "pde and bcs",
+   9
+  ],
+  [
+   "ibvp pde bcs",
+   9
+  ],
+  [
+   "introduce the idea",
+   9
+  ],
+  [
+   "sines and cosines",
+   9
+  ],
+  [
+   "initial-value problem pde",
+   9
+  ],
+  [
+   "gives and hence",
+   8
+  ],
+  [
+   "solve the dirichlet",
+   8
+  ]
+ ],
+ "2-gram": [
+  [
+   "differential equations",
+   96
+  ],
+  [
+   "pde bcs",
+   90
+  ],
+  [
+   "wave equation",
+   69
+  ],
+  [
+   "partial differential",
+   68
+  ],
+  [
+   "laplace transform",
+   55
+  ],
+  [
+   "fourier transform",
+   52
+  ],
+  [
+   "approximate methods",
+   49
+  ],
+  [
+   "boundary conditions",
+   41
+  ],
+  [
+   "fourier series",
+   41
+  ],
+  [
+   "laplace equation",
+   38
+  ],
+  [
+   "heat equation",
+   34
+  ],
+  [
+   "heat flow",
+   32
+  ],
+  [
+   "sine transform",
+   32
+  ],
+  [
+   "integral transforms",
+   31
+  ],
+  [
+   "initial conditions",
+   31
+  ],
+  [
+   "monte carlo",
+   29
+  ],
+  [
+   "differential equation",
+   26
+  ],
+  [
+   "vibrating string",
+   24
+  ],
+  [
+   "look like",
+   24
+  ],
+  [
+   "euler-lagrange equation",
+   23
+  ],
+  [
+   "cosine transforms",
+   22
+  ],
+  [
+   "partial derivatives",
+   22
+  ],
+  [
+   "independent variables",
+   22
+  ],
+  [
+   "interior dirichlet",
+   21
+  ],
+  [
+   "finite-difference method",
+   19
+  ],
+  [
+   "finite sine",
+   19
+  ],
+  [
+   "first-order equations",
+   18
+  ],
+  [
+   "mathematical physics",
+   18
+  ],
+  [
+   "variable coefficients",
+   18
+  ],
+  [
+   "initial temperature",
+   18
+  ],
+  [
+   "polar coordinates",
+   17
+  ],
+  [
+   "turns out",
+   17
+  ],
+  [
+   "separation constant",
+   17
+  ],
+  [
+   "laplace's equation",
+   17
+  ],
+  [
+   "spherical coordinates",
+   16
+  ],
+  [
+   "carry out",
+   16
+  ],
+  [
+   "bcs ics",
+   16
+  ],
+  [
+   "carlo methods",
+   15
+  ],
+  [
+   "standing waves",
+   15
+  ],
+  [
+   "fourier sine",
+   15
+  ],
+  [
+   "coordinate system",
+   15
+  ],
+  [
+   "one-dimensional wave",
+   15
+  ],
+  [
+   "ordinary differential",
+   14
+  ],
+  [
+   "hyperbolic equation",
+   14
+  ],
+  [
+   "elliptic equations",
+   14
+  ],
+  [
+   "solving pdes",
+   14
+  ],
+  [
+   "give rise",
+   14
+  ],
+  [
+   "conservation equation",
+   14
+  ],
+  [
+   "cosine transform",
+   14
+  ],
+  [
+   "algebraic equations",
+   14
+  ],
+  [
+   "green's function",
+   14
+  ],
+  [
+   "green function",
+   14
+  ],
+  [
+   "right-hand side",
+   13
+  ],
+  [
+   "minimizing function",
+   13
+  ],
+  [
+   "parabolic equations",
+   12
+  ],
+  [
+   "nonhomogeneous bcs",
+   12
+  ],
+  [
+   "fourier transforms",
+   12
+  ],
+  [
+   "numerical methods",
+   12
+  ],
+  [
+   "heat source",
+   12
+  ],
+  [
+   "boundary temperature",
+   12
+  ],
+  [
+   "frequency spectrum",
+   12
+  ],
+  [
+   "exterior dirichlet",
+   12
+  ],
+  [
+   "conformal mappings",
+   12
+  ],
+  [
+   "methods numerical",
+   12
+  ],
+  [
+   "flow diagram",
+   12
+  ],
+  [
+   "wiley sons",
+   11
+  ],
+  [
+   "transforms sine",
+   11
+  ],
+  [
+   "hyperbolic equations",
+   11
+  ],
+  [
+   "vibrating beam",
+   11
+  ],
+  [
+   "free space",
+   11
+  ],
+  [
+   "crank-nicolson method",
+   11
+  ],
+  [
+   "zero bcs",
+   11
+  ],
+  [
+   "final step",
+   11
+  ],
+  [
+   "solve pde",
+   11
+  ],
+  [
+   "inverse transform",
+   11
+  ],
+  [
+   "original coordinates",
+   11
+  ],
+  [
+   "characteristic curves",
+   11
+  ],
+  [
+   "equation inside",
+   11
+  ],
+  [
+   "euler's equation",
+   11
+  ],
+  [
+   "interior grid",
+   11
+  ],
+  [
+   "carlo method",
+   11
+  ],
+  [
+   "john wiley",
+   10
+  ],
+  [
+   "duhamel principle",
+   10
+  ],
+  [
+   "integral transform",
+   10
+  ],
+  [
+   "coordinate systems",
+   10
+  ],
+  [
+   "fluid dynamics",
+   10
+  ],
+  [
+   "steady state",
+   10
+  ],
+  [
+   "homogeneous bcs",
+   10
+  ],
+  [
+   "inside circle",
+   10
+  ],
+  [
+   "infinite series",
+   10
+  ],
+  [
+   "pde theory",
+   10
+  ],
+  [
+   "poisson integral",
+   10
+  ],
+  [
+   "conformal mapping",
+   10
+  ],
+  [
+   "dependent variable",
+   9
+  ],
+  [
+   "wave motion",
+   9
+  ],
+  [
+   "temperature inside",
+   9
+  ],
+  [
+   "initial condition",
+   9
+  ],
+  [
+   "ibvp pde",
+   9
+  ],
+  [
+   "complex plane",
+   9
+  ],
+  [
+   "diffusion coefficient",
+   9
+  ],
+  [
+   "pde ics",
+   9
+  ],
+  [
+   "initial velocity",
+   9
+  ],
+  [
+   "semi-infinite string",
+   9
+  ],
+  [
+   "characteristic equations",
+   9
+  ],
+  [
+   "upper-half plane",
+   9
+  ],
+  [
+   "finite-difference approximations",
+   9
+  ],
+  [
+   "explicit method",
+   9
+  ],
+  [
+   "stanley farlow",
+   8
+  ],
+  [
+   "homogeneous ones",
+   8
+  ],
+  [
+   "convection term",
+   8
+  ],
+  [
+   "equations conservation",
+   8
+  ],
+  [
+   "conservation equations",
+   8
+  ],
+  [
+   "vibrating drumhead",
+   8
+  ],
+  [
+   "general nature",
+   8
+  ],
+  [
+   "spherical harmonics",
+   8
+  ],
+  [
+   "explicit finite-difference",
+   8
+  ],
+  [
+   "eigenfunction expansion",
+   8
+  ],
+  [
+   "steady-state temperature",
+   8
+  ],
+  [
+   "thermal capacity",
+   8
+  ],
+  [
+   "basic idea",
+   8
+  ]
+ ],
+ "1-gram": [
+  [
+   "equation",
+   625
+  ],
+  [
+   "pde",
+   364
+  ],
+  [
+   "equations",
+   355
+  ],
+  [
+   "solve",
+   297
+  ],
+  [
+   "transform",
+   280
+  ],
+  [
+   "bcs",
+   258
+  ],
+  [
+   "function",
+   255
+  ],
+  [
+   "boundary",
+   187
+  ],
+  [
+   "temperature",
+   172
+  ],
+  [
+   "method",
+   168
+  ],
+  [
+   "variables",
+   148
+  ],
+  [
+   "functions",
+   146
+  ],
+  [
+   "heat",
+   145
+  ],
+  [
+   "fourier",
+   144
+  ],
+  [
+   "initial",
+   142
+  ],
+  [
+   "hence",
+   140
+  ],
+  [
+   "general",
+   135
+  ],
+  [
+   "methods",
+   133
+  ],
+  [
+   "zero",
+   131
+  ],
+  [
+   "wave",
+   129
+  ],
+  [
+   "differential",
+   126
+  ],
+  [
+   "pdes",
+   124
+  ],
+  [
+   "solving",
+   122
+  ],
+  [
+   "get",
+   122
+  ],
+  [
+   "coordinates",
+   117
+  ],
+  [
+   "reader",
+   114
+  ],
+  [
+   "step",
+   110
+  ],
+  [
+   "transforms",
+   106
+  ],
+  [
+   "dirichlet",
+   106
+  ],
+  [
+   "integral",
+   101
+  ],
+  [
+   "variable",
+   101
+  ],
+  [
+   "laplace",
+   100
+  ],
+  [
+   "like",
+   100
+  ],
+  [
+   "constant",
+   100
+  ],
+  [
+   "numerical",
+   99
+  ],
+  [
+   "partial",
+   98
+  ],
+  [
+   "simple",
+   97
+  ],
+  [
+   "string",
+   90
+  ],
+  [
+   "rod",
+   90
+  ],
+  [
+   "separation",
+   88
+  ],
+  [
+   "out",
+   88
+  ],
+  [
+   "series",
+   86
+  ],
+  [
+   "plane",
+   85
+  ],
+  [
+   "potential",
+   84
+  ],
+  [
+   "words",
+   84
+  ],
+  [
+   "conditions",
+   82
+  ],
+  [
+   "gives",
+   79
+  ],
+  [
+   "sine",
+   78
+  ],
+  [
+   "flow",
+   78
+  ],
+  [
+   "approximate",
+   77
+  ],
+  [
+   "coefficients",
+   76
+  ],
+  [
+   "terms",
+   74
+  ],
+  [
+   "finding",
+   73
+  ],
+  [
+   "solved",
+   72
+  ],
+  [
+   "inside",
+   71
+  ],
+  [
+   "system",
+   70
+  ],
+  [
+   "linear",
+   69
+  ],
+  [
+   "physical",
+   69
+  ],
+  [
+   "waves",
+   67
+  ],
+  [
+   "finite",
+   66
+  ],
+  [
+   "circle",
+   66
+  ],
+  [
+   "ics",
+   66
+  ],
+  [
+   "nonhomogeneous",
+   65
+  ],
+  [
+   "original",
+   65
+  ],
+  [
+   "found",
+   64
+  ],
+  [
+   "hyperbolic",
+   63
+  ],
+  [
+   "vibrating",
+   63
+  ],
+  [
+   "purpose",
+   62
+  ],
+  [
+   "basic",
+   62
+  ],
+  [
+   "diffusion-type",
+   61
+  ],
+  [
+   "transformation",
+   60
+  ],
+  [
+   "parabolic",
+   59
+  ],
+  [
+   "diffusion",
+   58
+  ],
+  [
+   "ode",
+   57
+  ],
+  [
+   "change",
+   56
+  ],
+  [
+   "due",
+   56
+  ],
+  [
+   "different",
+   54
+  ],
+  [
+   "important",
+   52
+  ],
+  [
+   "term",
+   51
+  ],
+  [
+   "dimensions",
+   51
+  ],
+  [
+   "order",
+   51
+  ],
+  [
+   "canonical",
+   50
+  ],
+  [
+   "depends",
+   50
+  ],
+  [
+   "sum",
+   50
+  ],
+  [
+   "however",
+   49
+  ],
+  [
+   "look",
+   49
+  ],
+  [
+   "nonlinear",
+   48
+  ],
+  [
+   "fact",
+   48
+  ],
+  [
+   "substitute",
+   48
+  ],
+  [
+   "mathematical",
+   47
+  ],
+  [
+   "cosine",
+   47
+  ],
+  [
+   "elliptic",
+   47
+  ],
+  [
+   "derivatives",
+   47
+  ],
+  [
+   "velocity",
+   47
+  ],
+  [
+   "transformed",
+   47
+  ],
+  [
+   "hyperbolic-type",
+   46
+  ],
+  [
+   "moving",
+   46
+  ],
+  [
+   "transforming",
+   45
+  ],
+  [
+   "interpretation",
+   45
+  ],
+  [
+   "vibrations",
+   45
+  ],
+  [
+   "various",
+   44
+  ],
+  [
+   "homogeneous",
+   43
+  ],
+  [
+   "principle",
+   43
+  ],
+  [
+   "derivative",
+   43
+  ],
+  [
+   "idea",
+   43
+  ],
+  [
+   "end",
+   43
+  ],
+  [
+   "formula",
+   43
+  ],
+  [
+   "functional",
+   43
+  ],
+  [
+   "random",
+   43
+  ],
+  [
+   "types",
+   42
+  ],
+  [
+   "interior",
+   41
+  ],
+  [
+   "satisfy",
+   41
+  ],
+  [
+   "introduce",
+   41
+  ],
+  [
+   "write",
+   40
+  ],
+  [
+   "finite-difference",
+   40
+  ],
+  [
+   "independent",
+   40
+  ],
+  [
+   "flux",
+   40
+  ],
+  [
+   "known",
+   40
+  ],
+  [
+   "side",
+   40
+  ],
+  [
+   "give",
+   40
+  ]
+ ]
+}
