@@ -30,9 +30,39 @@ param(
     [double]$GpuUtilization = 0.8
 )
 
-$ErrorActionPreference = 'Stop'
+# Deliberately NOT 'Stop': under Windows PowerShell 5.1 anything a native program writes
+# to stderr becomes a terminating error, so winget, ollama or python printing a harmless
+# notice would kill the script. Failures are checked explicitly instead.
+$ErrorActionPreference = 'Continue'
 $root = $PSScriptRoot
 if (-not $root) { $root = (Get-Location).Path }
+
+function Find-Python {
+    <#
+      Returns a usable Python 3.10+ interpreter, or $null.
+      The `python` on a clean Windows is usually the Microsoft Store alias: a stub that
+      prints a notice and exits, so it has to be skipped rather than probed.
+    #>
+    $candidates = @()
+    $launcher = Get-Command py -ErrorAction SilentlyContinue
+    if ($launcher) { $candidates += $launcher.Source }
+    foreach ($name in @('python', 'python3')) {
+        foreach ($cmd in (Get-Command $name -All -ErrorAction SilentlyContinue)) {
+            if ($cmd.Source -and $cmd.Source -notlike '*\WindowsApps\*') {
+                $candidates += $cmd.Source
+            }
+        }
+    }
+    foreach ($exe in ($candidates | Select-Object -Unique)) {
+        $ver = $null
+        try { $ver = & $exe -c "import sys; print('%d.%d' % sys.version_info[:2])" 2>$null }
+        catch { continue }
+        if ($ver -and ($ver -match '^\d+\.\d+$') -and [version]$ver -ge [version]'3.10') {
+            return $exe
+        }
+    }
+    return $null
+}
 
 function Step($text) { Write-Host "`n=== $text ===" -ForegroundColor Cyan }
 function Good($text) { Write-Host "  [ok] $text" -ForegroundColor Green }
@@ -47,21 +77,16 @@ if (-not (Get-Command winget -ErrorAction SilentlyContinue)) {
 }
 Good "winget present"
 
-$python = $null
-foreach ($candidate in @('python', 'py')) {
-    $cmd = Get-Command $candidate -ErrorAction SilentlyContinue
-    if ($cmd) {
-        $ver = & $cmd.Source -c "import sys; print('%d.%d' % sys.version_info[:2])" 2>$null
-        if ($ver -and [version]$ver -ge [version]'3.10') { $python = $cmd.Source; break }
-    }
-}
+$python = Find-Python
 if (-not $python) {
     Warn "Python 3.10+ not found - installing Python 3.12"
     winget install --id Python.Python.3.12 --accept-source-agreements --accept-package-agreements --disable-interactivity
     $env:Path = [System.Environment]::GetEnvironmentVariable('Path', 'Machine') + ';' +
                 [System.Environment]::GetEnvironmentVariable('Path', 'User')
-    $python = (Get-Command python -ErrorAction SilentlyContinue).Source
-    if (-not $python) { Die "Python still not on PATH. Open a new terminal and re-run." }
+    $python = Find-Python
+    if (-not $python) {
+        Die "Python installed but not visible yet. Close this window, open a new PowerShell and re-run."
+    }
 }
 Good "Python: $python"
 
