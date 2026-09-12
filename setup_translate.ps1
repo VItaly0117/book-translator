@@ -23,7 +23,11 @@
 param(
     [string]$PagesSource,
     [string]$Model,
-    [switch]$SkipModelPull
+    [switch]$SkipModelPull,
+    # Share of VRAM the translator may take. The rest is left for the desktop, so the
+    # machine stays usable and nothing gets pushed out of memory mid-run.
+    [ValidateRange(0.3, 1.0)]
+    [double]$GpuUtilization = 0.8
 )
 
 $ErrorActionPreference = 'Stop'
@@ -80,13 +84,22 @@ if ($smi) {
 }
 Write-Host "  GPU: $gpuName, VRAM: $vramGb GB"
 
-# Model choice follows VRAM: the whole model must fit or generation falls back to CPU
-# and slows down by roughly an order of magnitude.
+# Budget, not the whole card: the reserved slice keeps the desktop responsive and stops
+# the model being evicted halfway through a long run.
+$usableGb = [math]::Round($vramGb * $GpuUtilization, 1)
+$reserveBytes = [int64](($vramGb - $usableGb) * 1GB)
+if ($vramGb -gt 0) {
+    Write-Host ("  budget: {0} GB for the model, {1} GB left free ({2:P0} cap)" -f `
+                $usableGb, [math]::Round($vramGb - $usableGb, 1), $GpuUtilization)
+}
+
+# The model must fit the budget. If it does not, Ollama spills layers onto the CPU and
+# generation slows by roughly an order of magnitude.
 if (-not $Model) {
-    if     ($vramGb -ge 20) { $Model = 'gemma3:27b' }
-    elseif ($vramGb -ge 11) { $Model = 'gemma3:12b' }
-    elseif ($vramGb -ge 6)  { $Model = 'gemma3:12b' }
-    else                    { $Model = 'gemma3:4b'  }
+    if     ($usableGb -ge 18) { $Model = 'gemma3:27b' }   # ~17 GB on disk
+    elseif ($usableGb -ge 9)  { $Model = 'gemma3:12b' }   # ~8.1 GB
+    elseif ($usableGb -ge 4)  { $Model = 'gemma3:4b'  }   # ~3.3 GB
+    else                      { $Model = 'gemma3:4b'  }
 }
 Good "translation model: $Model"
 if (-not $smi) {
@@ -117,10 +130,28 @@ Good "ollama: $ollamaExe"
 $env:OLLAMA_NUM_PARALLEL = '1'
 $env:OLLAMA_KEEP_ALIVE = '30m'
 
+# Hold back the rest of the card. OLLAMA_GPU_OVERHEAD is read when the server starts,
+# so a server already running with a different value has to be restarted.
+$overheadChanged = $false
+if ($reserveBytes -gt 0) {
+    $previous = [Environment]::GetEnvironmentVariable('OLLAMA_GPU_OVERHEAD', 'User')
+    if ("$previous" -ne "$reserveBytes") { $overheadChanged = $true }
+    [Environment]::SetEnvironmentVariable('OLLAMA_GPU_OVERHEAD', "$reserveBytes", 'User')
+    $env:OLLAMA_GPU_OVERHEAD = "$reserveBytes"
+    Good ("reserving {0} GB of VRAM for everything else" -f [math]::Round($reserveBytes / 1GB, 1))
+}
+
 $up = $false
 for ($i = 0; $i -lt 3; $i++) {
     try { Invoke-RestMethod http://127.0.0.1:11434/api/version -TimeoutSec 4 | Out-Null; $up = $true; break }
     catch { Start-Sleep -Seconds 2 }
+}
+
+if ($up -and $overheadChanged) {
+    Warn "restarting the Ollama server so the VRAM reservation takes effect"
+    Get-Process -Name 'ollama' -ErrorAction SilentlyContinue | Stop-Process -Force
+    Start-Sleep -Seconds 3
+    $up = $false
 }
 if (-not $up) {
     Warn "starting the Ollama server"

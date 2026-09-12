@@ -38,9 +38,55 @@ Rules:
 - Translate only prose. Leave numbers, equation labels like (2.5), and names as they are.
 - Use standard Ukrainian mathematical terminology.
 - Output only the translation, with no commentary.
-
-TEXT:
 """
+
+GLOSSARY_HEADER = """
+Use exactly these Ukrainian equivalents for the terms below. Inflect them to fit the
+sentence, but do not substitute a synonym and do not invent abbreviations:
+"""
+
+# Wrong renderings seen in practice: invented abbreviations and Russian calques.
+# These are style problems, not corruption, so they are reported rather than rejected.
+STYLE_TRAPS = {
+    "РДЗ": "invented abbreviation for PDE - use рівняння з частинними похідними",
+    "ІБВП": "invented abbreviation for IBVP - use початково-крайова задача",
+    "рішення": "Russian calque for solution - use розв'язок",
+    "числовий": "wrong sense of numerical - use чисельний",
+}
+
+
+def load_glossary(path):
+    """Read the TSV glossary into [(english, ukrainian)], longest term first."""
+    entries = []
+    p = Path(path)
+    if not p.exists():
+        return entries
+    for line in p.read_text(encoding="utf-8").splitlines():
+        line = line.strip()
+        if not line or line.startswith("#"):
+            continue
+        parts = line.split("\t")
+        if len(parts) >= 2 and parts[0].strip() and parts[1].strip():
+            entries.append((parts[0].strip(), parts[1].strip()))
+    entries.sort(key=lambda e: -len(e[0]))
+    return entries
+
+
+def glossary_for(text, entries, limit=40):
+    """Only the terms that actually occur on this page, so the prompt stays short."""
+    hits = []
+    low = text.lower()
+    for en, uk in entries:
+        if re.search(r"(?<![A-Za-z])" + re.escape(en.lower()) + r"(?![A-Za-z])", low):
+            hits.append(f"- {en} -> {uk}")
+        if len(hits) >= limit:
+            break
+    return hits
+
+
+def style_warnings(text):
+    return [f"{bad}: {why}" for bad, why in STYLE_TRAPS.items()
+            if re.search(r"(?<![А-Яа-яЇїІіЄєҐґ])" + bad, text, re.I)]
 
 
 def signature(text):
@@ -63,12 +109,16 @@ def translate_azure(masked, target):
     )
 
 
-def translate_ollama(masked, host, model, timeout, num_ctx=8192):
+def translate_ollama(masked, host, model, timeout, glossary_lines=(), num_ctx=8192):
+    prompt = OLLAMA_PROMPT
+    if glossary_lines:
+        prompt += GLOSSARY_HEADER + "\n".join(glossary_lines) + "\n"
+    prompt += "\nTEXT:\n"
     r = requests.post(
         f"{host}/api/generate",
         json={
             "model": model,
-            "prompt": OLLAMA_PROMPT + masked,
+            "prompt": prompt + masked,
             "stream": False,
             "options": {"temperature": 0.1, "num_ctx": num_ctx},
         },
@@ -103,6 +153,8 @@ def main():
     ap.add_argument("--target", default="uk")
     ap.add_argument("--model", default="gemma3:12b", help="ollama backend only")
     ap.add_argument("--host", default="http://127.0.0.1:11434")
+    ap.add_argument("--glossary", default="glossary/terms_uk.tsv",
+                    help="TSV of pinned term translations; '' disables it")
     ap.add_argument("--timeout", type=int, default=600)
     ap.add_argument("--first", type=int, default=1)
     ap.add_argument("--last", type=int, default=0)
@@ -134,8 +186,11 @@ def main():
         sys.exit("AZURE_TRANSLATOR_KEY is not set: create .env with your Azure "
                  "Translator key, endpoint and region, then re-run.")
 
+    glossary = load_glossary(a.glossary) if a.glossary else []
     print(f"backend={a.backend} target={a.target} pages todo={len(todo)}"
-          + (f" model={a.model}" if a.backend == "ollama" else ""), flush=True)
+          + (f" model={a.model}" if a.backend == "ollama" else "")
+          + (f" glossary={len(glossary)} terms" if glossary else " glossary=off"),
+          flush=True)
 
     done = ok = rejected = 0
     t_start = time.time()
@@ -157,8 +212,9 @@ def main():
             if a.backend == "azure":
                 translated_masked = translate_azure(masked, a.target)
             else:
-                translated_masked = translate_ollama(masked, a.host, a.model,
-                                                     a.timeout)
+                translated_masked = translate_ollama(
+                    masked, a.host, a.model, a.timeout,
+                    glossary_lines=glossary_for(source, glossary))
         except Exception as exc:  # noqa: BLE001
             print(f"  p{page:04d}: request failed - {exc}", flush=True)
             with log_path.open("a", encoding="utf-8") as fh:
